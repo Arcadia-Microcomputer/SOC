@@ -1,0 +1,18 @@
+#Kicad files we don't need to upload
+*.bck
+*.sch-bak
+*.fp-info-cache
+*.dcm
+SOCSchem/fp-info-cache
+SOCSchem/SocSchem-cache.lib
+SOCSchem/sym-lib-table
+
+#Visual Studio code workspaces
+*.code-workspace
+
+#ISE generated files
+SOC/*
+!SOC/SOC.xise
+!SOC/RTL/
+!SOC/ipcore_dir/
+!SOC/WorkingDir/SOC.bin

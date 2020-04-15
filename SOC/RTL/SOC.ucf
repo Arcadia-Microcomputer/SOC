@@ -1,0 +1,4 @@
+CONFIG VCCAUX = "3.3" ;
+NET "i_Clk"                  LOC = A10     | IOSTANDARD = LVCMOS33 | PERIOD = 100MHz ;
+   
+NET "o_UART0_TX"             LOC = E12      | IOSTANDARD = LVCMOS33 | DRIVE = 8 | SLEW = FAST ;
