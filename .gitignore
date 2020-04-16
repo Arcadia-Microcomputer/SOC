@@ -12,7 +12,6 @@ SOCSchem/sym-lib-table
 
 #ISE generated files
 SOC/*
-!SOC/SOC.xise
 !SOC/RTL/
 !SOC/ipcore_dir/
 !SOC/WorkingDir/SOC.bin
