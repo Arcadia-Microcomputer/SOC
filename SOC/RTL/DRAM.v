@@ -31,7 +31,7 @@ module DRAM #(
     integer i;
     integer numRamUsed;
     initial begin
-Ram[0] = 32'h00000001;
+Ram[0] = 32'h00000003;
 numRamUsed = 1;
 
         for(i = numRamUsed; i < DEPTH; i = i + 1)begin

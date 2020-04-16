@@ -22,17 +22,16 @@ module CPU(
     wire [31:0]w_PC_F;
 
     //----IRAM Signals----/
-    wire [31:0]w_Inst_F;
+    wire [31:0]w_Inst_D;
 
     //----IF_ID Signals----/
     wire [31:0]w_PC_D;
-    wire [31:0]w_IF_ID_Inst_D;
-
-    //----InstSel Signals----/
-    wire [31:0]w_Inst_D;
     
     //----Decoder Signals----/
-    wire [12:0]w_Control_D;
+    parameter p_CONTROL_D_SIZE = 15;
+    wire [p_CONTROL_D_SIZE-1:0]w_Control_D;
+    wire w_RS2Valid_D = w_Control_D[1];
+    wire w_RS1Valid_D = w_Control_D[0];
 
     //----RegFile Signals----/
     wire [4:0]w_RS1Addr_D = w_Inst_D[19:15];
@@ -46,7 +45,8 @@ module CPU(
     wire [31:0]w_Immediate_D;
 
     //----ID_IE Signals----/
-    wire [12:0]w_Control_E;   
+    parameter p_CONTROL_E_SIZE = 13;
+    wire [p_CONTROL_E_SIZE-1:0]w_Control_E;   
     wire w_AluBSel_E = w_Control_E[0];
     wire [3:0]w_AluOp_E = w_Control_E[4:1];
     wire w_IsBranch_E = w_Control_E[5];
@@ -71,7 +71,8 @@ module CPU(
     wire [31:0]w_DBusWrData_E;
 
     //----IE_MEM Signals----/
-    wire [7:0]w_Control_M;
+    parameter p_CONTROL_M_SIZE = 8;
+    wire [p_CONTROL_M_SIZE-1:0]w_Control_M;
     wire w_IsBranch_M = w_Control_M[0];
     wire w_DRAM_We_M = w_Control_M[1];
     wire w_DRAM_Re_M = w_Control_M[2];
@@ -96,7 +97,8 @@ module CPU(
     wire [31:0]w_DRAM_Rd_M;
 
     //----MEM_WB Signals----/
-    wire [1:0]w_Control_W;
+    parameter p_CONTROL_W_SIZE = 2;
+    wire [p_CONTROL_W_SIZE-1:0]w_Control_W;
     wire w_RegWrEn_W = w_Control_W[1];
     wire w_WBSrc_W = w_Control_W[0];
 
@@ -114,7 +116,8 @@ module CPU(
 
     //----HazardUnit Signals----/
     wire w_PcEn0;
-    wire w_IRAMSel;
+    wire w_IRamOZero;
+    wire w_IRamRdEn;
 
     wire w_RegEn_D;
     wire w_RegEn_E;
@@ -161,29 +164,25 @@ module CPU(
         .DEPTH(64)
     )IRAM0(
         .i_Clk(i_Clk),
+
+        .i_RdEn(w_IRamRdEn),
+        .i_OZero(w_IRamOZero),
+
         .i_Addr(w_PC_F[31:2]),
-        .o_RD(w_Inst_F)
+        .o_Inst(w_Inst_D)
     );
 
     //Instruction Decode Stage//
     StageReg #(
-        .WIDTH(64)
+        .WIDTH(32)
     ) IF_ID (
         .i_Clk(i_Clk),
 
         .i_En(w_RegEn_D),
         .i_Clear(w_RegClr_D),
 
-        .i_In({w_PC_F, w_Inst_F}),
-        .o_Out({w_PC_D, w_IF_ID_Inst_D})
-    );
-
-    Mux_2_1 InstSel(
-        .i_Sel(w_IRAMSel),
-        .i_Src0(w_Inst_F),
-        .i_Src1(w_IF_ID_Inst_D),
-
-        .o_Data(w_Inst_D)
+        .i_In({w_PC_F}),
+        .o_Out({w_PC_D})
     );
 
     Decoder Decoder0(
@@ -220,7 +219,7 @@ module CPU(
         .i_En(w_RegEn_E),
         .i_Clear(w_RegClr_E),
 
-        .i_In({w_Control_D, w_PC_D, w_RS1_D, w_RS2_D, w_Immediate_D, w_RS1Addr_D, w_RS2Addr_D, w_RDAddr_D}),
+        .i_In({w_Control_D[p_CONTROL_D_SIZE-1:(p_CONTROL_D_SIZE-p_CONTROL_E_SIZE)], w_PC_D, w_RS1_D, w_RS2_D, w_Immediate_D, w_RS1Addr_D, w_RS2Addr_D, w_RDAddr_D}),
         .o_Out({w_Control_E, w_PC_E, w_RS1_E, w_RS2_E, w_Immediate_E, w_RS1Addr_E, w_RS2Addr_E, w_RDAddr_E})
     );
 
@@ -261,7 +260,7 @@ module CPU(
         .i_En(w_RegEn_M),
         .i_Clear(w_RegClr_M),
 
-        .i_In({w_Control_E[12:5], w_PC_E, w_AluZero_E, w_AluResult_E, w_Immediate_E, w_DBusWrData_E, w_RS2Addr_E, w_RDAddr_E}),
+        .i_In({w_Control_E[p_CONTROL_E_SIZE-1:(p_CONTROL_E_SIZE-p_CONTROL_M_SIZE)], w_PC_E, w_AluZero_E, w_AluResult_E, w_Immediate_E, w_DBusWrData_E, w_RS2Addr_E, w_RDAddr_E}),
         .o_Out({w_Control_M, w_PC_M, w_AluZero_M, w_AluResult_M, w_Immediate_M, w_DBusWrDataSReg_M, w_RS2Addr_M, w_RDAddr_M})
     );
 
@@ -300,7 +299,7 @@ module CPU(
         .i_En(w_RegEn_W),
         .i_Clear(w_RegClr_W),
         
-        .i_In({w_Control_M[7:6], w_AluResult_M, w_RDAddr_M}),
+        .i_In({w_Control_M[p_CONTROL_M_SIZE-1:(p_CONTROL_M_SIZE-p_CONTROL_W_SIZE)], w_AluResult_M, w_RDAddr_M}),
         .o_Out({w_Control_W, w_AluResult_W, w_RDAddr_W})
     );
 
@@ -332,22 +331,29 @@ module CPU(
 
     HazardUnit HazardUnit0 (
         .i_Clk(i_Clk),
-
+        
+        .i_RS1Valid_D(w_RS1Valid_D),
         .i_RS1Addr_D(w_RS1Addr_D),
+        
+        .i_RS2Valid_D(w_RS2Valid_D),
         .i_RS2Addr_D(w_RS2Addr_D),
+        
         .i_RDAddr_E(w_RDAddr_E),
         .i_RDAddr_M(w_RDAddr_M),
-        .i_RDAddr_E(w_RDAddr_W),
+        .i_RDAddr_W(w_RDAddr_W),
+        
         .i_IsMemRead_E(w_WBSrc_E),
         .i_IsMemRead_M(w_WBSrc_M),
         .i_IsMemRead_W(w_WBSrc_W),
+        
         .i_IsBranch_E(w_IsBranch_E),
         .i_IsBranch_M(w_IsBranch_M),
         .i_TakeBranch_M(w_TakeBranch),
         
         .o_PcEn0(w_PcEn0),
-        .o_IRAMSel(w_IRAMSel),
-
+        .o_IRamRdEn(w_IRamRdEn),
+        .o_IRamOZero(w_IRamOZero),
+    
         .o_RegEn_D(w_RegEn_D),
         .o_RegEn_E(w_RegEn_E),
         .o_RegEn_M(w_RegEn_M),

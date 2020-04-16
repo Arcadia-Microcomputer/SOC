@@ -25,17 +25,6 @@ Inst[24:20]
 Text Label 3875 2950 0    31   ~ 0
 Inst[19:15]
 $Comp
-L SOC:IRAM U?
-U 1 1 5E76292E
-P 3250 4100
-F 0 "U?" H 3025 4325 50  0001 C CNN
-F 1 "IRAM" H 3150 4225 39  0000 C CNN
-F 2 "" H 3150 4225 50  0001 C CNN
-F 3 "" H 3150 4225 50  0001 C CNN
-	1    3250 4100
-	1    0    0    -1  
-$EndComp
-$Comp
 L SOC:REGFILE U?
 U 1 1 5E76926F
 P 4625 3550
@@ -68,11 +57,11 @@ F 3 "" H 2100 4250 50  0001 C CNN
 	1    1950 4225
 	1    0    0    -1  
 $EndComp
-Connection ~ 3025 4075
+Connection ~ 3250 4075
 Wire Wire Line
-	3025 3175 3525 3175
+	3250 3175 3525 3175
 Wire Wire Line
-	3025 3175 3025 4075
+	3250 3175 3250 4075
 Wire Wire Line
 	4900 3350 5025 3350
 Wire Wire Line
@@ -82,16 +71,14 @@ Wire Wire Line
 $Comp
 L SOC:PC U?
 U 1 1 5E760631
-P 2725 4225
-F 0 "U?" H 2675 4375 50  0001 C CNN
-F 1 "PC" H 2550 4475 39  0000 C CNN
-F 2 "" H 2550 4425 50  0001 C CNN
-F 3 "" H 2550 4425 50  0001 C CNN
-	1    2725 4225
+P 2850 4225
+F 0 "U?" H 2800 4375 50  0001 C CNN
+F 1 "PC" H 2675 4475 39  0000 C CNN
+F 2 "" H 2675 4425 50  0001 C CNN
+F 3 "" H 2675 4425 50  0001 C CNN
+	1    2850 4225
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	3025 4075 3050 4075
 Wire Wire Line
 	3850 2775 3850 2950
 Text Label 1800 4375 2    31   ~ 0
@@ -149,7 +136,7 @@ Wire Wire Line
 	4425 3900 3850 3900
 Connection ~ 3850 3900
 Wire Wire Line
-	3850 3900 3850 4050
+	3850 3900 3850 4075
 Text Label 5225 3900 0    31   ~ 0
 Immediate_E
 Text Label 5225 2975 0    31   ~ 0
@@ -252,21 +239,8 @@ Text Label 5775 3125 0    31   ~ 0
 AluOp_E
 Text Label 5225 4300 0    31   ~ 0
 RDAddr_E
-$Comp
-L SOC:2-1Mux U?
-U 1 1 5E878B4B
-P 3775 4050
-F 0 "U?" H 3800 4375 50  0001 C CNN
-F 1 "2-1Mux" H 3775 4200 50  0001 C CNN
-F 2 "" H 3800 4375 50  0001 C CNN
-F 3 "" H 3800 4375 50  0001 C CNN
-	1    3775 4050
-	1    0    0    -1  
-$EndComp
 Wire Wire Line
-	3825 4050 3850 4050
-Text Label 3800 1800 0    31   ~ 0
-IRAM_Sel
+	3825 4075 3850 4075
 Text Label 5250 2675 0    31   ~ 0
 WBSrc_E
 Text Label 2975 2125 2    31   ~ 0
@@ -283,8 +257,6 @@ Text Label 2975 1825 2    31   ~ 0
 RS2Addr_D
 Text Label 2975 1900 2    31   ~ 0
 RDAddr_E
-Text Label 3775 3950 1    31   ~ 0
-IRAM_Sel
 $Comp
 L SOC:IF-ID U?
 U 1 1 5E8C474F
@@ -348,9 +320,7 @@ IsBranch_M
 Text Label 5250 2725 0    31   ~ 0
 Func3_E
 Wire Wire Line
-	3000 4075 3025 4075
-Wire Wire Line
-	2175 4225 2475 4225
+	2175 4225 2600 4225
 Wire Wire Line
 	1875 4000 1600 4000
 Wire Wire Line
@@ -358,13 +328,13 @@ Wire Wire Line
 Wire Wire Line
 	1600 4225 1875 4225
 Wire Wire Line
-	3025 4450 1600 4450
+	3250 4450 1600 4450
 Wire Wire Line
 	1600 4450 1600 4300
 Wire Wire Line
 	1600 4300 1800 4300
 Wire Wire Line
-	3025 4075 3025 4450
+	3250 4075 3250 4450
 $Comp
 L SOC:BRANCH_UNIT U?
 U 1 1 5EA17429
@@ -377,11 +347,11 @@ F 3 "" H 1525 4100 31  0001 C CNN
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	2175 3650 2250 3650
+	2175 3650 2350 3650
 Wire Wire Line
-	2250 3650 2250 4150
+	2350 3650 2350 4150
 Wire Wire Line
-	2250 4150 2475 4150
+	2350 4150 2600 4150
 Text Label 1300 3725 2    31   ~ 0
 Func3_M
 Text Label 1300 3650 2    31   ~ 0
@@ -390,15 +360,6 @@ Text Label 2175 3650 0    31   ~ 0
 TakeBranch
 Text Label 2975 2500 2    31   ~ 0
 TakeBranch
-Wire Wire Line
-	3475 4075 3500 4075
-Wire Wire Line
-	3500 4075 3500 4025
-Wire Wire Line
-	3500 4025 3725 4025
-Connection ~ 3500 4075
-Wire Wire Line
-	3500 4075 3525 4075
 Wire Wire Line
 	5225 3425 5325 3425
 Wire Wire Line
@@ -460,33 +421,33 @@ Text Label 6000 4050 2    31   ~ 0
 RS2_E
 Text Label 5100 4475 3    31   ~ 0
 En_E
-Text Label 3600 4200 3    31   ~ 0
+Text Label 3600 3475 3    31   ~ 0
 En_D
 Text Label 6250 4450 3    31   ~ 0
 En_M
 Text Label 5150 4475 3    31   ~ 0
 Clr_E
-Text Label 3650 4200 3    31   ~ 0
+Text Label 3650 3475 3    31   ~ 0
 Clr_D
 Text Label 6300 4450 3    31   ~ 0
 Clr_M
-Text Label 3800 1925 0    31   ~ 0
+Text Label 3800 2000 0    31   ~ 0
 En_E
-Text Label 3800 2150 0    31   ~ 0
+Text Label 3800 2225 0    31   ~ 0
 Clr_E
-Text Label 3800 1875 0    31   ~ 0
+Text Label 3800 1950 0    31   ~ 0
 En_D
-Text Label 3800 2100 0    31   ~ 0
+Text Label 3800 2175 0    31   ~ 0
 Clr_D
-Text Label 3800 1975 0    31   ~ 0
+Text Label 3800 2050 0    31   ~ 0
 En_M
-Text Label 3800 2200 0    31   ~ 0
+Text Label 3800 2275 0    31   ~ 0
 Clr_M
-Text Label 3800 2025 0    31   ~ 0
+Text Label 3800 2100 0    31   ~ 0
 En_W
-Text Label 3800 2250 0    31   ~ 0
+Text Label 3800 2325 0    31   ~ 0
 Clr_W
-Text Label 2475 4075 2    31   ~ 0
+Text Label 2600 4075 2    31   ~ 0
 PcEn0
 $Comp
 L SOC:HAZARD_UNIT U?
@@ -721,4 +682,27 @@ Text Label 2975 1975 2    31   ~ 0
 RDAddr_M
 Text Label 2975 2050 2    31   ~ 0
 RDAddr_W
+Wire Wire Line
+	3125 4075 3250 4075
+Wire Wire Line
+	3400 4075 3250 4075
+$Comp
+L SOC:IRAM U?
+U 1 1 5E9D39C4
+P 3600 4150
+F 0 "U?" H 3500 4400 50  0001 C CNN
+F 1 "IRAM" H 3500 4325 39  0000 C CNN
+F 2 "" H 3450 4325 50  0001 C CNN
+F 3 "" H 3450 4325 50  0001 C CNN
+	1    3600 4150
+	1    0    0    -1  
+$EndComp
+Text Label 3800 1850 0    31   ~ 0
+IRamRdEn
+Text Label 3800 1800 0    31   ~ 0
+IRamOZero
+Text Label 3600 4250 3    31   ~ 0
+IRamRdEn
+Text Label 3650 4250 3    31   ~ 0
+IRamOZero
 $EndSCHEMATC

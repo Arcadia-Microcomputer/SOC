@@ -3,7 +3,7 @@
 module Decoder(
     input [31:0]i_Inst,
 
-    output [12:0]o_Control
+    output [14:0]o_Control
     );
 
     //Instruction Opcodes 
@@ -45,41 +45,43 @@ module Decoder(
     //Control signals
     reg r_RegWe = 0;
     reg r_WBSrc = 0;
-    reg r_DBUS_Re = 0;
-    reg r_DBUS_We = 0;
+    reg r_DBusRe = 0;
+    reg r_DBusWe = 0;
     reg r_IsBranch = 0;
-    reg [3:0]r_ALUOp = 0;
-    reg r_ALU_BSel = 0;
-    
-    assign o_Control = {r_RegWe, r_WBSrc, w_func3, r_DBUS_Re, r_DBUS_We, r_IsBranch, r_ALUOp, r_ALU_BSel};
+    reg [3:0]r_AluOp = 0;
+    reg r_AluBSel = 0;
+    wire w_RS2Valid = ((w_OpCode == p_InstType_R)    || (w_OpCode == p_InstType_B)     || (w_OpCode == p_InstType_S));
+    wire w_RS1Valid = !((w_OpCode == p_InstType_LUI) || (w_OpCode == p_InstType_AUIPC) || (w_OpCode == p_InstType_JAL));
+
+    assign o_Control = {r_RegWe, r_WBSrc, w_func3, r_DBusRe, r_DBusWe, r_IsBranch, r_AluOp, r_AluBSel, w_RS2Valid, w_RS1Valid};
 
     always @(*) begin
         r_RegWe <= 1'b0;
         r_WBSrc <= WB_SRC_ALU;
-        r_DBUS_Re <= 1'b0;
-        r_DBUS_We <= 1'b0;
+        r_DBusRe <= 1'b0;
+        r_DBusWe <= 1'b0;
         r_IsBranch <= 1'b0;
-        r_ALUOp <= ALU_ADD;
-        r_ALU_BSel <= ALU_SRCB_RS2;
+        r_AluOp <= ALU_ADD;
+        r_AluBSel <= ALU_SRCB_RS2;
 
         case (w_OpCode)
             p_InstType_R:begin
                 r_RegWe <= 1'b1;
                 r_WBSrc <= WB_SRC_ALU;
-                r_ALUOp <= w_ALUFunc4;
-                r_ALU_BSel <= ALU_SRCB_RS2;
+                r_AluOp <= w_ALUFunc4;
+                r_AluBSel <= ALU_SRCB_RS2;
                 
             end
             p_InstType_I:begin 
                 r_RegWe <= 1'b1;
                 r_WBSrc <= WB_SRC_ALU;
-                r_ALU_BSel <= ALU_SRCB_IMM;
+                r_AluBSel <= ALU_SRCB_IMM;
 
                 //If it's a immediate shift right, bit 30 is needed to make up the alu op code
                 if(w_func3 == 3'b101)begin
-                    r_ALUOp <= w_ALUFunc4;
+                    r_AluOp <= w_ALUFunc4;
                 end else begin
-                    r_ALUOp <= w_ALUFunc3;
+                    r_AluOp <= w_ALUFunc3;
                 end
             end
             p_InstType_JALR:begin
@@ -88,9 +90,9 @@ module Decoder(
             p_InstType_L:begin
                 r_RegWe <= 1'b1;
                 r_WBSrc <= WB_SRC_DRAM;
-                r_DBUS_Re <= 1'b1;
-                r_ALUOp <= ALU_ADD;
-                r_ALU_BSel <= ALU_SRCB_IMM;
+                r_DBusRe <= 1'b1;
+                r_AluOp <= ALU_ADD;
+                r_AluBSel <= ALU_SRCB_IMM;
             end
             p_InstType_LUI:begin
                 
@@ -99,19 +101,19 @@ module Decoder(
                 
             end
             p_InstType_JAL:begin
-                r_ALUOp <= ALU_SUB;
-                r_ALU_BSel <= ALU_SRCB_RS2;
+                r_AluOp <= ALU_SUB;
+                r_AluBSel <= ALU_SRCB_RS2;
             end
             p_InstType_B:begin
                 r_IsBranch <= 1'b1;
-                r_ALUOp <= ALU_SUB;
-                r_ALU_BSel <= ALU_SRCB_RS2;
+                r_AluOp <= ALU_SUB;
+                r_AluBSel <= ALU_SRCB_RS2;
             end
             p_InstType_S:begin
-                r_DBUS_We <= 1'b1;
-                r_ALU_BSel <= ALU_SRCB_IMM;
-                r_ALUOp <= ALU_ADD;
-                r_DBUS_We <= 1'b1;
+                r_DBusWe <= 1'b1;
+                r_AluBSel <= ALU_SRCB_IMM;
+                r_AluOp <= ALU_ADD;
+                r_DBusWe <= 1'b1;
             end
         endcase    
     end
