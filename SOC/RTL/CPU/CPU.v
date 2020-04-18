@@ -12,11 +12,17 @@ module CPU(
     output [31:0]i_DBusWd
     );
 
-    //----PCAdd Signals----/
-    wire [31:0]w_PCAdd_Sum;
-
     //----BranchUnit Signals----/
     wire w_TakeBranch;
+
+    //----PC Adder Signals----/
+    wire [31:0]w_PCAdder_Sum;
+
+    //----Branch Adder Signals----/
+    wire [31:0]w_BranchAdder_Sum;
+
+    //----NewPC Src Signals----/
+    wire [31:0]w_newPC;
 
     //----PC Signals----/
     wire [31:0]w_PC_F;
@@ -28,7 +34,7 @@ module CPU(
     wire [31:0]w_PC_D;
     
     //----Decoder Signals----/
-    parameter p_CONTROL_D_SIZE = 15;
+    parameter p_CONTROL_D_SIZE = 17;
     wire [p_CONTROL_D_SIZE-1:0]w_Control_D;
     wire w_RS2Valid_D = w_Control_D[1];
     wire w_RS1Valid_D = w_Control_D[0];
@@ -45,12 +51,14 @@ module CPU(
     wire [31:0]w_Immediate_D;
 
     //----ID_IE Signals----/
-    parameter p_CONTROL_E_SIZE = 13;
+    parameter p_CONTROL_E_SIZE = 15;
     wire [p_CONTROL_E_SIZE-1:0]w_Control_E;   
     wire w_AluBSel_E = w_Control_E[0];
-    wire [3:0]w_AluOp_E = w_Control_E[4:1];
-    wire w_IsBranch_E = w_Control_E[5];
-    wire w_WBSrc_E = w_Control_E[11];
+    wire [2:0]w_MathUOp_E = w_Control_E[3:1];
+    wire [1:0]r_BShiftOp = w_Control_E[5:4];
+    wire w_AluResSrc = w_Control_E[6];
+    wire w_IsBranch_E = w_Control_E[7];
+    wire w_WBSrc_E = w_Control_E[13];
 
     wire [31:0]w_PC_E;
 
@@ -65,7 +73,6 @@ module CPU(
     
     //----ALU Signals----/
     wire [31:0] w_AluResult_E;
-    wire w_AluZero_E;
 
     //----DBusForwardA Signals----/
     wire [31:0]w_DBusWrData_E;
@@ -82,7 +89,7 @@ module CPU(
 
     wire [31:0]w_PC_M;
 
-    wire w_AluZero_M;
+    wire w_AluResZero_M = (w_AluResult_M == 32'b0)? 1'b1: 1'b0;
     wire [31:0]w_AluResult_M;
     wire [31:0]w_Immediate_M;
     wire [31:0]w_RS2_M;
@@ -115,7 +122,7 @@ module CPU(
     wire w_DBusForwardBSrc;
 
     //----HazardUnit Signals----/
-    wire w_PcEn0;
+    wire w_PcEn;
     wire w_IRamOZero;
     wire w_IRamRdEn;
 
@@ -130,33 +137,42 @@ module CPU(
     wire w_RegClr_W;
 
     //Instruction Fetch Stage//
-    PCAdd PCAdd0(
-        .i_ASrc(w_IsBranch_M),
-        .i_A0(32'd4),
-        .i_A1(w_Immediate_M),
-
-        .i_BSrc(w_IsBranch_M),
-        .i_B0(w_PC_F),
-        .i_B1(w_PC_M),
-
-        .o_Sum(w_PCAdd_Sum)
-    );
-
     BranchUnit BranchUnit0(
         .i_IsBranch_M(w_IsBranch_M),
         .i_BranchType_M(w_func3_M),
-        .AluZero_M(w_AluZero_M),
+        .AluZero_M(w_AluResZero_M),
 
         .o_TakeBranch(w_TakeBranch)
+    );
+
+    Adder PCAdder(
+        .i_A(32'd4),
+        .i_B(w_PC_F),
+
+        .o_Sum(w_PCAdder_Sum)
+    );
+
+    Adder BranchAdder(
+        .i_A(w_Immediate_M),
+        .i_B(w_PC_M),
+
+        .o_Sum(w_BranchAdder_Sum)
+    );
+
+    Mux_2_1 NewPCSrc(
+        .i_Sel(w_TakeBranch),
+        .i_Src0(w_PCAdder_Sum),
+        .i_Src1(w_BranchAdder_Sum),
+
+        .o_Data(w_newPC)
     );
 
     PC PC0 (
         .i_Clk(i_Clk),
         
-        .i_En0(w_PcEn0),
-        .i_En1(w_TakeBranch),
+        .i_En(w_PcEn),
 
-        .i_NewPc(w_PCAdd_Sum),
+        .i_NewPc(w_newPC),
         .o_Pc(w_PC_F)
     );
 
@@ -212,7 +228,7 @@ module CPU(
 
     //Execute Stage//
     StageReg #(
-        .WIDTH(156)
+        .WIDTH(158)
     ) ID_IE (
         .i_Clk(i_Clk),
 
@@ -224,7 +240,8 @@ module CPU(
     );
 
     ALU ALU0 (
-        .i_OpCode(w_AluOp_E),
+        .i_MathUOpCode(w_MathUOp_E),
+        .i_BShiftOpCode(r_BShiftOp),
 
         .i_ForASel(w_AluForwardASrc),
         .i_ForA0(w_RS1_E),
@@ -239,8 +256,8 @@ module CPU(
         .i_SrcBSel(w_AluBSel_E),
         .i_SrcB1(w_Immediate_E),
 
-        .o_Result(w_AluResult_E),
-        .o_Zero(w_AluZero_E)
+        .i_ResSel(w_AluResSrc),
+        .o_Result(w_AluResult_E)
     );
 
     Mux_2_1 DBusForwardA(
@@ -253,15 +270,15 @@ module CPU(
 
     //Memory Stage//
     StageReg #(
-        .WIDTH(147)
+        .WIDTH(146)
     ) IE_MEM (
         .i_Clk(i_Clk),
 
         .i_En(w_RegEn_M),
         .i_Clear(w_RegClr_M),
 
-        .i_In({w_Control_E[p_CONTROL_E_SIZE-1:(p_CONTROL_E_SIZE-p_CONTROL_M_SIZE)], w_PC_E, w_AluZero_E, w_AluResult_E, w_Immediate_E, w_DBusWrData_E, w_RS2Addr_E, w_RDAddr_E}),
-        .o_Out({w_Control_M, w_PC_M, w_AluZero_M, w_AluResult_M, w_Immediate_M, w_DBusWrDataSReg_M, w_RS2Addr_M, w_RDAddr_M})
+        .i_In({w_Control_E[p_CONTROL_E_SIZE-1:(p_CONTROL_E_SIZE-p_CONTROL_M_SIZE)], w_PC_E, w_AluResult_E, w_Immediate_E, w_DBusWrData_E, w_RS2Addr_E, w_RDAddr_E}),
+        .o_Out({w_Control_M, w_PC_M, w_AluResult_M, w_Immediate_M, w_DBusWrDataSReg_M, w_RS2Addr_M, w_RDAddr_M})
     );
 
     Mux_2_1 DBusForwardB(
@@ -311,7 +328,6 @@ module CPU(
         .o_Data(w_WBData_W)
     );
     
-
     //Misc//
     ForwardingUnit ForwardingUnit0(
         .i_RS1Addr_E(w_RS1Addr_E),
@@ -350,7 +366,7 @@ module CPU(
         .i_IsBranch_M(w_IsBranch_M),
         .i_TakeBranch_M(w_TakeBranch),
         
-        .o_PcEn0(w_PcEn0),
+        .o_PcEn(w_PcEn),
         .o_IRamRdEn(w_IRamRdEn),
         .o_IRamOZero(w_IRamOZero),
     

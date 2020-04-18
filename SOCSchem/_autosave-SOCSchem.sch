@@ -407,8 +407,6 @@ F 3 "" H 6750 3500 50  0001 C CNN
 	1    6750 3150
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	7050 4300 8075 4300
 Text Label 7250 3825 2    31   ~ 0
 WBData_W
 Wire Wire Line
@@ -814,4 +812,6 @@ Wire Wire Line
 Connection ~ 6875 3625
 Wire Wire Line
 	6875 3625 7325 3625
+Wire Wire Line
+	6850 4300 8075 4300
 $EndSCHEMATC

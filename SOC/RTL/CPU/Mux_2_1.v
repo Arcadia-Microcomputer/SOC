@@ -8,7 +8,5 @@ module Mux_2_1 (
     output [31:0]o_Data
     );
 
-    wire [31:0]mux_Src[2:0] = {i_Src1, i_Src0};
-
-    assign o_Data = mux_Src[i_Sel];
+    assign o_Data = i_Sel? i_Src1: i_Src0;
 endmodule

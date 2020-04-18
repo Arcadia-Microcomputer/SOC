@@ -15,14 +15,13 @@ module DRAM #(
     output [31:0] o_DBusRd,
     input [31:0] i_DBusWd
     );
-
+    
+    reg [31:0] r_Rd = 0;
     reg r_SelRd = 1'b0;
     wire w_Sel = (i_DBusAddr[29:ADDR_BITS_PER_BLOCK] === ADDR_BLOCK)? 1: 0;
     wire [ADDR_BITS_PER_BLOCK-1:0] w_Addr = i_DBusAddr[ADDR_BITS_PER_BLOCK-1:0];
 
     assign o_DBusRd = r_SelRd? r_Rd : 32'bz;
-
-    reg [31:0] r_Rd = 0;
 
     //The Ram block
     reg [31:0] Ram [DEPTH - 1:0];
@@ -31,8 +30,11 @@ module DRAM #(
     integer i;
     integer numRamUsed;
     initial begin
-Ram[0] = 32'h00000003;
-numRamUsed = 1;
+Ram[0] = 32'h0000000d;
+Ram[1] = 32'h6c6c6548;
+Ram[2] = 32'h6f57206f;
+Ram[3] = 32'h21646c72;
+numRamUsed = 4;
 
         for(i = numRamUsed; i < DEPTH; i = i + 1)begin
             Ram[i] = 0;

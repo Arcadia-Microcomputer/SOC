@@ -21,7 +21,7 @@ module HazardUnit(
     input i_IsBranch_M,
     input i_TakeBranch_M,
 
-    output reg o_PcEn0,
+    output reg o_PcEn,
     output reg o_IRamRdEn,
     output reg o_IRamOZero,
 
@@ -37,7 +37,7 @@ module HazardUnit(
     );
     
     initial begin
-        o_PcEn0     = 1'b1;
+        o_PcEn     = 1'b1;
         o_IRamRdEn  = 1'b1;
         o_IRamOZero = 1'b0;
 
@@ -60,7 +60,7 @@ module HazardUnit(
     reg [1:0]r_StallCounter_q = 2'b0;
 
     always @(*) begin
-        o_PcEn0   <= 1'b1;
+        o_PcEn   <= 1'b1;
         o_IRamRdEn  <= 1'b1;
         o_IRamOZero <= 1'b0;
 
@@ -76,34 +76,32 @@ module HazardUnit(
 
         r_StallCounter_d <= r_StallCounter_q;
 
-        if(w_HazDRam_DE)begin
-            o_PcEn0 <= 1'b0;
+        if (i_IsBranch_M && i_TakeBranch_M) begin
+            //Clear out the consecutive instructions executing
+            o_RegClr_D <= 1'b1;
+            o_RegClr_E <= 1'b1;
+            o_RegClr_M <= 1'b1;
+
+            //Stall the pipelined for 2 cycles
+            o_IRamOZero <= 1'b0;
+
+            r_StallCounter_d <= 2'd1;
+        end else if(w_HazDRam_DE)begin
+            o_PcEn <= 1'b0;
             o_IRamRdEn <= 1'b0;
 
             o_RegClr_E <= 1'b1;
         end else if(w_HazDRam_DM)begin
-            o_PcEn0 <= 1'b0;
+            o_PcEn <= 1'b0;
             o_IRamRdEn <= 1'b0;
 
             o_RegClr_E <= 1'b1;
         end else if(w_HazDRam_DW)begin
-            o_PcEn0 <= 1'b0;
+            o_PcEn <= 1'b0;
             o_IRamRdEn <= 1'b0;
 
             o_RegClr_E <= 1'b1;
-        end if (i_IsBranch_M) begin
-            if(i_TakeBranch_M)begin
-                //Clear out the consecutive instructions executing
-                o_RegClr_D <= 1'b1;
-                o_RegClr_E <= 1'b1;
-                o_RegClr_M <= 1'b1;
-
-                //Stall the pipelined for 2 cycles
-                o_IRamOZero <= 1'b0;
-
-                r_StallCounter_d <= 2'd1;
-            end
-        end 
+        end
 
         if (r_StallCounter_q != 0)begin
             o_RegEn_E <= 1'b0;

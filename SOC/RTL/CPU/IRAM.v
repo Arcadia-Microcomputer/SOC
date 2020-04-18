@@ -21,12 +21,22 @@ module IRAM #(
     integer i;
     integer numRamUsed;
     initial begin
-Ram[0] = 32'h00002083;
-Ram[1] = 32'h00100113;
-Ram[2] = 32'h00108093;
-Ram[3] = 32'h00108093;
-Ram[4] = 32'h00000063;
-numRamUsed = 5;
+Ram[0] = 32'h00100093;
+Ram[1] = 32'h40101023;
+Ram[2] = 32'h00002083;
+Ram[3] = 32'h00400113;
+Ram[4] = 32'h00000193;
+Ram[5] = 32'h00100213;
+Ram[6] = 32'h00010303;
+Ram[7] = 32'h40002283;
+Ram[8] = 32'h0102d293;
+Ram[9] = 32'hfe429ce3;
+Ram[10] = 32'h40600223;
+Ram[11] = 32'h00118193;
+Ram[12] = 32'h00110113;
+Ram[13] = 32'hfe1192e3;
+Ram[14] = 32'h00108063;
+numRamUsed = 15;
 
         for(i = numRamUsed; i < DEPTH; i = i + 1)begin
             Ram[i] = 0;

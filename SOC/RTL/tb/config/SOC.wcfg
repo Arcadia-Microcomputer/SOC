@@ -10,9 +10,9 @@
          </top_modules>
       </db_ref>
    </db_ref_list>
-   <WVObjectSize size="47" />
+   <WVObjectSize size="46" />
    <wave_markers>
-      <marker time="6650000000" label="" />
+      <marker time="8680000000" label="" />
    </wave_markers>
    <wvobject fp_name="/SOC_tb/SOC0/CPU0/i_Clk" type="logic" db_ref_id="1">
       <obj_property name="ElementShortName">i_Clk</obj_property>
@@ -45,8 +45,8 @@
       <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
    </wvobject>
    <wvobject fp_name="/SOC_tb/SOC0/CPU0/w_Control_D" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">w_Control_D[14:0]</obj_property>
-      <obj_property name="ObjectShortName">w_Control_D[14:0]</obj_property>
+      <obj_property name="ElementShortName">w_Control_D[16:0]</obj_property>
+      <obj_property name="ObjectShortName">w_Control_D[16:0]</obj_property>
       <obj_property name="UseCustomSignalColor">true</obj_property>
       <obj_property name="CustomSignalColor">#ffff00</obj_property>
    </wvobject>
@@ -57,11 +57,11 @@
       <obj_property name="UseCustomSignalColor">true</obj_property>
       <obj_property name="CustomSignalColor">#00ff00</obj_property>
    </wvobject>
-   <wvobject fp_name="/SOC_tb/SOC0/CPU0/w_RS1Valid_D" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">w_RS1Valid_D</obj_property>
-      <obj_property name="ObjectShortName">w_RS1Valid_D</obj_property>
+   <wvobject fp_name="/SOC_tb/SOC0/CPU0/HazardUnit0/i_RS1Valid_D" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">i_RS1Valid_D</obj_property>
+      <obj_property name="ObjectShortName">i_RS1Valid_D</obj_property>
       <obj_property name="UseCustomSignalColor">true</obj_property>
-      <obj_property name="CustomSignalColor">#ffa500</obj_property>
+      <obj_property name="CustomSignalColor">#800080</obj_property>
    </wvobject>
    <wvobject fp_name="/SOC_tb/SOC0/CPU0/w_RS1Addr_D" type="array" db_ref_id="1">
       <obj_property name="ElementShortName">w_RS1Addr_D[4:0]</obj_property>
@@ -70,11 +70,11 @@
       <obj_property name="UseCustomSignalColor">true</obj_property>
       <obj_property name="CustomSignalColor">#800080</obj_property>
    </wvobject>
-   <wvobject fp_name="/SOC_tb/SOC0/CPU0/w_RS2Valid_D" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">w_RS2Valid_D</obj_property>
-      <obj_property name="ObjectShortName">w_RS2Valid_D</obj_property>
+   <wvobject fp_name="/SOC_tb/SOC0/CPU0/HazardUnit0/i_RS2Valid_D" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">i_RS2Valid_D</obj_property>
+      <obj_property name="ObjectShortName">i_RS2Valid_D</obj_property>
       <obj_property name="UseCustomSignalColor">true</obj_property>
-      <obj_property name="CustomSignalColor">#ffa500</obj_property>
+      <obj_property name="CustomSignalColor">#800080</obj_property>
    </wvobject>
    <wvobject fp_name="/SOC_tb/SOC0/CPU0/w_RS2Addr_D" type="array" db_ref_id="1">
       <obj_property name="ElementShortName">w_RS2Addr_D[4:0]</obj_property>
@@ -87,7 +87,7 @@
       <obj_property name="ElementShortName">w_WBSrc_E</obj_property>
       <obj_property name="ObjectShortName">w_WBSrc_E</obj_property>
       <obj_property name="UseCustomSignalColor">true</obj_property>
-      <obj_property name="CustomSignalColor">#ffa500</obj_property>
+      <obj_property name="CustomSignalColor">#800080</obj_property>
    </wvobject>
    <wvobject fp_name="/SOC_tb/SOC0/CPU0/w_RDAddr_E" type="array" db_ref_id="1">
       <obj_property name="ElementShortName">w_RDAddr_E[4:0]</obj_property>
@@ -100,7 +100,7 @@
       <obj_property name="ElementShortName">w_WBSrc_M</obj_property>
       <obj_property name="ObjectShortName">w_WBSrc_M</obj_property>
       <obj_property name="UseCustomSignalColor">true</obj_property>
-      <obj_property name="CustomSignalColor">#ffa500</obj_property>
+      <obj_property name="CustomSignalColor">#800080</obj_property>
    </wvobject>
    <wvobject fp_name="/SOC_tb/SOC0/CPU0/w_RDAddr_M" type="array" db_ref_id="1">
       <obj_property name="ElementShortName">w_RDAddr_M[4:0]</obj_property>
@@ -113,7 +113,7 @@
       <obj_property name="ElementShortName">w_WBSrc_W</obj_property>
       <obj_property name="ObjectShortName">w_WBSrc_W</obj_property>
       <obj_property name="UseCustomSignalColor">true</obj_property>
-      <obj_property name="CustomSignalColor">#ffa500</obj_property>
+      <obj_property name="CustomSignalColor">#800080</obj_property>
    </wvobject>
    <wvobject fp_name="/SOC_tb/SOC0/CPU0/w_RDAddr_W" type="array" db_ref_id="1">
       <obj_property name="ElementShortName">w_RDAddr_W[4:0]</obj_property>
@@ -188,38 +188,11 @@
       <obj_property name="UseCustomSignalColor">true</obj_property>
       <obj_property name="CustomSignalColor">#ffa500</obj_property>
    </wvobject>
-   <wvobject fp_name="/SOC_tb/SOC0/CPU0/PCAdd0/i_ASrc" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">i_ASrc</obj_property>
-      <obj_property name="ObjectShortName">i_ASrc</obj_property>
+   <wvobject fp_name="/SOC_tb/SOC0/CPU0/BranchUnit0/i_IsBranch_M" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">i_IsBranch_M</obj_property>
+      <obj_property name="ObjectShortName">i_IsBranch_M</obj_property>
       <obj_property name="UseCustomSignalColor">true</obj_property>
-      <obj_property name="CustomSignalColor">#ff00ff</obj_property>
-   </wvobject>
-   <wvobject fp_name="/SOC_tb/SOC0/CPU0/PCAdd0/i_A1" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">i_A1[31:0]</obj_property>
-      <obj_property name="ObjectShortName">i_A1[31:0]</obj_property>
-      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
-      <obj_property name="UseCustomSignalColor">true</obj_property>
-      <obj_property name="CustomSignalColor">#ff00ff</obj_property>
-   </wvobject>
-   <wvobject fp_name="/SOC_tb/SOC0/CPU0/PCAdd0/i_BSrc" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">i_BSrc</obj_property>
-      <obj_property name="ObjectShortName">i_BSrc</obj_property>
-      <obj_property name="UseCustomSignalColor">true</obj_property>
-      <obj_property name="CustomSignalColor">#ff00ff</obj_property>
-   </wvobject>
-   <wvobject fp_name="/SOC_tb/SOC0/CPU0/PCAdd0/i_B1" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">i_B1[31:0]</obj_property>
-      <obj_property name="ObjectShortName">i_B1[31:0]</obj_property>
-      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
-      <obj_property name="UseCustomSignalColor">true</obj_property>
-      <obj_property name="CustomSignalColor">#ff00ff</obj_property>
-   </wvobject>
-   <wvobject fp_name="/SOC_tb/SOC0/CPU0/PCAdd0/o_Sum" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">o_Sum[31:0]</obj_property>
-      <obj_property name="ObjectShortName">o_Sum[31:0]</obj_property>
-      <obj_property name="UseCustomSignalColor">true</obj_property>
-      <obj_property name="CustomSignalColor">#ff00ff</obj_property>
-      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      <obj_property name="CustomSignalColor">#00ffff</obj_property>
    </wvobject>
    <wvobject fp_name="/SOC_tb/SOC0/CPU0/BranchUnit0/o_TakeBranch" type="logic" db_ref_id="1">
       <obj_property name="ElementShortName">o_TakeBranch</obj_property>
@@ -411,28 +384,28 @@
       <wvobject fp_name="/SOC_tb/SOC0/CPU0/RegFile0/Registers[6]" type="array" db_ref_id="1">
          <obj_property name="ElementShortName">[6,31:0]</obj_property>
          <obj_property name="ObjectShortName">Registers[6,31:0]</obj_property>
-         <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
          <obj_property name="UseCustomSignalColor">true</obj_property>
          <obj_property name="CustomSignalColor">#ff00ff</obj_property>
       </wvobject>
       <wvobject fp_name="/SOC_tb/SOC0/CPU0/RegFile0/Registers[5]" type="array" db_ref_id="1">
          <obj_property name="ElementShortName">[5,31:0]</obj_property>
          <obj_property name="ObjectShortName">Registers[5,31:0]</obj_property>
-         <obj_property name="Radix">HEXRADIX</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
          <obj_property name="UseCustomSignalColor">true</obj_property>
          <obj_property name="CustomSignalColor">#ff00ff</obj_property>
       </wvobject>
       <wvobject fp_name="/SOC_tb/SOC0/CPU0/RegFile0/Registers[4]" type="array" db_ref_id="1">
          <obj_property name="ElementShortName">[4,31:0]</obj_property>
          <obj_property name="ObjectShortName">Registers[4,31:0]</obj_property>
-         <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+         <obj_property name="Radix">ASCIIRADIX</obj_property>
          <obj_property name="UseCustomSignalColor">true</obj_property>
          <obj_property name="CustomSignalColor">#ff00ff</obj_property>
       </wvobject>
       <wvobject fp_name="/SOC_tb/SOC0/CPU0/RegFile0/Registers[3]" type="array" db_ref_id="1">
          <obj_property name="ElementShortName">[3,31:0]</obj_property>
          <obj_property name="ObjectShortName">Registers[3,31:0]</obj_property>
-         <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
          <obj_property name="UseCustomSignalColor">true</obj_property>
          <obj_property name="CustomSignalColor">#ff00ff</obj_property>
       </wvobject>
@@ -464,22 +437,30 @@
       <obj_property name="UseCustomSignalColor">true</obj_property>
       <obj_property name="CustomSignalColor">#ff00ff</obj_property>
    </wvobject>
-   <wvobject fp_name="/SOC_tb/SOC0/CPU0/ALU0/i_OpCode" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">i_OpCode[3:0]</obj_property>
-      <obj_property name="ObjectShortName">i_OpCode[3:0]</obj_property>
+   <wvobject fp_name="/SOC_tb/SOC0/CPU0/ALU0/i_MathUOpCode" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">i_MathUOpCode[2:0]</obj_property>
+      <obj_property name="ObjectShortName">i_MathUOpCode[2:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
       <obj_property name="UseCustomSignalColor">true</obj_property>
       <obj_property name="CustomSignalColor">#00ffff</obj_property>
    </wvobject>
-   <wvobject fp_name="/SOC_tb/SOC0/CPU0/ALU0/w_SrcA" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">w_SrcA[31:0]</obj_property>
-      <obj_property name="ObjectShortName">w_SrcA[31:0]</obj_property>
+   <wvobject fp_name="/SOC_tb/SOC0/CPU0/ALU0/i_BShiftOpCode" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">i_BShiftOpCode[1:0]</obj_property>
+      <obj_property name="ObjectShortName">i_BShiftOpCode[1:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#00ffff</obj_property>
+   </wvobject>
+   <wvobject fp_name="/SOC_tb/SOC0/CPU0/ALU0/w_A" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">w_A[31:0]</obj_property>
+      <obj_property name="ObjectShortName">w_A[31:0]</obj_property>
       <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
       <obj_property name="UseCustomSignalColor">true</obj_property>
       <obj_property name="CustomSignalColor">#00ffff</obj_property>
    </wvobject>
-   <wvobject fp_name="/SOC_tb/SOC0/CPU0/ALU0/w_SrcB" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">w_SrcB[31:0]</obj_property>
-      <obj_property name="ObjectShortName">w_SrcB[31:0]</obj_property>
+   <wvobject fp_name="/SOC_tb/SOC0/CPU0/ALU0/w_B" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">w_B[31:0]</obj_property>
+      <obj_property name="ObjectShortName">w_B[31:0]</obj_property>
       <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
       <obj_property name="UseCustomSignalColor">true</obj_property>
       <obj_property name="CustomSignalColor">#00ffff</obj_property>
@@ -490,6 +471,13 @@
       <obj_property name="UseCustomSignalColor">true</obj_property>
       <obj_property name="CustomSignalColor">#00ffff</obj_property>
       <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/SOC_tb/SOC0/CPU0/w_DRAM_Rd_M" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">w_DRAM_Rd_M[31:0]</obj_property>
+      <obj_property name="ObjectShortName">w_DRAM_Rd_M[31:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ffff00</obj_property>
    </wvobject>
    <wvobject fp_name="/SOC_tb/SOC0/DRAM0/w_Sel" type="logic" db_ref_id="1">
       <obj_property name="ElementShortName">w_Sel</obj_property>
@@ -872,56 +860,56 @@
       <wvobject fp_name="/SOC_tb/SOC0/DRAM0/Ram[11]" type="array" db_ref_id="1">
          <obj_property name="ElementShortName">[11,31:0]</obj_property>
          <obj_property name="ObjectShortName">Ram[11,31:0]</obj_property>
-         <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+         <obj_property name="Radix">ASCIIRADIX</obj_property>
          <obj_property name="UseCustomSignalColor">true</obj_property>
          <obj_property name="CustomSignalColor">#ffff00</obj_property>
       </wvobject>
       <wvobject fp_name="/SOC_tb/SOC0/DRAM0/Ram[10]" type="array" db_ref_id="1">
          <obj_property name="ElementShortName">[10,31:0]</obj_property>
          <obj_property name="ObjectShortName">Ram[10,31:0]</obj_property>
-         <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+         <obj_property name="Radix">ASCIIRADIX</obj_property>
          <obj_property name="UseCustomSignalColor">true</obj_property>
          <obj_property name="CustomSignalColor">#ffff00</obj_property>
       </wvobject>
       <wvobject fp_name="/SOC_tb/SOC0/DRAM0/Ram[9]" type="array" db_ref_id="1">
          <obj_property name="ElementShortName">[9,31:0]</obj_property>
          <obj_property name="ObjectShortName">Ram[9,31:0]</obj_property>
-         <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+         <obj_property name="Radix">ASCIIRADIX</obj_property>
          <obj_property name="UseCustomSignalColor">true</obj_property>
          <obj_property name="CustomSignalColor">#ffff00</obj_property>
       </wvobject>
       <wvobject fp_name="/SOC_tb/SOC0/DRAM0/Ram[8]" type="array" db_ref_id="1">
          <obj_property name="ElementShortName">[8,31:0]</obj_property>
          <obj_property name="ObjectShortName">Ram[8,31:0]</obj_property>
-         <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+         <obj_property name="Radix">ASCIIRADIX</obj_property>
          <obj_property name="UseCustomSignalColor">true</obj_property>
          <obj_property name="CustomSignalColor">#ffff00</obj_property>
       </wvobject>
       <wvobject fp_name="/SOC_tb/SOC0/DRAM0/Ram[7]" type="array" db_ref_id="1">
          <obj_property name="ElementShortName">[7,31:0]</obj_property>
          <obj_property name="ObjectShortName">Ram[7,31:0]</obj_property>
-         <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+         <obj_property name="Radix">ASCIIRADIX</obj_property>
          <obj_property name="UseCustomSignalColor">true</obj_property>
          <obj_property name="CustomSignalColor">#ffff00</obj_property>
       </wvobject>
       <wvobject fp_name="/SOC_tb/SOC0/DRAM0/Ram[6]" type="array" db_ref_id="1">
          <obj_property name="ElementShortName">[6,31:0]</obj_property>
          <obj_property name="ObjectShortName">Ram[6,31:0]</obj_property>
-         <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+         <obj_property name="Radix">ASCIIRADIX</obj_property>
          <obj_property name="UseCustomSignalColor">true</obj_property>
          <obj_property name="CustomSignalColor">#ffff00</obj_property>
       </wvobject>
       <wvobject fp_name="/SOC_tb/SOC0/DRAM0/Ram[5]" type="array" db_ref_id="1">
          <obj_property name="ElementShortName">[5,31:0]</obj_property>
          <obj_property name="ObjectShortName">Ram[5,31:0]</obj_property>
-         <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+         <obj_property name="Radix">ASCIIRADIX</obj_property>
          <obj_property name="UseCustomSignalColor">true</obj_property>
          <obj_property name="CustomSignalColor">#ffff00</obj_property>
       </wvobject>
       <wvobject fp_name="/SOC_tb/SOC0/DRAM0/Ram[4]" type="array" db_ref_id="1">
          <obj_property name="ElementShortName">[4,31:0]</obj_property>
          <obj_property name="ObjectShortName">Ram[4,31:0]</obj_property>
-         <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+         <obj_property name="Radix">ASCIIRADIX</obj_property>
          <obj_property name="UseCustomSignalColor">true</obj_property>
          <obj_property name="CustomSignalColor">#ffff00</obj_property>
       </wvobject>
@@ -975,6 +963,13 @@
    <wvobject fp_name="/SOC_tb/SOC0/UART0/r_Idle" type="logic" db_ref_id="1">
       <obj_property name="ElementShortName">r_Idle</obj_property>
       <obj_property name="ObjectShortName">r_Idle</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ff00ff</obj_property>
+   </wvobject>
+   <wvobject fp_name="/SOC_tb/SOC0/UART0/r_Reg_ClksPerBit" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">r_Reg_ClksPerBit[15:0]</obj_property>
+      <obj_property name="ObjectShortName">r_Reg_ClksPerBit[15:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
       <obj_property name="UseCustomSignalColor">true</obj_property>
       <obj_property name="CustomSignalColor">#ff00ff</obj_property>
    </wvobject>
