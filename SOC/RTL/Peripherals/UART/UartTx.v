@@ -3,17 +3,17 @@
 module UartTx (
     input i_Clk,
 
-    output reg o_UART_TX,
-
     input [15:0] i_ClksPerBit,
     input i_TxEn,
     input [7:0] i_Data,
-    output reg o_TxDone
+    output reg o_TxDone,
+
+    output reg o_UART_TX
     );
 
     initial begin
-        o_UART_TX <= 1'b1;
         o_TxDone <= 1'b1;
+        o_UART_TX <= 1'b1;
     end
     
     reg [15:0] r_ClksPerBitCounter = 16'b0;
@@ -45,19 +45,17 @@ module UartTx (
             TX_START_BIT:begin
                 o_UART_TX <= 0;
 
-                if(r_ClksPerBitCounter < i_ClksPerBit - 1)begin
-                    r_ClksPerBitCounter <= r_ClksPerBitCounter + 1;
-                end else begin
+                if(r_ClksPerBitCounter == i_ClksPerBit - 1)begin
                     r_ClksPerBitCounter <= 0;
                     TXState <= TX_DATA;
+                end else begin
+                    r_ClksPerBitCounter <= r_ClksPerBitCounter + 1;
                 end
             end
             TX_DATA:begin
                 o_UART_TX <= i_Data[r_BitCounter];
 
-                if(r_ClksPerBitCounter < i_ClksPerBit - 1)begin
-                    r_ClksPerBitCounter <= r_ClksPerBitCounter + 1;
-                end else begin
+                if(r_ClksPerBitCounter == i_ClksPerBit - 1)begin
                     r_BitCounter <= r_BitCounter + 1;
                     r_ClksPerBitCounter <= 0;
 
@@ -65,16 +63,18 @@ module UartTx (
                         r_BitCounter <= 0;
                         TXState <= TX_STOP; 
                     end
+                end else begin
+                    r_ClksPerBitCounter <= r_ClksPerBitCounter + 1;
                 end
             end
             TX_STOP:begin
                 o_UART_TX <= 1;
-                if(r_ClksPerBitCounter < i_ClksPerBit - 1)begin
-                    r_ClksPerBitCounter <= r_ClksPerBitCounter + 1;
-                end else begin
+                if(r_ClksPerBitCounter == i_ClksPerBit - 1)begin
                     r_ClksPerBitCounter <= 0;
                     o_TxDone <= 1;
                     TXState <= TX_WAIT;
+                end else begin
+                    r_ClksPerBitCounter <= r_ClksPerBitCounter + 1;
                 end
             end
         endcase

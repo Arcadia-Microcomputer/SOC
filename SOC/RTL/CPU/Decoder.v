@@ -3,7 +3,7 @@
 module Decoder(
     input [31:0]i_Inst,
 
-    output [16:0]o_Control
+    output [18:0]o_Control
     );
 
     //Instruction Opcodes 
@@ -21,186 +21,91 @@ module Decoder(
     parameter ALU_SRCB_RS2 = 1'b0;
     parameter ALU_SRCB_IMM = 1'b1;
 
-    //ALU Result Src Mux
-    parameter ALU_RES_SRC_MATHU  = 1'b0;
-    parameter ALU_RESSRC_BSHIFT = 1'b1;
-
-    // FUNC3 INST R type opcodes
-    parameter INST_SUB_ADD  = 3'b000;
-    parameter INST_AND      = 3'b111;
-    parameter INST_OR       = 3'b110;
-    parameter INST_XOR      = 3'b100;
-    parameter INST_SLL      = 3'b001;
-    parameter INST_SRL_SRA  = 3'b101;
-    
-    //BIT30 INST R type opcodes
-    parameter INST_ADD  = 1'b0;
-    parameter INST_SUB  = 1'b1;
-    parameter INST_SRL  = 1'b0;
-    parameter INST_SRA  = 1'b1;
-
-    //The Math Unit opcodes
-    parameter MATHU_ADD   = 3'b000;
-    parameter MATHU_SUB   = 3'b001;
-    parameter MATHU_AND   = 3'b010;
-    parameter MATHU_OR    = 3'b011;
-    parameter MATHU_XOR   = 3'b100;
-
-    //Barrel Shift opcodes
-    parameter BSHIFT_SLL = 2'b00;
-    parameter BSHIFT_SRL = 2'b01;
-    parameter BSHIFT_SRA = 2'b10;
+    //ALU opcodes
+    parameter ALU_ADD  = 4'b0000;
+    parameter ALU_SUB  = 4'b1000;
+    parameter ALU_AND  = 4'b0111;
+    parameter ALU_OR   = 4'b0110;
+    parameter ALU_XOR  = 4'b0100;
+    parameter ALU_SLL  = 4'b0001;
+    parameter ALU_SRL  = 4'b0101;
+    parameter ALU_SRA  = 4'b1101;
 
     //WB Src Mux
-    parameter WB_SRC_ALU = 1'b0;
-    parameter WB_SRC_DRAM = 1'b1;
+    parameter WB_SRC_PC_PLUS4   = 2'd0;
+    parameter WB_SRC_ALU        = 2'd1;
+    parameter WB_SRC_DRAM       = 2'd2;
+
+    //Branch Adder B Src Mux
+    parameter BA_SRC_PC   = 1'd0;
+    parameter BA_SRC_REG1 = 1'd1;
 
     wire [2:0]w_func3 = {i_Inst[14:12]};
     wire [6:0]w_func7 = {i_Inst[31:25]};
     wire [6:0]w_OpCode = i_Inst[6:0];
-    
+    wire [3:0]w_AluFunc4 = {i_Inst[30], i_Inst[14:12]};
+    wire [3:0]w_AluFunc3 = {1'b0, i_Inst[14:12]};
+
     //Control signals
     reg r_RegWe = 0;
-    reg r_WBSrc = 0;
+    reg [1:0]r_WBSrc = 0;
     reg r_DBusRe = 0;
     reg r_DBusWe = 0;
+    reg r_BranchAdderBSel = 1'b0;
+    reg r_IsJump = 0;
     reg r_IsBranch = 0;
-    reg r_AluResSrc = 0;
-    reg [1:0]r_BShiftOp = 0;
-    reg [2:0]r_MathUOp = 0;
+    reg [3:0]r_ALuOp = 0;
     reg r_AluBSel = 0;
+    reg r_DBusReq = 0;
     wire w_RS2Valid = ((w_OpCode == p_InstType_R)    || (w_OpCode == p_InstType_B)     || (w_OpCode == p_InstType_S));
     wire w_RS1Valid = !((w_OpCode == p_InstType_LUI) || (w_OpCode == p_InstType_AUIPC) || (w_OpCode == p_InstType_JAL));
 
-    assign o_Control = {r_RegWe, r_WBSrc, w_func3, r_DBusRe, r_DBusWe, r_IsBranch, r_AluResSrc, r_BShiftOp, r_MathUOp, r_AluBSel, w_RS2Valid, w_RS1Valid};
+    assign o_Control = {r_RegWe, r_WBSrc, r_DBusRe, r_DBusWe, r_BranchAdderBSel, w_func3, r_IsJump, r_IsBranch, r_ALuOp, r_AluBSel, r_DBusReq, w_RS2Valid, w_RS1Valid};
 
     always @(*) begin
         r_RegWe <= 1'b0;
         r_WBSrc <= WB_SRC_ALU;
         r_DBusRe <= 1'b0;
         r_DBusWe <= 1'b0;
+        r_BranchAdderBSel <= BA_SRC_PC;
+        r_IsJump <= 1'b0;
         r_IsBranch <= 1'b0;
-        r_AluResSrc <= ALU_RES_SRC_MATHU;
-        r_BShiftOp <= BSHIFT_SLL;
-        r_MathUOp <= MATHU_ADD;
+        r_ALuOp <= ALU_ADD;
         r_AluBSel <= ALU_SRCB_RS2;
-
+        r_DBusReq <= 1'b0;
+        
         case (w_OpCode)
             p_InstType_R:begin
                 r_RegWe <= 1'b1;
                 r_WBSrc <= WB_SRC_ALU;
+                r_ALuOp <= w_AluFunc4;
                 r_AluBSel <= ALU_SRCB_RS2;
-                
-                case (w_func3)
-                    INST_SUB_ADD:begin
-                        r_AluResSrc <= ALU_RES_SRC_MATHU;
-
-                        case (i_Inst[30])
-                            INST_ADD:begin
-                                r_MathUOp <= MATHU_ADD;
-                            end
-                            INST_SUB:begin
-                                r_MathUOp <= MATHU_SUB;
-                            end
-                        endcase
-                    end
-                    INST_AND:begin
-                        r_AluResSrc <= ALU_RES_SRC_MATHU;
-                        r_MathUOp <= MATHU_AND;
-                    end
-                    INST_OR:begin
-                        r_AluResSrc <= ALU_RES_SRC_MATHU;
-                        r_MathUOp <= MATHU_OR;
-                    end
-                    INST_XOR:begin
-                        r_AluResSrc <= ALU_RES_SRC_MATHU;
-                        r_MathUOp <= MATHU_XOR;
-                    end
-                    INST_SLL:begin
-                        r_AluResSrc <= ALU_RESSRC_BSHIFT;
-                        r_BShiftOp <= BSHIFT_SLL;
-                    end
-                    INST_SRL:begin
-                        r_AluResSrc <= ALU_RESSRC_BSHIFT;
-                        r_BShiftOp <= BSHIFT_SRL;
-                    end
-                    INST_SRL_SRA:begin
-                        r_AluResSrc <= ALU_RESSRC_BSHIFT;
-
-                        case (i_Inst[30])
-                            INST_SRL:begin
-                                r_BShiftOp <= BSHIFT_SRL;
-                            end
-                            INST_SRA:begin
-                                r_BShiftOp <= BSHIFT_SRA;
-                            end
-                        endcase
-                    end
-                endcase
             end
             p_InstType_I:begin 
                 r_RegWe <= 1'b1;
                 r_WBSrc <= WB_SRC_ALU;
                 r_AluBSel <= ALU_SRCB_IMM;
 
-                 case (w_func3)
-                    INST_SUB_ADD:begin
-                        r_AluResSrc <= ALU_RES_SRC_MATHU;
-
-                        case (i_Inst[30])
-                            INST_ADD:begin
-                                r_MathUOp <= MATHU_ADD;
-                            end
-                            INST_SUB:begin
-                                r_MathUOp <= MATHU_SUB;
-                            end
-                        endcase
-                    end
-                    INST_AND:begin
-                        r_AluResSrc <= ALU_RES_SRC_MATHU;
-                        r_MathUOp <= MATHU_AND;
-                    end
-                    INST_OR:begin
-                        r_AluResSrc <= ALU_RES_SRC_MATHU;
-                        r_MathUOp <= MATHU_OR;
-                    end
-                    INST_XOR:begin
-                        r_AluResSrc <= ALU_RES_SRC_MATHU;
-                        r_MathUOp <= MATHU_XOR;
-                    end
-                    INST_SLL:begin
-                        r_AluResSrc <= ALU_RESSRC_BSHIFT;
-                        r_BShiftOp <= BSHIFT_SLL;
-                    end
-                    INST_SRL:begin
-                        r_AluResSrc <= ALU_RESSRC_BSHIFT;
-                        r_BShiftOp <= BSHIFT_SRL;
-                    end
-                    INST_SRL_SRA:begin
-                        r_AluResSrc <= ALU_RESSRC_BSHIFT;
-
-                        case (i_Inst[30])
-                            INST_SRL:begin
-                                r_BShiftOp <= BSHIFT_SRL;
-                            end
-                            INST_SRA:begin
-                                r_BShiftOp <= BSHIFT_SRA;
-                            end
-                        endcase
-                    end
-                endcase
+                if(w_func3 == 3'b101)begin
+                    //If it is a SRLI or SRAI the 4th bit is needed
+                    r_ALuOp <= w_AluFunc4;
+                end else begin
+                    r_ALuOp <= w_AluFunc3;
+                end
             end
             p_InstType_JALR:begin
-                
+                r_RegWe <= 1'b1;
+                r_WBSrc <= WB_SRC_PC_PLUS4;
+                r_BranchAdderBSel <= BA_SRC_REG1;
+                r_IsJump <= 1'b1;
             end
             p_InstType_L:begin
                 r_RegWe <= 1'b1;
                 r_WBSrc <= WB_SRC_DRAM;
                 r_DBusRe <= 1'b1;
-
-                r_AluResSrc <= ALU_RES_SRC_MATHU;
-                r_MathUOp <= MATHU_ADD;
+                r_ALuOp <= ALU_ADD;
                 r_AluBSel <= ALU_SRCB_IMM;
+                r_DBusReq <= 1'b1;
             end
             p_InstType_LUI:begin
                 
@@ -209,21 +114,22 @@ module Decoder(
                 
             end
             p_InstType_JAL:begin
-                
+                r_RegWe <= 1'b1;
+                r_WBSrc <= WB_SRC_PC_PLUS4;
+                r_BranchAdderBSel <= BA_SRC_PC;
+                r_IsJump <= 1'b1;
             end
             p_InstType_B:begin
+                r_BranchAdderBSel <= BA_SRC_PC;
                 r_IsBranch <= 1'b1;
-
-                r_AluResSrc <= ALU_RES_SRC_MATHU;
-                r_MathUOp <= MATHU_SUB;
+                r_ALuOp <= ALU_SUB;
                 r_AluBSel <= ALU_SRCB_RS2;
             end
             p_InstType_S:begin
                 r_DBusWe <= 1'b1;
-
-                r_AluResSrc <= ALU_RES_SRC_MATHU;
-                r_MathUOp <= MATHU_ADD;
+                r_ALuOp <= ALU_ADD;
                 r_AluBSel <= ALU_SRCB_IMM;
+                r_DBusReq <= 1'b1;
             end
         endcase    
     end

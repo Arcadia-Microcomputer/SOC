@@ -1,56 +1,67 @@
 `timescale 1ns / 1ps
 
 module ForwardingUnit(
+    input [4:0]i_RS1Addr_D,
+    input [4:0]i_RS2Addr_D,
     input [4:0]i_RS1Addr_E,
     input [4:0]i_RS2Addr_E,
+    input [4:0]i_RS1Addr_M,
     input [4:0]i_RS2Addr_M,
     input [4:0]i_RDAddr_M,
-    input [4:0]i_RDAddr_W,
     input i_RegWrEn_M,
-    input i_RegWrEn_W,
     
-    output reg [1:0] o_AluForA,
-    output reg [1:0] o_AluForB,
-
-    output reg o_DBusForA,
-    output reg o_DBusForB
+    output reg o_RS1ForSel_D,
+    output reg o_RS2ForSel_D,
+    output reg o_RS1ForSel_E,
+    output reg o_RS2ForSel_E,
+    output reg o_RS1ForSel_M,
+    output reg o_RS2ForSel_M
     );
     
     parameter p_SRC_REG = 2'd0;
-    parameter p_SRC_MEM = 2'd1;
-    parameter p_SRC_WB  = 2'd2;
+    parameter p_SRC_WB = 2'd1;
 
     always @(*) begin
-        //ALU Src A Forwading
+        //RS1 D Forwading
+        if((i_RDAddr_M != 0) && (i_RDAddr_M == i_RS1Addr_D) && i_RegWrEn_M)begin
+            o_RS1ForSel_D <= p_SRC_WB;
+        end else begin
+            o_RS1ForSel_D <= p_SRC_REG;
+        end
+
+        //RS2 D Forwading
+        if((i_RDAddr_M != 0) && (i_RDAddr_M == i_RS2Addr_D) && i_RegWrEn_M)begin
+            o_RS2ForSel_D <= p_SRC_WB;
+        end else begin
+            o_RS2ForSel_D <= p_SRC_REG;
+        end
+
+        //RS1 E Forwading
         if((i_RDAddr_M != 0) && (i_RDAddr_M == i_RS1Addr_E) && i_RegWrEn_M)begin
-            o_AluForA <= p_SRC_MEM;
-        end else if ((i_RDAddr_W != 0) && (i_RDAddr_W == i_RS1Addr_E) && i_RegWrEn_W)begin
-            o_AluForA <= p_SRC_WB;
+            o_RS1ForSel_E <= p_SRC_WB;
         end else begin
-            o_AluForA <= p_SRC_REG;
+            o_RS1ForSel_E <= p_SRC_REG;
         end
 
-        //ALU Src B Forwading
+        //RS2 E Forwading
         if((i_RDAddr_M != 0) && (i_RDAddr_M == i_RS2Addr_E) && i_RegWrEn_M)begin
-            o_AluForB <= p_SRC_MEM;
-        end else if ((i_RDAddr_W != 0) && (i_RDAddr_W == i_RS2Addr_E) && i_RegWrEn_W)begin
-            o_AluForB <= p_SRC_WB;
+            o_RS2ForSel_E <= p_SRC_WB;
         end else begin
-            o_AluForB <= p_SRC_REG;
+            o_RS2ForSel_E <= p_SRC_REG;
         end
 
-        //DBus Execute Stage WrData Forwarding
-        if((i_RDAddr_W != 0) && (i_RDAddr_W == i_RS2Addr_E) && i_RegWrEn_W)begin
-            o_DBusForA <= 1'b1;
+        //RS1 M Forwading
+        if((i_RDAddr_M != 0) && (i_RDAddr_M == i_RS1Addr_M) && i_RegWrEn_M)begin
+            o_RS1ForSel_M <= p_SRC_WB;
         end else begin
-            o_DBusForA <= 1'b0;
+            o_RS1ForSel_M <= p_SRC_REG;
         end
 
-        //DBus Mem Stage WrData Forwarding
-        if((i_RDAddr_W != 0) && (i_RDAddr_W == i_RS2Addr_M) && i_RegWrEn_W)begin
-            o_DBusForB <= 1'b1;
+        //RS2 M Forwading
+        if((i_RDAddr_M != 0) && (i_RDAddr_M == i_RS2Addr_M) && i_RegWrEn_M)begin
+            o_RS2ForSel_M <= p_SRC_WB;
         end else begin
-            o_DBusForB <= 1'b0;
+            o_RS2ForSel_M <= p_SRC_REG;
         end
     end
 
