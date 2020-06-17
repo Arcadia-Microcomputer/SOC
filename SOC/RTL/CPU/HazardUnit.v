@@ -13,6 +13,8 @@ module HazardUnit(
     input [4:0]i_RDAddr_M,
     input [4:0]i_RDAddr_W,
 
+    input i_IBusWaitReq_D,
+
     input i_DBusGnt_M,
     input i_DBusWaitReq_W,
 
@@ -25,8 +27,8 @@ module HazardUnit(
     input i_TakeBranch_M,
 
     output reg o_PcEn,
-    output reg o_IRamRdEn,
-    output reg o_IRamOZero,
+    output reg o_IBusRdEn,
+    output reg o_IBusOZero,
     output reg o_DBusTranslatorEn,
 
     output reg o_RegEn_D,
@@ -42,8 +44,8 @@ module HazardUnit(
     
     initial begin
         o_PcEn = 1'b1;
-        o_IRamRdEn  = 1'b1;
-        o_IRamOZero = 1'b0;
+        o_IBusRdEn  = 1'b1;
+        o_IBusOZero = 1'b0;
         o_DBusTranslatorEn = 1'b1;
 
         o_RegEn_D  = 1'b1;
@@ -62,13 +64,13 @@ module HazardUnit(
     wire w_DBusHaz_DW  = (i_IsMemRead_W && ((i_RS1Valid_D & (i_RS1Addr_D == i_RDAddr_W)) || (i_RS2Valid_D & (i_RS2Addr_D == i_RDAddr_W))));
     wire w_DBusHazzard = w_DBusHaz_DE || w_DBusHaz_DM || w_DBusHaz_DW;
 
-    reg [1:0]r_StallCounter_d = 2'b0;
-    reg [1:0]r_StallCounter_q = 2'b0;
+    reg r_StallCounter_d = 2'b0;
+    reg r_StallCounter_q = 2'b0;
 
     always @(*) begin
         o_PcEn   <= 1'b1;
-        o_IRamRdEn  <= 1'b1;
-        o_IRamOZero <= 1'b0;
+        o_IBusRdEn  <= 1'b1;
+        o_IBusOZero <= 1'b0;
         o_DBusTranslatorEn <= 1'b1;
 
         o_RegEn_D  <= 1'b1;
@@ -91,7 +93,7 @@ module HazardUnit(
 
             //Stall all the previous stages
             o_PcEn <= 1'b0;
-            o_IRamRdEn <= 1'b0;
+            o_IBusRdEn <= 1'b0;
 
             o_RegEn_D <= 1'b0;
             o_RegEn_E <= 1'b0;
@@ -106,13 +108,13 @@ module HazardUnit(
             o_RegClr_M <= 1'b1;
 
             //Stall the pipelined for 2 cycles
-            o_IRamOZero <= 1'b0;
+            o_IBusOZero <= 1'b0;
 
             r_StallCounter_d <= 2'd1;
         end else if(w_DBusHazzard)begin
             //If there is a load data dependency hazzard
             o_PcEn <= 1'b0;
-            o_IRamRdEn <= 1'b0;
+            o_IBusRdEn <= 1'b0;
 
             o_RegEn_D <= 1'b0;
             o_RegClr_E <= 1'b1;
@@ -120,7 +122,7 @@ module HazardUnit(
 
         if (r_StallCounter_q != 0)begin
             o_RegEn_E <= 1'b0;
-            o_IRamOZero <= 1'b0;
+            o_IBusOZero <= 1'b0;
 
             if(r_StallCounter_q != 1)begin
                o_RegEn_D <= 1'b0; 

@@ -14,14 +14,14 @@ module PC(
     input i_AluASign_M,
     input i_AluBSign_M,
     input i_AluCarry_M,
-    input i_AluResZero_M,
-    input i_AluResNeg_M,
+    input i_ResZero_M,
+    input i_ResNeg_M,
     
     input i_BranchAdderBSel_M,
 
-    input [31:0]w_Imm_M,
-    input [31:0]w_PC_M,
-    input [31:0]w_RS1_M,
+    input [31:0]i_Imm_M,
+    input [31:0]i_PC_M,
+    input [31:0]i_RS1_M,
 
     output o_TakeBranch,
     output reg [31:0]o_Pc
@@ -31,10 +31,10 @@ module PC(
     wire w_TakeBranch;
     assign o_TakeBranch = w_TakeBranch;
     
-    wire [31:0] w_BranchAdderB = i_BranchAdderBSel_M? w_RS1_M: w_PC_M;
+    wire [31:0] w_BranchAdderB = i_BranchAdderBSel_M? i_RS1_M: i_PC_M;
 
     wire [31:0] w_PC_NextSeq = o_Pc + 4;
-    wire [31:0] w_PC_Branch = w_Imm_M + w_BranchAdderB;
+    wire [31:0] w_PC_Branch = i_Imm_M + w_BranchAdderB;
 
     initial begin
         o_Pc = 0;
@@ -54,8 +54,8 @@ module PC(
         .i_AluASign_M(i_AluASign_M),
         .i_AluBSign_M(i_AluBSign_M),
         .i_AluCarry_M(i_AluCarry_M),
-        .i_AluResZero_M(i_AluResZero_M),
-        .i_AluResNeg_M(i_AluResNeg_M),
+        .i_ResZero_M(i_ResZero_M),
+        .i_ResNeg_M(i_ResNeg_M),
 
         .o_TakeBranch(w_TakeBranch)
     );

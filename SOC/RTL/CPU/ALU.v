@@ -18,6 +18,8 @@ module ALU(
     //The various ALU operations
     parameter ALU_ADD   = 4'b0000;
     parameter ALU_SUB   = 4'b1000;
+    parameter ALU_SLT   = 4'b0010;
+    parameter ALU_SLTU  = 4'b0011;
     parameter ALU_AND   = 4'b0111;
     parameter ALU_OR    = 4'b0110;
     parameter ALU_XOR   = 4'b0100;
@@ -34,7 +36,13 @@ module ALU(
             end
             ALU_SUB:begin
                 {o_Carry, o_Result} <= i_A - w_B;
-            end  
+            end
+            ALU_SLT:begin
+                {o_Carry, o_Result} <= i_A - w_B;
+            end
+            ALU_SLTU:begin
+                {o_Carry, o_Result} <= i_A - w_B;
+            end
             ALU_AND:begin
                 o_Result <= i_A &  w_B;
             end  

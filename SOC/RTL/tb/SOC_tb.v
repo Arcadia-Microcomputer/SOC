@@ -10,6 +10,6 @@ module SOC_tb();
     end
 
     SOC SOC0(
-        .i_OscClk(r_Clk)
+        .i_OscClk_100Mhz(r_Clk)
     );
 endmodule
