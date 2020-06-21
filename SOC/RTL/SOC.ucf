@@ -1,4 +1,5 @@
 CONFIG VCCAUX = "3.3";
+PIN "UART0/o_AV_WaitRequest_BUFG.O" CLOCK_DEDICATED_ROUTE = FALSE;
 
 #### Misc ####
 NET "i_OscClk_100Mhz"          LOC = R7     | IOSTANDARD = LVCMOS33 | PERIOD = 100MHz;

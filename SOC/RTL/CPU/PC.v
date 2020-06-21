@@ -1,6 +1,8 @@
 `timescale 1ns / 1ps
 
-module PC(
+module PC #(
+    parameter INITIAL_PC_VALUE = 0
+    )(
     input i_Clk,
 
     //Control Signals    
@@ -37,7 +39,7 @@ module PC(
     wire [31:0] w_PC_Branch = i_Imm_M + w_BranchAdderB;
 
     initial begin
-        o_Pc = 0;
+        o_Pc = INITIAL_PC_VALUE;
     end
 
     always @(posedge i_Clk) begin

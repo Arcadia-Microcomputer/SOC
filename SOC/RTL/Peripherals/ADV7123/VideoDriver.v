@@ -1,6 +1,6 @@
 `timescale 1ns / 1ps
 
-module ADV7123_BusInterface#(
+module VideoDriver#(
     //horizontal timing (Line)
     parameter HorSyncTime = 96,
     parameter HorBackPorch = 48,
@@ -49,51 +49,60 @@ module ADV7123_BusInterface#(
     end
     assign o_AV_WaitRequest = 0;
 
+    reg r_VRAM_WE = 0;
+    reg [3:0]r_VRAM_ByteEn = 0;
+    reg [12:0] r_VRAM_WriteAddr = 0;
+    reg [31:0]r_VRAM_WData = 0;
 
-    //The various register addresses
-    parameter p_REG_ADDR_COLOUR   = 0;
-
-    //DBus addressable registers
-    reg [15:0] r_NewColour = 0;
+    wire [14:0]w_VRAM_VidAddr = w_NextHPos[$clog2(HorEndCnt) - 1:3] + (w_NextVPos[$clog2(VertEndCnt) - 1:3] * (HorAddrVideoTime/8));
+    wire [7:0] w_VRAM_Colour;
 
     //--ADV7123 Driver Signals--//
-    wire w_inVBlank;
-    reg [15:0] r_NewColour1 = 0;
-    reg [15:0] r_Colour = 16'hFFE0;
+    wire [15:0] w_ADV7123_Colour = {w_VRAM_Colour[7:5],2'b0, w_VRAM_Colour[4:2], 3'b0, w_VRAM_Colour[1:0], 3'b0};
+    wire w_inActiveArea;
+    wire [$clog2(HorEndCnt) - 1:0] w_NextHPos;
+    wire [$clog2(VertEndCnt) - 1:0] w_NextVPos;
 
     always @(posedge i_Clk)begin
         o_AV_ReadData <= 0;
+        r_VRAM_WE <= 0;
 
         if (i_SlaveSel) begin
             //Write transaction
             if(i_AV_Write)begin
-                case (i_RegAddr)
-                    p_REG_ADDR_COLOUR:begin
-                        r_NewColour[7:0]  <= i_AV_ByteEn[0]? i_AV_WriteData[7:0] : r_Colour[7:0];
-                        r_NewColour[15:8] <= i_AV_ByteEn[1]? i_AV_WriteData[15:8]: r_Colour[15:8];
-                    end
-                endcase
+                if(i_RegAddr < 8100)begin
+                    r_VRAM_WE <= 1;
+                    r_VRAM_ByteEn <= i_AV_ByteEn;
+                    r_VRAM_WriteAddr <= i_RegAddr[14:0];
+                    r_VRAM_WData <= i_AV_WriteData;
+                end
             end
             
             //Read transaction
-            if(i_AV_Read)begin
-                case (i_RegAddr)
-                    p_REG_ADDR_COLOUR:begin
-                        o_AV_ReadData <= {r_Colour, r_NewColour};
-                    end
-                    default:begin
-                        o_AV_ReadData <= 0;
-                    end
-                endcase
-            end
+            // if(i_AV_Read)begin
+            //     case (i_RegAddr)
+            //         :begin
+            //         end
+            //         default:begin
+            //             o_AV_ReadData <= 0;
+            //         end
+            //     endcase
+            // end
         end
     end
 
-    always @(posedge i_VidClk)begin
-        if(w_inVBlank)begin
-           r_Colour <= r_NewColour; 
-        end
-    end
+    VRAM VRAM0 (
+        .clka(i_Clk),
+        .ena(r_VRAM_WE),
+        .wea(r_VRAM_ByteEn),
+        .addra(r_VRAM_WriteAddr),
+        .dina(r_VRAM_WData),
+
+        .clkb(i_VidClk),
+        .enb(w_inActiveArea),
+        .addrb(w_VRAM_VidAddr),
+        .doutb(w_VRAM_Colour)
+    );
 
     ADV7123_Driver #(
 		.HorSyncTime(HorSyncTime),
@@ -111,7 +120,10 @@ module ADV7123_BusInterface#(
 		.i_VidClk(i_VidClk),
 
         .o_inVBlank(w_inVBlank),
-		.i_Colour(r_Colour),
+        .o_inActiveArea(w_inActiveArea),
+        .o_NextHPos(w_NextHPos),
+        .o_NextVPos(w_NextVPos),
+		.i_Colour(w_ADV7123_Colour),
 
 		//ADV7123 Signals
 		.o_Pixel_Clk(o_Pixel_Clk),

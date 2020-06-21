@@ -100,7 +100,7 @@ module HazardUnit(
             o_RegEn_M <= 1'b0;
             o_RegEn_W <= 1'b0;
 
-        end else if ((i_IsBranch_M && i_TakeBranch_M) || i_IsJump_M) begin
+        end else if (i_TakeBranch_M) begin
             //If there is a branch hazzard
             //Clear out the consecutive instructions executing
             o_RegClr_D <= 1'b1;
@@ -110,19 +110,22 @@ module HazardUnit(
             //Stall the pipelined for 2 cycles
             o_IBusOZero <= 1'b0;
 
-            r_StallCounter_d <= 2'd1;
+            r_StallCounter_d <= 1'd1;
         end else if(w_DBusHazzard)begin
             //If there is a load data dependency hazzard
             o_PcEn <= 1'b0;
             o_IBusRdEn <= 1'b0;
-
+            
             o_RegEn_D <= 1'b0;
-            o_RegClr_E <= 1'b1;
-        end
+
+            if(!w_DBusHaz_DW)begin
+                //Only need to clear the DE stage reg if you don't want it to execute next cycle
+               o_RegClr_E <= 1'b1; 
+            end
+        end 
 
         if (r_StallCounter_q != 0)begin
             o_RegEn_E <= 1'b0;
-            o_IBusOZero <= 1'b0;
 
             if(r_StallCounter_q != 1)begin
                o_RegEn_D <= 1'b0; 

@@ -17,34 +17,26 @@ module SOC(
     
     //--480p resolution--//
     //horizontal timing (Line)
-    parameter HorSyncTime = 96;
-    parameter HorBackPorch = 48;
-    parameter HorFrontPorch = 16;
-    parameter HorAddrVideoTime = 640;
-    parameter HorEndCnt = 800;
+    parameter HorSyncTime = 44;
+    parameter HorBackPorch = 148;
+    parameter HorFrontPorch = 88;
+    parameter HorAddrVideoTime = 1920;
+    parameter HorEndCnt = 2200;
     //vertical timing (Frame)
-    parameter VertSyncTime = 2;
-    parameter VertBackPorch = 32;
-    parameter VertFrontPorch = 10;
-    parameter VertAddrVideoTime = 480;
-    parameter VertEndCnt = 525;
+    parameter VertSyncTime = 5;
+    parameter VertBackPorch = 36;
+    parameter VertFrontPorch = 4;
+    parameter VertAddrVideoTime = 1080;
+    parameter VertEndCnt = 1125;
 
-    //--IBus Layout--//
-    //Top Block
-    parameter IBUS_TOP_SEL_BITS = 4;
-    parameter IBUS_TOP_ROM      = 4'd0;
-
-    //--PLL_M Signals--//
-    wire w_SysClk;
-    wire w_VidClk;
-    
-    //--IBus--//
+    //----I/D Bus----//
+    //IBus
     wire [29:0]w_IBus_Address;
     wire w_IBus_Read;
     wire [31:0]w_IBus_ReadData;
     wire w_IBus_WaitRequest;
 
-    //------- DBus --------//
+    //DBus
     wire [29:0]w_DBus_Address;
     wire [3:0]w_DBus_ByteEn;
     wire w_DBus_Read;
@@ -53,58 +45,90 @@ module SOC(
     wire [31:0]w_DBus_WriteData;
     wire w_DBus_WaitRequest;
 
+    //Address Space Layout//
     //Top Block
-    parameter DBUS_TOP_SEL_BITS = 4;
-    parameter DBUS_TOP_SDRAM    = 4'd0;
-    parameter DBUS_TOP_MEM      = 4'd1;
-    parameter DBUS_TOP_IO       = 4'd2;
+    parameter ADDR_TOP_SEL_BITS = 4;
+    parameter ADDR_TOP_SDRAM    = 4'd0;
+    parameter ADDR_TOP_MEM      = 4'd1;
+    parameter ADDR_TOP_IO       = 4'd2;
+    parameter ADDR_TOP_VRAM     = 4'd3;
 
-    //---DBUS MEM Block---//
-    parameter DBUS_MEM_SEL_BITS = 4;
-    parameter DBUS_MEM_SLAVE_SEL_BITS = (DBUS_TOP_SEL_BITS + DBUS_MEM_SEL_BITS);
-    parameter DBUS_MEM_FLASH    = 4'd0;
-    parameter DBUS_MEM_DROM     = 4'd1;
+    //---MEM Block---//
+    parameter ADDR_MEM_SEL_BITS = 4;
+    parameter ADDR_MEM_SLAVE_SEL_BITS = (ADDR_TOP_SEL_BITS + ADDR_MEM_SEL_BITS);
+    
+    parameter ADDR_MEM_ROM      = 4'd0;
+    parameter ADDR_MEM_DRAM     = 4'd1;
 
-    wire [DBUS_MEM_SLAVE_SEL_BITS-1:0]w_DBUS_MEM_SlaveSelAddr = w_DBus_Address[29:30-DBUS_MEM_SLAVE_SEL_BITS];
-    wire [29-DBUS_MEM_SLAVE_SEL_BITS:0]w_DBUS_MEM_RegSelAddr = w_DBus_Address[29-DBUS_MEM_SLAVE_SEL_BITS:0];
+    wire [ADDR_MEM_SLAVE_SEL_BITS-1:0]w_DBus_MEM_SlaveSelAddr = w_DBus_Address[29:30-ADDR_MEM_SLAVE_SEL_BITS];
+    wire [29-ADDR_MEM_SLAVE_SEL_BITS:0]w_DBus_MEM_RegSelAddr = w_DBus_Address[29-ADDR_MEM_SLAVE_SEL_BITS:0];
 
-    //DROM0
-    parameter w_DROM0_SlaveAddr = {DBUS_TOP_MEM, DBUS_MEM_DROM};
-    wire w_DROM0_Sel = (w_DBUS_MEM_SlaveSelAddr == w_DROM0_SlaveAddr)? 1: 0;
-    wire [31:0]w_AV_DROM0_ReadData;
-    wire w_AV_DROM0_WaitRequest;
+    wire [ADDR_MEM_SLAVE_SEL_BITS-1:0]w_IBus_MEM_SlaveSelAddr = w_IBus_Address[29:30-ADDR_MEM_SLAVE_SEL_BITS];
+    wire [29-ADDR_MEM_SLAVE_SEL_BITS:0]w_IBus_MEM_RegSelAddr = w_IBus_Address[29-ADDR_MEM_SLAVE_SEL_BITS:0];
+
+    //ROM0
+    parameter ROM0_SlaveAddr = {ADDR_TOP_MEM, ADDR_MEM_ROM};
+    //IBus Port
+    wire w_ROM0_I_Sel = (w_IBus_MEM_SlaveSelAddr == ROM0_SlaveAddr)? 1: 0;
+    wire [31:0]w_AV0_ROM0_ReadData;
+    wire w_AV0_ROM0_WaitRequest;
+    //DBus Port
+    wire w_ROM0_D_Sel = (w_DBus_MEM_SlaveSelAddr == ROM0_SlaveAddr)? 1: 0;
+    wire [31:0]w_AV1_ROM0_ReadData;
+    wire w_AV1_ROM0_WaitRequest;
+
+    //DRAM0
+    parameter DRAM0_SlaveAddr = {ADDR_TOP_MEM, ADDR_MEM_DRAM};
+    wire w_DRAM0_Sel = (w_DBus_MEM_SlaveSelAddr == DRAM0_SlaveAddr)? 1: 0;
+    wire [31:0]w_AV_DRAM0_ReadData;
+    wire w_AV_DRAM0_WaitRequest;
 
     //---IO Block---//
-    parameter DBUS_IO_SEL_BITS  = 17;
-    parameter DBUS_IO_SLAVE_SEL_BITS = (DBUS_TOP_SEL_BITS + DBUS_IO_SEL_BITS);
-    parameter DBUS_IO_UART0     = 17'd0;
-    parameter DBUS_IO_COUNTER0  = 17'd1;
-    parameter DBUS_IO_ADV7123   = 17'd2;
+    parameter ADDR_IO_SEL_BITS  = 17;
+    parameter ADDR_IO_SLAVE_SEL_BITS = (ADDR_TOP_SEL_BITS + ADDR_IO_SEL_BITS);
+    parameter ADDR_IO_UART0     = 17'd0;
+    parameter ADDR_IO_COUNTER0  = 17'd1;
 
-    wire [DBUS_IO_SLAVE_SEL_BITS-1:0]w_DBUS_IO_SlaveSelAddr = w_DBus_Address[29:30-DBUS_IO_SLAVE_SEL_BITS];
-    wire [29-DBUS_IO_SLAVE_SEL_BITS:0]w_DBUS_IO_RegSelAddr = w_DBus_Address[29-DBUS_IO_SLAVE_SEL_BITS:0];
+    wire [ADDR_IO_SLAVE_SEL_BITS-1:0]w_DBus_IO_SlaveSelAddr = w_DBus_Address[29:30-ADDR_IO_SLAVE_SEL_BITS];
+    wire [29-ADDR_IO_SLAVE_SEL_BITS:0]w_DBus_IO_RegSelAddr  = w_DBus_Address[29-ADDR_IO_SLAVE_SEL_BITS:0];
 
     //UART0
-    parameter w_UART0_SlaveAddr = {DBUS_TOP_IO, DBUS_IO_UART0};
-    wire w_UART0_Sel = (w_DBUS_IO_SlaveSelAddr == w_UART0_SlaveAddr)? 1: 0;
+    parameter UART0_SlaveAddr = {ADDR_TOP_IO, ADDR_IO_UART0};
+    wire w_UART0_Sel = (w_DBus_IO_SlaveSelAddr == UART0_SlaveAddr)? 1: 0;
     wire [31:0]w_AV_UART0_ReadData;
     wire w_AV_UART0_WaitRequest;
 
     //Counter0
-    parameter w_Counter0_SlaveAddr = {DBUS_TOP_IO, DBUS_IO_COUNTER0};
-    wire w_Counter0_Sel = (w_DBUS_IO_SlaveSelAddr == w_Counter0_SlaveAddr)? 1: 0;
+    parameter Counter0_SlaveAddr = {ADDR_TOP_IO, ADDR_IO_COUNTER0};
+    wire w_Counter0_Sel = (w_DBus_IO_SlaveSelAddr == Counter0_SlaveAddr)? 1: 0;
     wire [31:0]w_AV_Counter0_ReadData;
     wire w_AV_Counter0_WaitRequest;
 
-    //ADV7123
-    parameter w_ADV7123_SlaveAddr = {DBUS_TOP_IO, DBUS_IO_ADV7123};
-    wire w_ADV7123_Sel = (w_DBUS_IO_SlaveSelAddr == w_ADV7123_SlaveAddr)? 1: 0;
-    wire [31:0]w_AV_ADV7123_ReadData;
-    wire w_AV_ADV7123_WaitRequest;
+    //---VRAM Block---//
+    parameter ADDR_VRAM_SEL_BITS  = 2;
+    parameter ADDR_VRAM_SLAVE_SEL_BITS = (ADDR_TOP_SEL_BITS + ADDR_VRAM_SEL_BITS);
+    parameter ADDR_VRAM_VID     = 2'd0;
 
-    //DBus Slave 
-    assign w_DBus_ReadData = w_AV_DROM0_ReadData | w_AV_UART0_ReadData | w_AV_Counter0_ReadData | w_AV_ADV7123_ReadData;
-    assign w_DBus_WaitRequest = w_AV_DROM0_WaitRequest | w_AV_UART0_WaitRequest | w_AV_Counter0_WaitRequest | w_AV_ADV7123_WaitRequest;
+    wire [ADDR_VRAM_SLAVE_SEL_BITS-1:0]w_DBus_VRAM_SlaveSelAddr = w_DBus_Address[29:30-ADDR_VRAM_SLAVE_SEL_BITS];
+    wire [29-ADDR_VRAM_SLAVE_SEL_BITS:0]w_DBus_VRAM_RegSelAddr  = w_DBus_Address[29-ADDR_VRAM_SLAVE_SEL_BITS:0];
+
+    //Video Driver
+    parameter VideoDriver_SlaveAddr = {ADDR_TOP_VRAM, ADDR_VRAM_VID};
+    wire w_VideoDriver_Sel = (w_DBus_VRAM_SlaveSelAddr == VideoDriver_SlaveAddr)? 1: 0;
+    wire [31:0]w_AV_VideoDriver_ReadData;
+    wire w_AV_VideoDriver_WaitRequest;
+
+    //--IBus Slave Driver--//
+    assign w_IBus_ReadData = w_AV0_ROM0_ReadData;
+    assign w_IBus_WaitRequest = w_AV0_ROM0_WaitRequest;
+
+    //--DBus Slave Driver--//
+    assign w_DBus_ReadData = w_AV1_ROM0_ReadData | w_AV_DRAM0_ReadData | w_AV_UART0_ReadData | w_AV_Counter0_ReadData | w_AV_VideoDriver_ReadData;
+    assign w_DBus_WaitRequest = w_AV1_ROM0_WaitRequest | w_AV_DRAM0_WaitRequest | w_AV_UART0_WaitRequest | w_AV_Counter0_WaitRequest | w_AV_VideoDriver_WaitRequest;
+
+    //--PLL_M Signals--//
+    wire w_SysClk;
+    wire w_VidClk;
 
     //--CPU DBUS Arbitor--//
     wire w_CPU0_DBus_Req;
@@ -124,7 +148,10 @@ module SOC(
         .o_VidClk25M(w_VidClk)
     );
 
-    CPU CPU0 (
+    CPU #(
+        //Starts executing from ROM
+        .INITIAL_PC_VALUE(32'h10000000)
+    )CPU0 (
         .i_Clk(w_SysClk),
 
         //IBus Master
@@ -146,44 +173,52 @@ module SOC(
         .i_DBus_WaitRequest(w_DBus_WaitRequest)
     );
 
-    //IROM
-    IRAM #(
-        .ADDR_SEL_BITS(IBUS_TOP_SEL_BITS),
-        .ADDR_BLOCK(IBUS_TOP_ROM),
-        .DEPTH(64)
-    )IRAM0(
+    ROM #(
+        .ADDR_SEL_BITS(ADDR_MEM_SLAVE_SEL_BITS),
+        .DEPTH(512)
+    )ROM0(
         .i_Clk(w_SysClk),
 
-        .i_IBus_Address(w_IBus_Address),
-        .i_IBus_Read(w_IBus_Read),
-        .o_IBus_ReadData(w_IBus_ReadData),
-        .o_IBus_WaitRequest(w_IBus_WaitRequest)
+        //IBus Slave
+        .i_AV0_SlaveSel(w_ROM0_I_Sel),
+        .i_AV0_RegAddr(w_IBus_MEM_RegSelAddr),
+        .i_AV0_Read(w_IBus_Read),
+        .o_AV0_ReadData(w_AV0_ROM0_ReadData),
+        .o_AV0_WaitRequest(w_AV0_ROM0_WaitRequest),
+
+        //DBus Slave
+        .i_AV1_SlaveSel(w_ROM0_D_Sel),
+        .i_AV1_RegAddr(w_DBus_MEM_RegSelAddr),
+        .i_AV1_Read(w_DBus_Read),
+        .o_AV1_ReadData(w_AV1_ROM0_ReadData),
+        .o_AV1_WaitRequest(w_AV1_ROM0_WaitRequest)
     );
 
-    DRAM #(
-        .ADDR_SEL_BITS(DBUS_MEM_SLAVE_SEL_BITS),
-        .DEPTH(64)
-    )DRAM0(
+    RAM #(
+        .ADDR_SEL_BITS(ADDR_MEM_SLAVE_SEL_BITS),
+        .DEPTH(512)
+    )RAM0(
         .i_Clk(w_SysClk),
 
         //DBus Slave
-        .i_SlaveSel(w_DROM0_Sel),
-        .i_RegAddr(w_DBUS_MEM_RegSelAddr),
-
-        .i_AV_Address(w_DBus_Address),
+        .i_SlaveSel(w_DRAM0_Sel),
+        .i_RegAddr(w_DBus_MEM_RegSelAddr),
+        .i_AV_ByteEn(w_DBus_ByteEn),
         .i_AV_Read(w_DBus_Read),
-        .o_AV_ReadData(w_AV_DROM0_ReadData),
-        .o_AV_WaitRequest(w_AV_DROM0_WaitRequest)
+        .i_AV_Write(w_DBus_Write),
+        .o_AV_ReadData(w_AV_DRAM0_ReadData),
+        .i_AV_WriteData(w_DBus_WriteData),
+        .o_AV_WaitRequest(w_AV_DRAM0_WaitRequest)
     );
 
     UART #(
-        .ADDR_SEL_BITS(DBUS_IO_SLAVE_SEL_BITS)
+        .ADDR_SEL_BITS(ADDR_IO_SLAVE_SEL_BITS)
     )UART0(
         .i_Clk(w_SysClk),
         
         //DBus Slave
         .i_SlaveSel(w_UART0_Sel),
-        .i_RegAddr(w_DBUS_IO_RegSelAddr),
+        .i_RegAddr(w_DBus_IO_RegSelAddr),
 
         .i_AV_ByteEn(w_DBus_ByteEn),
         .i_AV_Read(w_DBus_Read),
@@ -196,13 +231,13 @@ module SOC(
     );
     
     Counter #(
-        .ADDR_SEL_BITS(DBUS_IO_SLAVE_SEL_BITS)
+        .ADDR_SEL_BITS(ADDR_IO_SLAVE_SEL_BITS)
     )Counter0(
         .i_Clk(w_SysClk),
         
         //DBus Slave
         .i_SlaveSel(w_Counter0_Sel),
-        .i_RegAddr(w_DBUS_IO_RegSelAddr),
+        .i_RegAddr(w_DBus_IO_RegSelAddr),
 
         .i_AV_ByteEn(w_DBus_ByteEn),
         .i_AV_Read(w_DBus_Read),
@@ -212,7 +247,7 @@ module SOC(
         .o_AV_WaitRequest(w_AV_Counter0_WaitRequest)
     );
 
-    ADV7123_BusInterface #(
+    VideoDriver #(
         //Video Timings
         .HorSyncTime(HorSyncTime),
 		.HorBackPorch(HorBackPorch),
@@ -227,20 +262,20 @@ module SOC(
 		.VertEndCnt(VertEndCnt),
 
         //DBus Addressing
-        .ADDR_SEL_BITS(DBUS_IO_SLAVE_SEL_BITS)
-    )ADV7123_BusInterface0(
+        .ADDR_SEL_BITS(ADDR_VRAM_SLAVE_SEL_BITS)
+    )VideoDriver(
         .i_Clk(w_SysClk),
 
         //DBus Slave
-        .i_SlaveSel(w_ADV7123_Sel),
-        .i_RegAddr(w_DBUS_IO_RegSelAddr),
+        .i_SlaveSel(w_VideoDriver_Sel),
+        .i_RegAddr(w_DBus_VRAM_RegSelAddr),
 
         .i_AV_ByteEn(w_DBus_ByteEn),
         .i_AV_Read(w_DBus_Read),
         .i_AV_Write(w_DBus_Write),
-        .o_AV_ReadData(w_AV_ADV7123_ReadData),
+        .o_AV_ReadData(w_AV_VideoDriver_ReadData),
         .i_AV_WriteData(w_DBus_WriteData),
-        .o_AV_WaitRequest(w_AV_ADV7123_WaitRequest),
+        .o_AV_WaitRequest(w_AV_VideoDriver_WaitRequest),
 
         //Video
         .i_VidClk(w_VidClk),

@@ -32,7 +32,7 @@ module DBusMaster(
     assign o_DBus_Write = i_DBus_Gnt? r_DBusWe: 1'bz;
     assign o_DBus_WriteData =  i_DBus_Gnt? r_DBus_WriteData: 32'bz;
 
-    reg [29:0]r_DBus_Address = 32'b0;
+    reg [29:0]r_DBus_Address = 30'b0;
     reg [3:0]r_DBus_ByteEn = 4'b1111;
     reg r_DBusRe = 1'b0;
     reg r_DBusWe = 1'b0;
@@ -72,59 +72,59 @@ module DBusMaster(
     end
 
     always @(*) begin
-
-        //Bus Read//
-        case (r_BusModeRd[1:0])
-            p_BUS_BYTE_ACCESS:begin
-                //Take care of sign extension for the signed/unsigned byte loads
-                o_CpuRd[31:8] <= {{24{w_SignedRd & i_DBus_ReadData[7]}}};
-                
-                case (r_AddrRd)
-                    0:begin
-                        o_CpuRd[7:0] <= i_DBus_ReadData[7:0];
-                    end
-                    1:begin
-                        o_CpuRd[7:0] <= i_DBus_ReadData[15:8];
-                    end
-                    2:begin
-                        o_CpuRd[7:0] <= i_DBus_ReadData[23:16];
-                    end
-                    3:begin
-                        o_CpuRd[7:0] <= i_DBus_ReadData[31:24];
-                    end 
-                endcase
-            end
-            p_BUS_HALF_WORD_ACCESS:begin
-                //Take care of sign extension for the signed/unsigned half word loads
-                o_CpuRd[31:16] <= {{16{w_SignedRd & i_DBus_ReadData[15]}}};
-
-                case (r_AddrRd)
-                    0:begin
-                        o_CpuRd[15:0] <= i_DBus_ReadData[15:0];
-                    end
-                    1:begin
-                        o_CpuRd[15:0] <= i_DBus_ReadData[23:8];
-                    end
-                    2:begin
-                        o_CpuRd[15:0] <= i_DBus_ReadData[31:16];
-                    end
-                    default:begin
-                        o_CpuRd <= 32'b0;
-                    end
-                endcase
-            end
-            p_BUS_WORD_ACCESS:begin
-                o_CpuRd <= i_DBus_ReadData;
-            end
-            default:begin
-                o_CpuRd <= 32'b0;
-            end
-        endcase
         
         if(i_DBusTranslatorEn)begin
             r_DBus_Address <= i_CpuAddr[31:2];
             r_DBusRe <= i_CpuRe;
             r_DBusWe <= i_CpuWe;
+
+            //Bus Read//
+            case (r_BusModeRd[1:0])
+                p_BUS_BYTE_ACCESS:begin
+                    //Take care of sign extension for the signed/unsigned byte loads
+                    o_CpuRd[31:8] <= {{24{w_SignedRd & i_DBus_ReadData[7]}}};
+                    
+                    case (r_AddrRd)
+                        0:begin
+                            o_CpuRd[7:0] <= i_DBus_ReadData[7:0];
+                        end
+                        1:begin
+                            o_CpuRd[7:0] <= i_DBus_ReadData[15:8];
+                        end
+                        2:begin
+                            o_CpuRd[7:0] <= i_DBus_ReadData[23:16];
+                        end
+                        3:begin
+                            o_CpuRd[7:0] <= i_DBus_ReadData[31:24];
+                        end 
+                    endcase
+                end
+                p_BUS_HALF_WORD_ACCESS:begin
+                    //Take care of sign extension for the signed/unsigned half word loads
+                    o_CpuRd[31:16] <= {{16{w_SignedRd & i_DBus_ReadData[15]}}};
+
+                    case (r_AddrRd)
+                        0:begin
+                            o_CpuRd[15:0] <= i_DBus_ReadData[15:0];
+                        end
+                        1:begin
+                            o_CpuRd[15:0] <= i_DBus_ReadData[23:8];
+                        end
+                        2:begin
+                            o_CpuRd[15:0] <= i_DBus_ReadData[31:16];
+                        end
+                        default:begin
+                            o_CpuRd <= 32'b0;
+                        end
+                    endcase
+                end
+                p_BUS_WORD_ACCESS:begin
+                    o_CpuRd <= i_DBus_ReadData;
+                end
+                default:begin
+                    o_CpuRd <= 32'b0;
+                end
+            endcase
 
             //Bus Write//
             case (i_BusMode[1:0])

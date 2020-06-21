@@ -1,6 +1,8 @@
 `timescale 1ns / 1ps
 
-module CPU(
+module CPU #(
+    parameter INITIAL_PC_VALUE = 0
+    )(
     input i_Clk,
 
     //IBus Master
@@ -163,7 +165,9 @@ module CPU(
     wire w_RegClr_W;
 
     //--Fetch Stage--//
-    PC PC0 (
+    PC #(
+        .INITIAL_PC_VALUE(INITIAL_PC_VALUE)
+    )PC0 (
         .i_Clk(i_Clk),
         
         //Control Signals  
