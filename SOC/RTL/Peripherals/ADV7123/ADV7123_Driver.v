@@ -45,16 +45,18 @@ module ADV7123_Driver#(
 
     //Deal with driving the clock output for the ADV7123 chip
     ODDR2 #(
-        .DDR_ALIGNMENT("NONE"), // Sets output alignment to "NONE", "C0" or "C1" 
-        .INIT(1'b0),    // Sets initial state of the Q output to 1'b0 or 1'b1
-        .SRTYPE("SYNC") // Specifies "SYNC" or "ASYNC" set/reset
+        .DDR_ALIGNMENT("NONE"),
+        .INIT(1'b0),
+        .SRTYPE("SYNC")
     ) ODDR2_ClkOut (
-        .Q(o_Pixel_Clk),        // 1-bit DDR output data
-        .C0(i_VidClk),    // 1-bit clock input
-        .C1(!i_VidClk),   // 1-bit clock input
-        .CE(1'b1),    // 1-bit clock enable input
-        .D0(1'b1),  // 1-bit data input (associated with C0)
-        .D1(1'b0)   // 1-bit data input (associated with C1)
+        .Q(o_Pixel_Clk),
+        .C0(i_VidClk),
+        .C1(!i_VidClk),
+        .CE(1'b1),
+        .D0(1'b1),
+        .D1(1'b0),
+        .R(1'b0),
+        .S(1'b1)
     );
 
     reg [$clog2(HorEndCnt) - 1:0] r_HPos = 0;

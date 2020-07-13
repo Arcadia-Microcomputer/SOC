@@ -3,7 +3,7 @@
 module SOC(
     input i_OscClk_100Mhz,
 
-    output io_IO,
+    output UART0_TX,
 
     //VGA
     output o_VGA_Clk,
@@ -227,7 +227,7 @@ module SOC(
         .i_AV_WriteData(w_DBus_WriteData),
         .o_AV_WaitRequest(w_AV_UART0_WaitRequest),
 
-        .o_UART_TX(io_IO)
+        .o_UART_TX(UART0_TX)
     );
     
     Counter #(

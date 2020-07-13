@@ -118,8 +118,8 @@ module HazardUnit(
             
             o_RegEn_D <= 1'b0;
 
-            if(!w_DBusHaz_DW)begin
-                //Only need to clear the DE stage reg if you don't want it to execute next cycle
+            if(!(w_DBusHaz_DW && i_IsBranch_M))begin
+                //Don't clear
                o_RegClr_E <= 1'b1; 
             end
         end 

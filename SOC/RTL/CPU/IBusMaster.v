@@ -17,6 +17,10 @@ module IBusMaster(
     output reg [31:0] o_CpuRd
     );
 
+    initial begin
+        o_CpuRd = 0;
+    end
+
     reg r_Old_RdEn = 0;
     reg [31:0]r_OldRd = 0;
 
@@ -24,6 +28,8 @@ module IBusMaster(
     assign o_IBus_Read = i_RdEn;
 
     always @(*)begin
+        o_CpuRd <= 0;
+        
         if(r_Old_RdEn)begin
            if(i_OZero)begin
                 o_CpuRd <= 0;

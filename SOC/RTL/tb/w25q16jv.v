@@ -58,7 +58,7 @@ reg [7:0] sfdp[0:PAGESIZE];                                                // Se
 
 reg lock_array[0:NUM_LOCKBITS];                                            // 510 blocks + 32 sectors
 
-reg [23:0] status_reg;				      // Status Register
+reg [23:0] status_reg = 0;				      // Status Register
 reg [23:0] status_reg_shadow;			// Status Register Shadow Register
 reg status_reg_otp [23:0];      // Status Register OTP Bits 
 reg [23:0] byte_address;				    // Page address used for reading pages. 
@@ -349,11 +349,11 @@ initial
 begin :initialization
 
    
-// Erase memory array to FFh state.
-//	for(x = 0; x < (NUM_PAGES * PAGESIZE); x=x+1)
-//		memory[x] = 8'hff;
-//		
-//	dump_mem();	
+//Erase memory array to FFh state.
+	// for(x = 0; x < (NUM_PAGES * PAGESIZE); x=x+1)
+	// 	memory[x] = 8'hff;
+		
+	// dump_mem();	
 		
   $readmemh(`MEM_FILENAME,memory);
   $readmemh(`SECSI_FILENAME,secsi);
@@ -1273,8 +1273,8 @@ begin
 	   for(x = 7; x >= 0; x=x-1)
 	   begin
 	      get_posclk_holdn;
-         input_data[x] = DIO;
-      end
+          input_data[x] = DIO;
+       end
 	   in_byte = input_data;
 	end
 end
@@ -2134,35 +2134,36 @@ integer x;
 integer address;
 
 begin
-// Move memory page into page latch
-  if(flag_secsi)
-  begin
-    address = (prog_address >> 4) - 31'h100;
-    address[7:0] = 0;
-  end
-  else
-  begin
-    address = prog_address;
-   	address[7:0] = 0;
+	// Move memory page into page latch
+	if(flag_secsi) begin
+		address = (prog_address >> 4) - 31'h100;
+		address[7:0] = 0;
+	end else begin
+		address = prog_address;
+		address[7:0] = 0;
 	end
-  for(x = 0; x < PAGESIZE; x=x+1)
+
+  	for(x = 0; x < PAGESIZE; x=x+1)
 	   page_latch[x] = flag_secsi ? secsi[address+x] : memory[address+x];
 	
 	// Now update page latch with input data and signal a page_program operation
 	forever
-	begin
-	   if(quadio)
-			input_byte_quad(temp);
-		else
-			input_byte(temp);
-		page_latch[prog_address[7:0]] = temp;
-		if(flag_secsi)
-		  flag_prog_secsi_page = 1;
-		else
-  		  flag_prog_page = 1;
-		prog_address[7:0] = prog_address[7:0] + 1;
+		begin
+			if(quadio)
+				input_byte_quad(temp);
+			else
+				input_byte(temp);
+
+			page_latch[prog_address[7:0]] = temp;
+
+			if(flag_secsi)
+				flag_prog_secsi_page = 1;
+			else
+				flag_prog_page = 1;
+
+			prog_address[7:0] = prog_address[7:0] + 1;
+		end
 	end
-end
 endtask
 
 
@@ -2504,18 +2505,19 @@ integer x;                         // Local loop variable only to be used here.
 
 	@(posedge CSn);						            // Wait for CSn to go high
 	begin
-    		status_reg[`WIP] = 1;
+		status_reg[`WIP] = 1;
 
-      prog_byte_address[7:0] = 0;
-      for(x = 0; x < PAGESIZE; x=x+1)    
-      begin
-          memory[prog_byte_address+x] = page_latch[x] & memory[prog_byte_address+x];
-        		wait_reset_suspend(tPP / PAGESIZE);
-    		end
-		  status_reg[`WIP] = 0;
-    		status_reg[`WEL] = 0;
+		prog_byte_address[7:0] = 0;
+		for(x = 0; x < PAGESIZE; x=x+1)    
+		begin
+			memory[prog_byte_address+x] = page_latch[x] & memory[prog_byte_address+x];
+					wait_reset_suspend(tPP / PAGESIZE);
+				end
+			status_reg[`WIP] = 0;
+				status_reg[`WEL] = 0;
 	end
 	flag_prog_page = 0;
+	dump_mem();
 end
 
 /******************************************************************************

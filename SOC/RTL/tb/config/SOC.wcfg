@@ -7609,11 +7609,11 @@
       <obj_property name="CustomSignalColor">#ff00ff</obj_property>
       <obj_property name="Radix">ASCIIRADIX</obj_property>
    </wvobject>
-   <wvobject fp_name="/SOC_tb/SOC0/io_IO" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">io_IO</obj_property>
-      <obj_property name="ObjectShortName">io_IO</obj_property>
+   <wvobject fp_name="/SOC_tb/SOC0/UART0_TX" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">UART0_TX</obj_property>
+      <obj_property name="ObjectShortName">UART0_TX</obj_property>
       <obj_property name="UseCustomSignalColor">true</obj_property>
-      <obj_property name="CustomSignalColor">#800080</obj_property>
+      <obj_property name="CustomSignalColor">#ff00ff</obj_property>
    </wvobject>
    <wvobject fp_name="/SOC_tb/SOC0/Counter0/i_SlaveSel" type="logic" db_ref_id="1">
       <obj_property name="ElementShortName">i_SlaveSel</obj_property>
@@ -7679,14 +7679,14 @@
       <obj_property name="Radix">HEXRADIX</obj_property>
    </wvobject>
    <wvobject fp_name="/SOC_tb/SOC0/VideoDriver/w_NextVPos" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">w_NextVPos[9:0]</obj_property>
-      <obj_property name="ObjectShortName">w_NextVPos[9:0]</obj_property>
+      <obj_property name="ElementShortName">w_NextVPos[10:0]</obj_property>
+      <obj_property name="ObjectShortName">w_NextVPos[10:0]</obj_property>
       <obj_property name="UseCustomSignalColor">true</obj_property>
       <obj_property name="CustomSignalColor">#00ffff</obj_property>
    </wvobject>
    <wvobject fp_name="/SOC_tb/SOC0/VideoDriver/w_NextHPos" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">w_NextHPos[9:0]</obj_property>
-      <obj_property name="ObjectShortName">w_NextHPos[9:0]</obj_property>
+      <obj_property name="ElementShortName">w_NextHPos[11:0]</obj_property>
+      <obj_property name="ObjectShortName">w_NextHPos[11:0]</obj_property>
       <obj_property name="UseCustomSignalColor">true</obj_property>
       <obj_property name="CustomSignalColor">#00ffff</obj_property>
    </wvobject>

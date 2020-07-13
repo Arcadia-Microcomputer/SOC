@@ -72,7 +72,6 @@ module DBusMaster(
     end
 
     always @(*) begin
-        
         if(i_DBusTranslatorEn)begin
             r_DBus_Address <= i_CpuAddr[31:2];
             r_DBusRe <= i_CpuRe;
@@ -181,6 +180,7 @@ module DBusMaster(
             r_DBusRe <= r_Old_DBusRe;
             r_DBusWe <= r_Old_DBusWe;
             r_DBus_WriteData <= r_Old_DBus_WriteData;
+            o_CpuRd <= 0;
         end
     end
 
