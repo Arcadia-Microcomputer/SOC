@@ -71,7 +71,7 @@ module FlashControler_tb();
             r_CNTRL_SlaveSel <= 1;
             r_AV_ByteEN <= 4'b0001;
             r_AV_Write <= 1;
-            r_AV_WriteData <= 32'h00AA;
+            r_AV_WriteData <= 32'h000000AA;
             r_CNTRL_RegAddr <= p_REG_ADDR_DATA;
             r_Counter <= r_Counter + 1;
         end

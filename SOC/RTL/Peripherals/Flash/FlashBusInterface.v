@@ -84,6 +84,7 @@ module FlashBusInterface #(
         o_AV_ReadData <= 0;
         o_AV_WaitRequest <= 0;
         r_WRFifo_WREn <= 0;
+        r_WRFifo_RDEn <= 0;
         r_FLASH_CMDEn <= 0;
 
         if (i_MEM_SlaveSel) begin
@@ -111,13 +112,15 @@ module FlashBusInterface #(
 
                                 if(i_AV_ByteEn[0])begin
                                     r_FLASH_CMD <= i_AV_WriteData[3:0];
-                                    if(i_AV_WriteData[3:0] == COMMAND_PROGRAM_PAGE)begin
-                                        r_isWriteTransaction <= 1; 
+                                    if((i_AV_WriteData[3:0] == COMMAND_PROGRAM_PAGE) && !w_WRFifo_Empty)begin
+                                        r_isWriteTransaction <= 1;
+                                        r_WRFifo_RDEn <= 1; 
                                     end
                                 end else begin
                                     r_FLASH_CMD <= r_CMD;
-                                    if(r_CMD == COMMAND_PROGRAM_PAGE)begin
-                                        r_isWriteTransaction <= 1; 
+                                    if((r_CMD == COMMAND_PROGRAM_PAGE) && !w_WRFifo_Empty)begin
+                                        r_isWriteTransaction <= 1;
+                                        r_WRFifo_RDEn <= 1; 
                                     end
                                 end
 
@@ -156,7 +159,6 @@ module FlashBusInterface #(
         end
 
         if(r_isWriteTransaction)begin
-            r_WRFifo_RDEn <= 0;
             r_FLASH_AckReq <= 1;
             r_FLASH_WriteData <= w_WRFifo_DOut;
 
