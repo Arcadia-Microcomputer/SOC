@@ -2517,7 +2517,6 @@ integer x;                         // Local loop variable only to be used here.
 				status_reg[`WEL] = 0;
 	end
 	flag_prog_page = 0;
-	dump_mem();
 end
 
 /******************************************************************************

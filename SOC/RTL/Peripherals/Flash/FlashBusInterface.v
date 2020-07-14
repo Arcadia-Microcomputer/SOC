@@ -51,7 +51,6 @@ module FlashBusInterface #(
 	reg r_FLASH_CMDEn = 0;
     reg [2:0]r_FLASH_CMD = 0;
     reg [23:0]r_FLASH_Addr = 0;
-    reg [7:0]r_FLASH_WriteData = 0;
     wire [7:0]w_FLASH_ReadData;
     wire w_FLASH_ReqNextData;
     wire w_FLASH_NewDataAvailableNextClk;
@@ -66,13 +65,15 @@ module FlashBusInterface #(
     wire w_WRFifo_Full;
     wire w_WRFifo_Empty;
 
-    //Read FSM
-    localparam FSM_STATE_SIZE = 1;
-    localparam FSM_WAIT = 0,
-               FSM_TX = 1;
-    reg [FSM_STATE_SIZE-1:0] FSM_state = FSM_WAIT;
+    //Memory Mapped Read FSM
+    localparam FSM_READ_STATE_SIZE = 1;
+    localparam FSM_READ_WAIT = 0,
+               FSM_READ_RD = 1;
+    reg [FSM_READ_STATE_SIZE-1:0] FSM_READ_state = 0;
 
-    reg r_ReadByteCounter = 0;
+    reg [3:0]r_ReadByteCounter = 0;
+    reg [23:0]r_ReadData = 0;
+    reg r_isMMReadTransaction = 0;
     
     //Addressable Registers
     reg [23:0]r_Address = 0;
@@ -87,16 +88,53 @@ module FlashBusInterface #(
         r_WRFifo_RDEn <= 0;
         r_FLASH_CMDEn <= 0;
 
-        if (i_MEM_SlaveSel) begin
+        if(r_isMMReadTransaction)begin
+            o_AV_WaitRequest <= 1;
+            
+
+            case (FSM_READ_state)
+                FSM_READ_WAIT:begin
+                    if(w_FLASH_NewDataAvailableNextClk)begin
+                        r_ReadByteCounter <= r_ReadByteCounter - 1;
+                        FSM_READ_state <= FSM_READ_RD;
+                    end
+                end
+                FSM_READ_RD:begin
+                    if(r_ReadByteCounter == 1)begin
+                        r_FLASH_AckReq <= 0;
+                    end
+
+                    if(r_ReadByteCounter == 0)begin
+                        r_isMMReadTransaction <= 0;
+                        o_AV_ReadData[23:0] <= r_ReadData;
+                        o_AV_WaitRequest <= 0;
+                    end
+
+                    case (r_ReadByteCounter[1:0])
+                        3:r_ReadData[7:0] <= w_FLASH_ReadData;
+                        2:r_ReadData[15:8] <= w_FLASH_ReadData;
+                        1:r_ReadData[23:16] <= w_FLASH_ReadData;
+                        0:o_AV_ReadData[31:24] <= w_FLASH_ReadData;
+                    endcase
+
+                    FSM_READ_state <= FSM_READ_WAIT;
+                end
+            endcase
+        end else if (i_MEM_SlaveSel) begin
             //Read transaction
             if(i_AV_Read)begin
-                //Check to see if in the memory mapped read section
-                if(i_MEM_RegAddr[29-MEM_ADDR_SEL_BITS:22] == 0)begin
-                    r_FLASH_Addr <= {i_MEM_RegAddr[21:0], 4'b0};
-                    r_FLASH_CMD <= COMMAND_READ;
-                end
+                r_isMMReadTransaction <= 1;
+                r_ReadByteCounter <= 4;
+                r_ReadData <= 0;
+                r_FLASH_Addr <= {i_MEM_RegAddr[21:0], 4'b0};
+                r_FLASH_CMD <= COMMAND_READ;
+                r_FLASH_CMDEn <= 1;
+                r_FLASH_AckReq <= 1;
+                o_AV_WaitRequest <= 1;
             end
         end
+
+        
 
         if (i_CNTRL_SlaveSel) begin
             //Write transaction
@@ -160,9 +198,9 @@ module FlashBusInterface #(
 
         if(r_isWriteTransaction)begin
             r_FLASH_AckReq <= 1;
-            r_FLASH_WriteData <= w_WRFifo_DOut;
 
-            //Check to see if the flash controler wants new data to write 
+            //Check to see if the flash controler wants new data to write
+            //Have 2 cycles to deal with the request 
             if(w_FLASH_ReqNextData)begin
                 if(!w_WRFifo_Empty)begin
                     r_WRFifo_RDEn <= 1;
@@ -181,7 +219,7 @@ module FlashBusInterface #(
         .i_CMDEn(r_FLASH_CMDEn),
         .i_CMD(r_FLASH_CMD),
         .i_Addr(r_FLASH_Addr),
-        .i_WriteData(r_FLASH_WriteData),
+        .i_WriteData(w_WRFifo_DOut),
         .o_ReadData(w_FLASH_ReadData),
         .o_ReqNextData(w_FLASH_ReqNextData),
         .o_NewDataAvailableNextClk(w_FLASH_NewDataAvailableNextClk),

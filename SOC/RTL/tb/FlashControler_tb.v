@@ -44,10 +44,10 @@ module FlashControler_tb();
     end
     
     reg [7:0]r_Counter = 0;
+    reg [31:0]r_RDData = 0;
 
     initial begin
         #100;
-
         //Write Enable
         @(posedge r_Clk);
         r_CNTRL_SlaveSel <= 1;
@@ -62,7 +62,7 @@ module FlashControler_tb();
         r_CNTRL_SlaveSel <= 1;
         r_AV_ByteEN <= 4'b1111;
         r_AV_Write <= 1;
-        r_AV_WriteData <= 4;
+        r_AV_WriteData <= 0;
         r_CNTRL_RegAddr <= p_REG_ADDR_ADDR;
 
         //Write 4 words to the fifo
@@ -71,7 +71,13 @@ module FlashControler_tb();
             r_CNTRL_SlaveSel <= 1;
             r_AV_ByteEN <= 4'b0001;
             r_AV_Write <= 1;
-            r_AV_WriteData <= 32'h000000AA;
+            case (r_Counter)
+                0:r_AV_WriteData <= 32'h00000012;
+                1:r_AV_WriteData <= 32'h000000EF;
+                2:r_AV_WriteData <= 32'h000000CD;
+                3:r_AV_WriteData <= 32'h000000AB;
+            endcase
+            
             r_CNTRL_RegAddr <= p_REG_ADDR_DATA;
             r_Counter <= r_Counter + 1;
         end

@@ -2,7 +2,13 @@
 
 module SOC(
     input i_OscClk_100Mhz,
+    
+    //User Flash
+    output o_UserFlash_Clk,
+    output o_UserFlash_nCS,
+    inout [3:0]io_UserFlash_IO,
 
+    //Usb to Uart Converter
     output UART0_TX,
 
     //VGA
@@ -57,8 +63,9 @@ module SOC(
     parameter ADDR_MEM_SEL_BITS = 4;
     parameter ADDR_MEM_SLAVE_SEL_BITS = (ADDR_TOP_SEL_BITS + ADDR_MEM_SEL_BITS);
     
-    parameter ADDR_MEM_ROM      = 4'd0;
-    parameter ADDR_MEM_DRAM     = 4'd1;
+    parameter ADDR_MEM_ROM0      = 4'd0;
+    parameter ADDR_MEM_DRAM0     = 4'd1;
+    parameter ADDR_MEM_FLASH0    = 4'd2;
 
     wire [ADDR_MEM_SLAVE_SEL_BITS-1:0]w_DBus_MEM_SlaveSelAddr = w_DBus_Address[29:30-ADDR_MEM_SLAVE_SEL_BITS];
     wire [29-ADDR_MEM_SLAVE_SEL_BITS:0]w_DBus_MEM_RegSelAddr = w_DBus_Address[29-ADDR_MEM_SLAVE_SEL_BITS:0];
@@ -66,8 +73,8 @@ module SOC(
     wire [ADDR_MEM_SLAVE_SEL_BITS-1:0]w_IBus_MEM_SlaveSelAddr = w_IBus_Address[29:30-ADDR_MEM_SLAVE_SEL_BITS];
     wire [29-ADDR_MEM_SLAVE_SEL_BITS:0]w_IBus_MEM_RegSelAddr = w_IBus_Address[29-ADDR_MEM_SLAVE_SEL_BITS:0];
 
-    //ROM0
-    parameter ROM0_SlaveAddr = {ADDR_TOP_MEM, ADDR_MEM_ROM};
+    //-ROM0-//
+    parameter ROM0_SlaveAddr = {ADDR_TOP_MEM, ADDR_MEM_ROM0};
     //IBus Port
     wire w_ROM0_I_Sel = (w_IBus_MEM_SlaveSelAddr == ROM0_SlaveAddr)? 1: 0;
     wire [31:0]w_AV0_ROM0_ReadData;
@@ -77,17 +84,24 @@ module SOC(
     wire [31:0]w_AV1_ROM0_ReadData;
     wire w_AV1_ROM0_WaitRequest;
 
-    //DRAM0
-    parameter DRAM0_SlaveAddr = {ADDR_TOP_MEM, ADDR_MEM_DRAM};
+    //-DRAM0-//
+    //DBus Port
+    parameter DRAM0_SlaveAddr = {ADDR_TOP_MEM, ADDR_MEM_DRAM0};
     wire w_DRAM0_Sel = (w_DBus_MEM_SlaveSelAddr == DRAM0_SlaveAddr)? 1: 0;
     wire [31:0]w_AV_DRAM0_ReadData;
     wire w_AV_DRAM0_WaitRequest;
+
+    //-FLASH0 Mem Interface-//
+    //DBus Port
+    parameter FLASH0_MEM_SlaveAddr = {ADDR_TOP_MEM, ADDR_MEM_FLASH0};
+    wire w_FLASH0_MEM_Sel = (w_DBus_MEM_SlaveSelAddr == FLASH0_MEM_SlaveAddr)? 1: 0;
 
     //---IO Block---//
     parameter ADDR_IO_SEL_BITS  = 17;
     parameter ADDR_IO_SLAVE_SEL_BITS = (ADDR_TOP_SEL_BITS + ADDR_IO_SEL_BITS);
     parameter ADDR_IO_UART0     = 17'd0;
     parameter ADDR_IO_COUNTER0  = 17'd1;
+    parameter ADDR_IO_FLASH0    = 17'd2;
 
     wire [ADDR_IO_SLAVE_SEL_BITS-1:0]w_DBus_IO_SlaveSelAddr = w_DBus_Address[29:30-ADDR_IO_SLAVE_SEL_BITS];
     wire [29-ADDR_IO_SLAVE_SEL_BITS:0]w_DBus_IO_RegSelAddr  = w_DBus_Address[29-ADDR_IO_SLAVE_SEL_BITS:0];
@@ -103,6 +117,12 @@ module SOC(
     wire w_Counter0_Sel = (w_DBus_IO_SlaveSelAddr == Counter0_SlaveAddr)? 1: 0;
     wire [31:0]w_AV_Counter0_ReadData;
     wire w_AV_Counter0_WaitRequest;
+
+    //-FLASH0 Control Interface-//
+    parameter FLASH0_CNTL_SlaveAddr = {ADDR_TOP_IO, ADDR_IO_FLASH0};
+    wire w_FLASH0_CNTL_Sel = (w_DBus_IO_SlaveSelAddr == FLASH0_CNTL_SlaveAddr)? 1: 0;
+    wire [31:0]w_AV_FLASH0_ReadData;
+    wire w_AV_FLASH0_WaitRequest;
 
     //---VRAM Block---//
     parameter ADDR_VRAM_SEL_BITS  = 2;
@@ -123,8 +143,8 @@ module SOC(
     assign w_IBus_WaitRequest = w_AV0_ROM0_WaitRequest;
 
     //--DBus Slave Driver--//
-    assign w_DBus_ReadData = w_AV1_ROM0_ReadData | w_AV_DRAM0_ReadData | w_AV_UART0_ReadData | w_AV_Counter0_ReadData | w_AV_VideoDriver_ReadData;
-    assign w_DBus_WaitRequest = w_AV1_ROM0_WaitRequest | w_AV_DRAM0_WaitRequest | w_AV_UART0_WaitRequest | w_AV_Counter0_WaitRequest | w_AV_VideoDriver_WaitRequest;
+    assign w_DBus_ReadData = w_AV1_ROM0_ReadData | w_AV_DRAM0_ReadData | w_AV_UART0_ReadData | w_AV_Counter0_ReadData | w_AV_VideoDriver_ReadData | w_AV_FLASH0_ReadData;
+    assign w_DBus_WaitRequest = w_AV1_ROM0_WaitRequest | w_AV_DRAM0_WaitRequest | w_AV_UART0_WaitRequest | w_AV_Counter0_WaitRequest | w_AV_VideoDriver_WaitRequest | w_AV_FLASH0_WaitRequest;
 
     //--PLL_M Signals--//
     wire w_SysClk;
@@ -197,7 +217,7 @@ module SOC(
     RAM #(
         .ADDR_SEL_BITS(ADDR_MEM_SLAVE_SEL_BITS),
         .DEPTH(512)
-    )RAM0(
+    )DRAM0(
         .i_Clk(w_SysClk),
 
         //DBus Slave
@@ -209,6 +229,30 @@ module SOC(
         .o_AV_ReadData(w_AV_DRAM0_ReadData),
         .i_AV_WriteData(w_DBus_WriteData),
         .o_AV_WaitRequest(w_AV_DRAM0_WaitRequest)
+    );
+
+    FlashBusInterface #(
+        .MEM_ADDR_SEL_BITS(ADDR_MEM_SLAVE_SEL_BITS),
+        .CNTRL_ADDR_SEL_BITS(ADDR_IO_SLAVE_SEL_BITS)
+    )FLASH0(
+        .i_Clk(w_SysClk),
+        
+        .i_MEM_SlaveSel(w_FLASH0_MEM_Sel),
+        .i_MEM_RegAddr(w_DBus_MEM_RegSelAddr),
+
+        .i_CNTRL_SlaveSel(w_FLASH0_CNTL_Sel),
+        .i_CNTRL_RegAddr(w_DBus_IO_RegSelAddr),
+
+        .i_AV_ByteEn(w_DBus_ByteEn),
+        .i_AV_Read(w_DBus_Read),
+        .i_AV_Write(w_DBus_Write),
+        .o_AV_ReadData(w_AV_FLASH0_ReadData),
+        .i_AV_WriteData(w_DBus_WriteData),
+        .o_AV_WaitRequest(w_AV_FLASH0_WaitRequest),
+
+        .o_Flash_Clk(o_UserFlash_Clk),
+        .o_Flash_nCS(o_UserFlash_nCS),
+        .io_Flash_IO(io_UserFlash_IO)
     );
 
     UART #(

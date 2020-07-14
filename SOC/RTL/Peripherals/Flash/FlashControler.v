@@ -187,7 +187,7 @@ module FlashControler(
                 r_BitCounter <= r_BitCounter + 1;
                 
                 //Take care of generating the request new data signal 
-                if((r_BitCounter == 5) && !r_SendAddress && !r_ReceiveTrue && r_NumBytesHostDependant)begin
+                if((r_BitCounter == 1) && !r_SendAddress && !r_ReceiveTrue && r_NumBytesHostDependant)begin
                     o_ReqNextData <= 1;
                 end
 
