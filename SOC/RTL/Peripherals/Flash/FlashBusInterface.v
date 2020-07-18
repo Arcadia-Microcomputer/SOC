@@ -192,6 +192,9 @@ module FlashBusInterface #(
                     p_REG_ADDR_DATA:begin
                         o_AV_ReadData <= {24'b0, w_FLASH_ReadData};
                     end
+                    default:begin
+                        o_AV_ReadData <= 0;
+                    end
                 endcase 
             end
         end

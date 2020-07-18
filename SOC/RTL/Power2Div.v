@@ -1,7 +1,7 @@
 `timescale 1ns / 1ps
 
 module Power2Div#(
-        parameter POWER_OF_2_DIV = 2;
+        parameter POWER_OF_2_DIV = 2
     )(
         input i_Clk,
         output o_DivClk
