@@ -3,6 +3,15 @@
 module SOC(
     input i_OscClk_100Mhz,
     
+    //VGA
+    output o_VGA_Clk,
+    output o_VGA_VSync,
+    output o_VGA_HSync,
+    output o_VGA_nBlank,
+    output [4:0]o_VGA_R,
+    output [5:0]o_VGA_G,
+    output [4:0]o_VGA_B,
+
     //User Flash
     output o_UserFlash_Clk,
     output o_UserFlash_nCS,
@@ -11,14 +20,8 @@ module SOC(
     //Usb to Uart Converter
     output UART0_TX,
 
-    //VGA
-    output o_VGA_Clk,
-    output o_VGA_VSync,
-    output o_VGA_HSync,
-    output o_VGA_nBlank,
-    output [4:0]o_VGA_R,
-    output [5:0]o_VGA_G,
-    output [4:0]o_VGA_B
+    output [2:0]o_7Seg_En,
+    output [6:0]o_7Seg_Led
     );
     
     //--1080p resolution--//
@@ -129,6 +132,7 @@ module SOC(
     parameter ADDR_VSMALL_PERIPH_SPI1               = 10'd6;
     parameter ADDR_VSMALL_PERIPH_I2S0               = 10'd7;
     parameter ADDR_VSMALL_PERIPH_COUNTER0           = 10'd8;
+    parameter ADDR_VSMALL_PERIPH_GPIO               = 10'd9;
 
     wire [ADDR_VSMALL_PERIPH_SLAVE_SEL_BITS-1:0]w_IBus_VSMALL_PERIPH_SlaveSelAddr = w_IBus_Address[29:30-ADDR_VSMALL_PERIPH_SLAVE_SEL_BITS];
     wire [29-ADDR_VSMALL_PERIPH_SLAVE_SEL_BITS:0]w_IBus_VSMALL_PERIPH_RegSelAddr  = w_IBus_Address[29-ADDR_VSMALL_PERIPH_SLAVE_SEL_BITS:0];
@@ -201,15 +205,22 @@ module SOC(
     wire [31:0]w_DBUS_COUNTER0_ReadData;
     wire w_DBUS_COUNTER0_WaitRequest;
 
+    //-GPIO-//
+    parameter GPIO_SlaveAddr = {ADDR_VSMALL_PERIPH, ADDR_VSMALL_PERIPH_GPIO};
+    //DBus Port
+    wire w_DBUS_GPIO_Sel = (w_DBus_VSMALL_PERIPH_SlaveSelAddr == GPIO_SlaveAddr)? 1: 0;
+    wire [31:0]w_DBUS_GPIO_ReadData;
+    wire w_DBUS_GPIO_WaitRequest;
+
     //--IBus Slave Driver--//
     assign w_IBus_ReadData = w_IBUS_SDRAM0_ReadData | w_IBUS_ROM0_ReadData | w_IBUS_QSPI_FLASH0_ReadData;
     assign w_IBus_WaitRequest = w_IBUS_SDRAM0_WaitRequest | w_IBUS_ROM0_WaitRequest | w_IBUS_QSPI_FLASH0_WaitRequest;
 
     //--DBus Slave Driver--//
-    assign w_DBus_ReadData = w_DBUS_SDRAM0_ReadData | w_DBUS_QSPI_FLASH0_ReadData | w_DBUS_TVRAM0_ReadData | w_DBUS_ROM0_ReadData | w_DBUS_DRAM0_ReadData
+    assign w_DBus_ReadData = w_DBUS_SDRAM0_ReadData | w_DBUS_QSPI_FLASH0_ReadData | w_DBUS_TVRAM0_ReadData | w_DBUS_ROM0_ReadData | w_DBUS_DRAM0_ReadData | w_DBUS_GPIO_ReadData
                            | w_DBUS_UART0_ReadData | w_DBUS_UART1_ReadData | w_DBUS_SPI0_ReadData | w_DBUS_SPI1_ReadData | w_DBUS_I2S0_ReadData | w_DBUS_COUNTER0_ReadData;
 
-    assign w_DBus_WaitRequest = w_DBUS_SDRAM0_WaitRequest | w_DBUS_QSPI_FLASH0_WaitRequest | w_DBUS_TVRAM0_WaitRequest | w_DBUS_ROM0_WaitRequest | w_DBUS_DRAM0_WaitRequest
+    assign w_DBus_WaitRequest = w_DBUS_SDRAM0_WaitRequest | w_DBUS_QSPI_FLASH0_WaitRequest | w_DBUS_TVRAM0_WaitRequest | w_DBUS_ROM0_WaitRequest | w_DBUS_DRAM0_WaitRequest | w_DBUS_GPIO_WaitRequest
                               | w_DBUS_UART0_WaitRequest | w_DBUS_UART1_WaitRequest | w_DBUS_SPI0_WaitRequest | w_DBUS_SPI1_WaitRequest | w_DBUS_I2S0_WaitRequest | w_DBUS_COUNTER0_WaitRequest;
 
     //--PLL_M Signals--//
@@ -402,4 +413,24 @@ module SOC(
         .o_AV_WaitRequest(w_DBUS_COUNTER0_WaitRequest)
     );
 
+    GPIOBusInterface #(
+        .ADDR_SEL_BITS(ADDR_VSMALL_PERIPH_SLAVE_SEL_BITS)
+    ) GPIOBusInterface0(
+        .i_Clk(w_SysClk),
+
+        //DBus Slave
+        .i_SlaveSel(w_DBUS_GPIO_Sel),
+        .i_RegAddr(w_DBus_VSMALL_PERIPH_RegSelAddr),
+
+        .i_AV_ByteEn(w_DBus_ByteEn),
+        .i_AV_Read(w_DBus_Read),
+        .i_AV_Write(w_DBus_Write),
+        .o_AV_ReadData(w_DBUS_GPIO_ReadData),
+        .i_AV_WriteData(w_DBus_WriteData),
+        .o_AV_WaitRequest(w_DBUS_GPIO_WaitRequest),
+
+        //GPIO
+        .o_7Seg_En(o_7Seg_En),
+        .o_7Seg_Led(o_7Seg_Led)
+    );
 endmodule

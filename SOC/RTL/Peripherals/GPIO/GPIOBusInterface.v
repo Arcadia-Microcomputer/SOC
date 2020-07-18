@@ -33,9 +33,9 @@ module GPIOBusInterface #(
     parameter p_REG_ADDR_GPIO_DDR = 2;
     parameter p_REG_ADDR_7SEG     = 3;
 
-    reg [7:0]r_7SegOne = 0;
-    reg [7:0]r_7SegTwo = 0;
-    reg [7:0]r_7SegThree = 0;
+    reg [6:0]r_7SegOne = 0;
+    reg [6:0]r_7SegTwo = 0;
+    reg [6:0]r_7SegThree = 0;
     reg r_7SegLUTModeEn = 0;
 
     //7Seg Divider Clk Signals
@@ -51,12 +51,11 @@ module GPIOBusInterface #(
             if(i_AV_Write)begin
                 case (i_RegAddr)
                     p_REG_ADDR_7SEG:begin
-                        if(i_AV_ByteEn[0]) r_7SegOne        <= i_AV_WriteData[7:0];
-                        if(i_AV_ByteEn[1]) r_7SegTwo        <= i_AV_WriteData[15:8];
-                        if(i_AV_ByteEn[2]) r_7SegThree      <= i_AV_WriteData[23:16];
+                        if(i_AV_ByteEn[0]) r_7SegOne        <= i_AV_WriteData[6:0];
+                        if(i_AV_ByteEn[1]) r_7SegTwo        <= i_AV_WriteData[14:8];
+                        if(i_AV_ByteEn[2]) r_7SegThree      <= i_AV_WriteData[22:16];
                         if(i_AV_ByteEn[3]) r_7SegLUTModeEn  <= i_AV_WriteData[24];
                     end
-                   
                 endcase 
             end
             
@@ -72,12 +71,11 @@ module GPIOBusInterface #(
                 endcase 
             end
         end
-
     end
 
-    Power2Div#(
-        POWER_OF_2_DIV(65536),
-    )7SegDivClk(
+    Power2Div #(
+        .POWER_OF_TWO_DIV(65536)
+    )SegDivClk(
         .i_Clk(i_Clk),
         .o_DivClk(w_7SegClk)
     );
