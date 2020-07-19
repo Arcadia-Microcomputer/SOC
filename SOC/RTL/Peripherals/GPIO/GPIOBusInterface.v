@@ -63,7 +63,7 @@ module GPIOBusInterface #(
             if(i_AV_Read)begin
                 case (i_RegAddr)
                     p_REG_ADDR_7SEG:begin
-                        o_AV_ReadData = {7'b0, r_7SegLUTModeEn, r_7SegThree, r_7SegTwo, r_7SegOne};
+                        o_AV_ReadData <= {7'b0, r_7SegLUTModeEn, r_7SegThree, r_7SegTwo, r_7SegOne};
                     end
                     default:begin
                         o_AV_ReadData <= 0;
@@ -74,7 +74,7 @@ module GPIOBusInterface #(
     end
 
     Power2Div #(
-        .POWER_OF_TWO_DIV(65536)
+        .POWER_OF_TWO_DIV(32768)
     )SegDivClk(
         .i_Clk(i_Clk),
         .o_DivClk(w_7SegClk)

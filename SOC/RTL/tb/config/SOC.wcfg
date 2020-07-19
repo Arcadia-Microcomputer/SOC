@@ -10,7 +10,7 @@
          </top_modules>
       </db_ref>
    </db_ref_list>
-   <WVObjectSize size="39" />
+   <WVObjectSize size="45" />
    <wvobject fp_name="/SOC_tb/SOC0/CPU0/i_Clk" type="logic" db_ref_id="1">
       <obj_property name="ElementShortName">i_Clk</obj_property>
       <obj_property name="ObjectShortName">i_Clk</obj_property>
@@ -3992,6 +3992,30 @@
       <obj_property name="UseCustomSignalColor">true</obj_property>
       <obj_property name="CustomSignalColor">#800080</obj_property>
    </wvobject>
+   <wvobject fp_name="/SOC_tb/SOC0/FLASH0/o_Flash_nCS" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">o_Flash_nCS</obj_property>
+      <obj_property name="ObjectShortName">o_Flash_nCS</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#800080</obj_property>
+   </wvobject>
+   <wvobject fp_name="/SOC_tb/SOC0/FLASH0/o_Flash_Clk" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">o_Flash_Clk</obj_property>
+      <obj_property name="ObjectShortName">o_Flash_Clk</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#800080</obj_property>
+   </wvobject>
+   <wvobject fp_name="/SOC_tb/SOC0/FLASH0/FlashControler0/r_CMDBusy" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">r_CMDBusy</obj_property>
+      <obj_property name="ObjectShortName">r_CMDBusy</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#800080</obj_property>
+   </wvobject>
+   <wvobject fp_name="/SOC_tb/W25Q16JV_0/status_reg" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">status_reg[23:0]</obj_property>
+      <obj_property name="ObjectShortName">status_reg[23:0]</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#800080</obj_property>
+   </wvobject>
    <wvobject fp_name="/SOC_tb/SOC0/UART0/r_Reg_ClksPerBit" type="array" db_ref_id="1">
       <obj_property name="ElementShortName">r_Reg_ClksPerBit[15:0]</obj_property>
       <obj_property name="ObjectShortName">r_Reg_ClksPerBit[15:0]</obj_property>
@@ -4043,22 +4067,22 @@
       <obj_property name="CustomSignalColor">#00ffff</obj_property>
    </wvobject>
    <wvobject fp_name="/SOC_tb/SOC0/GPIOBusInterface0/r_7SegOne" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">r_7SegOne[7:0]</obj_property>
-      <obj_property name="ObjectShortName">r_7SegOne[7:0]</obj_property>
+      <obj_property name="ElementShortName">r_7SegOne[6:0]</obj_property>
+      <obj_property name="ObjectShortName">r_7SegOne[6:0]</obj_property>
       <obj_property name="Radix">HEXRADIX</obj_property>
       <obj_property name="UseCustomSignalColor">true</obj_property>
       <obj_property name="CustomSignalColor">#00ffff</obj_property>
    </wvobject>
    <wvobject fp_name="/SOC_tb/SOC0/GPIOBusInterface0/r_7SegTwo" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">r_7SegTwo[7:0]</obj_property>
-      <obj_property name="ObjectShortName">r_7SegTwo[7:0]</obj_property>
+      <obj_property name="ElementShortName">r_7SegTwo[6:0]</obj_property>
+      <obj_property name="ObjectShortName">r_7SegTwo[6:0]</obj_property>
       <obj_property name="Radix">HEXRADIX</obj_property>
       <obj_property name="UseCustomSignalColor">true</obj_property>
       <obj_property name="CustomSignalColor">#00ffff</obj_property>
    </wvobject>
    <wvobject fp_name="/SOC_tb/SOC0/GPIOBusInterface0/r_7SegThree" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">r_7SegThree[7:0]</obj_property>
-      <obj_property name="ObjectShortName">r_7SegThree[7:0]</obj_property>
+      <obj_property name="ElementShortName">r_7SegThree[6:0]</obj_property>
+      <obj_property name="ObjectShortName">r_7SegThree[6:0]</obj_property>
       <obj_property name="Radix">HEXRADIX</obj_property>
       <obj_property name="UseCustomSignalColor">true</obj_property>
       <obj_property name="CustomSignalColor">#00ffff</obj_property>
@@ -4068,5 +4092,13 @@
       <obj_property name="ObjectShortName">r_7SegLUTModeEn</obj_property>
       <obj_property name="UseCustomSignalColor">true</obj_property>
       <obj_property name="CustomSignalColor">#00ffff</obj_property>
+   </wvobject>
+   <wvobject fp_name="/SOC_tb/SOC0/o_7Seg_En" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">o_7Seg_En[2:0]</obj_property>
+      <obj_property name="ObjectShortName">o_7Seg_En[2:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/SOC_tb/SOC0/o_7Seg_Led" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">o_7Seg_Led[6:0]</obj_property>
+      <obj_property name="ObjectShortName">o_7Seg_Led[6:0]</obj_property>
    </wvobject>
 </wave_config>

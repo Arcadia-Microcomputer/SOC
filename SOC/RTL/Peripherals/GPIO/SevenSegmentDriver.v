@@ -35,8 +35,6 @@ module SevenSegmentDriver(
         7'b0000110, //1
         7'b0111111  //0
     };
-    
-    wire [6:0]w_test = w_HexLut[4'h2];
 
     wire [6:0]w_SegOne    = i_HexLutEn? w_HexLut[i_SegOne[3:0]]   : i_SegOne;
     wire [6:0]w_SegTwo    = i_HexLutEn? w_HexLut[i_SegTwo[3:0]]   : i_SegTwo;

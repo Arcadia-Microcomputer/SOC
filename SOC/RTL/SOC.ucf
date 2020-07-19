@@ -75,9 +75,9 @@ NET "o_7Seg_Led[0]"     LOC = E12      | IOSTANDARD = LVCMOS33 | DRIVE = 8 | SLE
 NET "o_7Seg_Led[1]"     LOC = F12      | IOSTANDARD = LVCMOS33 | DRIVE = 8 | SLEW = FAST;
 NET "o_7Seg_Led[2]"     LOC = E11      | IOSTANDARD = LVCMOS33 | DRIVE = 8 | SLEW = FAST;
 NET "o_7Seg_Led[3]"     LOC = F10      | IOSTANDARD = LVCMOS33 | DRIVE = 8 | SLEW = FAST;
-NET "o_7Seg_Led[4]"     LOC = C10      | IOSTANDARD = LVCMOS33 | DRIVE = 8 | SLEW = FAST;
-NET "o_7Seg_Led[5]"     LOC = E10      | IOSTANDARD = LVCMOS33 | DRIVE = 8 | SLEW = FAST;
-NET "o_7Seg_Led[6]"     LOC = F9       | IOSTANDARD = LVCMOS33 | DRIVE = 8 | SLEW = FAST;
+NET "o_7Seg_Led[4]"     LOC = E10      | IOSTANDARD = LVCMOS33 | DRIVE = 8 | SLEW = FAST;
+NET "o_7Seg_Led[5]"     LOC = F9       | IOSTANDARD = LVCMOS33 | DRIVE = 8 | SLEW = FAST;
+NET "o_7Seg_Led[6]"     LOC = C10      | IOSTANDARD = LVCMOS33 | DRIVE = 8 | SLEW = FAST;
 
 ### User Switches ###
 #NET "i_UserSW[0]"       LOC = C5      | IOSTANDARD = LVCMOS33 | DRIVE = 8 | SLEW = FAST | PULLUP;
@@ -86,3 +86,9 @@ NET "o_7Seg_Led[6]"     LOC = F9       | IOSTANDARD = LVCMOS33 | DRIVE = 8 | SLE
 #NET "i_UserSW[3]"       LOC = C7      | IOSTANDARD = LVCMOS33 | DRIVE = 8 | SLEW = FAST | PULLUP;
 
 #NET "i_BootSel"         LOC = A8      | IOSTANDARD = LVCMOS33 | DRIVE = 8 | SLEW = FAST | PULLUP;
+
+#I2S Dac
+#NET "o_I2S_SDIN"         LOC = M7      | IOSTANDARD = LVCMOS33 | DRIVE = 8 | SLEW = FAST;
+#NET "o_I2S_SCLK"         LOC = P7      | IOSTANDARD = LVCMOS33 | DRIVE = 8 | SLEW = FAST;
+#NET "o_I2S_LCLK"         LOC = P6      | IOSTANDARD = LVCMOS33 | DRIVE = 8 | SLEW = FAST;
+#NET "o_I2S_MCLK"         LOC = N6      | IOSTANDARD = LVCMOS33 | DRIVE = 8 | SLEW = FAST;
