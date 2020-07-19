@@ -90,7 +90,6 @@ module FlashBusInterface #(
 
         if(r_isMMReadTransaction)begin
             o_AV_WaitRequest <= 1;
-            
 
             case (FSM_READ_state)
                 FSM_READ_WAIT:begin
@@ -126,7 +125,7 @@ module FlashBusInterface #(
                 r_isMMReadTransaction <= 1;
                 r_ReadByteCounter <= 4;
                 r_ReadData <= 0;
-                r_FLASH_Addr <= {i_MEM_RegAddr[21:0], 4'b0};
+                r_FLASH_Addr <= {i_MEM_RegAddr[21:0], 2'b0};
                 r_FLASH_CMD <= COMMAND_READ;
                 r_FLASH_CMDEn <= 1;
                 r_FLASH_AckReq <= 1;

@@ -99,7 +99,7 @@
       <wvobject fp_name="/SOC_tb/SOC0/CPU0/RegFile0/Registers[29]" type="array" db_ref_id="1">
          <obj_property name="ElementShortName">[29,31:0]</obj_property>
          <obj_property name="ObjectShortName">Registers[29,31:0]</obj_property>
-         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
          <obj_property name="UseCustomSignalColor">true</obj_property>
          <obj_property name="CustomSignalColor">#ff00ff</obj_property>
       </wvobject>
