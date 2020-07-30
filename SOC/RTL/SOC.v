@@ -377,7 +377,7 @@ module SOC(
         .o_AV_WaitRequest(w_DBUS_DRAM0_WaitRequest)
     );
 
-    UART #(
+    UartBusInterface #(
         .ADDR_SEL_BITS(ADDR_VSMALL_PERIPH_SLAVE_SEL_BITS)
     )UART0(
         .i_Clk(w_SysClk),

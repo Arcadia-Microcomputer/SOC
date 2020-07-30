@@ -48,7 +48,6 @@ module Counter #(
                 r_OverFlow <= 1'b1;
             end else begin
                 r_Counter <= r_Counter + 1'b1;
-
                 if(r_OverFlowClr)begin
                     r_OverFlow <= 1'b0;
                 end

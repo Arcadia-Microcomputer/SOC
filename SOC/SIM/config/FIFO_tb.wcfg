@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="I:/4-Git Repos/Arcadia Microcomputer/SOC/SOC/WorkingDir/FIFO_tb_isim_beh.wdb" id="1" type="auto">
+         <top_modules>
+            <top_module name="FIFO_tb" />
+            <top_module name="glbl" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <WVObjectSize size="14" />
+   <wvobject fp_name="/FIFO_tb/r_Clk" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">r_Clk</obj_property>
+      <obj_property name="ObjectShortName">r_Clk</obj_property>
+   </wvobject>
+   <wvobject fp_name="/FIFO_tb/r_WrEn" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">r_WrEn</obj_property>
+      <obj_property name="ObjectShortName">r_WrEn</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ffff00</obj_property>
+   </wvobject>
+   <wvobject fp_name="/FIFO_tb/r_WrData" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">r_WrData[7:0]</obj_property>
+      <obj_property name="ObjectShortName">r_WrData[7:0]</obj_property>
+      <obj_property name="Radix">HEXRADIX</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ffff00</obj_property>
+   </wvobject>
+   <wvobject fp_name="/FIFO_tb/r_RdEn" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">r_RdEn</obj_property>
+      <obj_property name="ObjectShortName">r_RdEn</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#00ffff</obj_property>
+   </wvobject>
+   <wvobject fp_name="/FIFO_tb/r_RdData" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">r_RdData[7:0]</obj_property>
+      <obj_property name="ObjectShortName">r_RdData[7:0]</obj_property>
+      <obj_property name="Radix">HEXRADIX</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#00ffff</obj_property>
+   </wvobject>
+   <wvobject fp_name="/FIFO_tb/w_Full" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">w_Full</obj_property>
+      <obj_property name="ObjectShortName">w_Full</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#800080</obj_property>
+   </wvobject>
+   <wvobject fp_name="/FIFO_tb/w_Empty" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">w_Empty</obj_property>
+      <obj_property name="ObjectShortName">w_Empty</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#800080</obj_property>
+   </wvobject>
+   <wvobject fp_name="/FIFO_tb/w_OverFlow" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">w_OverFlow</obj_property>
+      <obj_property name="ObjectShortName">w_OverFlow</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#800080</obj_property>
+   </wvobject>
+   <wvobject fp_name="/FIFO_tb/w_UnderFlow" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">w_UnderFlow</obj_property>
+      <obj_property name="ObjectShortName">w_UnderFlow</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#800080</obj_property>
+   </wvobject>
+   <wvobject fp_name="/FIFO_tb/DUT/r_Count" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">r_Count[2:0]</obj_property>
+      <obj_property name="ObjectShortName">r_Count[2:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ffa500</obj_property>
+   </wvobject>
+   <wvobject fp_name="/FIFO_tb/DUT/r_RAM" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">r_RAM[3:0,7:0]</obj_property>
+      <obj_property name="ObjectShortName">r_RAM[3:0,7:0]</obj_property>
+      <obj_property name="Radix">HEXRADIX</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ffa500</obj_property>
+      <wvobject fp_name="/FIFO_tb/DUT/r_RAM[3]" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">[3,7:0]</obj_property>
+         <obj_property name="ObjectShortName">r_RAM[3,7:0]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
+         <obj_property name="CustomSignalColor">#ffa500</obj_property>
+      </wvobject>
+      <wvobject fp_name="/FIFO_tb/DUT/r_RAM[2]" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">[2,7:0]</obj_property>
+         <obj_property name="ObjectShortName">r_RAM[2,7:0]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
+         <obj_property name="CustomSignalColor">#ffa500</obj_property>
+      </wvobject>
+      <wvobject fp_name="/FIFO_tb/DUT/r_RAM[1]" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">[1,7:0]</obj_property>
+         <obj_property name="ObjectShortName">r_RAM[1,7:0]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
+         <obj_property name="CustomSignalColor">#ffa500</obj_property>
+      </wvobject>
+      <wvobject fp_name="/FIFO_tb/DUT/r_RAM[0]" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">[0,7:0]</obj_property>
+         <obj_property name="ObjectShortName">r_RAM[0,7:0]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
+         <obj_property name="CustomSignalColor">#ffa500</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject fp_name="/FIFO_tb/DUT/r_WrPointer" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">r_WrPointer[1:0]</obj_property>
+      <obj_property name="ObjectShortName">r_WrPointer[1:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ffa500</obj_property>
+   </wvobject>
+   <wvobject fp_name="/FIFO_tb/DUT/r_RdPointer" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">r_RdPointer[1:0]</obj_property>
+      <obj_property name="ObjectShortName">r_RdPointer[1:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ffa500</obj_property>
+   </wvobject>
+   <wvobject fp_name="/FIFO_tb/DUT/r_Count" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">r_Count[2:0]</obj_property>
+      <obj_property name="ObjectShortName">r_Count[2:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ffa500</obj_property>
+   </wvobject>
+</wave_config>

@@ -26,7 +26,6 @@ module UartTx (
                TX_DATA      = 2,
                TX_STOP      = 3;
     reg [TX_STATE_SIZE-1:0] TXState = TX_WAIT;
-    
 
     always @(posedge i_Clk)begin
         case (TXState)
@@ -71,7 +70,6 @@ module UartTx (
                 o_UART_TX <= 1;
                 if(r_ClksPerBitCounter == i_ClksPerBit - 1)begin
                     r_ClksPerBitCounter <= 0;
-                    o_TxDone <= 1;
                     TXState <= TX_WAIT;
                 end else begin
                     r_ClksPerBitCounter <= r_ClksPerBitCounter + 1;

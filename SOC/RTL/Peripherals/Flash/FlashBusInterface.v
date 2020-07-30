@@ -58,10 +58,10 @@ module FlashBusInterface #(
     wire w_FLASH_CMDBusy;
 
     //Write Fifo Signals
-    reg [7:0]r_WRFifo_Din = 0;
-    reg r_WRFifo_WREn = 0;
-    reg r_WRFifo_RDEn = 0;
-    wire [7:0]w_WRFifo_DOut;
+    reg [7:0]r_WRFifo_WrData = 0;
+    reg r_WRFifo_WrEn = 0;
+    reg r_WRFifo_RdEn = 0;
+    wire [7:0]w_WRFifo_RdData;
     wire w_WRFifo_Full;
     wire w_WRFifo_Empty;
 
@@ -84,8 +84,8 @@ module FlashBusInterface #(
     always @(posedge i_Clk)begin
         o_AV_ReadData <= 0;
         o_AV_WaitRequest <= 0;
-        r_WRFifo_WREn <= 0;
-        r_WRFifo_RDEn <= 0;
+        r_WRFifo_WrEn <= 0;
+        r_WRFifo_RdEn <= 0;
         r_FLASH_CMDEn <= 0;
 
         if(r_isMMReadTransaction)begin
@@ -151,13 +151,13 @@ module FlashBusInterface #(
                                     r_FLASH_CMD <= i_AV_WriteData[3:0];
                                     if((i_AV_WriteData[3:0] == COMMAND_PROGRAM_PAGE) && !w_WRFifo_Empty)begin
                                         r_isWriteTransaction <= 1;
-                                        r_WRFifo_RDEn <= 1; 
+                                        r_WRFifo_RdEn <= 1; 
                                     end
                                 end else begin
                                     r_FLASH_CMD <= r_CMD;
                                     if((r_CMD == COMMAND_PROGRAM_PAGE) && !w_WRFifo_Empty)begin
                                         r_isWriteTransaction <= 1;
-                                        r_WRFifo_RDEn <= 1; 
+                                        r_WRFifo_RdEn <= 1; 
                                     end
                                 end
 
@@ -172,8 +172,8 @@ module FlashBusInterface #(
                     end
                     p_REG_ADDR_DATA:begin
                         if(i_AV_ByteEn[0])begin
-                            r_WRFifo_WREn <= 1;
-                            r_WRFifo_Din <= i_AV_WriteData[7:0];
+                            r_WRFifo_WrEn <= 1;
+                            r_WRFifo_WrData <= i_AV_WriteData[7:0];
                         end
                     end
                 endcase 
@@ -205,7 +205,7 @@ module FlashBusInterface #(
             //Have 2 cycles to deal with the request 
             if(w_FLASH_ReqNextData)begin
                 if(!w_WRFifo_Empty)begin
-                    r_WRFifo_RDEn <= 1;
+                    r_WRFifo_RdEn <= 1;
                 end else begin
                     //If the write FIFO is empty, end the transaction
                     r_isWriteTransaction <= 0;
@@ -221,7 +221,7 @@ module FlashBusInterface #(
         .i_CMDEn(r_FLASH_CMDEn),
         .i_CMD(r_FLASH_CMD),
         .i_Addr(r_FLASH_Addr),
-        .i_WriteData(w_WRFifo_DOut),
+        .i_WriteData(w_WRFifo_RdData),
         .o_ReadData(w_FLASH_ReadData),
         .o_ReqNextData(w_FLASH_ReqNextData),
         .o_NewDataAvailableNextClk(w_FLASH_NewDataAvailableNextClk),
@@ -233,13 +233,16 @@ module FlashBusInterface #(
         .io_Flash_IO(io_Flash_IO)
     );
 
-    FlashWriteFIFO FlashWriteFIFO0 (
-        .clk(i_Clk),
-        .din(r_WRFifo_Din),
-        .wr_en(r_WRFifo_WREn),
-        .rd_en(r_WRFifo_RDEn),
-        .dout(w_WRFifo_DOut),
-        .full(w_WRFifo_Full),
-        .empty(w_WRFifo_Empty)
+    FIFO WrFIFO (
+        .i_Clk(i_Clk),
+
+        .i_WrEn(r_WRFifo_WrEn),
+        .i_WrData(r_WRFifo_WrData),
+
+        .i_RdEn(r_WRFifo_RdEn),
+        .o_RdData(w_WRFifo_RdData),
+
+        .o_Full(w_WRFifo_Full),
+        .o_Empty(w_WRFifo_Empty)
     );
 endmodule

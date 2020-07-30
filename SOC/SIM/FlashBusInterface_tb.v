@@ -1,6 +1,6 @@
 `timescale 1ns / 1ps
 
-module FlashControler_tb();
+module FlashBusInterface_tb();
     reg r_Clk = 0;
     
     //Command interface commands
