@@ -8,6 +8,9 @@ module SOC_tb();
     wire w_Flash_Clk;
     wire [3:0]w_Flash_IO;
 
+    //Uart Signals
+    wire w_UART0_TX;
+
     //Generate the clock
     initial begin
         #10;
@@ -19,7 +22,10 @@ module SOC_tb();
 
         .o_UserFlash_Clk(w_Flash_Clk),
         .o_UserFlash_nCS(w_Flash_nCS),
-        .io_UserFlash_IO(w_Flash_IO)
+        .io_UserFlash_IO(w_Flash_IO),
+
+        .UART0_TX(w_UART0_TX),
+        .UART0_RX(w_UART0_TX)
     );
 
     W25Q16JV W25Q16JV_0(

@@ -62,7 +62,7 @@ NET "io_UserFlash_IO[3]"    LOC = M12      | IOSTANDARD = LVCMOS33 | DRIVE = 8 |
 
 #### USB To Uart ####
 NET "UART0_TX"          LOC = D9      | IOSTANDARD = LVCMOS33 | DRIVE = 8 | SLEW = FAST;
-#NET "UART0_RX"          LOC = C9      | IOSTANDARD = LVCMOS33 | DRIVE = 8 | SLEW = FAST;
+NET "UART0_RX"          LOC = C9      | IOSTANDARD = LVCMOS33 | DRIVE = 8 | SLEW = FAST;
 #NET "UART0_RTS"          LOC = C8      | IOSTANDARD = LVCMOS33 | DRIVE = 8 | SLEW = FAST;
 #NET "UART0_CTS"          LOC = D8      | IOSTANDARD = LVCMOS33 | DRIVE = 8 | SLEW = FAST;
 

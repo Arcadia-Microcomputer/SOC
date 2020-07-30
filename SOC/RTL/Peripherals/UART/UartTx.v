@@ -6,18 +6,19 @@ module UartTx (
     input [15:0] i_ClksPerBit,
     input i_TxEn,
     input [7:0] i_Data,
-    output reg o_TxDone,
+    output reg o_TxIdle,
 
     output reg o_UART_TX
     );
 
     initial begin
-        o_TxDone <= 1'b1;
+        o_TxIdle <= 1'b1;
         o_UART_TX <= 1'b1;
     end
     
-    reg [15:0] r_ClksPerBitCounter = 16'b0;
-    reg [2:0] r_BitCounter = 3'b0;
+    reg [15:0]r_ClksPerBitCounter = 16'b0;
+    reg [2:0]r_BitCounter = 3'b0;
+    reg [7:0]r_Data = 0;
 
     //UART TX state machine
     localparam TX_STATE_SIZE = 2;
@@ -35,16 +36,16 @@ module UartTx (
                 r_BitCounter <= 0;
 
                 if(i_TxEn == 1)begin
-                    o_TxDone <= 0;
+                    o_TxIdle <= 0;
                     TXState <= TX_START_BIT;
                 end else begin
-                    o_TxDone <= 1;
+                    o_TxIdle <= 1;
                 end
             end
             TX_START_BIT:begin
                 o_UART_TX <= 0;
 
-                if(r_ClksPerBitCounter == i_ClksPerBit - 1)begin
+                if(r_ClksPerBitCounter == (i_ClksPerBit - 1))begin
                     r_ClksPerBitCounter <= 0;
                     TXState <= TX_DATA;
                 end else begin
@@ -54,7 +55,7 @@ module UartTx (
             TX_DATA:begin
                 o_UART_TX <= i_Data[r_BitCounter];
 
-                if(r_ClksPerBitCounter == i_ClksPerBit - 1)begin
+                if(r_ClksPerBitCounter == (i_ClksPerBit - 1))begin
                     r_BitCounter <= r_BitCounter + 1;
                     r_ClksPerBitCounter <= 0;
 
@@ -68,7 +69,7 @@ module UartTx (
             end
             TX_STOP:begin
                 o_UART_TX <= 1;
-                if(r_ClksPerBitCounter == i_ClksPerBit - 1)begin
+                if(r_ClksPerBitCounter == (i_ClksPerBit - 1))begin
                     r_ClksPerBitCounter <= 0;
                     TXState <= TX_WAIT;
                 end else begin

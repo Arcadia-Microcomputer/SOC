@@ -40,6 +40,7 @@ module FIFO_tb();
     end
 
     FIFO #(
+        .FWFT("TRUE"),
         .WIDTH(8),
         .DEPTH(4)
     )DUT(

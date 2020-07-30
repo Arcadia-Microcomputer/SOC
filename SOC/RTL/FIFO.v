@@ -1,6 +1,7 @@
 `timescale 1ns / 1ps
 
 module FIFO#(
+        parameter FWFT = "FALSE",
         parameter WIDTH = 8,
         parameter DEPTH = 2
     )(
@@ -42,7 +43,6 @@ module FIFO#(
         end
     end
 
-
     always @(posedge i_Clk) begin
         if(i_WrEn)begin
             if(o_Full)begin
@@ -54,13 +54,26 @@ module FIFO#(
             end
         end
 
-        if(i_RdEn)begin
-            if(o_Empty)begin
-                o_UnderFlow <= 1;
-            end else begin
-                o_UnderFlow <= 0;
-                r_RdPointer <= r_RdPointer + 1;
-                o_RdData <= r_RAM[r_RdPointer]; 
+        if(FWFT == "TRUE")begin
+            o_RdData <= r_RAM[r_RdPointer]; 
+            
+            if(i_RdEn)begin
+                if(o_Empty)begin
+                    o_UnderFlow <= 1;
+                end else begin
+                    o_UnderFlow <= 0;
+                    r_RdPointer <= r_RdPointer + 1;
+                end
+            end
+        end else if (FWFT == "FALSE") begin
+            if(i_RdEn)begin
+                if(o_Empty)begin
+                    o_UnderFlow <= 1;
+                end else begin
+                    o_UnderFlow <= 0;
+                    r_RdPointer <= r_RdPointer + 1;
+                    o_RdData <= r_RAM[r_RdPointer]; 
+                end
             end
         end
 

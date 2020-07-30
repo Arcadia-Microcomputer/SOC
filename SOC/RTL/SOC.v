@@ -19,6 +19,7 @@ module SOC(
 
     //Usb to Uart Converter
     output UART0_TX,
+    input UART0_RX,
 
     output [2:0]o_7Seg_En,
     output [6:0]o_7Seg_Led
@@ -393,7 +394,8 @@ module SOC(
         .i_AV_WriteData(w_DBus_WriteData),
         .o_AV_WaitRequest(w_DBUS_UART0_WaitRequest),
 
-        .o_UART_TX(UART0_TX)
+        .o_UART_TX(UART0_TX),
+        .i_UART_RX(UART0_RX)
     );
     
     Counter #(

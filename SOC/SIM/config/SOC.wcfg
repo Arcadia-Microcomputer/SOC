@@ -10,7 +10,7 @@
          </top_modules>
       </db_ref>
    </db_ref_list>
-   <WVObjectSize size="48" />
+   <WVObjectSize size="43" />
    <wvobject fp_name="/SOC_tb/SOC0/CPU0/i_Clk" type="logic" db_ref_id="1">
       <obj_property name="ElementShortName">i_Clk</obj_property>
       <obj_property name="ObjectShortName">i_Clk</obj_property>
@@ -3960,18 +3960,6 @@
          <obj_property name="Radix">HEXRADIX</obj_property>
       </wvobject>
    </wvobject>
-   <wvobject fp_name="/SOC_tb/SOC0/FLASH0/i_MEM_SlaveSel" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">i_MEM_SlaveSel</obj_property>
-      <obj_property name="ObjectShortName">i_MEM_SlaveSel</obj_property>
-      <obj_property name="UseCustomSignalColor">true</obj_property>
-      <obj_property name="CustomSignalColor">#800080</obj_property>
-   </wvobject>
-   <wvobject fp_name="/SOC_tb/SOC0/FLASH0/i_CNTRL_SlaveSel" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">i_CNTRL_SlaveSel</obj_property>
-      <obj_property name="ObjectShortName">i_CNTRL_SlaveSel</obj_property>
-      <obj_property name="UseCustomSignalColor">true</obj_property>
-      <obj_property name="CustomSignalColor">#800080</obj_property>
-   </wvobject>
    <wvobject fp_name="/SOC_tb/SOC0/FLASH0/r_FLASH_CMDEn" type="logic" db_ref_id="1">
       <obj_property name="ElementShortName">r_FLASH_CMDEn</obj_property>
       <obj_property name="ObjectShortName">r_FLASH_CMDEn</obj_property>
@@ -4016,13 +4004,6 @@
       <obj_property name="UseCustomSignalColor">true</obj_property>
       <obj_property name="CustomSignalColor">#800080</obj_property>
    </wvobject>
-   <wvobject fp_name="/SOC_tb/SOC0/UART0/r_Reg_ClksPerBit" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">r_Reg_ClksPerBit[15:0]</obj_property>
-      <obj_property name="ObjectShortName">r_Reg_ClksPerBit[15:0]</obj_property>
-      <obj_property name="UseCustomSignalColor">true</obj_property>
-      <obj_property name="CustomSignalColor">#ffa500</obj_property>
-      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
-   </wvobject>
    <wvobject fp_name="/SOC_tb/SOC0/UART0/TX/i_Data" type="array" db_ref_id="1">
       <obj_property name="ElementShortName">i_Data[7:0]</obj_property>
       <obj_property name="ObjectShortName">i_Data[7:0]</obj_property>
@@ -4030,61 +4011,49 @@
       <obj_property name="CustomSignalColor">#ffa500</obj_property>
       <obj_property name="Radix">ASCIIRADIX</obj_property>
    </wvobject>
-   <wvobject fp_name="/SOC_tb/SOC0/UART0/w_UartTX_Done" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">w_UartTX_Done</obj_property>
-      <obj_property name="ObjectShortName">w_UartTX_Done</obj_property>
+   <wvobject fp_name="/SOC_tb/SOC0/UART0/RX/o_RxDataValid" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">o_RxDataValid</obj_property>
+      <obj_property name="ObjectShortName">o_RxDataValid</obj_property>
       <obj_property name="UseCustomSignalColor">true</obj_property>
-      <obj_property name="CustomSignalColor">#ffa500</obj_property>
+      <obj_property name="CustomSignalColor">#00ffff</obj_property>
    </wvobject>
-   <wvobject fp_name="/SOC_tb/SOC0/UART0/TxFIFO/i_WrEn" type="logic" db_ref_id="1">
+   <wvobject fp_name="/SOC_tb/SOC0/UART0/RX/o_RxData" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">o_RxData[7:0]</obj_property>
+      <obj_property name="ObjectShortName">o_RxData[7:0]</obj_property>
+      <obj_property name="Radix">ASCIIRADIX</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#00ffff</obj_property>
+   </wvobject>
+   <wvobject fp_name="/SOC_tb/SOC0/UART0/RxFIFO/i_WrEn" type="logic" db_ref_id="1">
       <obj_property name="ElementShortName">i_WrEn</obj_property>
       <obj_property name="ObjectShortName">i_WrEn</obj_property>
       <obj_property name="UseCustomSignalColor">true</obj_property>
       <obj_property name="CustomSignalColor">#00ffff</obj_property>
    </wvobject>
-   <wvobject fp_name="/SOC_tb/SOC0/UART0/TxFIFO/i_WrData" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">i_WrData[7:0]</obj_property>
-      <obj_property name="ObjectShortName">i_WrData[7:0]</obj_property>
+   <wvobject fp_name="/SOC_tb/SOC0/UART0/w_RxFifo_Empty" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">w_RxFifo_Empty</obj_property>
+      <obj_property name="ObjectShortName">w_RxFifo_Empty</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#00ffff</obj_property>
+   </wvobject>
+   <wvobject fp_name="/SOC_tb/SOC0/UART0/r_ReqNewRxData" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">r_ReqNewRxData</obj_property>
+      <obj_property name="ObjectShortName">r_ReqNewRxData</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#00ffff</obj_property>
+   </wvobject>
+   <wvobject fp_name="/SOC_tb/SOC0/UART0/r_WaitReadNewRxData" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">r_WaitReadNewRxData</obj_property>
+      <obj_property name="ObjectShortName">r_WaitReadNewRxData</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#00ffff</obj_property>
+   </wvobject>
+   <wvobject fp_name="/SOC_tb/SOC0/UART0/w_RxFifo_RdData" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">w_RxFifo_RdData[7:0]</obj_property>
+      <obj_property name="ObjectShortName">w_RxFifo_RdData[7:0]</obj_property>
       <obj_property name="UseCustomSignalColor">true</obj_property>
       <obj_property name="CustomSignalColor">#00ffff</obj_property>
       <obj_property name="Radix">ASCIIRADIX</obj_property>
-   </wvobject>
-   <wvobject fp_name="/SOC_tb/SOC0/UART0/TxFIFO/i_RdEn" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">i_RdEn</obj_property>
-      <obj_property name="ObjectShortName">i_RdEn</obj_property>
-      <obj_property name="UseCustomSignalColor">true</obj_property>
-      <obj_property name="CustomSignalColor">#00ffff</obj_property>
-   </wvobject>
-   <wvobject fp_name="/SOC_tb/SOC0/UART0/TxFIFO/o_Full" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">o_Full</obj_property>
-      <obj_property name="ObjectShortName">o_Full</obj_property>
-      <obj_property name="UseCustomSignalColor">true</obj_property>
-      <obj_property name="CustomSignalColor">#00ffff</obj_property>
-   </wvobject>
-   <wvobject fp_name="/SOC_tb/SOC0/UART0/TxFIFO/o_Empty" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">o_Empty</obj_property>
-      <obj_property name="ObjectShortName">o_Empty</obj_property>
-      <obj_property name="UseCustomSignalColor">true</obj_property>
-      <obj_property name="CustomSignalColor">#00ffff</obj_property>
-   </wvobject>
-   <wvobject fp_name="/SOC_tb/SOC0/UART0/TxFIFO/r_Count" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">r_Count[4:0]</obj_property>
-      <obj_property name="ObjectShortName">r_Count[4:0]</obj_property>
-      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
-      <obj_property name="UseCustomSignalColor">true</obj_property>
-      <obj_property name="CustomSignalColor">#00ffff</obj_property>
-   </wvobject>
-   <wvobject fp_name="/SOC_tb/SOC0/UART0/TxFIFO/o_OverFlow" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">o_OverFlow</obj_property>
-      <obj_property name="ObjectShortName">o_OverFlow</obj_property>
-      <obj_property name="UseCustomSignalColor">true</obj_property>
-      <obj_property name="CustomSignalColor">#00ffff</obj_property>
-   </wvobject>
-   <wvobject fp_name="/SOC_tb/SOC0/UART0/TxFIFO/o_UnderFlow" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">o_UnderFlow</obj_property>
-      <obj_property name="ObjectShortName">o_UnderFlow</obj_property>
-      <obj_property name="UseCustomSignalColor">true</obj_property>
-      <obj_property name="CustomSignalColor">#00ffff</obj_property>
    </wvobject>
    <wvobject fp_name="/SOC_tb/SOC0/Counter0/r_OverFlow" type="logic" db_ref_id="1">
       <obj_property name="ElementShortName">r_OverFlow</obj_property>
