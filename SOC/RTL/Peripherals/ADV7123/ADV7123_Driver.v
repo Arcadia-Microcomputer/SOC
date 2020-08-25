@@ -46,7 +46,7 @@ module ADV7123_Driver#(
     //Deal with driving the clock output for the ADV7123 chip
     ODDR2 #(
         .DDR_ALIGNMENT("NONE"),
-        .INIT(1'b0),
+        .INIT(1'b1),
         .SRTYPE("SYNC")
     ) ODDR2_ClkOut (
         .Q(o_Pixel_Clk),

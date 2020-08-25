@@ -35,7 +35,7 @@ module CPU #(
     reg [31:0]r_PC_D = 0;
 
     //Decoder Signals
-    parameter p_CONTROL_D_SIZE = 21;
+    localparam p_CONTROL_D_SIZE = 21;
     wire [p_CONTROL_D_SIZE-1:0]w_Control_D;
     wire w_RS1Valid_D = w_Control_D[0];
     wire w_RS2Valid_D = w_Control_D[1];
@@ -55,7 +55,7 @@ module CPU #(
     wire [31:0]w_RS2For_D;
 
     //ID_IE Signals
-    parameter p_CONTROL_E_SIZE = 19;
+    localparam p_CONTROL_E_SIZE = 19;
     reg [p_CONTROL_E_SIZE-1:0]r_Control_E = 0;
     assign o_DBus_Req_E = r_Control_E[0];   
     wire w_LoadUpperOp_E = r_Control_E[1];
@@ -93,7 +93,7 @@ module CPU #(
     wire [31:0]w_PCPlus4_E;
 
     //IE_MEM Signals
-    parameter p_CONTROL_M_SIZE = 11;
+    localparam p_CONTROL_M_SIZE = 11;
     reg [p_CONTROL_M_SIZE-1:0]r_Control_M = 0;
     wire w_IsBranch_M = r_Control_M[0];
     wire w_IsJump_M = r_Control_M[1];
@@ -127,7 +127,7 @@ module CPU #(
     wire [31:0]w_RS2For_M;
 
     //MEM_WB Signals
-    parameter p_CONTROL_W_SIZE = 4;
+    localparam p_CONTROL_W_SIZE = 4;
     reg [p_CONTROL_W_SIZE-1:0]r_Control_W = 0;
     wire w_DBusRe_W = r_Control_W[0];
     wire [1:0]w_WBSrc_W = r_Control_W[2:1];

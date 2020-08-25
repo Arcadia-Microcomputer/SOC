@@ -37,4 +37,5 @@ module SOC_tb();
         .WPn(w_Flash_IO[2]),
         .HOLDn(w_Flash_IO[3])
     );
+
 endmodule

@@ -17,12 +17,19 @@ module SOC(
     output o_UserFlash_nCS,
     inout [3:0]io_UserFlash_IO,
 
-    //Usb to Uart Converter
+    //UART0
     output UART0_TX,
     input UART0_RX,
 
+    //GPIO0
     output [2:0]o_7Seg_En,
-    output [6:0]o_7Seg_Led
+    output [6:0]o_7Seg_Led,
+
+    //I2S0
+    output o_I2S_SDIN,
+    output o_I2S_SCLK,
+    output o_I2S_LCLK,
+    output o_I2S_MCLK
     );
     
     //--1080p resolution--//
@@ -196,8 +203,8 @@ module SOC(
     parameter I2S0_SlaveAddr = {ADDR_VSMALL_PERIPH, ADDR_VSMALL_PERIPH_I2S0};
     //DBus Port
     wire w_DBUS_I2S0_Sel = (w_DBus_VSMALL_PERIPH_SlaveSelAddr == I2S0_SlaveAddr)? 1: 0;
-    wire [31:0]w_DBUS_I2S0_ReadData = 0;
-    wire w_DBUS_I2S0_WaitRequest = 0;
+    wire [31:0]w_DBUS_I2S0_ReadData;
+    wire w_DBUS_I2S0_WaitRequest;
 
     //-COUNTER0-//
     parameter COUNTER0_SlaveAddr = {ADDR_VSMALL_PERIPH, ADDR_VSMALL_PERIPH_COUNTER0};
@@ -227,6 +234,7 @@ module SOC(
     //--PLL_M Signals--//
     wire w_SysClk;
     wire w_VidClk;
+    wire w_AudioClk;
 
     //--CPU DBUS Arbitor--//
     wire w_CPU0_DBus_Req;
@@ -243,7 +251,8 @@ module SOC(
     PLL_M PLL_M_0(
         .i_Clk100M(i_OscClk_100Mhz),
         .o_SysClk75M(w_SysClk),
-        .o_VidClk25M(w_VidClk)
+        .o_VidClk25M(w_VidClk),
+        .o_I2SClk12_88M(w_AudioClk)
     );
 
     CPU #(
@@ -398,6 +407,30 @@ module SOC(
         .i_UART_RX(UART0_RX)
     );
     
+    I2SBusInterface#(
+        .ADDR_SEL_BITS(ADDR_VSMALL_PERIPH_SLAVE_SEL_BITS)
+    )I2S0(
+        .i_Clk(w_SysClk),
+
+        //DBus Slave
+        .i_SlaveSel(w_DBUS_I2S0_Sel),
+        .i_RegAddr(w_DBus_VSMALL_PERIPH_RegSelAddr),
+
+        .i_AV_ByteEn(w_DBus_ByteEn),
+        .i_AV_Read(w_DBus_Read),
+        .i_AV_Write(w_DBus_Write),
+        .o_AV_ReadData(w_DBUS_I2S0_ReadData),
+        .i_AV_WriteData(w_DBus_WriteData),
+        .o_AV_WaitRequest(w_DBUS_I2S0_WaitRequest),
+
+        //I2S0 Output
+        .i_Audio_Clk(w_AudioClk),
+        .o_I2S0_SDIN(o_I2S_SDIN),
+        .o_I2S0_SCLK(o_I2S_SCLK),
+        .o_I2S0_LRCK(o_I2S_LCLK),
+        .o_I2S0_MCLK(o_I2S_MCLK)
+    );
+
     Counter #(
         .ADDR_SEL_BITS(ADDR_VSMALL_PERIPH_SLAVE_SEL_BITS)
     )Counter0(
@@ -417,7 +450,7 @@ module SOC(
 
     GPIOBusInterface #(
         .ADDR_SEL_BITS(ADDR_VSMALL_PERIPH_SLAVE_SEL_BITS)
-    ) GPIOBusInterface0(
+    )GPIO0(
         .i_Clk(w_SysClk),
 
         //DBus Slave

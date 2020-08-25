@@ -28,31 +28,32 @@ module FlashControler(
     end
 
     //Command interface commands
-    parameter COMMAND_WRITE_ENABLE      = 0;
-    parameter COMMAND_SECTOR_ERASE_4KB  = 1;
-    parameter COMMAND_BLOCK_ERASE_64KB  = 2;
-    parameter COMMAND_CHIP_ERASE        = 3;
-    parameter COMMAND_PROGRAM_PAGE      = 4;
-    parameter COMMAND_READ              = 5;
-    parameter COMMAND_READ_SR           = 6;
-    parameter COMMAND_WRITE_SR          = 7;
+    parameter COMMAND_WRITE_ENABLE          = 0;
+    parameter COMMAND_VOL_SR_WRITE_ENABLE   = 1;
+    parameter COMMAND_SECTOR_ERASE_4KB      = 2;
+    parameter COMMAND_BLOCK_ERASE_64KB      = 3;
+    parameter COMMAND_CHIP_ERASE            = 4;
+    parameter COMMAND_PROGRAM_PAGE          = 5;
+    parameter COMMAND_READ                  = 6;
+    parameter COMMAND_READ_SR               = 7;
+    parameter COMMAND_WRITE_SR              = 8;
 
     //Flash commands
-    parameter FLASH_WRITE_ENABLE          = 8'h06;
-    parameter FLASH_VOLATILE_WRITE_ENABLE = 8'h50;
-    parameter FLASH_WRITE_DISABLE         = 8'h04;
-    parameter FLASH_READ_DATA             = 8'h03;
-    parameter FLASH_PAGE_PROGRAM          = 8'h02;
-    parameter FLASH_SECTOR_ERASE_4KB      = 8'h20;
-    parameter FLASH_BLOCK_ERASE_32KB      = 8'h52;
-    parameter FLASH_BLOCK_ERASE_64KB      = 8'hD8;
-    parameter FLASH_CHIP_ERASE            = 8'hC7;
-    parameter FLASH_READ_STATUS_REG_1     = 8'h05;
-    parameter FLASH_WRITE_STATUS_REG_1    = 8'h01;
-    parameter FLASH_READ_STATUS_REG_2     = 8'h35;
-    parameter FLASH_WRITE_STATUS_REG_2    = 8'h31;
-    parameter FLASH_READ_STATUS_REG_3     = 8'h15;
-    parameter FLASH_WRITE_STATUS_REG_3    = 8'h11;
+    parameter FLASH_WRITE_ENABLE             = 8'h06;
+    parameter FLASH_VOLATILE_SR_WRITE_ENABLE = 8'h50;
+    parameter FLASH_WRITE_DISABLE            = 8'h04;
+    parameter FLASH_READ_DATA                = 8'h03;
+    parameter FLASH_PAGE_PROGRAM             = 8'h02;
+    parameter FLASH_SECTOR_ERASE_4KB         = 8'h20;
+    parameter FLASH_BLOCK_ERASE_32KB         = 8'h52;
+    parameter FLASH_BLOCK_ERASE_64KB         = 8'hD8;
+    parameter FLASH_CHIP_ERASE               = 8'hC7;
+    parameter FLASH_READ_STATUS_REG_1        = 8'h05;
+    parameter FLASH_WRITE_STATUS_REG_1       = 8'h01;
+    parameter FLASH_READ_STATUS_REG_2        = 8'h35;
+    parameter FLASH_WRITE_STATUS_REG_2       = 8'h31;
+    parameter FLASH_READ_STATUS_REG_3        = 8'h15;
+    parameter FLASH_WRITE_STATUS_REG_3      = 8'h11;
 
     reg [3:0]r_Flash_IO_SelectOutput = 0;
     reg [3:0]r_Flash_O = 0;
@@ -114,6 +115,13 @@ module FlashControler(
                     case (i_CMD)
                         COMMAND_WRITE_ENABLE:begin
                             r_TmpByte <= FLASH_WRITE_ENABLE;
+
+                            //Set the nWP Pin to 1
+                            r_Flash_IO_SelectOutput[2] <= 1;
+                            r_Flash_O[2] <= 1;
+                        end
+                        COMMAND_VOL_SR_WRITE_ENABLE:begin
+                            r_TmpByte <= FLASH_VOLATILE_SR_WRITE_ENABLE;
 
                             //Set the nWP Pin to 1
                             r_Flash_IO_SelectOutput[2] <= 1;

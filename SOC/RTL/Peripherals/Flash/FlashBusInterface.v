@@ -38,14 +38,15 @@ module FlashBusInterface #(
     parameter p_REG_ADDR_DATA  = 2;
 
     //Command interface commands
-    parameter COMMAND_WRITE_ENABLE      = 0;
-    parameter COMMAND_SECTOR_ERASE_4KB  = 1;
-    parameter COMMAND_BLOCK_ERASE_64KB  = 2;
-    parameter COMMAND_CHIP_ERASE        = 3;
-    parameter COMMAND_PROGRAM_PAGE      = 4;
-    parameter COMMAND_READ              = 5;
-    parameter COMMAND_READ_SR           = 6;
-    parameter COMMAND_WRITE_SR          = 7;
+    parameter COMMAND_WRITE_ENABLE          = 0;
+    parameter COMMAND_VOL_SR_WRITE_ENABLE   = 1;
+    parameter COMMAND_SECTOR_ERASE_4KB      = 2;
+    parameter COMMAND_BLOCK_ERASE_64KB      = 3;
+    parameter COMMAND_CHIP_ERASE            = 4;
+    parameter COMMAND_PROGRAM_PAGE          = 5;
+    parameter COMMAND_READ                  = 6;
+    parameter COMMAND_READ_SR               = 7;
+    parameter COMMAND_WRITE_SR              = 8;
 
     //Flash Controller
 	reg r_FLASH_CMDEn = 0;
@@ -233,7 +234,11 @@ module FlashBusInterface #(
         .io_Flash_IO(io_Flash_IO)
     );
 
-    FIFO WrFIFO (
+    FIFO #(
+        .FWFT("FALSE"),
+        .WIDTH(8),
+        .DEPTH(128)
+    )WrFIFO (
         .i_Clk(i_Clk),
 
         .i_WrEn(r_WRFifo_WrEn),

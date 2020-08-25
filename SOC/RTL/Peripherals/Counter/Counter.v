@@ -59,13 +59,13 @@ module Counter #(
             if(i_AV_Write)begin
                 case (i_RegAddr)
                     p_REG_ADDR_CTRL:begin
-                        {r_OverFlowClr, r_Enable} <= i_AV_ByteEn[0]? i_AV_WriteData[1:0]: r_OverFlowClr;
+                        if(i_AV_ByteEn[0]) {r_OverFlowClr, r_Enable} <= i_AV_WriteData[1:0];
                     end
                     p_REG_ADDR_TRIG:begin
-                        r_Trigger[7:0]   <= i_AV_ByteEn[0]? i_AV_WriteData[7:0]  : r_Trigger[7:0];
-                        r_Trigger[15:8]  <= i_AV_ByteEn[1]? i_AV_WriteData[15:8] : r_Trigger[15:8];
-                        r_Trigger[23:16] <= i_AV_ByteEn[2]? i_AV_WriteData[23:16]: r_Trigger[23:16];
-                        r_Trigger[31:24] <= i_AV_ByteEn[3]? i_AV_WriteData[31:24]: r_Trigger[31:24];
+                        if(i_AV_ByteEn[0]) r_Trigger[7:0]   <= i_AV_WriteData[7:0];
+                        if(i_AV_ByteEn[1]) r_Trigger[15:8]  <= i_AV_WriteData[15:8];
+                        if(i_AV_ByteEn[2]) r_Trigger[23:16] <= i_AV_WriteData[23:16];
+                        if(i_AV_ByteEn[3]) r_Trigger[31:24] <= i_AV_WriteData[31:24];
                     end
                 endcase
             end
