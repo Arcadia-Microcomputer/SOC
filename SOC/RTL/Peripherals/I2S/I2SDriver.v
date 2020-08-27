@@ -15,7 +15,9 @@ module I2SDriver (
     localparam LRCK_DIV = 256;
 
     initial begin
+        o_ReqNextData = 0;
         o_SDIN = 0;
+        o_LRCK = 0;
     end
 
     wire w_SCLK;

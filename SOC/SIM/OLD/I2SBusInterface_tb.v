@@ -22,8 +22,8 @@ module I2SBusInterface_tb();
     wire w_AV_WaitRequest;
 
     //The various I2S pheriph register addresses
-    parameter p_REG_ADDR_DATA  = 0;
-    parameter p_REG_ADDR_CNTRL = 1;
+    parameter p_REG_ADDR_DATA  = 1;
+    parameter p_REG_ADDR_CNTRL = 0;
 
     //Generate the main clock
     initial begin
