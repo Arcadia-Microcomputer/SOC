@@ -10,7 +10,7 @@
          </top_modules>
       </db_ref>
    </db_ref_list>
-   <WVObjectSize size="14" />
+   <WVObjectSize size="16" />
    <wvobject fp_name="/FIFO_tb/r_Clk" type="logic" db_ref_id="1">
       <obj_property name="ElementShortName">r_Clk</obj_property>
       <obj_property name="ObjectShortName">r_Clk</obj_property>
@@ -65,65 +65,45 @@
       <obj_property name="UseCustomSignalColor">true</obj_property>
       <obj_property name="CustomSignalColor">#800080</obj_property>
    </wvobject>
+   <wvobject fp_name="/FIFO_tb/w_ProgFull" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">w_ProgFull</obj_property>
+      <obj_property name="ObjectShortName">w_ProgFull</obj_property>
+   </wvobject>
+   <wvobject fp_name="/FIFO_tb/w_ProgEmpty" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">w_ProgEmpty</obj_property>
+      <obj_property name="ObjectShortName">w_ProgEmpty</obj_property>
+   </wvobject>
    <wvobject fp_name="/FIFO_tb/DUT/r_Count" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">r_Count[2:0]</obj_property>
-      <obj_property name="ObjectShortName">r_Count[2:0]</obj_property>
+      <obj_property name="ElementShortName">r_Count[3:0]</obj_property>
+      <obj_property name="ObjectShortName">r_Count[3:0]</obj_property>
       <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
       <obj_property name="UseCustomSignalColor">true</obj_property>
       <obj_property name="CustomSignalColor">#ffa500</obj_property>
    </wvobject>
    <wvobject fp_name="/FIFO_tb/DUT/r_RAM" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">r_RAM[3:0,7:0]</obj_property>
-      <obj_property name="ObjectShortName">r_RAM[3:0,7:0]</obj_property>
+      <obj_property name="ElementShortName">r_RAM[7:0,7:0]</obj_property>
+      <obj_property name="ObjectShortName">r_RAM[7:0,7:0]</obj_property>
       <obj_property name="Radix">HEXRADIX</obj_property>
       <obj_property name="UseCustomSignalColor">true</obj_property>
       <obj_property name="CustomSignalColor">#ffa500</obj_property>
-      <wvobject fp_name="/FIFO_tb/DUT/r_RAM[3]" type="array" db_ref_id="1">
-         <obj_property name="ElementShortName">[3,7:0]</obj_property>
-         <obj_property name="ObjectShortName">r_RAM[3,7:0]</obj_property>
-         <obj_property name="Radix">HEXRADIX</obj_property>
-         <obj_property name="UseCustomSignalColor">true</obj_property>
-         <obj_property name="CustomSignalColor">#ffa500</obj_property>
-      </wvobject>
-      <wvobject fp_name="/FIFO_tb/DUT/r_RAM[2]" type="array" db_ref_id="1">
-         <obj_property name="ElementShortName">[2,7:0]</obj_property>
-         <obj_property name="ObjectShortName">r_RAM[2,7:0]</obj_property>
-         <obj_property name="Radix">HEXRADIX</obj_property>
-         <obj_property name="UseCustomSignalColor">true</obj_property>
-         <obj_property name="CustomSignalColor">#ffa500</obj_property>
-      </wvobject>
-      <wvobject fp_name="/FIFO_tb/DUT/r_RAM[1]" type="array" db_ref_id="1">
-         <obj_property name="ElementShortName">[1,7:0]</obj_property>
-         <obj_property name="ObjectShortName">r_RAM[1,7:0]</obj_property>
-         <obj_property name="Radix">HEXRADIX</obj_property>
-         <obj_property name="UseCustomSignalColor">true</obj_property>
-         <obj_property name="CustomSignalColor">#ffa500</obj_property>
-      </wvobject>
-      <wvobject fp_name="/FIFO_tb/DUT/r_RAM[0]" type="array" db_ref_id="1">
-         <obj_property name="ElementShortName">[0,7:0]</obj_property>
-         <obj_property name="ObjectShortName">r_RAM[0,7:0]</obj_property>
-         <obj_property name="Radix">HEXRADIX</obj_property>
-         <obj_property name="UseCustomSignalColor">true</obj_property>
-         <obj_property name="CustomSignalColor">#ffa500</obj_property>
-      </wvobject>
    </wvobject>
    <wvobject fp_name="/FIFO_tb/DUT/r_WrPointer" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">r_WrPointer[1:0]</obj_property>
-      <obj_property name="ObjectShortName">r_WrPointer[1:0]</obj_property>
+      <obj_property name="ElementShortName">r_WrPointer[2:0]</obj_property>
+      <obj_property name="ObjectShortName">r_WrPointer[2:0]</obj_property>
       <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
       <obj_property name="UseCustomSignalColor">true</obj_property>
       <obj_property name="CustomSignalColor">#ffa500</obj_property>
    </wvobject>
    <wvobject fp_name="/FIFO_tb/DUT/r_RdPointer" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">r_RdPointer[1:0]</obj_property>
-      <obj_property name="ObjectShortName">r_RdPointer[1:0]</obj_property>
+      <obj_property name="ElementShortName">r_RdPointer[2:0]</obj_property>
+      <obj_property name="ObjectShortName">r_RdPointer[2:0]</obj_property>
       <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
       <obj_property name="UseCustomSignalColor">true</obj_property>
       <obj_property name="CustomSignalColor">#ffa500</obj_property>
    </wvobject>
    <wvobject fp_name="/FIFO_tb/DUT/r_Count" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">r_Count[2:0]</obj_property>
-      <obj_property name="ObjectShortName">r_Count[2:0]</obj_property>
+      <obj_property name="ElementShortName">r_Count[3:0]</obj_property>
+      <obj_property name="ObjectShortName">r_Count[3:0]</obj_property>
       <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
       <obj_property name="UseCustomSignalColor">true</obj_property>
       <obj_property name="CustomSignalColor">#ffa500</obj_property>

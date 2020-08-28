@@ -19,7 +19,9 @@ module SOC(
 
     //UART0
     output UART0_TX,
+    input UART0_nCTS,
     input UART0_RX,
+    output UART0_nRTS,
 
     //GPIO0
     output [2:0]o_7Seg_En,
@@ -404,7 +406,9 @@ module SOC(
         .o_AV_WaitRequest(w_DBUS_UART0_WaitRequest),
 
         .o_UART_TX(UART0_TX),
-        .i_UART_RX(UART0_RX)
+        .i_UART_nCTS(UART0_nCTS),
+        .i_UART_RX(UART0_RX),
+        .o_UART_nRTS(UART0_nRTS)
     );
     
     I2SBusInterface#(

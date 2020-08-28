@@ -18,7 +18,9 @@ module UartBusInterface #(
 
     //UART
     output o_UART_TX,
-    input i_UART_RX
+    input i_UART_nCTS,
+    input i_UART_RX,
+    output o_UART_nRTS
     );
 
     //DBus Signals
@@ -49,14 +51,18 @@ module UartBusInterface #(
     wire w_UartTX_Idle;
     reg r_UartTX_En = 0;
 
-    //Rx FIFO Signals
-    wire w_RxFifo_Empty;
+    //Rx FIFO Signals    
     reg r_RxFifo_RdEn = 0;
     wire [7:0]w_RxFifo_RdData;
+    wire w_RxFifo_Full;
+    wire w_RxFifo_Empty;
+    wire w_RxFifo_ProgFull;
 
     //UartRx Signals
     wire w_RxDataValid;
     wire [7:0]w_RxData;
+
+    assign o_UART_nRTS = r_AReg_FlowControlEn? w_RxFifo_ProgFull: 1'b0;
 
     always @(posedge i_Clk)begin
         o_AV_ReadData <= 0;
@@ -136,15 +142,18 @@ module UartBusInterface #(
         .i_Clk(i_Clk),
         
         .i_ClksPerBit(r_AReg_ClksPerBit),
+        .i_FC_En(r_AReg_FlowControlEn),
         .i_TxEn(r_UartTX_En),
         .i_Data(w_TxFifo_RdData),
         .o_TxIdle(w_UartTX_Idle),
 
-        .o_UART_TX(o_UART_TX)
+        .o_UART_TX(o_UART_TX),
+        .i_UART_nCTS(i_UART_nCTS)
     );
 
     FIFO #(
         .FWFT("TRUE"),
+        .PROG_FULL_TRESHOLD(14),
         .WIDTH(8),
         .DEPTH(16)
     )RxFIFO(
@@ -156,7 +165,9 @@ module UartBusInterface #(
         .i_RdEn(r_RxFifo_RdEn),
         .o_RdData(w_RxFifo_RdData),
 
-        .o_Empty(w_RxFifo_Empty)
+        .o_Full(w_RxFifo_Full),
+        .o_Empty(w_RxFifo_Empty),
+        .o_ProgFull(w_RxFifo_ProgFull)
     );
 
     UartRx RX(

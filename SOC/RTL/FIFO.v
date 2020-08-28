@@ -2,6 +2,8 @@
 
 module FIFO#(
         parameter FWFT = "FALSE",
+        parameter PROG_FULL_TRESHOLD = 0,
+        parameter PROG_EMPTY_TRESHOLD = 0,
         parameter WIDTH = 8,
         parameter DEPTH = 2
     )(
@@ -15,6 +17,8 @@ module FIFO#(
 
         output o_Full,
         output o_Empty,
+        output o_ProgFull,
+        output o_ProgEmpty,
         output reg o_OverFlow,
         output reg o_UnderFlow
     );
@@ -29,6 +33,9 @@ module FIFO#(
 
     assign o_Full = (r_Count == DEPTH)? 1 : 0;
     assign o_Empty = (r_Count == 0)? 1 : 0;
+
+    assign o_ProgFull = (r_Count >= PROG_FULL_TRESHOLD)? 1: 0;
+    assign o_ProgEmpty = (r_Count <= PROG_EMPTY_TRESHOLD)? 1: 0;
 
     integer i;
     initial begin

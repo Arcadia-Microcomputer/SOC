@@ -237,7 +237,7 @@ module FlashBusInterface #(
     FIFO #(
         .FWFT("FALSE"),
         .WIDTH(8),
-        .DEPTH(128)
+        .DEPTH(64)
     )WrFIFO (
         .i_Clk(i_Clk),
 
