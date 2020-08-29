@@ -36,7 +36,7 @@ module I2SBusInterface #(
     parameter p_REG_ADDR_DATAR = 2;
 
     //I2S FIFOs
-    reg [47:0]r_Fifo_DataIn = 0;
+    reg [47:0]r_AReg_Fifo_DataIn = 0;
     reg r_Fifo_WrEn = 0;
     wire [47:0]w_Fifo_DataOut;
     reg r_Fifo_RdEn = 0;
@@ -63,17 +63,15 @@ module I2SBusInterface #(
                     p_REG_ADDR_CNTRL:begin
                     end
                     p_REG_ADDR_DATAL:begin
-                        if(i_AV_ByteEn[0]) r_Fifo_DataIn[7:0]   <= i_AV_WriteData[7:0];
-                        if(i_AV_ByteEn[1]) r_Fifo_DataIn[15:8]  <= i_AV_WriteData[15:8];
-                        if(i_AV_ByteEn[2])begin
-                            r_Fifo_DataIn[23:16] <= i_AV_WriteData[23:16];
-                        end 
+                        if(i_AV_ByteEn[0]) r_AReg_Fifo_DataIn[7:0]   <= i_AV_WriteData[7:0];
+                        if(i_AV_ByteEn[1]) r_AReg_Fifo_DataIn[15:8]  <= i_AV_WriteData[15:8];
+                        if(i_AV_ByteEn[2]) r_AReg_Fifo_DataIn[23:16] <= i_AV_WriteData[23:16];
                     end
                     p_REG_ADDR_DATAR:begin
-                        if(i_AV_ByteEn[0]) r_Fifo_DataIn[31:24]   <= i_AV_WriteData[7:0];
-                        if(i_AV_ByteEn[1]) r_Fifo_DataIn[39:32]  <= i_AV_WriteData[15:8];
+                        if(i_AV_ByteEn[0]) r_AReg_Fifo_DataIn[31:24] <= i_AV_WriteData[7:0];
+                        if(i_AV_ByteEn[1]) r_AReg_Fifo_DataIn[39:32] <= i_AV_WriteData[15:8];
                         if(i_AV_ByteEn[2])begin
-                            r_Fifo_DataIn[47:40] <= i_AV_WriteData[23:16];
+                            r_AReg_Fifo_DataIn[47:40] <= i_AV_WriteData[23:16];
                             r_Fifo_WrEn <= 1;
                         end 
                     end
@@ -87,10 +85,10 @@ module I2SBusInterface #(
                         o_AV_ReadData <= {31'b0, w_full};
                     end
                     p_REG_ADDR_DATAL:begin
-                        o_AV_ReadData <= {8'b0, r_Fifo_DataIn[23:0]};
+                        o_AV_ReadData <= {8'b0, r_AReg_Fifo_DataIn[23:0]};
                     end
                     p_REG_ADDR_DATAR:begin
-                        o_AV_ReadData <= {8'b0, r_Fifo_DataIn[47:24]};
+                        o_AV_ReadData <= {8'b0, r_AReg_Fifo_DataIn[47:24]};
                     end
                     default:begin
                         o_AV_ReadData <= 0;
@@ -119,7 +117,7 @@ module I2SBusInterface #(
         .wr_clk(i_Clk),
         .rd_clk(i_Audio_Clk),
 
-        .din(r_Fifo_DataIn),
+        .din(r_AReg_Fifo_DataIn),
         .wr_en(r_Fifo_WrEn),
 
         .rd_en(r_Fifo_RdEn),

@@ -77,8 +77,8 @@ module FlashBusInterface #(
     reg r_isMMReadTransaction = 0;
     
     //Addressable Registers
-    reg [23:0]r_Address = 0;
-    reg [3:0]r_CMD = 0;
+    reg [23:0]r_AReg_Address = 0;
+    reg [3:0]r_AReg_CMD = 0;
 
     reg r_isWriteTransaction = 0;
 
@@ -142,11 +142,11 @@ module FlashBusInterface #(
                 case (i_CNTRL_RegAddr)
                     p_REG_ADDR_CNTRL:begin
                         if(i_AV_ByteEn[0])begin
-                            r_CMD <= i_AV_WriteData[3:0];
+                            r_AReg_CMD <= i_AV_WriteData[3:0];
                         end
                         if(i_AV_ByteEn[1])begin
                             if(!w_FLASH_CMDBusy)begin
-                                r_FLASH_Addr <= r_Address;
+                                r_FLASH_Addr <= r_AReg_Address;
 
                                 if(i_AV_ByteEn[0])begin
                                     r_FLASH_CMD <= i_AV_WriteData[3:0];
@@ -155,8 +155,8 @@ module FlashBusInterface #(
                                         r_WRFifo_RdEn <= 1; 
                                     end
                                 end else begin
-                                    r_FLASH_CMD <= r_CMD;
-                                    if((r_CMD == COMMAND_PROGRAM_PAGE) && !w_WRFifo_Empty)begin
+                                    r_FLASH_CMD <= r_AReg_CMD;
+                                    if((r_AReg_CMD == COMMAND_PROGRAM_PAGE) && !w_WRFifo_Empty)begin
                                         r_isWriteTransaction <= 1;
                                         r_WRFifo_RdEn <= 1; 
                                     end
@@ -167,9 +167,9 @@ module FlashBusInterface #(
                         end
                     end
                     p_REG_ADDR_ADDR:begin
-                        r_Address[7:0]   <= i_AV_ByteEn[0]? i_AV_WriteData[7:0]  : r_FLASH_Addr[7:0];
-                        r_Address[15:8]  <= i_AV_ByteEn[1]? i_AV_WriteData[15:8] : r_FLASH_Addr[15:8];
-                        r_Address[23:16] <= i_AV_ByteEn[2]? i_AV_WriteData[23:16]: r_FLASH_Addr[23:16];
+                        if(i_AV_ByteEn[0]) r_AReg_Address[7:0]   <= i_AV_WriteData[7:0];
+                        if(i_AV_ByteEn[1]) r_AReg_Address[15:8]  <= i_AV_WriteData[15:8];
+                        if(i_AV_ByteEn[2]) r_AReg_Address[23:16] <= i_AV_WriteData[23:16];
                     end
                     p_REG_ADDR_DATA:begin
                         if(i_AV_ByteEn[0])begin
@@ -184,10 +184,10 @@ module FlashBusInterface #(
             if(i_AV_Read)begin
                 case (i_CNTRL_RegAddr)
                     p_REG_ADDR_CNTRL:begin
-                        o_AV_ReadData <= {20'b0, w_WRFifo_Empty, w_WRFifo_Full, w_FLASH_CMDBusy, r_FLASH_CMDEn, 4'b0, r_CMD};
+                        o_AV_ReadData <= {20'b0, w_WRFifo_Empty, w_WRFifo_Full, w_FLASH_CMDBusy, r_FLASH_CMDEn, 4'b0, r_AReg_CMD};
                     end
                     p_REG_ADDR_ADDR:begin
-                        o_AV_ReadData <= {8'b0, r_Address};
+                        o_AV_ReadData <= {8'b0, r_AReg_Address};
                     end
                     p_REG_ADDR_DATA:begin
                         o_AV_ReadData <= {24'b0, w_FLASH_ReadData};
