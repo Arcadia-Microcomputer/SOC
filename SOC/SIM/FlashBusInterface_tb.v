@@ -4,14 +4,15 @@ module FlashBusInterface_tb();
     reg r_Clk = 0;
     
     //Command interface commands
-    parameter COMMAND_WRITE_ENABLE      = 0;
-    parameter COMMAND_SECTOR_ERASE_4KB  = 1;
-    parameter COMMAND_BLOCK_ERASE_64KB  = 2;
-    parameter COMMAND_CHIP_ERASE        = 3;
-    parameter COMMAND_PROGRAM_PAGE      = 4;
-    parameter COMMAND_READ              = 5;
-    parameter COMMAND_READ_SR           = 6;
-    parameter COMMAND_WRITE_SR          = 7;
+    parameter COMMAND_WRITE_ENABLE          = 0;
+    parameter COMMAND_VOL_SR_WRITE_ENABLE   = 1;
+    parameter COMMAND_SECTOR_ERASE_4KB      = 2;
+    parameter COMMAND_BLOCK_ERASE_64KB      = 3;
+    parameter COMMAND_CHIP_ERASE            = 4;
+    parameter COMMAND_PROGRAM_PAGE          = 5;
+    parameter COMMAND_READ                  = 6;
+    parameter COMMAND_READ_SR               = 7;
+    parameter COMMAND_WRITE_SR              = 8;
 
     //Flash Signals
     wire w_Flash_nCS;
@@ -91,6 +92,7 @@ module FlashBusInterface_tb();
         r_AV_ByteEN <= 4'b1111;
         r_AV_Write <= 1;
         r_AV_WriteData[3:0] <= COMMAND_PROGRAM_PAGE;
+        r_AV_WriteData[22:16] <= 4;
         r_AV_WriteData[8] <= 1;
         r_CNTRL_RegAddr <= p_REG_ADDR_CNTRL;
         

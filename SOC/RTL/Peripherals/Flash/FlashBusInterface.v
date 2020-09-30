@@ -49,8 +49,6 @@ module FlashBusInterface #(
     parameter COMMAND_WRITE_SR              = 8;
 
     //Flash Controller
-	reg r_FLASH_CMDEn = 0;
-    reg [2:0]r_FLASH_CMD = 0;
     reg [23:0]r_FLASH_Addr = 0;
     wire [7:0]w_FLASH_ReadData;
     wire w_FLASH_ReqNextData;
@@ -65,21 +63,27 @@ module FlashBusInterface #(
     wire [7:0]w_WRFifo_RdData;
     wire w_WRFifo_Full;
     wire w_WRFifo_Empty;
-
+    
+    //Addressable Registers
+    reg [23:0]r_AReg_Addr = 0;
+    reg [3:0]r_AReg_CMD = 0;
+    reg [6:0]r_AReg_Count = 0;
+    reg r_AReg_CMDEn = 0;
+    
     //Memory Mapped Read FSM
     localparam FSM_READ_STATE_SIZE = 1;
     localparam FSM_READ_WAIT = 0,
                FSM_READ_RD = 1;
     reg [FSM_READ_STATE_SIZE-1:0] FSM_READ_state = 0;
 
-    reg [3:0]r_ReadByteCounter = 0;
-    reg [23:0]r_ReadData = 0;
-    reg r_isMMReadTransaction = 0;
-    
-    //Addressable Registers
-    reg [23:0]r_AReg_Address = 0;
-    reg [3:0]r_AReg_CMD = 0;
+    //Memory Mapped Read Registers
+    reg r_MM_isReadTransaction = 0;
+    reg [3:0]r_MM_ReadByteCounter = 0;
+    reg [23:0]r_MM_ReadData = 0;
+    reg [23:0]r_MM_Addr = 0;
+    reg [23:0]r_MM_CMDEn = 0;
 
+    //Write transaction registers
     reg r_isWriteTransaction = 0;
 
     always @(posedge i_Clk)begin
@@ -87,33 +91,34 @@ module FlashBusInterface #(
         o_AV_WaitRequest <= 0;
         r_WRFifo_WrEn <= 0;
         r_WRFifo_RdEn <= 0;
-        r_FLASH_CMDEn <= 0;
+        r_AReg_CMDEn <= 0;
+        r_MM_CMDEn <= 0;
 
-        if(r_isMMReadTransaction)begin
+        if(r_MM_isReadTransaction)begin
             o_AV_WaitRequest <= 1;
 
             case (FSM_READ_state)
                 FSM_READ_WAIT:begin
                     if(w_FLASH_NewDataAvailableNextClk)begin
-                        r_ReadByteCounter <= r_ReadByteCounter - 1;
+                        r_MM_ReadByteCounter <= r_MM_ReadByteCounter - 1;
                         FSM_READ_state <= FSM_READ_RD;
                     end
                 end
                 FSM_READ_RD:begin
-                    if(r_ReadByteCounter == 1)begin
+                    if(r_MM_ReadByteCounter == 1)begin
                         r_FLASH_AckReq <= 0;
                     end
 
-                    if(r_ReadByteCounter == 0)begin
-                        r_isMMReadTransaction <= 0;
-                        o_AV_ReadData[23:0] <= r_ReadData;
+                    if(r_MM_ReadByteCounter == 0)begin
+                        r_MM_isReadTransaction <= 0;
+                        o_AV_ReadData[23:0] <= r_MM_ReadData;
                         o_AV_WaitRequest <= 0;
                     end
 
-                    case (r_ReadByteCounter[1:0])
-                        3:r_ReadData[7:0] <= w_FLASH_ReadData;
-                        2:r_ReadData[15:8] <= w_FLASH_ReadData;
-                        1:r_ReadData[23:16] <= w_FLASH_ReadData;
+                    case (r_MM_ReadByteCounter[1:0])
+                        3:r_MM_ReadData[7:0] <= w_FLASH_ReadData;
+                        2:r_MM_ReadData[15:8] <= w_FLASH_ReadData;
+                        1:r_MM_ReadData[23:16] <= w_FLASH_ReadData;
                         0:o_AV_ReadData[31:24] <= w_FLASH_ReadData;
                     endcase
 
@@ -123,18 +128,15 @@ module FlashBusInterface #(
         end else if (i_MEM_SlaveSel) begin
             //Read transaction
             if(i_AV_Read)begin
-                r_isMMReadTransaction <= 1;
-                r_ReadByteCounter <= 4;
-                r_ReadData <= 0;
-                r_FLASH_Addr <= {i_MEM_RegAddr[21:0], 2'b0};
-                r_FLASH_CMD <= COMMAND_READ;
-                r_FLASH_CMDEn <= 1;
+                r_MM_isReadTransaction <= 1;
+                r_MM_ReadByteCounter <= 4;
+                r_MM_ReadData <= 0;
+                r_MM_Addr <= {i_MEM_RegAddr[21:0], 2'b0};
+                r_MM_CMDEn <= 1;
                 r_FLASH_AckReq <= 1;
                 o_AV_WaitRequest <= 1;
             end
         end
-
-        
 
         if (i_CNTRL_SlaveSel) begin
             //Write transaction
@@ -145,31 +147,33 @@ module FlashBusInterface #(
                             r_AReg_CMD <= i_AV_WriteData[3:0];
                         end
                         if(i_AV_ByteEn[1])begin
-                            if(!w_FLASH_CMDBusy)begin
-                                r_FLASH_Addr <= r_AReg_Address;
+                            r_AReg_CMDEn <= i_AV_WriteData[8];
+                            r_FLASH_Addr <= r_AReg_Addr;
 
-                                if(i_AV_ByteEn[0])begin
-                                    r_FLASH_CMD <= i_AV_WriteData[3:0];
-                                    if((i_AV_WriteData[3:0] == COMMAND_PROGRAM_PAGE) && !w_WRFifo_Empty)begin
-                                        r_isWriteTransaction <= 1;
-                                        r_WRFifo_RdEn <= 1; 
-                                    end
-                                end else begin
-                                    r_FLASH_CMD <= r_AReg_CMD;
-                                    if((r_AReg_CMD == COMMAND_PROGRAM_PAGE) && !w_WRFifo_Empty)begin
-                                        r_isWriteTransaction <= 1;
-                                        r_WRFifo_RdEn <= 1; 
-                                    end
+                            //Check to see if a write command needs to be issued
+                            if(i_AV_ByteEn[0])begin
+                                //Command is getting updated as well so use latest data
+                                if(i_AV_WriteData[8] && (i_AV_WriteData[3:0] == COMMAND_PROGRAM_PAGE))begin
+                                    r_isWriteTransaction <= 1;
+                                    r_WRFifo_RdEn <= 1; 
                                 end
-
-                                r_FLASH_CMDEn <= i_AV_WriteData[8];
+                            end else begin
+                                //Command isn't getting updated so use stored command
+                                if(i_AV_WriteData[8] && (r_AReg_CMD == COMMAND_PROGRAM_PAGE))begin
+                                    r_isWriteTransaction <= 1;
+                                    r_WRFifo_RdEn <= 1; 
+                                end
                             end
+                        end
+
+                        if(i_AV_ByteEn[2])begin
+                            r_AReg_Count <= i_AV_WriteData[22:16];
                         end
                     end
                     p_REG_ADDR_ADDR:begin
-                        if(i_AV_ByteEn[0]) r_AReg_Address[7:0]   <= i_AV_WriteData[7:0];
-                        if(i_AV_ByteEn[1]) r_AReg_Address[15:8]  <= i_AV_WriteData[15:8];
-                        if(i_AV_ByteEn[2]) r_AReg_Address[23:16] <= i_AV_WriteData[23:16];
+                        if(i_AV_ByteEn[0]) r_AReg_Addr[7:0]   <= i_AV_WriteData[7:0];
+                        if(i_AV_ByteEn[1]) r_AReg_Addr[15:8]  <= i_AV_WriteData[15:8];
+                        if(i_AV_ByteEn[2]) r_AReg_Addr[23:16] <= i_AV_WriteData[23:16];
                     end
                     p_REG_ADDR_DATA:begin
                         if(i_AV_ByteEn[0])begin
@@ -184,10 +188,10 @@ module FlashBusInterface #(
             if(i_AV_Read)begin
                 case (i_CNTRL_RegAddr)
                     p_REG_ADDR_CNTRL:begin
-                        o_AV_ReadData <= {20'b0, w_WRFifo_Empty, w_WRFifo_Full, w_FLASH_CMDBusy, r_FLASH_CMDEn, 4'b0, r_AReg_CMD};
+                        o_AV_ReadData <= {9'b0, r_AReg_Count, 4'b0, w_WRFifo_Empty, w_WRFifo_Full, w_FLASH_CMDBusy, r_AReg_CMDEn, 4'b0, r_AReg_CMD};
                     end
                     p_REG_ADDR_ADDR:begin
-                        o_AV_ReadData <= {8'b0, r_AReg_Address};
+                        o_AV_ReadData <= {8'b0, r_AReg_Addr};
                     end
                     p_REG_ADDR_DATA:begin
                         o_AV_ReadData <= {24'b0, w_FLASH_ReadData};
@@ -205,12 +209,13 @@ module FlashBusInterface #(
             //Check to see if the flash controler wants new data to write
             //Have 2 cycles to deal with the request 
             if(w_FLASH_ReqNextData)begin
-                if(!w_WRFifo_Empty)begin
-                    r_WRFifo_RdEn <= 1;
-                end else begin
-                    //If the write FIFO is empty, end the transaction
+                if((r_AReg_Count == 1) || w_WRFifo_Empty)begin
+                    //If the specified number of bytes are written, end transaction
                     r_isWriteTransaction <= 0;
                     r_FLASH_AckReq <= 0;
+                end else begin
+                    r_WRFifo_RdEn <= 1;
+                    r_AReg_Count <= r_AReg_Count - 1;
                 end
             end
         end
@@ -219,9 +224,10 @@ module FlashBusInterface #(
     FlashControler FlashControler0(
         .i_Clk(i_Clk),
 
-        .i_CMDEn(r_FLASH_CMDEn),
-        .i_CMD(r_FLASH_CMD),
-        .i_Addr(r_FLASH_Addr),
+        .i_CMDEn(r_MM_isReadTransaction? r_MM_CMDEn :r_AReg_CMDEn),
+        .i_CMD(r_MM_isReadTransaction? COMMAND_READ : r_AReg_CMD),
+        .i_Addr(r_MM_isReadTransaction? r_MM_Addr : r_FLASH_Addr),
+
         .i_WriteData(w_WRFifo_RdData),
         .o_ReadData(w_FLASH_ReadData),
         .o_ReqNextData(w_FLASH_ReqNextData),

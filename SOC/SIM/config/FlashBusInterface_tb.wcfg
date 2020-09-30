@@ -3,189 +3,78 @@
    <wave_state>
    </wave_state>
    <db_ref_list>
-      <db_ref path="I:/4-Git Repos/Arcadia Microcomputer/SOC/SOC/WorkingDir/FlashControler_tb_isim_beh.wdb" id="1" type="auto">
+      <db_ref path="I:/4-Git Repos/Arcadia Microcomputer/SOC/SOC/WorkingDir/FlashBusInterface_tb_isim_beh.wdb" id="1" type="auto">
          <top_modules>
-            <top_module name="FlashControler_tb" />
+            <top_module name="FlashBusInterface_tb" />
             <top_module name="glbl" />
          </top_modules>
       </db_ref>
    </db_ref_list>
-   <WVObjectSize size="30" />
-   <wvobject fp_name="/FlashControler_tb/w_AV_WaitRequest" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">w_AV_WaitRequest</obj_property>
-      <obj_property name="ObjectShortName">w_AV_WaitRequest</obj_property>
-   </wvobject>
-   <wvobject fp_name="/FlashControler_tb/r_Clk" type="logic" db_ref_id="1">
+   <WVObjectSize size="12" />
+   <wvobject fp_name="/FlashBusInterface_tb/r_Clk" type="logic" db_ref_id="1">
       <obj_property name="ElementShortName">r_Clk</obj_property>
       <obj_property name="ObjectShortName">r_Clk</obj_property>
    </wvobject>
-   <wvobject fp_name="/FlashControler_tb/r_MEM_SlaveSel" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">r_MEM_SlaveSel</obj_property>
-      <obj_property name="ObjectShortName">r_MEM_SlaveSel</obj_property>
-      <obj_property name="UseCustomSignalColor">true</obj_property>
-      <obj_property name="CustomSignalColor">#ffff00</obj_property>
-   </wvobject>
-   <wvobject fp_name="/FlashControler_tb/r_MEM_RegAddr" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">r_MEM_RegAddr[25:0]</obj_property>
-      <obj_property name="ObjectShortName">r_MEM_RegAddr[25:0]</obj_property>
-      <obj_property name="UseCustomSignalColor">true</obj_property>
-      <obj_property name="CustomSignalColor">#ffff00</obj_property>
-      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
-   </wvobject>
-   <wvobject fp_name="/FlashControler_tb/r_CNTRL_SlaveSel" type="logic" db_ref_id="1">
+   <wvobject fp_name="/FlashBusInterface_tb/r_CNTRL_SlaveSel" type="logic" db_ref_id="1">
       <obj_property name="ElementShortName">r_CNTRL_SlaveSel</obj_property>
       <obj_property name="ObjectShortName">r_CNTRL_SlaveSel</obj_property>
       <obj_property name="UseCustomSignalColor">true</obj_property>
       <obj_property name="CustomSignalColor">#ffff00</obj_property>
    </wvobject>
-   <wvobject fp_name="/FlashControler_tb/r_CNTRL_RegAddr" type="array" db_ref_id="1">
+   <wvobject fp_name="/FlashBusInterface_tb/r_CNTRL_RegAddr" type="array" db_ref_id="1">
       <obj_property name="ElementShortName">r_CNTRL_RegAddr[25:0]</obj_property>
       <obj_property name="ObjectShortName">r_CNTRL_RegAddr[25:0]</obj_property>
+      <obj_property name="Radix">HEXRADIX</obj_property>
       <obj_property name="UseCustomSignalColor">true</obj_property>
       <obj_property name="CustomSignalColor">#ffff00</obj_property>
-      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
    </wvobject>
-   <wvobject fp_name="/FlashControler_tb/r_AV_WriteData" type="array" db_ref_id="1">
+   <wvobject fp_name="/FlashBusInterface_tb/r_AV_Write" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">r_AV_Write</obj_property>
+      <obj_property name="ObjectShortName">r_AV_Write</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ffff00</obj_property>
+   </wvobject>
+   <wvobject fp_name="/FlashBusInterface_tb/r_AV_WriteData" type="array" db_ref_id="1">
       <obj_property name="ElementShortName">r_AV_WriteData[31:0]</obj_property>
       <obj_property name="ObjectShortName">r_AV_WriteData[31:0]</obj_property>
-      <obj_property name="UseCustomSignalColor">true</obj_property>
-      <obj_property name="CustomSignalColor">#ffff00</obj_property>
-      <obj_property name="Radix">HEXRADIX</obj_property>
-   </wvobject>
-   <wvobject fp_name="/FlashControler_tb/DUT/o_AV_ReadData" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">o_AV_ReadData[31:0]</obj_property>
-      <obj_property name="ObjectShortName">o_AV_ReadData[31:0]</obj_property>
       <obj_property name="Radix">HEXRADIX</obj_property>
       <obj_property name="UseCustomSignalColor">true</obj_property>
       <obj_property name="CustomSignalColor">#ffff00</obj_property>
    </wvobject>
-   <wvobject fp_name="/FlashControler_tb/w_AV_WaitRequest" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">w_AV_WaitRequest</obj_property>
-      <obj_property name="ObjectShortName">w_AV_WaitRequest</obj_property>
-      <obj_property name="UseCustomSignalColor">true</obj_property>
-      <obj_property name="CustomSignalColor">#ffff00</obj_property>
-   </wvobject>
-   <wvobject fp_name="/FlashControler_tb/DUT/r_Address" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">r_Address[23:0]</obj_property>
-      <obj_property name="ObjectShortName">r_Address[23:0]</obj_property>
-      <obj_property name="UseCustomSignalColor">true</obj_property>
-      <obj_property name="CustomSignalColor">#800080</obj_property>
+   <wvobject fp_name="/FlashBusInterface_tb/DUT/r_AReg_Count" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">r_AReg_Count[6:0]</obj_property>
+      <obj_property name="ObjectShortName">r_AReg_Count[6:0]</obj_property>
       <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
    </wvobject>
-   <wvobject fp_name="/FlashControler_tb/DUT/r_CMD" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">r_CMD[3:0]</obj_property>
-      <obj_property name="ObjectShortName">r_CMD[3:0]</obj_property>
-      <obj_property name="UseCustomSignalColor">true</obj_property>
-      <obj_property name="CustomSignalColor">#800080</obj_property>
+   <wvobject fp_name="/FlashBusInterface_tb/DUT/r_ByteCounter" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">r_ByteCounter[6:0]</obj_property>
+      <obj_property name="ObjectShortName">r_ByteCounter[6:0]</obj_property>
       <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
    </wvobject>
-   <wvobject fp_name="/FlashControler_tb/DUT/r_isWriteTransaction" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">r_isWriteTransaction</obj_property>
-      <obj_property name="ObjectShortName">r_isWriteTransaction</obj_property>
-      <obj_property name="UseCustomSignalColor">true</obj_property>
-      <obj_property name="CustomSignalColor">#800080</obj_property>
-   </wvobject>
-   <wvobject fp_name="/FlashControler_tb/DUT/r_isMMReadTransaction" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">r_isMMReadTransaction</obj_property>
-      <obj_property name="ObjectShortName">r_isMMReadTransaction</obj_property>
-   </wvobject>
-   <wvobject fp_name="/FlashControler_tb/DUT/r_ReadByteCounter" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">r_ReadByteCounter[3:0]</obj_property>
-      <obj_property name="ObjectShortName">r_ReadByteCounter[3:0]</obj_property>
-      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
-   </wvobject>
-   <wvobject fp_name="/FlashControler_tb/DUT/FSM_READ_state" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">FSM_READ_state[0:0]</obj_property>
-      <obj_property name="ObjectShortName">FSM_READ_state[0:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/FlashControler_tb/DUT/FlashWriteFIFO0/rd_en" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">rd_en</obj_property>
-      <obj_property name="ObjectShortName">rd_en</obj_property>
-      <obj_property name="UseCustomSignalColor">true</obj_property>
-      <obj_property name="CustomSignalColor">#800080</obj_property>
-   </wvobject>
-   <wvobject fp_name="/FlashControler_tb/DUT/w_WRFifo_DOut" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">w_WRFifo_DOut[7:0]</obj_property>
-      <obj_property name="ObjectShortName">w_WRFifo_DOut[7:0]</obj_property>
-      <obj_property name="Radix">HEXRADIX</obj_property>
-      <obj_property name="UseCustomSignalColor">true</obj_property>
-      <obj_property name="CustomSignalColor">#800080</obj_property>
-   </wvobject>
-   <wvobject fp_name="/FlashControler_tb/DUT/r_FLASH_CMDEn" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">r_FLASH_CMDEn</obj_property>
-      <obj_property name="ObjectShortName">r_FLASH_CMDEn</obj_property>
-      <obj_property name="UseCustomSignalColor">true</obj_property>
-      <obj_property name="CustomSignalColor">#00ffff</obj_property>
-   </wvobject>
-   <wvobject fp_name="/FlashControler_tb/DUT/r_FLASH_CMD" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">r_FLASH_CMD[2:0]</obj_property>
-      <obj_property name="ObjectShortName">r_FLASH_CMD[2:0]</obj_property>
-      <obj_property name="UseCustomSignalColor">true</obj_property>
-      <obj_property name="CustomSignalColor">#00ffff</obj_property>
-      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
-   </wvobject>
-   <wvobject fp_name="/FlashControler_tb/DUT/w_FLASH_ReadData" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">w_FLASH_ReadData[7:0]</obj_property>
-      <obj_property name="ObjectShortName">w_FLASH_ReadData[7:0]</obj_property>
-      <obj_property name="UseCustomSignalColor">true</obj_property>
-      <obj_property name="CustomSignalColor">#00ffff</obj_property>
+   <wvobject fp_name="/FlashBusInterface_tb/DUT/FlashControler0/i_WriteData" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">i_WriteData[7:0]</obj_property>
+      <obj_property name="ObjectShortName">i_WriteData[7:0]</obj_property>
       <obj_property name="Radix">HEXRADIX</obj_property>
    </wvobject>
-   <wvobject fp_name="/FlashControler_tb/DUT/r_FLASH_Addr" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">r_FLASH_Addr[23:0]</obj_property>
-      <obj_property name="ObjectShortName">r_FLASH_Addr[23:0]</obj_property>
-      <obj_property name="UseCustomSignalColor">true</obj_property>
-      <obj_property name="CustomSignalColor">#00ffff</obj_property>
-      <obj_property name="Radix">HEXRADIX</obj_property>
-   </wvobject>
-   <wvobject fp_name="/FlashControler_tb/DUT/w_FLASH_ReqNextData" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">w_FLASH_ReqNextData</obj_property>
-      <obj_property name="ObjectShortName">w_FLASH_ReqNextData</obj_property>
-      <obj_property name="UseCustomSignalColor">true</obj_property>
-      <obj_property name="CustomSignalColor">#00ffff</obj_property>
-   </wvobject>
-   <wvobject fp_name="/FlashControler_tb/DUT/FlashControler0/r_TmpByte" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">r_TmpByte[7:0]</obj_property>
-      <obj_property name="ObjectShortName">r_TmpByte[7:0]</obj_property>
-      <obj_property name="Radix">HEXRADIX</obj_property>
-   </wvobject>
-   <wvobject fp_name="/FlashControler_tb/DUT/w_FLASH_NewDataAvailableNextClk" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">w_FLASH_NewDataAvailableNextClk</obj_property>
-      <obj_property name="ObjectShortName">w_FLASH_NewDataAvailableNextClk</obj_property>
-      <obj_property name="UseCustomSignalColor">true</obj_property>
-      <obj_property name="CustomSignalColor">#00ffff</obj_property>
-   </wvobject>
-   <wvobject fp_name="/FlashControler_tb/DUT/w_FLASH_CMDBusy" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">w_FLASH_CMDBusy</obj_property>
-      <obj_property name="ObjectShortName">w_FLASH_CMDBusy</obj_property>
-      <obj_property name="UseCustomSignalColor">true</obj_property>
-      <obj_property name="CustomSignalColor">#00ffff</obj_property>
-   </wvobject>
-   <wvobject fp_name="/FlashControler_tb/DUT/r_FLASH_AckReq" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">r_FLASH_AckReq</obj_property>
-      <obj_property name="ObjectShortName">r_FLASH_AckReq</obj_property>
-      <obj_property name="UseCustomSignalColor">true</obj_property>
-      <obj_property name="CustomSignalColor">#00ffff</obj_property>
-   </wvobject>
-   <wvobject fp_name="/FlashControler_tb/w_Flash_nCS" type="logic" db_ref_id="1">
+   <wvobject fp_name="/FlashBusInterface_tb/w_Flash_nCS" type="logic" db_ref_id="1">
       <obj_property name="ElementShortName">w_Flash_nCS</obj_property>
       <obj_property name="ObjectShortName">w_Flash_nCS</obj_property>
       <obj_property name="UseCustomSignalColor">true</obj_property>
-      <obj_property name="CustomSignalColor">#ffff00</obj_property>
+      <obj_property name="CustomSignalColor">#ff00ff</obj_property>
    </wvobject>
-   <wvobject fp_name="/FlashControler_tb/w_Flash_Clk" type="logic" db_ref_id="1">
+   <wvobject fp_name="/FlashBusInterface_tb/w_Flash_Clk" type="logic" db_ref_id="1">
       <obj_property name="ElementShortName">w_Flash_Clk</obj_property>
       <obj_property name="ObjectShortName">w_Flash_Clk</obj_property>
       <obj_property name="UseCustomSignalColor">true</obj_property>
-      <obj_property name="CustomSignalColor">#ffff00</obj_property>
+      <obj_property name="CustomSignalColor">#ff00ff</obj_property>
    </wvobject>
-   <wvobject fp_name="/FlashControler_tb/w_Flash_IO" type="array" db_ref_id="1">
+   <wvobject fp_name="/FlashBusInterface_tb/w_Flash_IO" type="array" db_ref_id="1">
       <obj_property name="ElementShortName">w_Flash_IO[3:0]</obj_property>
       <obj_property name="ObjectShortName">w_Flash_IO[3:0]</obj_property>
       <obj_property name="UseCustomSignalColor">true</obj_property>
-      <obj_property name="CustomSignalColor">#ffff00</obj_property>
+      <obj_property name="CustomSignalColor">#ff00ff</obj_property>
    </wvobject>
-   <wvobject fp_name="/FlashControler_tb/W25Q16JV_0/status_reg" type="array" db_ref_id="1">
+   <wvobject fp_name="/FlashBusInterface_tb/W25Q16JV_0/status_reg" type="array" db_ref_id="1">
       <obj_property name="ElementShortName">status_reg[23:0]</obj_property>
       <obj_property name="ObjectShortName">status_reg[23:0]</obj_property>
    </wvobject>
