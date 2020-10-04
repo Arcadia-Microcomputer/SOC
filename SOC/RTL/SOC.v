@@ -64,174 +64,162 @@ module SOC(
     wire [31:0]w_DBus_WriteData;
     wire w_DBus_WaitRequest;
 
-    //Address Space Layout//
+    //------------Address Space Layout---------------//
     //Top Block
-    parameter ADDR_TOP_SEL_BITS     = 3;
-    parameter ADDR_TOP_MAIN_PERIPH  = 3'd0;
+    parameter ADDR_TOP_SEL_BITS = 2;
+    parameter ADDR_TOP_MEM      = 2'd0;
+    parameter ADDR_TOP_PERIPH   = 2'd3;
 
-    //----Main Periph Block----//
-    parameter ADDR_MAIN_PERIPH_SEL_BITS = 2;
-    parameter ADDR_MAIN_PERIPH_SLAVE_SEL_BITS = (ADDR_TOP_SEL_BITS + ADDR_MAIN_PERIPH_SEL_BITS);
-    parameter ADDR_MAIN_PERIPH = {ADDR_TOP_MAIN_PERIPH};
+    //----TOP MEM Block----//
+    parameter ADDR_MEM_SEL_BITS = (ADDR_TOP_SEL_BITS + 3);
+    parameter ADDR_MEM = {ADDR_TOP_MEM};
 
-    parameter ADDR_MAIN_PERIPH_SDRAM0       = 2'd0;
-    parameter ADDR_MAIN_PERIPH_SMALL_PERIPH = 2'd3;
+    parameter ADDR_MEM_SDRAM0      = 3'd0;
+    parameter ADDR_MEM_SMALL_MEM   = 3'd7;
 
-    wire [ADDR_MAIN_PERIPH_SLAVE_SEL_BITS-1:0]w_IBus_MAIN_PERIPH_SlaveSelAddr = w_IBus_Address[29:30-ADDR_MAIN_PERIPH_SLAVE_SEL_BITS];
-    wire [29-ADDR_MAIN_PERIPH_SLAVE_SEL_BITS:0]w_IBus_MAIN_PERIPH_RegSelAddr  = w_IBus_Address[29-ADDR_MAIN_PERIPH_SLAVE_SEL_BITS:0];
+    wire [ADDR_MEM_SEL_BITS-1:0]w_IBus_MEM_SlaveSelAddr = w_IBus_Address[29:30-ADDR_MEM_SEL_BITS];
+    wire [29-ADDR_MEM_SEL_BITS:0]w_IBus_MEM_RegSelAddr  = w_IBus_Address[29-ADDR_MEM_SEL_BITS:0];
 
-    wire [ADDR_MAIN_PERIPH_SLAVE_SEL_BITS-1:0]w_DBus_MAIN_PERIPH_SlaveSelAddr = w_DBus_Address[29:30-ADDR_MAIN_PERIPH_SLAVE_SEL_BITS];
-    wire [29-ADDR_MAIN_PERIPH_SLAVE_SEL_BITS:0]w_DBus_MAIN_PERIPH_RegSelAddr  = w_DBus_Address[29-ADDR_MAIN_PERIPH_SLAVE_SEL_BITS:0];
+    wire [ADDR_MEM_SEL_BITS-1:0]w_DBus_MEM_SlaveSelAddr = w_DBus_Address[29:30-ADDR_MEM_SEL_BITS];
+    wire [29-ADDR_MEM_SEL_BITS:0]w_DBus_MEM_RegSelAddr  = w_DBus_Address[29-ADDR_MEM_SEL_BITS:0];
 
     //-SDRAM0-//
-    parameter SDRAM0_SlaveAddr = {ADDR_MAIN_PERIPH, ADDR_MAIN_PERIPH_SDRAM0};
+    parameter SDRAM0_SlaveAddr = {ADDR_MEM, ADDR_MEM_SDRAM0};
     //IBus Port
-    wire w_IBUS_SDRAM0_Sel = (w_IBus_MAIN_PERIPH_SlaveSelAddr == SDRAM0_SlaveAddr)? 1: 0;
-    wire [31:0]w_IBUS_SDRAM0_ReadData = 0;
-    wire w_IBUS_SDRAM0_WaitRequest = 0;
+    wire w_IBUS_SDRAM0_Sel = (w_IBus_MEM_SlaveSelAddr == SDRAM0_SlaveAddr)? 1: 0;
+    wire [31:0]w_IBUS_SDRAM0_ReadData = 0; //UNIMPLEMENTED
+    wire w_IBUS_SDRAM0_WaitRequest = 0; //UNIMPLEMENTED
     //DBus Port
-    wire w_DBUS_SDRAM0_Sel = (w_DBus_MAIN_PERIPH_SlaveSelAddr == SDRAM0_SlaveAddr)? 1: 0;
-    wire [31:0]w_DBUS_SDRAM0_ReadData = 0;
-    wire w_DBUS_SDRAM0_WaitRequest = 0;
+    wire w_DBUS_SDRAM0_Sel = (w_DBus_MEM_SlaveSelAddr == SDRAM0_SlaveAddr)? 1: 0;
+    wire [31:0]w_DBUS_SDRAM0_ReadData = 0; //UNIMPLEMENTED
+    wire w_DBUS_SDRAM0_WaitRequest = 0; //UNIMPLEMENTED
 
-    //----Small Periph Block----//
-    parameter ADDR_SMALL_PERIPH_SEL_BITS = 3;
-    parameter ADDR_SMALL_PERIPH_SLAVE_SEL_BITS = (ADDR_MAIN_PERIPH_SLAVE_SEL_BITS + ADDR_SMALL_PERIPH_SEL_BITS);
-    parameter ADDR_SMALL_PERIPH = {ADDR_MAIN_PERIPH, ADDR_MAIN_PERIPH_SMALL_PERIPH};
+    //----TOP MEM SMALL_MEM Block----//
+    parameter ADDR_SMALL_MEM_SEL_BITS = (ADDR_MEM_SEL_BITS + 3);
+    parameter ADDR_SMALL_MEM = {ADDR_MEM, ADDR_MEM_SMALL_MEM};
 
-    parameter ADDR_SMALL_PERIPH_QSPI_FLASH0   = 3'd0;
-    parameter ADDR_SMALL_PERIPH_VSMALL_PERIPH = 3'd1;
-    parameter ADDR_SMALL_PERIPH_TMP_VRAM      = 3'd2;
+    parameter ADDR_SMALL_MEM_QSPI0 = 3'd0;
 
-    wire [ADDR_SMALL_PERIPH_SLAVE_SEL_BITS-1:0]w_IBus_SMALL_PERIPH_SlaveSelAddr = w_IBus_Address[29:30-ADDR_SMALL_PERIPH_SLAVE_SEL_BITS];
-    wire [29-ADDR_SMALL_PERIPH_SLAVE_SEL_BITS:0]w_IBus_SMALL_PERIPH_RegSelAddr  = w_IBus_Address[29-ADDR_SMALL_PERIPH_SLAVE_SEL_BITS:0];
+    wire [ADDR_SMALL_MEM_SEL_BITS-1:0]w_IBus_SMALL_MEM_SlaveSelAddr = w_IBus_Address[29:30-ADDR_SMALL_MEM_SEL_BITS];
+    wire [29-ADDR_SMALL_MEM_SEL_BITS:0]w_IBus_SMALL_MEM_RegSelAddr  = w_IBus_Address[29-ADDR_SMALL_MEM_SEL_BITS:0];
 
-    wire [ADDR_SMALL_PERIPH_SLAVE_SEL_BITS-1:0]w_DBus_SMALL_PERIPH_SlaveSelAddr = w_DBus_Address[29:30-ADDR_SMALL_PERIPH_SLAVE_SEL_BITS];
-    wire [29-ADDR_SMALL_PERIPH_SLAVE_SEL_BITS:0]w_DBus_SMALL_PERIPH_RegSelAddr  = w_DBus_Address[29-ADDR_SMALL_PERIPH_SLAVE_SEL_BITS:0];
+    wire [ADDR_SMALL_MEM_SEL_BITS-1:0]w_DBus_SMALL_MEM_SlaveSelAddr = w_DBus_Address[29:30-ADDR_SMALL_MEM_SEL_BITS];
+    wire [29-ADDR_SMALL_MEM_SEL_BITS:0]w_DBus_SMALL_MEM_RegSelAddr  = w_DBus_Address[29-ADDR_SMALL_MEM_SEL_BITS:0];
 
-    //-QSPI FLASH0-//
-    parameter QSPI_FLASH0_SlaveAddr = {ADDR_SMALL_PERIPH, ADDR_SMALL_PERIPH_QSPI_FLASH0};
-    //IBus Port (Not Implemented)
-    wire w_IBUS_QSPI_FLASH0_Sel = (w_IBus_SMALL_PERIPH_SlaveSelAddr == QSPI_FLASH0_SlaveAddr)? 1: 0;
-    wire [31:0]w_IBUS_QSPI_FLASH0_ReadData = 0;
-    wire w_IBUS_QSPI_FLASH0_WaitRequest = 0;
-
-    //DBus Port
-    wire w_DBUS_QSPI_FLASH0_Sel = (w_DBus_SMALL_PERIPH_SlaveSelAddr == QSPI_FLASH0_SlaveAddr)? 1: 0;
-    wire [31:0]w_DBUS_QSPI_FLASH0_ReadData;
-    wire w_DBUS_QSPI_FLASH0_WaitRequest;
-
-    //-Temp VRAM0-//
-    parameter TVRAM0_SlaveAddr = {ADDR_SMALL_PERIPH, ADDR_SMALL_PERIPH_TMP_VRAM};
-    //DBus Port
-    wire w_DBUS_TVRAM0_Sel = (w_DBus_SMALL_PERIPH_SlaveSelAddr == TVRAM0_SlaveAddr)? 1: 0;
-    wire [31:0]w_DBUS_TVRAM0_ReadData;
-    wire w_DBUS_TVRAM0_WaitRequest;
-    
-    //----VSmall Periph Block----//
-    parameter ADDR_VSMALL_PERIPH_SEL_BITS = 10;
-    parameter ADDR_VSMALL_PERIPH_SLAVE_SEL_BITS = (ADDR_SMALL_PERIPH_SLAVE_SEL_BITS + ADDR_VSMALL_PERIPH_SEL_BITS);
-    parameter ADDR_VSMALL_PERIPH = {ADDR_SMALL_PERIPH, ADDR_SMALL_PERIPH_VSMALL_PERIPH};
-
-    parameter ADDR_VSMALL_PERIPH_QSPI_FLASH_CNTRL   = 10'd0;
-    parameter ADDR_VSMALL_PERIPH_ROM0               = 10'd1;
-    parameter ADDR_VSMALL_PERIPH_DRAM0              = 10'd2;
-    parameter ADDR_VSMALL_PERIPH_UART0              = 10'd3;
-    parameter ADDR_VSMALL_PERIPH_UART1              = 10'd4;
-    parameter ADDR_VSMALL_PERIPH_SPI0               = 10'd5;
-    parameter ADDR_VSMALL_PERIPH_SPI1               = 10'd6;
-    parameter ADDR_VSMALL_PERIPH_I2S0               = 10'd7;
-    parameter ADDR_VSMALL_PERIPH_COUNTER0           = 10'd8;
-    parameter ADDR_VSMALL_PERIPH_GPIO               = 10'd9;
-
-    wire [ADDR_VSMALL_PERIPH_SLAVE_SEL_BITS-1:0]w_IBus_VSMALL_PERIPH_SlaveSelAddr = w_IBus_Address[29:30-ADDR_VSMALL_PERIPH_SLAVE_SEL_BITS];
-    wire [29-ADDR_VSMALL_PERIPH_SLAVE_SEL_BITS:0]w_IBus_VSMALL_PERIPH_RegSelAddr  = w_IBus_Address[29-ADDR_VSMALL_PERIPH_SLAVE_SEL_BITS:0];
-
-    wire [ADDR_VSMALL_PERIPH_SLAVE_SEL_BITS-1:0]w_DBus_VSMALL_PERIPH_SlaveSelAddr = w_DBus_Address[29:30-ADDR_VSMALL_PERIPH_SLAVE_SEL_BITS];
-    wire [29-ADDR_VSMALL_PERIPH_SLAVE_SEL_BITS:0]w_DBus_VSMALL_PERIPH_RegSelAddr  = w_DBus_Address[29-ADDR_VSMALL_PERIPH_SLAVE_SEL_BITS:0];
-
-    //-QSPI FLASH0 CNTRL-//
-    parameter QSPI_FLASH0_CNTL_SlaveAddr = {ADDR_VSMALL_PERIPH, ADDR_VSMALL_PERIPH_QSPI_FLASH_CNTRL};
-    //DBUS Port
-    wire w_DBUS_QSPI_FLASH0_CNTL_Sel = (w_DBus_VSMALL_PERIPH_SlaveSelAddr == QSPI_FLASH0_CNTL_SlaveAddr)? 1: 0;
-
-    //-ROM0-//
-    parameter ROM0_SlaveAddr = {ADDR_VSMALL_PERIPH, ADDR_VSMALL_PERIPH_ROM0};
+    //-QSPI0-//
+    parameter QSPI0_SlaveAddr = {ADDR_SMALL_MEM, ADDR_SMALL_MEM_QSPI0};
     //IBus Port
-    wire w_IBUS_ROM0_Sel = (w_IBus_VSMALL_PERIPH_SlaveSelAddr == ROM0_SlaveAddr)? 1: 0;
-    wire [31:0]w_IBUS_ROM0_ReadData;
-    wire w_IBUS_ROM0_WaitRequest;
+    wire w_IBUS_QSPI0_Sel = (w_IBus_SMALL_MEM_SlaveSelAddr == QSPI0_SlaveAddr)? 1: 0;
+    wire [31:0]w_IBUS_QSPI0_ReadData = 0; //UNIMPLEMENTED
+    wire w_IBUS_QSPI0_WaitRequest = 0; //UNIMPLEMENTED
     //DBus Port
-    wire w_DBUS_ROM0_Sel = (w_DBus_VSMALL_PERIPH_SlaveSelAddr == ROM0_SlaveAddr)? 1: 0;
-    wire [31:0]w_DBUS_ROM0_ReadData;
-    wire w_DBUS_ROM0_WaitRequest;
+    wire w_DBUS_QSPI0_Sel = (w_DBus_SMALL_MEM_SlaveSelAddr == QSPI0_SlaveAddr)? 1: 0;
+    wire [31:0]w_DBUS_QSPI0_ReadData;
+    wire w_DBUS_QSPI0_WaitRequest;
 
-    //-DRAM0-//
-    //DBus Port
-    parameter DRAM0_SlaveAddr = {ADDR_VSMALL_PERIPH, ADDR_VSMALL_PERIPH_DRAM0};
-    wire w_DBUS_DRAM0_Sel = (w_DBus_VSMALL_PERIPH_SlaveSelAddr == DRAM0_SlaveAddr)? 1: 0;
-    wire [31:0]w_DBUS_DRAM0_ReadData;
-    wire w_DBUS_DRAM0_WaitRequest;
+    //----TOP PERIPH Block----//
+    parameter ADDR_PERIPH_SEL_BITS = (ADDR_TOP_SEL_BITS + 8);
+    parameter ADDR_PERIPH = {ADDR_TOP_PERIPH};
 
-    //-UART0-//
-    parameter UART0_SlaveAddr = {ADDR_VSMALL_PERIPH, ADDR_VSMALL_PERIPH_UART0};
-    //DBus Port
-    wire w_DBUS_UART0_Sel = (w_DBus_VSMALL_PERIPH_SlaveSelAddr == UART0_SlaveAddr)? 1: 0;
-    wire [31:0]w_DBUS_UART0_ReadData;
-    wire w_DBUS_UART0_WaitRequest;
+    parameter ADDR_PERIPH_RAM           = 8'd0;
+    parameter ADDR_PERIPH_SMALL_PERIPH  = 8'd255;
 
-    //-UART1-//
-    parameter UART1_SlaveAddr = {ADDR_VSMALL_PERIPH, ADDR_VSMALL_PERIPH_UART1};
-    //DBus Port
-    wire w_DBUS_UART1_Sel = (w_DBus_VSMALL_PERIPH_SlaveSelAddr == UART1_SlaveAddr)? 1: 0;
-    wire [31:0]w_DBUS_UART1_ReadData = 0;
-    wire w_DBUS_UART1_WaitRequest = 0;
+    wire [ADDR_PERIPH_SEL_BITS-1:0]w_IBus_PERIPH_SlaveSelAddr = w_IBus_Address[29:30-ADDR_PERIPH_SEL_BITS];
+    wire [29-ADDR_PERIPH_SEL_BITS:0]w_IBus_PERIPH_RegSelAddr  = w_IBus_Address[29-ADDR_PERIPH_SEL_BITS:0];
 
-    //-SPI0-//
-    parameter SPI0_SlaveAddr = {ADDR_VSMALL_PERIPH, ADDR_VSMALL_PERIPH_SPI0};
-    //DBus Port
-    wire w_DBUS_SPI0_Sel = (w_DBus_VSMALL_PERIPH_SlaveSelAddr == SPI0_SlaveAddr)? 1: 0;
-    wire [31:0]w_DBUS_SPI0_ReadData = 0;
-    wire w_DBUS_SPI0_WaitRequest = 0;
+    wire [ADDR_PERIPH_SEL_BITS-1:0]w_DBus_PERIPH_SlaveSelAddr = w_DBus_Address[29:30-ADDR_PERIPH_SEL_BITS];
+    wire [29-ADDR_PERIPH_SEL_BITS:0]w_DBus_PERIPH_RegSelAddr  = w_DBus_Address[29-ADDR_PERIPH_SEL_BITS:0];
 
-    //-SPI1-//
-    parameter SPI1_SlaveAddr = {ADDR_VSMALL_PERIPH, ADDR_VSMALL_PERIPH_SPI1};
+    //-RAM-//
+    parameter RAM_SlaveAddr = {ADDR_PERIPH, ADDR_PERIPH_RAM};
+    //IBus Port
+    wire w_IBUS_RAM_Sel = (w_IBus_PERIPH_SlaveSelAddr == RAM_SlaveAddr)? 1: 0;
+    wire [31:0]w_IBUS_RAM_ReadData = 0; //UNIMPLEMENTED
+    wire w_IBUS_RAM_WaitRequest = 0; //UNIMPLEMENTED
     //DBus Port
-    wire w_DBUS_SPI1_Sel = (w_DBus_VSMALL_PERIPH_SlaveSelAddr == SPI1_SlaveAddr)? 1: 0;
-    wire [31:0]w_DBUS_SPI1_ReadData = 0;
-    wire w_DBUS_SPI1_WaitRequest = 0;
+    wire w_DBUS_RAM_Sel = (w_DBus_PERIPH_SlaveSelAddr == RAM_SlaveAddr)? 1: 0;
+    wire [31:0]w_DBUS_RAM_ReadData;
+    wire w_DBUS_RAM_WaitRequest;
 
-    //-I2S0-//
-    parameter I2S0_SlaveAddr = {ADDR_VSMALL_PERIPH, ADDR_VSMALL_PERIPH_I2S0};
-    //DBus Port
-    wire w_DBUS_I2S0_Sel = (w_DBus_VSMALL_PERIPH_SlaveSelAddr == I2S0_SlaveAddr)? 1: 0;
-    wire [31:0]w_DBUS_I2S0_ReadData;
-    wire w_DBUS_I2S0_WaitRequest;
+    //----TOP PERIPH SMALL_PERIPH Block----//
+    parameter ADDR_SMALL_PERIPH_SEL_BITS = (ADDR_PERIPH_SEL_BITS + 10);
+    parameter ADDR_SMALL_PERIPH = {ADDR_PERIPH, ADDR_PERIPH_SMALL_PERIPH};
 
-    //-COUNTER0-//
-    parameter COUNTER0_SlaveAddr = {ADDR_VSMALL_PERIPH, ADDR_VSMALL_PERIPH_COUNTER0};
+    parameter ADDR_SMALL_PERIPH_BOOT_ROM      = 10'd0;
+    parameter ADDR_SMALL_PERIPH_QSPI0_CNTRL   = 10'd1;
+    parameter ADDR_SMALL_PERIPH_GPIO          = 10'd2;
+    parameter ADDR_SMALL_PERIPH_WSG           = 10'd3;
+    parameter ADDR_SMALL_PERIPH_UART0         = 10'd4;
+    parameter ADDR_SMALL_PERIPH_UART1         = 10'd5;
+    parameter ADDR_SMALL_PERIPH_SPI0          = 10'd6;
+    parameter ADDR_SMALL_PERIPH_SPI1          = 10'd7;
+    parameter ADDR_SMALL_PERIPH_I2S0          = 10'd8;
+    parameter ADDR_SMALL_PERIPH_TIMER0        = 10'd9;
+    parameter ADDR_SMALL_PERIPH_TIMER1        = 10'd10;
+
+    wire [ADDR_SMALL_PERIPH_SEL_BITS-1:0]w_IBus_SMALL_PERIPH_SlaveSelAddr = w_IBus_Address[29:30-ADDR_SMALL_PERIPH_SEL_BITS];
+    wire [29-ADDR_SMALL_PERIPH_SEL_BITS:0]w_IBus_SMALL_PERIPH_RegSelAddr  = w_IBus_Address[29-ADDR_SMALL_PERIPH_SEL_BITS:0];
+
+    wire [ADDR_SMALL_PERIPH_SEL_BITS-1:0]w_DBus_SMALL_PERIPH_SlaveSelAddr = w_DBus_Address[29:30-ADDR_SMALL_PERIPH_SEL_BITS];
+    wire [29-ADDR_SMALL_PERIPH_SEL_BITS:0]w_DBus_SMALL_PERIPH_RegSelAddr  = w_DBus_Address[29-ADDR_SMALL_PERIPH_SEL_BITS:0];
+
+    //-BOOT ROM-//
+    parameter BOOT_ROM_SlaveAddr = {ADDR_SMALL_PERIPH, ADDR_SMALL_PERIPH_BOOT_ROM};
+    //IBus Port
+    wire w_IBUS_BOOT_ROM_Sel = (w_IBus_SMALL_PERIPH_SlaveSelAddr == BOOT_ROM_SlaveAddr)? 1: 0;
+    wire [31:0]w_IBUS_BOOT_ROM_ReadData;
+    wire w_IBUS_BOOT_ROM_WaitRequest;
     //DBus Port
-    wire w_DBUS_COUNTER0_Sel = (w_DBus_VSMALL_PERIPH_SlaveSelAddr == COUNTER0_SlaveAddr)? 1: 0;
-    wire [31:0]w_DBUS_COUNTER0_ReadData;
-    wire w_DBUS_COUNTER0_WaitRequest;
+    wire w_DBUS_BOOT_ROM_Sel = (w_DBus_SMALL_PERIPH_SlaveSelAddr == BOOT_ROM_SlaveAddr)? 1: 0;
+    wire [31:0]w_DBUS_BOOT_ROM_ReadData;
+    wire w_DBUS_BOOT_ROM_WaitRequest;
+
+    //-QSPI0 CNTRL-//
+    parameter QSPI0_CNTRL_SlaveAddr = {ADDR_SMALL_PERIPH, ADDR_SMALL_PERIPH_QSPI0_CNTRL};
+    //DBus Port
+    wire w_DBUS_QSPI0_CNTRL_Sel = (w_DBus_SMALL_PERIPH_SlaveSelAddr == QSPI0_CNTRL_SlaveAddr)? 1: 0;
 
     //-GPIO-//
-    parameter GPIO_SlaveAddr = {ADDR_VSMALL_PERIPH, ADDR_VSMALL_PERIPH_GPIO};
+    parameter GPIO_SlaveAddr = {ADDR_SMALL_PERIPH, ADDR_SMALL_PERIPH_GPIO};
     //DBus Port
-    wire w_DBUS_GPIO_Sel = (w_DBus_VSMALL_PERIPH_SlaveSelAddr == GPIO_SlaveAddr)? 1: 0;
+    wire w_DBUS_GPIO_Sel = (w_DBus_SMALL_PERIPH_SlaveSelAddr == GPIO_SlaveAddr)? 1: 0;
     wire [31:0]w_DBUS_GPIO_ReadData;
     wire w_DBUS_GPIO_WaitRequest;
 
-    //--IBus Slave Driver--//
-    assign w_IBus_ReadData = w_IBUS_SDRAM0_ReadData | w_IBUS_ROM0_ReadData | w_IBUS_QSPI_FLASH0_ReadData;
-    assign w_IBus_WaitRequest = w_IBUS_SDRAM0_WaitRequest | w_IBUS_ROM0_WaitRequest | w_IBUS_QSPI_FLASH0_WaitRequest;
+    //-UART0-//
+    parameter UART0_SlaveAddr = {ADDR_SMALL_PERIPH, ADDR_SMALL_PERIPH_UART0};
+    //DBus Port
+    wire w_DBUS_UART0_Sel = (w_DBus_SMALL_PERIPH_SlaveSelAddr == UART0_SlaveAddr)? 1: 0;
+    wire [31:0]w_DBUS_UART0_ReadData;
+    wire w_DBUS_UART0_WaitRequest;
 
-    //--DBus Slave Driver--//
-    assign w_DBus_ReadData = w_DBUS_SDRAM0_ReadData | w_DBUS_QSPI_FLASH0_ReadData | w_DBUS_TVRAM0_ReadData | w_DBUS_ROM0_ReadData | w_DBUS_DRAM0_ReadData | w_DBUS_GPIO_ReadData
-                           | w_DBUS_UART0_ReadData | w_DBUS_UART1_ReadData | w_DBUS_SPI0_ReadData | w_DBUS_SPI1_ReadData | w_DBUS_I2S0_ReadData | w_DBUS_COUNTER0_ReadData;
+    //-I2S0-//
+    parameter I2S0_SlaveAddr = {ADDR_SMALL_PERIPH, ADDR_SMALL_PERIPH_I2S0};
+    //DBus Port
+    wire w_DBUS_I2S0_Sel = (w_DBus_SMALL_PERIPH_SlaveSelAddr == I2S0_SlaveAddr)? 1: 0;
+    wire [31:0]w_DBUS_I2S0_ReadData;
+    wire w_DBUS_I2S0_WaitRequest;
 
-    assign w_DBus_WaitRequest = w_DBUS_SDRAM0_WaitRequest | w_DBUS_QSPI_FLASH0_WaitRequest | w_DBUS_TVRAM0_WaitRequest | w_DBUS_ROM0_WaitRequest | w_DBUS_DRAM0_WaitRequest | w_DBUS_GPIO_WaitRequest
-                              | w_DBUS_UART0_WaitRequest | w_DBUS_UART1_WaitRequest | w_DBUS_SPI0_WaitRequest | w_DBUS_SPI1_WaitRequest | w_DBUS_I2S0_WaitRequest | w_DBUS_COUNTER0_WaitRequest;
+    //-TIMER0-//
+    parameter TIMER0_SlaveAddr = {ADDR_SMALL_PERIPH, ADDR_SMALL_PERIPH_TIMER0};
+    //DBus Port
+    wire w_DBUS_TIMER0_Sel = (w_DBus_SMALL_PERIPH_SlaveSelAddr == TIMER0_SlaveAddr)? 1: 0;
+    wire [31:0]w_DBUS_TIMER0_ReadData;
+    wire w_DBUS_TIMER0_WaitRequest;
+
+    //---IBus Slave Driver---//
+    assign w_IBus_ReadData = w_IBUS_SDRAM0_ReadData | w_IBUS_QSPI0_ReadData | w_IBUS_RAM_ReadData | w_IBUS_BOOT_ROM_ReadData;
+
+    assign w_IBus_WaitRequest = w_IBUS_SDRAM0_WaitRequest | w_IBUS_QSPI0_WaitRequest | w_IBUS_RAM_WaitRequest | 
+                                w_IBUS_BOOT_ROM_WaitRequest;
+
+    //---DBus Slave Driver---//
+    assign w_DBus_ReadData = w_DBUS_SDRAM0_ReadData | w_DBUS_QSPI0_ReadData | w_DBUS_RAM_ReadData | w_DBUS_BOOT_ROM_ReadData | 
+                             w_DBUS_GPIO_ReadData | w_DBUS_UART0_ReadData | w_DBUS_I2S0_ReadData | w_DBUS_TIMER0_ReadData;
+
+    assign w_DBus_WaitRequest = w_DBUS_SDRAM0_WaitRequest | w_DBUS_QSPI0_WaitRequest | w_DBUS_RAM_WaitRequest | 
+                                w_DBUS_BOOT_ROM_WaitRequest | w_DBUS_GPIO_WaitRequest | 
+                                w_DBUS_UART0_WaitRequest | w_DBUS_I2S0_WaitRequest | w_DBUS_TIMER0_WaitRequest;
 
     //--PLL_M Signals--//
     wire w_SysClk;
@@ -259,7 +247,7 @@ module SOC(
 
     CPU #(
         //Starts executing from ROM
-        .INITIAL_PC_VALUE(32'h19004000)
+        .INITIAL_PC_VALUE(32'hFFC00000)
     )CPU0 (
         .i_Clk(w_SysClk),
 
@@ -283,120 +271,100 @@ module SOC(
     );
 
     FlashBusInterface #(
-        .MEM_ADDR_SEL_BITS(ADDR_SMALL_PERIPH_SLAVE_SEL_BITS),
-        .CNTRL_ADDR_SEL_BITS(ADDR_VSMALL_PERIPH_SLAVE_SEL_BITS)
-    )FLASH0(
+        .MEM_ADDR_SEL_BITS(ADDR_SMALL_MEM_SEL_BITS),
+        .CNTRL_ADDR_SEL_BITS(ADDR_SMALL_PERIPH_SEL_BITS)
+    )QSPI0(
         .i_Clk(w_SysClk),
 
         //DBUS
-        .i_MEM_SlaveSel(w_DBUS_QSPI_FLASH0_Sel),
-        .i_MEM_RegAddr(w_DBus_SMALL_PERIPH_RegSelAddr),
+        .i_MEM_SlaveSel(w_DBUS_QSPI0_Sel),
+        .i_MEM_RegAddr(w_DBus_SMALL_MEM_RegSelAddr),
         
-        .i_CNTRL_SlaveSel(w_DBUS_QSPI_FLASH0_CNTL_Sel),
-        .i_CNTRL_RegAddr(w_DBus_VSMALL_PERIPH_RegSelAddr),
+        .i_CNTRL_SlaveSel(w_DBUS_QSPI0_CNTRL_Sel),
+        .i_CNTRL_RegAddr(w_DBus_SMALL_PERIPH_RegSelAddr),
 
         .i_AV_ByteEn(w_DBus_ByteEn),
         .i_AV_Read(w_DBus_Read),
         .i_AV_Write(w_DBus_Write),
-        .o_AV_ReadData(w_DBUS_QSPI_FLASH0_ReadData),
+        .o_AV_ReadData(w_DBUS_QSPI0_ReadData),
         .i_AV_WriteData(w_DBus_WriteData),
-        .o_AV_WaitRequest(w_DBUS_QSPI_FLASH0_WaitRequest),
+        .o_AV_WaitRequest(w_DBUS_QSPI0_WaitRequest),
 
         .o_Flash_Clk(o_UserFlash_Clk),
         .o_Flash_nCS(o_UserFlash_nCS),
         .io_Flash_IO(io_UserFlash_IO)
     );
 
-    VideoDriver #(
-        //Video Timings
-        .HorSyncTime(HorSyncTime),
-		.HorBackPorch(HorBackPorch),
-		.HorFrontPorch(HorFrontPorch),
-		.HorAddrVideoTime(HorAddrVideoTime),
-		.HorEndCnt(HorEndCnt),
+    ROM #(
+        .ADDR_SEL_BITS(ADDR_SMALL_PERIPH_SEL_BITS),
+        .DEPTH(1024)
+    )BOOT_ROM0(
+        .i_Clk(w_SysClk),
 
-		.VertSyncTime(VertSyncTime),
-		.VertBackPorch(VertBackPorch),
-		.VertFrontPorch(VertFrontPorch),
-		.VertAddrVideoTime(VertAddrVideoTime),
-		.VertEndCnt(VertEndCnt),
+        //IBus Slave
+        .i_AV0_SlaveSel(w_IBUS_BOOT_ROM_Sel),
+        .i_AV0_RegAddr(w_IBus_SMALL_PERIPH_RegSelAddr),
 
-        .ADDR_SEL_BITS(ADDR_SMALL_PERIPH_SLAVE_SEL_BITS)
-    )VideoDriver(
+        .i_AV0_Read(w_IBus_Read),
+        .o_AV0_ReadData(w_IBUS_BOOT_ROM_ReadData),
+        .o_AV0_WaitRequest(w_IBUS_BOOT_ROM_WaitRequest),
+
+        //DBus Slave
+        .i_AV1_SlaveSel(w_DBUS_BOOT_ROM_Sel),
+        .i_AV1_RegAddr(w_DBus_SMALL_PERIPH_RegSelAddr),
+
+        .i_AV1_Read(w_DBus_Read),
+        .o_AV1_ReadData(w_DBUS_BOOT_ROM_ReadData),
+        .o_AV1_WaitRequest(w_DBUS_BOOT_ROM_WaitRequest)
+    );
+
+    RAM #(
+        .ADDR_SEL_BITS(ADDR_PERIPH_SEL_BITS),
+        .DEPTH(512)
+    )RAM0(
         .i_Clk(w_SysClk),
 
         //DBus Slave
-        .i_SlaveSel(w_DBUS_TVRAM0_Sel),
+        .i_SlaveSel(w_DBUS_RAM_Sel),
+        .i_RegAddr(w_DBus_PERIPH_RegSelAddr),
+
+        .i_AV_ByteEn(w_DBus_ByteEn),
+        .i_AV_Read(w_DBus_Read),
+        .i_AV_Write(w_DBus_Write),
+        .o_AV_ReadData(w_DBUS_RAM_ReadData),
+        .i_AV_WriteData(w_DBus_WriteData),
+        .o_AV_WaitRequest(w_DBUS_RAM_WaitRequest)
+    );
+
+    GPIOBusInterface #(
+        .ADDR_SEL_BITS(ADDR_SMALL_PERIPH_SEL_BITS)
+    )GPIO0(
+        .i_Clk(w_SysClk),
+
+        //DBus Slave
+        .i_SlaveSel(w_DBUS_GPIO_Sel),
         .i_RegAddr(w_DBus_SMALL_PERIPH_RegSelAddr),
 
         .i_AV_ByteEn(w_DBus_ByteEn),
         .i_AV_Read(w_DBus_Read),
         .i_AV_Write(w_DBus_Write),
-        .o_AV_ReadData(w_DBUS_TVRAM0_ReadData),
+        .o_AV_ReadData(w_DBUS_GPIO_ReadData),
         .i_AV_WriteData(w_DBus_WriteData),
-        .o_AV_WaitRequest(w_DBUS_TVRAM0_WaitRequest),
+        .o_AV_WaitRequest(w_DBUS_GPIO_WaitRequest),
 
-        //Video
-        .i_VidClk(w_VidClk),
-
-        .o_Pixel_Clk(o_VGA_Clk),
-		.o_VSync(o_VGA_VSync),
-		.o_HSync(o_VGA_HSync),
-		.o_nBlank(o_VGA_nBlank),
-		.o_R(o_VGA_R),
-		.o_G(o_VGA_G),
-		.o_B(o_VGA_B)
-    );
-
-    ROM #(
-        .ADDR_SEL_BITS(ADDR_VSMALL_PERIPH_SLAVE_SEL_BITS),
-        .DEPTH(512)
-    )ROM0(
-        .i_Clk(w_SysClk),
-
-        //IBus Slave
-        .i_AV0_SlaveSel(w_IBUS_ROM0_Sel),
-        .i_AV0_RegAddr(w_IBus_VSMALL_PERIPH_RegSelAddr),
-
-        .i_AV0_Read(w_IBus_Read),
-        .o_AV0_ReadData(w_IBUS_ROM0_ReadData),
-        .o_AV0_WaitRequest(w_IBUS_ROM0_WaitRequest),
-
-        //DBus Slave
-        .i_AV1_SlaveSel(w_DBUS_ROM0_Sel),
-        .i_AV1_RegAddr(w_DBus_VSMALL_PERIPH_RegSelAddr),
-
-        .i_AV1_Read(w_DBus_Read),
-        .o_AV1_ReadData(w_DBUS_ROM0_ReadData),
-        .o_AV1_WaitRequest(w_DBUS_ROM0_WaitRequest)
-    );
-
-    RAM #(
-        .ADDR_SEL_BITS(ADDR_VSMALL_PERIPH_SLAVE_SEL_BITS),
-        .DEPTH(512)
-    )DRAM0(
-        .i_Clk(w_SysClk),
-
-        //DBus Slave
-        .i_SlaveSel(w_DBUS_DRAM0_Sel),
-        .i_RegAddr(w_DBus_VSMALL_PERIPH_RegSelAddr),
-
-        .i_AV_ByteEn(w_DBus_ByteEn),
-        .i_AV_Read(w_DBus_Read),
-        .i_AV_Write(w_DBus_Write),
-        .o_AV_ReadData(w_DBUS_DRAM0_ReadData),
-        .i_AV_WriteData(w_DBus_WriteData),
-        .o_AV_WaitRequest(w_DBUS_DRAM0_WaitRequest)
+        //GPIO
+        .o_7Seg_En(o_7Seg_En),
+        .o_7Seg_Led(o_7Seg_Led)
     );
 
     UartBusInterface #(
-        .ADDR_SEL_BITS(ADDR_VSMALL_PERIPH_SLAVE_SEL_BITS)
+        .ADDR_SEL_BITS(ADDR_SMALL_PERIPH_SEL_BITS)
     )UART0(
         .i_Clk(w_SysClk),
         
         //DBus Slave
         .i_SlaveSel(w_DBUS_UART0_Sel),
-        .i_RegAddr(w_DBus_VSMALL_PERIPH_RegSelAddr),
+        .i_RegAddr(w_DBus_SMALL_PERIPH_RegSelAddr),
 
         .i_AV_ByteEn(w_DBus_ByteEn),
         .i_AV_Read(w_DBus_Read),
@@ -412,13 +380,13 @@ module SOC(
     );
     
     I2SBusInterface#(
-        .ADDR_SEL_BITS(ADDR_VSMALL_PERIPH_SLAVE_SEL_BITS)
+        .ADDR_SEL_BITS(ADDR_SMALL_PERIPH_SEL_BITS)
     )I2S0(
         .i_Clk(w_SysClk),
 
         //DBus Slave
         .i_SlaveSel(w_DBUS_I2S0_Sel),
-        .i_RegAddr(w_DBus_VSMALL_PERIPH_RegSelAddr),
+        .i_RegAddr(w_DBus_SMALL_PERIPH_RegSelAddr),
 
         .i_AV_ByteEn(w_DBus_ByteEn),
         .i_AV_Read(w_DBus_Read),
@@ -436,40 +404,69 @@ module SOC(
     );
 
     Counter #(
-        .ADDR_SEL_BITS(ADDR_VSMALL_PERIPH_SLAVE_SEL_BITS)
-    )Counter0(
+        .ADDR_SEL_BITS(ADDR_SMALL_PERIPH_SEL_BITS)
+    )TIMER0(
         .i_Clk(w_SysClk),
         
         //DBus Slave
-        .i_SlaveSel(w_DBUS_COUNTER0_Sel),
-        .i_RegAddr(w_DBus_VSMALL_PERIPH_RegSelAddr),
+        .i_SlaveSel(w_DBUS_TIMER0_Sel),
+        .i_RegAddr(w_DBus_SMALL_PERIPH_RegSelAddr),
 
         .i_AV_ByteEn(w_DBus_ByteEn),
         .i_AV_Read(w_DBus_Read),
         .i_AV_Write(w_DBus_Write),
-        .o_AV_ReadData(w_DBUS_COUNTER0_ReadData),
+        .o_AV_ReadData(w_DBUS_TIMER0_ReadData),
         .i_AV_WriteData(w_DBus_WriteData),
-        .o_AV_WaitRequest(w_DBUS_COUNTER0_WaitRequest)
+        .o_AV_WaitRequest(w_DBUS_TIMER0_WaitRequest)
     );
 
-    GPIOBusInterface #(
-        .ADDR_SEL_BITS(ADDR_VSMALL_PERIPH_SLAVE_SEL_BITS)
-    )GPIO0(
-        .i_Clk(w_SysClk),
+    // VideoDriver #(
+    //     //Video Timings
+    //     .HorSyncTime(HorSyncTime),
+	// 	.HorBackPorch(HorBackPorch),
+	// 	.HorFrontPorch(HorFrontPorch),
+	// 	.HorAddrVideoTime(HorAddrVideoTime),
+	// 	.HorEndCnt(HorEndCnt),
 
-        //DBus Slave
-        .i_SlaveSel(w_DBUS_GPIO_Sel),
-        .i_RegAddr(w_DBus_VSMALL_PERIPH_RegSelAddr),
+	// 	.VertSyncTime(VertSyncTime),
+	// 	.VertBackPorch(VertBackPorch),
+	// 	.VertFrontPorch(VertFrontPorch),
+	// 	.VertAddrVideoTime(VertAddrVideoTime),
+	// 	.VertEndCnt(VertEndCnt),
 
-        .i_AV_ByteEn(w_DBus_ByteEn),
-        .i_AV_Read(w_DBus_Read),
-        .i_AV_Write(w_DBus_Write),
-        .o_AV_ReadData(w_DBUS_GPIO_ReadData),
-        .i_AV_WriteData(w_DBus_WriteData),
-        .o_AV_WaitRequest(w_DBUS_GPIO_WaitRequest),
+    //     .ADDR_SEL_BITS(ADDR_SMALL_PERIPH_SEL_BITS)
+    // )VideoDriver(
+    //     .i_Clk(w_SysClk),
 
-        //GPIO
-        .o_7Seg_En(o_7Seg_En),
-        .o_7Seg_Led(o_7Seg_Led)
-    );
+    //     //DBus Slave
+    //     .i_SlaveSel(w_DBUS_TVRAM_Sel),
+    //     .i_RegAddr(w_DBus_SMALL_PERIPH_RegSelAddr),
+
+    //     .i_AV_ByteEn(w_DBus_ByteEn),
+    //     .i_AV_Read(w_DBus_Read),
+    //     .i_AV_Write(w_DBus_Write),
+    //     .o_AV_ReadData(w_DBUS_TVRAM_ReadData),
+    //     .i_AV_WriteData(w_DBus_WriteData),
+    //     .o_AV_WaitRequest(w_DBUS_TVRAM_WaitRequest),
+
+    //     //Video
+    //     .i_VidClk(w_VidClk),
+
+    //     .o_Pixel_Clk(o_VGA_Clk),
+	// 	.o_VSync(o_VGA_VSync),
+	// 	.o_HSync(o_VGA_HSync),
+	// 	.o_nBlank(o_VGA_nBlank),
+	// 	.o_R(o_VGA_R),
+	// 	.o_G(o_VGA_G),
+	// 	.o_B(o_VGA_B)
+    // );
+
+    assign o_VGA_Clk = 0;
+    assign o_VGA_VSync = 0;
+    assign o_VGA_HSync = 0;
+    assign o_VGA_nBlank = 0;
+    assign o_VGA_R = 0;
+    assign o_VGA_G = 0;
+    assign o_VGA_B = 0;
+
 endmodule
