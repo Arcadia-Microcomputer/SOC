@@ -295,7 +295,7 @@ module SOC(
         .io_Flash_IO(io_UserFlash_IO)
     );
 
-    ROM #(
+    BOOTROM #(
         .ADDR_SEL_BITS(ADDR_SMALL_PERIPH_SEL_BITS),
         .DEPTH(1024)
     )BOOT_ROM0(

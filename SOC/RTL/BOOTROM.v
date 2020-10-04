@@ -1,6 +1,6 @@
 `timescale 1ns / 1ps
 
-module ROM #(
+module BOOTROM #(
     parameter ADDR_SEL_BITS = 6,
     parameter DEPTH = 32
     )(
