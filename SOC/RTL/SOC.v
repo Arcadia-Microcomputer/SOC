@@ -134,8 +134,8 @@ module SOC(
     parameter RAM_SlaveAddr = {ADDR_PERIPH, ADDR_PERIPH_RAM};
     //IBus Port
     wire w_IBUS_RAM_Sel = (w_IBus_PERIPH_SlaveSelAddr == RAM_SlaveAddr)? 1: 0;
-    wire [31:0]w_IBUS_RAM_ReadData = 0; //UNIMPLEMENTED
-    wire w_IBUS_RAM_WaitRequest = 0; //UNIMPLEMENTED
+    wire [31:0]w_IBUS_RAM_ReadData;
+    wire w_IBUS_RAM_WaitRequest;
     //DBus Port
     wire w_DBUS_RAM_Sel = (w_DBus_PERIPH_SlaveSelAddr == RAM_SlaveAddr)? 1: 0;
     wire [31:0]w_DBUS_RAM_ReadData;
@@ -320,20 +320,26 @@ module SOC(
 
     RAM #(
         .ADDR_SEL_BITS(ADDR_PERIPH_SEL_BITS),
-        .DEPTH(512)
+        .DEPTH(1024)
     )RAM0(
         .i_Clk(w_SysClk),
 
-        //DBus Slave
-        .i_SlaveSel(w_DBUS_RAM_Sel),
-        .i_RegAddr(w_DBus_PERIPH_RegSelAddr),
+        //IBus R Slave
+        .i_AV0_SlaveSel(w_IBUS_RAM_Sel),
+        .i_AV0_RegAddr(w_IBus_PERIPH_RegSelAddr),
+        .i_AV0_Read(w_IBus_Read),
+        .o_AV0_ReadData(w_IBUS_RAM_ReadData),
+        .o_AV0_WaitRequest(w_IBUS_RAM_WaitRequest),
 
-        .i_AV_ByteEn(w_DBus_ByteEn),
-        .i_AV_Read(w_DBus_Read),
-        .i_AV_Write(w_DBus_Write),
-        .o_AV_ReadData(w_DBUS_RAM_ReadData),
-        .i_AV_WriteData(w_DBus_WriteData),
-        .o_AV_WaitRequest(w_DBUS_RAM_WaitRequest)
+        //DBus RW Slave
+        .i_AV1_SlaveSel(w_DBUS_RAM_Sel),
+        .i_AV1_RegAddr(w_DBus_PERIPH_RegSelAddr),
+        .i_AV1_ByteEn(w_DBus_ByteEn),
+        .i_AV1_Read(w_DBus_Read),
+        .i_AV1_Write(w_DBus_Write),
+        .o_AV1_ReadData(w_DBUS_RAM_ReadData),
+        .i_AV1_WriteData(w_DBus_WriteData),
+        .o_AV1_WaitRequest(w_DBUS_RAM_WaitRequest)
     );
 
     GPIOBusInterface #(

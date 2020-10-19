@@ -10,7 +10,7 @@
          </top_modules>
       </db_ref>
    </db_ref_list>
-   <WVObjectSize size="14" />
+   <WVObjectSize size="19" />
    <wvobject fp_name="/SOC_tb/SOC0/CPU0/i_Clk" type="logic" db_ref_id="1">
       <obj_property name="ElementShortName">i_Clk</obj_property>
       <obj_property name="ObjectShortName">i_Clk</obj_property>
@@ -318,5 +318,28 @@
       <obj_property name="UseCustomSignalColor">true</obj_property>
       <obj_property name="CustomSignalColor">#ffa500</obj_property>
       <obj_property name="Radix">ASCIIRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/SOC_tb/SOC0/RAM0/i_AV1_SlaveSel" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">i_AV1_SlaveSel</obj_property>
+      <obj_property name="ObjectShortName">i_AV1_SlaveSel</obj_property>
+   </wvobject>
+   <wvobject fp_name="/SOC_tb/SOC0/RAM0/i_AV1_RegAddr" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">i_AV1_RegAddr[19:0]</obj_property>
+      <obj_property name="ObjectShortName">i_AV1_RegAddr[19:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/SOC_tb/SOC0/RAM0/i_AV1_ByteEn" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">i_AV1_ByteEn[3:0]</obj_property>
+      <obj_property name="ObjectShortName">i_AV1_ByteEn[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/SOC_tb/SOC0/RAM0/i_AV1_WriteData" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">i_AV1_WriteData[31:0]</obj_property>
+      <obj_property name="ObjectShortName">i_AV1_WriteData[31:0]</obj_property>
+      <obj_property name="Radix">HEXRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/SOC_tb/SOC0/RAM0/Ram" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">Ram[1023:0,31:0]</obj_property>
+      <obj_property name="ObjectShortName">Ram[1023:0,31:0]</obj_property>
+      <obj_property name="Radix">HEXRADIX</obj_property>
    </wvobject>
 </wave_config>
