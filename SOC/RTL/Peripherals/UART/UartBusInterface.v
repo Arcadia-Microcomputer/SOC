@@ -6,9 +6,8 @@ module UartBusInterface #(
     input i_Clk,
 
     //Avalon RW slave
-    input i_SlaveSel,
-    input [29-ADDR_SEL_BITS:0]i_RegAddr,
-
+    input i_AV_SlaveSel,
+    input [29-ADDR_SEL_BITS:0]i_AV_RegAddr,
     input [3:0]i_AV_ByteEn,
     input i_AV_Read,
     input i_AV_Write,
@@ -70,10 +69,10 @@ module UartBusInterface #(
         r_TxFifo_WrEn <= 0;
         r_RxFifo_RdEn <= 0;
 
-        if (i_SlaveSel) begin
+        if (i_AV_SlaveSel) begin
             //Write transaction
             if(i_AV_Write)begin
-                case (i_RegAddr)
+                case (i_AV_RegAddr)
                     p_REG_ADDR_CTRL:begin
                         if(i_AV_ByteEn[0]) r_AReg_ClksPerBit[7:0] <= i_AV_WriteData[7:0];
                         if(i_AV_ByteEn[1]) r_AReg_ClksPerBit[15:8] <= i_AV_WriteData[15:8];
@@ -94,7 +93,7 @@ module UartBusInterface #(
             
             //Read transaction
             if(i_AV_Read)begin
-                case (i_RegAddr)
+                case (i_AV_RegAddr)
                     p_REG_ADDR_CTRL:begin
                         o_AV_ReadData <= {10'b0, r_AReg_FlowControlEn, !w_RxFifo_Empty, w_TxFifo_Full, (w_TxFifo_Empty && w_UartTX_Idle),
                                           r_AReg_RxEn, r_AReg_TxEn, r_AReg_ClksPerBit};

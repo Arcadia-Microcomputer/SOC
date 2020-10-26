@@ -6,9 +6,8 @@ module GPIOBusInterface #(
     input i_Clk,
 
     //Avalon RW slave
-    input i_SlaveSel,
-    input [29-ADDR_SEL_BITS:0]i_RegAddr,
-
+    input i_AV_SlaveSel,
+    input [29-ADDR_SEL_BITS:0]i_AV_RegAddr,
     input [3:0]i_AV_ByteEn,
     input i_AV_Read,
     input i_AV_Write,
@@ -45,10 +44,10 @@ module GPIOBusInterface #(
         o_AV_ReadData <= 0;
         o_AV_WaitRequest <= 0;
         
-        if (i_SlaveSel) begin
+        if (i_AV_SlaveSel) begin
             //Write transaction
             if(i_AV_Write)begin
-                case (i_RegAddr)
+                case (i_AV_RegAddr)
                     p_REG_ADDR_7SEG:begin
                         if(i_AV_ByteEn[0]) r_AReg_7SegOne        <= i_AV_WriteData[6:0];
                         if(i_AV_ByteEn[1]) r_AReg_7SegTwo        <= i_AV_WriteData[14:8];
@@ -60,7 +59,7 @@ module GPIOBusInterface #(
             
             //Read transaction
             if(i_AV_Read)begin
-                case (i_RegAddr)
+                case (i_AV_RegAddr)
                     p_REG_ADDR_7SEG:begin
                         o_AV_ReadData <= {7'b0, r_AReg_7SegLUTModeEn, r_AReg_7SegThree, r_AReg_7SegTwo, r_AReg_7SegOne};
                     end

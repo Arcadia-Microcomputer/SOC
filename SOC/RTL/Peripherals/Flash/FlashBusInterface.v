@@ -7,12 +7,10 @@ module FlashBusInterface #(
     input i_Clk,
 
     //Avalon RW slave
-    input i_MEM_SlaveSel,
-    input [29-MEM_ADDR_SEL_BITS:0]i_MEM_RegAddr,
-
+    input i_AV_MEM_SlaveSel,
+    input [29-MEM_ADDR_SEL_BITS:0]i_AV_MEM_RegAddr,
     input i_CNTRL_SlaveSel,
     input [29-CNTRL_ADDR_SEL_BITS:0]i_CNTRL_RegAddr,
-
     input [3:0]i_AV_ByteEn,
     input i_AV_Read,
     input i_AV_Write,
@@ -125,13 +123,13 @@ module FlashBusInterface #(
                     FSM_READ_state <= FSM_READ_WAIT;
                 end
             endcase
-        end else if (i_MEM_SlaveSel) begin
+        end else if (i_AV_MEM_SlaveSel) begin
             //Read transaction
             if(i_AV_Read)begin
                 r_MM_isReadTransaction <= 1;
                 r_MM_ReadByteCounter <= 4;
                 r_MM_ReadData <= 0;
-                r_MM_Addr <= {i_MEM_RegAddr[21:0], 2'b0};
+                r_MM_Addr <= {i_AV_MEM_RegAddr[21:0], 2'b0};
                 r_MM_CMDEn <= 1;
                 r_FLASH_AckReq <= 1;
                 o_AV_WaitRequest <= 1;

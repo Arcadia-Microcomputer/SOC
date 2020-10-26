@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- IMPORTANT: This is an internal file that has been generated
+     by the Xilinx ISE software.  Any direct editing or
+     changes made to this file may result in unpredictable
+     behavior or data corruption.  It is strongly advised that
+     users do not edit the contents of this file. -->
+<messages>
+<msg type="warning" file="HDLCompiler" num="693" delta="unknown" >"I:/4-Git Repos/Arcadia Microcomputer/SOC/SOC/WorkinDir/../RTL/Peripherals/UART/UartBusInterface.v" Line 32: Parameter declaration becomes local in <arg fmt="%s" index="1">UartBusInterface</arg> with formal parameter declaration list
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="693" delta="unknown" >"I:/4-Git Repos/Arcadia Microcomputer/SOC/SOC/WorkinDir/../RTL/Peripherals/UART/UartBusInterface.v" Line 33: Parameter declaration becomes local in <arg fmt="%s" index="1">UartBusInterface</arg> with formal parameter declaration list
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="693" delta="unknown" >"I:/4-Git Repos/Arcadia Microcomputer/SOC/SOC/WorkinDir/../RTL/Peripherals/Timer/Timer.v" Line 27: Parameter declaration becomes local in <arg fmt="%s" index="1">Timer</arg> with formal parameter declaration list
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="693" delta="unknown" >"I:/4-Git Repos/Arcadia Microcomputer/SOC/SOC/WorkinDir/../RTL/Peripherals/Timer/Timer.v" Line 28: Parameter declaration becomes local in <arg fmt="%s" index="1">Timer</arg> with formal parameter declaration list
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="693" delta="unknown" >"I:/4-Git Repos/Arcadia Microcomputer/SOC/SOC/WorkinDir/../RTL/Peripherals/Timer/Timer.v" Line 29: Parameter declaration becomes local in <arg fmt="%s" index="1">Timer</arg> with formal parameter declaration list
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="693" delta="unknown" >"I:/4-Git Repos/Arcadia Microcomputer/SOC/SOC/WorkinDir/../RTL/Peripherals/I2S/I2SBusInterface.v" Line 33: Parameter declaration becomes local in <arg fmt="%s" index="1">I2SBusInterface</arg> with formal parameter declaration list
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="693" delta="unknown" >"I:/4-Git Repos/Arcadia Microcomputer/SOC/SOC/WorkinDir/../RTL/Peripherals/I2S/I2SBusInterface.v" Line 34: Parameter declaration becomes local in <arg fmt="%s" index="1">I2SBusInterface</arg> with formal parameter declaration list
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="693" delta="unknown" >"I:/4-Git Repos/Arcadia Microcomputer/SOC/SOC/WorkinDir/../RTL/Peripherals/I2S/I2SBusInterface.v" Line 35: Parameter declaration becomes local in <arg fmt="%s" index="1">I2SBusInterface</arg> with formal parameter declaration list
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="693" delta="unknown" >"I:/4-Git Repos/Arcadia Microcomputer/SOC/SOC/WorkinDir/../RTL/Peripherals/GPIO/GPIOBusInterface.v" Line 30: Parameter declaration becomes local in <arg fmt="%s" index="1">GPIOBusInterface</arg> with formal parameter declaration list
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="693" delta="unknown" >"I:/4-Git Repos/Arcadia Microcomputer/SOC/SOC/WorkinDir/../RTL/Peripherals/GPIO/GPIOBusInterface.v" Line 31: Parameter declaration becomes local in <arg fmt="%s" index="1">GPIOBusInterface</arg> with formal parameter declaration list
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="693" delta="unknown" >"I:/4-Git Repos/Arcadia Microcomputer/SOC/SOC/WorkinDir/../RTL/Peripherals/GPIO/GPIOBusInterface.v" Line 32: Parameter declaration becomes local in <arg fmt="%s" index="1">GPIOBusInterface</arg> with formal parameter declaration list
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="693" delta="unknown" >"I:/4-Git Repos/Arcadia Microcomputer/SOC/SOC/WorkinDir/../RTL/Peripherals/GPIO/GPIOBusInterface.v" Line 33: Parameter declaration becomes local in <arg fmt="%s" index="1">GPIOBusInterface</arg> with formal parameter declaration list
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="693" delta="unknown" >"I:/4-Git Repos/Arcadia Microcomputer/SOC/SOC/WorkinDir/../RTL/Peripherals/Flash/FlashBusInterface.v" Line 34: Parameter declaration becomes local in <arg fmt="%s" index="1">FlashBusInterface</arg> with formal parameter declaration list
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="693" delta="unknown" >"I:/4-Git Repos/Arcadia Microcomputer/SOC/SOC/WorkinDir/../RTL/Peripherals/Flash/FlashBusInterface.v" Line 35: Parameter declaration becomes local in <arg fmt="%s" index="1">FlashBusInterface</arg> with formal parameter declaration list
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="693" delta="unknown" >"I:/4-Git Repos/Arcadia Microcomputer/SOC/SOC/WorkinDir/../RTL/Peripherals/Flash/FlashBusInterface.v" Line 36: Parameter declaration becomes local in <arg fmt="%s" index="1">FlashBusInterface</arg> with formal parameter declaration list
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="693" delta="unknown" >"I:/4-Git Repos/Arcadia Microcomputer/SOC/SOC/WorkinDir/../RTL/Peripherals/Flash/FlashBusInterface.v" Line 39: Parameter declaration becomes local in <arg fmt="%s" index="1">FlashBusInterface</arg> with formal parameter declaration list
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="693" delta="unknown" >"I:/4-Git Repos/Arcadia Microcomputer/SOC/SOC/WorkinDir/../RTL/Peripherals/Flash/FlashBusInterface.v" Line 40: Parameter declaration becomes local in <arg fmt="%s" index="1">FlashBusInterface</arg> with formal parameter declaration list
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="693" delta="unknown" >"I:/4-Git Repos/Arcadia Microcomputer/SOC/SOC/WorkinDir/../RTL/Peripherals/Flash/FlashBusInterface.v" Line 41: Parameter declaration becomes local in <arg fmt="%s" index="1">FlashBusInterface</arg> with formal parameter declaration list
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="693" delta="unknown" >"I:/4-Git Repos/Arcadia Microcomputer/SOC/SOC/WorkinDir/../RTL/Peripherals/Flash/FlashBusInterface.v" Line 42: Parameter declaration becomes local in <arg fmt="%s" index="1">FlashBusInterface</arg> with formal parameter declaration list
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="693" delta="unknown" >"I:/4-Git Repos/Arcadia Microcomputer/SOC/SOC/WorkinDir/../RTL/Peripherals/Flash/FlashBusInterface.v" Line 43: Parameter declaration becomes local in <arg fmt="%s" index="1">FlashBusInterface</arg> with formal parameter declaration list
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="693" delta="unknown" >"I:/4-Git Repos/Arcadia Microcomputer/SOC/SOC/WorkinDir/../RTL/Peripherals/Flash/FlashBusInterface.v" Line 44: Parameter declaration becomes local in <arg fmt="%s" index="1">FlashBusInterface</arg> with formal parameter declaration list
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="693" delta="unknown" >"I:/4-Git Repos/Arcadia Microcomputer/SOC/SOC/WorkinDir/../RTL/Peripherals/Flash/FlashBusInterface.v" Line 45: Parameter declaration becomes local in <arg fmt="%s" index="1">FlashBusInterface</arg> with formal parameter declaration list
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="693" delta="unknown" >"I:/4-Git Repos/Arcadia Microcomputer/SOC/SOC/WorkinDir/../RTL/Peripherals/Flash/FlashBusInterface.v" Line 46: Parameter declaration becomes local in <arg fmt="%s" index="1">FlashBusInterface</arg> with formal parameter declaration list
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="693" delta="unknown" >"I:/4-Git Repos/Arcadia Microcomputer/SOC/SOC/WorkinDir/../RTL/Peripherals/Flash/FlashBusInterface.v" Line 47: Parameter declaration becomes local in <arg fmt="%s" index="1">FlashBusInterface</arg> with formal parameter declaration list
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="1016" delta="unknown" >"I:/4-Git Repos/Arcadia Microcomputer/SOC/SOC/WorkinDir/../SIM/SOC_tb.v" Line 20: Port <arg fmt="%s" index="1">o_VGA_Clk</arg> is not connected to this instance
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="1016" delta="unknown" >"I:/4-Git Repos/Arcadia Microcomputer/SOC/SOC/WorkinDir/../RTL/Peripherals/Flash/FlashBusInterface.v" Line 241: Port <arg fmt="%s" index="1">o_ProgFull</arg> is not connected to this instance
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="1016" delta="unknown" >"I:/4-Git Repos/Arcadia Microcomputer/SOC/SOC/WorkinDir/../RTL/Peripherals/Flash/FlashControler.v" Line 82: Port <arg fmt="%s" index="1">R</arg> is not connected to this instance
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="189" delta="unknown" >"I:/4-Git Repos/Arcadia Microcomputer/SOC/SOC/WorkinDir/../RTL/Peripherals/Flash/FlashBusInterface.v" Line 225: Size mismatch in connection of port &lt;<arg fmt="%s" index="3">i_CMDEn</arg>&gt;. Formal port size is <arg fmt="%d" index="2">1</arg>-bit while actual signal size is <arg fmt="%d" index="1">24</arg>-bit.
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="189" delta="unknown" >"I:/4-Git Repos/Arcadia Microcomputer/SOC/SOC/WorkinDir/../RTL/Peripherals/Flash/FlashBusInterface.v" Line 226: Size mismatch in connection of port &lt;<arg fmt="%s" index="3">i_CMD</arg>&gt;. Formal port size is <arg fmt="%d" index="2">3</arg>-bit while actual signal size is <arg fmt="%d" index="1">32</arg>-bit.
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="1016" delta="unknown" >"I:/4-Git Repos/Arcadia Microcomputer/SOC/SOC/WorkinDir/../RTL/Peripherals/UART/UartBusInterface.v" Line 123: Port <arg fmt="%s" index="1">o_ProgFull</arg> is not connected to this instance
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="1016" delta="unknown" >"I:/4-Git Repos/Arcadia Microcomputer/SOC/SOC/WorkinDir/../RTL/Peripherals/UART/UartBusInterface.v" Line 153: Port <arg fmt="%s" index="1">o_ProgEmpty</arg> is not connected to this instance
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="1016" delta="unknown" >"I:/4-Git Repos/Arcadia Microcomputer/SOC/SOC/WorkinDir/../RTL/Peripherals/I2S/I2SDriver.v" Line 27: Port <arg fmt="%s" index="1">CE</arg> is not connected to this instance
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="1016" delta="unknown" >"I:/4-Git Repos/Arcadia Microcomputer/SOC/SOC/WorkinDir/../RTL/Peripherals/I2S/I2SDriver.v" Line 55: Port <arg fmt="%s" index="1">CE</arg> is not connected to this instance
+</msg>
+
+</messages>
+

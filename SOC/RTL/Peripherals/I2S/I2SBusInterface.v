@@ -6,9 +6,8 @@ module I2SBusInterface #(
     input i_Clk,
 
     //Avalon RW slave
-    input i_SlaveSel,
-    input [29-ADDR_SEL_BITS:0]i_RegAddr,
-
+    input i_AV_SlaveSel,
+    input [29-ADDR_SEL_BITS:0]i_AV_RegAddr,
     input [3:0]i_AV_ByteEn,
     input i_AV_Read,
     input i_AV_Write,
@@ -56,10 +55,10 @@ module I2SBusInterface #(
         o_AV_WaitRequest <= 0;
         r_Fifo_WrEn <= 0;
 
-        if (i_SlaveSel) begin
+        if (i_AV_SlaveSel) begin
             //Write transaction
             if(i_AV_Write)begin
-                case (i_RegAddr)
+                case (i_AV_RegAddr)
                     p_REG_ADDR_CNTRL:begin
                     end
                     p_REG_ADDR_DATAL:begin
@@ -80,7 +79,7 @@ module I2SBusInterface #(
             
             //Read transaction
             if(i_AV_Read)begin
-                case (i_RegAddr)
+                case (i_AV_RegAddr)
                     p_REG_ADDR_CNTRL:begin
                         o_AV_ReadData <= {31'b0, w_full};
                     end

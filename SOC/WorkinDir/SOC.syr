@@ -1,0 +1,2161 @@
+Release 14.7 - xst P.20131013 (nt64)
+Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
+--> Parameter TMPDIR set to xst/projnav.tmp
+
+
+Total REAL time to Xst completion: 0.00 secs
+Total CPU time to Xst completion: 0.38 secs
+ 
+--> Parameter xsthdpdir set to xst
+
+
+Total REAL time to Xst completion: 0.00 secs
+Total CPU time to Xst completion: 0.39 secs
+ 
+--> Reading design: SOC.prj
+
+TABLE OF CONTENTS
+  1) Synthesis Options Summary
+  2) HDL Parsing
+  3) HDL Elaboration
+  4) HDL Synthesis
+       4.1) HDL Synthesis Report
+  5) Advanced HDL Synthesis
+       5.1) Advanced HDL Synthesis Report
+  6) Low Level Synthesis
+  7) Partition Report
+  8) Design Summary
+       8.1) Primitive and Black Box Usage
+       8.2) Device utilization summary
+       8.3) Partition Resource Summary
+       8.4) Timing Report
+            8.4.1) Clock Information
+            8.4.2) Asynchronous Control Signals Information
+            8.4.3) Timing Summary
+            8.4.4) Timing Details
+            8.4.5) Cross Clock Domains Report
+
+
+=========================================================================
+*                      Synthesis Options Summary                        *
+=========================================================================
+---- Source Parameters
+Input File Name                    : "SOC.prj"
+Ignore Synthesis Constraint File   : NO
+
+---- Target Parameters
+Output File Name                   : "SOC"
+Output Format                      : NGC
+Target Device                      : xc6slx16-2-ftg256
+
+---- Source Options
+Top Module Name                    : SOC
+Automatic FSM Extraction           : YES
+FSM Encoding Algorithm             : Auto
+Safe Implementation                : No
+FSM Style                          : LUT
+RAM Extraction                     : Yes
+RAM Style                          : Auto
+ROM Extraction                     : Yes
+Shift Register Extraction          : YES
+ROM Style                          : Auto
+Resource Sharing                   : YES
+Asynchronous To Synchronous        : NO
+Shift Register Minimum Size        : 2
+Use DSP Block                      : Auto
+Automatic Register Balancing       : Yes
+
+---- Target Options
+LUT Combining                      : Auto
+Reduce Control Sets                : Auto
+Add IO Buffers                     : YES
+Global Maximum Fanout              : 100000
+Add Generic Clock Buffer(BUFG)     : 16
+Register Duplication               : YES
+Move First FlipFlop Stage          : YES
+Move Last FlipFlop Stage           : YES
+Optimize Instantiated Primitives   : NO
+Use Clock Enable                   : Auto
+Use Synchronous Set                : Auto
+Use Synchronous Reset              : Auto
+Pack IO Registers into IOBs        : True
+Equivalent register Removal        : YES
+
+---- General Options
+Optimization Goal                  : Speed
+Optimization Effort                : 2
+Power Reduction                    : NO
+Keep Hierarchy                     : Yes
+Netlist Hierarchy                  : As_Optimized
+RTL Output                         : No
+Global Optimization                : Inpad_To_Outpad
+Read Cores                         : YES
+Write Timing Constraints           : NO
+Cross Clock Analysis               : NO
+Hierarchy Separator                : _
+Bus Delimiter                      : {}
+Case Specifier                     : Maintain
+Slice Utilization Ratio            : 100
+BRAM Utilization Ratio             : 100
+DSP48 Utilization Ratio            : 100
+Auto BRAM Packing                  : NO
+Slice Utilization Ratio Delta      : 5
+
+---- Other Options
+Cores Search Directories           : {"../ipcore_dir"  }
+
+=========================================================================
+
+
+=========================================================================
+*                          HDL Parsing                                  *
+=========================================================================
+Analyzing Verilog file "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\ipcore_dir\PLL_M.v" into library work
+Parsing module <PLL_M>.
+Analyzing Verilog file "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\Power2Div.v" into library work
+Parsing module <Power2Div>.
+Analyzing Verilog file "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\CPU\BranchUnit.v" into library work
+Parsing module <BranchUnit>.
+Analyzing Verilog file "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\Peripherals\UART\UartTx.v" into library work
+Parsing module <UartTx>.
+Analyzing Verilog file "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\Peripherals\UART\UartRx.v" into library work
+Parsing module <UartRx>.
+Analyzing Verilog file "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\Peripherals\I2S\I2SDriver.v" into library work
+Parsing module <I2SDriver>.
+Analyzing Verilog file "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\Peripherals\GPIO\SevenSegmentDriver.v" into library work
+Parsing module <SevenSegmentDriver>.
+Analyzing Verilog file "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\Peripherals\Flash\FlashControler.v" into library work
+Parsing module <FlashControler>.
+Analyzing Verilog file "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\FIFO.v" into library work
+Parsing module <FIFO>.
+Analyzing Verilog file "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\CPU\RegFile.v" into library work
+Parsing module <RegFile>.
+Analyzing Verilog file "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\CPU\PC.v" into library work
+Parsing module <PC>.
+Analyzing Verilog file "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\CPU\LoadUpper.v" into library work
+Parsing module <LoadUpper>.
+Analyzing Verilog file "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\CPU\ImmGen.v" into library work
+Parsing module <ImmGen>.
+Analyzing Verilog file "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\CPU\IBusMaster.v" into library work
+Parsing module <IBusMaster>.
+Analyzing Verilog file "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\CPU\HazardUnit.v" into library work
+Parsing module <HazardUnit>.
+Analyzing Verilog file "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\CPU\ForwardingUnit.v" into library work
+Parsing module <ForwardingUnit>.
+Analyzing Verilog file "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\CPU\Decoder.v" into library work
+Parsing module <Decoder>.
+Analyzing Verilog file "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\CPU\DBusMaster.v" into library work
+Parsing module <DBusMaster>.
+Analyzing Verilog file "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\CPU\ALU.v" into library work
+Parsing module <ALU>.
+Analyzing Verilog file "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\ipcore_dir\I2S_FIFO.v" into library work
+Parsing module <I2S_FIFO>.
+Analyzing Verilog file "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\RAM.v" into library work
+Parsing module <RAM>.
+Analyzing Verilog file "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\Peripherals\UART\UartBusInterface.v" into library work
+Parsing module <UartBusInterface>.
+INFO:HDLCompiler:693 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\Peripherals\UART\UartBusInterface.v" Line 32. parameter declaration becomes local in UartBusInterface with formal parameter declaration list
+INFO:HDLCompiler:693 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\Peripherals\UART\UartBusInterface.v" Line 33. parameter declaration becomes local in UartBusInterface with formal parameter declaration list
+Analyzing Verilog file "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\Peripherals\Timer\Timer.v" into library work
+Parsing module <Timer>.
+INFO:HDLCompiler:693 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\Peripherals\Timer\Timer.v" Line 27. parameter declaration becomes local in Timer with formal parameter declaration list
+INFO:HDLCompiler:693 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\Peripherals\Timer\Timer.v" Line 28. parameter declaration becomes local in Timer with formal parameter declaration list
+INFO:HDLCompiler:693 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\Peripherals\Timer\Timer.v" Line 29. parameter declaration becomes local in Timer with formal parameter declaration list
+Analyzing Verilog file "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\Peripherals\I2S\I2SBusInterface.v" into library work
+Parsing module <I2SBusInterface>.
+INFO:HDLCompiler:693 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\Peripherals\I2S\I2SBusInterface.v" Line 33. parameter declaration becomes local in I2SBusInterface with formal parameter declaration list
+INFO:HDLCompiler:693 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\Peripherals\I2S\I2SBusInterface.v" Line 34. parameter declaration becomes local in I2SBusInterface with formal parameter declaration list
+INFO:HDLCompiler:693 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\Peripherals\I2S\I2SBusInterface.v" Line 35. parameter declaration becomes local in I2SBusInterface with formal parameter declaration list
+Analyzing Verilog file "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\Peripherals\GPIO\GPIOBusInterface.v" into library work
+Parsing module <GPIOBusInterface>.
+INFO:HDLCompiler:693 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\Peripherals\GPIO\GPIOBusInterface.v" Line 30. parameter declaration becomes local in GPIOBusInterface with formal parameter declaration list
+INFO:HDLCompiler:693 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\Peripherals\GPIO\GPIOBusInterface.v" Line 31. parameter declaration becomes local in GPIOBusInterface with formal parameter declaration list
+INFO:HDLCompiler:693 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\Peripherals\GPIO\GPIOBusInterface.v" Line 32. parameter declaration becomes local in GPIOBusInterface with formal parameter declaration list
+INFO:HDLCompiler:693 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\Peripherals\GPIO\GPIOBusInterface.v" Line 33. parameter declaration becomes local in GPIOBusInterface with formal parameter declaration list
+Analyzing Verilog file "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\Peripherals\Flash\FlashBusInterface.v" into library work
+Parsing module <FlashBusInterface>.
+INFO:HDLCompiler:693 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\Peripherals\Flash\FlashBusInterface.v" Line 34. parameter declaration becomes local in FlashBusInterface with formal parameter declaration list
+INFO:HDLCompiler:693 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\Peripherals\Flash\FlashBusInterface.v" Line 35. parameter declaration becomes local in FlashBusInterface with formal parameter declaration list
+INFO:HDLCompiler:693 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\Peripherals\Flash\FlashBusInterface.v" Line 36. parameter declaration becomes local in FlashBusInterface with formal parameter declaration list
+INFO:HDLCompiler:693 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\Peripherals\Flash\FlashBusInterface.v" Line 39. parameter declaration becomes local in FlashBusInterface with formal parameter declaration list
+INFO:HDLCompiler:693 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\Peripherals\Flash\FlashBusInterface.v" Line 40. parameter declaration becomes local in FlashBusInterface with formal parameter declaration list
+INFO:HDLCompiler:693 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\Peripherals\Flash\FlashBusInterface.v" Line 41. parameter declaration becomes local in FlashBusInterface with formal parameter declaration list
+INFO:HDLCompiler:693 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\Peripherals\Flash\FlashBusInterface.v" Line 42. parameter declaration becomes local in FlashBusInterface with formal parameter declaration list
+INFO:HDLCompiler:693 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\Peripherals\Flash\FlashBusInterface.v" Line 43. parameter declaration becomes local in FlashBusInterface with formal parameter declaration list
+INFO:HDLCompiler:693 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\Peripherals\Flash\FlashBusInterface.v" Line 44. parameter declaration becomes local in FlashBusInterface with formal parameter declaration list
+INFO:HDLCompiler:693 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\Peripherals\Flash\FlashBusInterface.v" Line 45. parameter declaration becomes local in FlashBusInterface with formal parameter declaration list
+INFO:HDLCompiler:693 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\Peripherals\Flash\FlashBusInterface.v" Line 46. parameter declaration becomes local in FlashBusInterface with formal parameter declaration list
+INFO:HDLCompiler:693 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\Peripherals\Flash\FlashBusInterface.v" Line 47. parameter declaration becomes local in FlashBusInterface with formal parameter declaration list
+Analyzing Verilog file "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\CPU\CPU.v" into library work
+Parsing module <CPU>.
+Analyzing Verilog file "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\BOOTROM.v" into library work
+Parsing module <BOOTROM>.
+Analyzing Verilog file "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\SOC.v" into library work
+Parsing module <SOC>.
+
+=========================================================================
+*                            HDL Elaboration                            *
+=========================================================================
+
+Elaborating module <SOC>.
+WARNING:HDLCompiler:1127 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\SOC.v" Line 233: Assignment to r_CPU0_DBus_Gnt ignored, since the identifier is never used
+
+Elaborating module <PLL_M>.
+
+Elaborating module <IBUFG>.
+
+Elaborating module <PLL_BASE(BANDWIDTH="OPTIMIZED",CLK_FEEDBACK="CLKFBOUT",COMPENSATION="SYSTEM_SYNCHRONOUS",DIVCLK_DIVIDE=2,CLKFBOUT_MULT=9,CLKFBOUT_PHASE=0.0,CLKOUT0_DIVIDE=6,CLKOUT0_PHASE=0.0,CLKOUT0_DUTY_CYCLE=0.5,CLKOUT1_DIVIDE=3,CLKOUT1_PHASE=0.0,CLKOUT1_DUTY_CYCLE=0.5,CLKOUT2_DIVIDE=35,CLKOUT2_PHASE=0.0,CLKOUT2_DUTY_CYCLE=0.5,CLKIN_PERIOD=10.0,REF_JITTER=0.0)>.
+WARNING:HDLCompiler:1127 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\ipcore_dir\PLL_M.v" Line 124: Assignment to clkout3_unused ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\ipcore_dir\PLL_M.v" Line 125: Assignment to clkout4_unused ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\ipcore_dir\PLL_M.v" Line 126: Assignment to clkout5_unused ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\ipcore_dir\PLL_M.v" Line 127: Assignment to locked_unused ignored, since the identifier is never used
+
+Elaborating module <BUFG>.
+WARNING:HDLCompiler:1127 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\SOC.v" Line 244: Assignment to w_VidClk ignored, since the identifier is never used
+
+Elaborating module <CPU(INITIAL_PC_VALUE=32'b11111111110000000000000000000000)>.
+
+Elaborating module <PC(INITIAL_PC_VALUE=32'b11111111110000000000000000000000)>.
+
+Elaborating module <BranchUnit>.
+
+Elaborating module <IBusMaster>.
+
+Elaborating module <Decoder>.
+
+Elaborating module <RegFile>.
+
+Elaborating module <ImmGen>.
+
+Elaborating module <ALU>.
+
+Elaborating module <LoadUpper>.
+
+Elaborating module <DBusMaster>.
+
+Elaborating module <ForwardingUnit>.
+
+Elaborating module <HazardUnit>.
+WARNING:HDLCompiler:413 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\CPU\HazardUnit.v" Line 133: Result of 32-bit expression is truncated to fit in 1-bit target.
+WARNING:HDLCompiler:1016 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\Peripherals\Flash\FlashBusInterface.v" Line 241: Port o_ProgFull is not connected to this instance
+
+Elaborating module <FlashBusInterface(MEM_ADDR_SEL_BITS=8,CNTRL_ADDR_SEL_BITS=20)>.
+WARNING:HDLCompiler:413 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\Peripherals\Flash\FlashBusInterface.v" Line 101: Result of 32-bit expression is truncated to fit in 4-bit target.
+WARNING:HDLCompiler:413 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\Peripherals\Flash\FlashBusInterface.v" Line 216: Result of 32-bit expression is truncated to fit in 7-bit target.
+WARNING:HDLCompiler:1016 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\Peripherals\Flash\FlashControler.v" Line 82: Port R is not connected to this instance
+
+Elaborating module <FlashControler>.
+
+Elaborating module <ODDR2(DDR_ALIGNMENT="NONE",INIT=1'b0,SRTYPE="SYNC")>.
+WARNING:HDLCompiler:295 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\Peripherals\Flash\FlashControler.v" Line 173: case condition never applies
+WARNING:HDLCompiler:413 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\Peripherals\Flash\FlashControler.v" Line 195: Result of 4-bit expression is truncated to fit in 3-bit target.
+WARNING:HDLCompiler:413 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\Peripherals\Flash\FlashControler.v" Line 209: Result of 3-bit expression is truncated to fit in 2-bit target.
+WARNING:HDLCompiler:413 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\Peripherals\Flash\FlashControler.v" Line 259: Result of 32-bit expression is truncated to fit in 3-bit target.
+WARNING:HDLCompiler:413 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\Peripherals\Flash\FlashControler.v" Line 263: Result of 4-bit expression is truncated to fit in 3-bit target.
+WARNING:HDLCompiler:634 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\Peripherals\Flash\FlashControler.v" Line 59: Net <r_Flash_O[3]> does not have a driver.
+WARNING:HDLCompiler:189 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\Peripherals\Flash\FlashBusInterface.v" Line 225: Size mismatch in connection of port <i_CMDEn>. Formal port size is 1-bit while actual signal size is 24-bit.
+WARNING:HDLCompiler:189 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\Peripherals\Flash\FlashBusInterface.v" Line 226: Size mismatch in connection of port <i_CMD>. Formal port size is 3-bit while actual signal size is 32-bit.
+
+Elaborating module <FIFO(FWFT="FALSE",WIDTH=8,DEPTH=64)>.
+WARNING:HDLCompiler:413 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\FIFO.v" Line 34: Result of 32-bit expression is truncated to fit in 1-bit target.
+WARNING:HDLCompiler:413 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\FIFO.v" Line 35: Result of 32-bit expression is truncated to fit in 1-bit target.
+WARNING:HDLCompiler:413 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\FIFO.v" Line 38: Result of 32-bit expression is truncated to fit in 1-bit target.
+WARNING:HDLCompiler:413 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\FIFO.v" Line 59: Result of 7-bit expression is truncated to fit in 6-bit target.
+WARNING:HDLCompiler:413 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\FIFO.v" Line 81: Result of 7-bit expression is truncated to fit in 6-bit target.
+WARNING:HDLCompiler:413 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\FIFO.v" Line 88: Result of 8-bit expression is truncated to fit in 7-bit target.
+WARNING:HDLCompiler:413 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\FIFO.v" Line 89: Result of 32-bit expression is truncated to fit in 7-bit target.
+WARNING:HDLCompiler:413 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\FIFO.v" Line 91: Result of 8-bit expression is truncated to fit in 7-bit target.
+WARNING:HDLCompiler:413 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\FIFO.v" Line 92: Result of 32-bit expression is truncated to fit in 7-bit target.
+
+Elaborating module <BOOTROM(ADDR_SEL_BITS=20,DEPTH=1024)>.
+
+Elaborating module <RAM(ADDR_SEL_BITS=10,DEPTH=1024)>.
+
+Elaborating module <GPIOBusInterface(ADDR_SEL_BITS=20)>.
+
+Elaborating module <Power2Div(POWER_OF_TWO_DIV=32768)>.
+WARNING:HDLCompiler:413 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\Power2Div.v" Line 15: Result of 16-bit expression is truncated to fit in 15-bit target.
+
+Elaborating module <SevenSegmentDriver>.
+WARNING:HDLCompiler:413 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\Peripherals\GPIO\SevenSegmentDriver.v" Line 49: Result of 4-bit expression is truncated to fit in 3-bit target.
+WARNING:HDLCompiler:1016 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\Peripherals\UART\UartBusInterface.v" Line 123: Port o_ProgFull is not connected to this instance
+WARNING:HDLCompiler:1016 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\Peripherals\UART\UartBusInterface.v" Line 153: Port o_ProgEmpty is not connected to this instance
+
+Elaborating module <UartBusInterface(ADDR_SEL_BITS=20)>.
+
+Elaborating module <FIFO(FWFT="FALSE",WIDTH=8,DEPTH=16)>.
+WARNING:HDLCompiler:413 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\FIFO.v" Line 34: Result of 32-bit expression is truncated to fit in 1-bit target.
+WARNING:HDLCompiler:413 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\FIFO.v" Line 35: Result of 32-bit expression is truncated to fit in 1-bit target.
+WARNING:HDLCompiler:413 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\FIFO.v" Line 38: Result of 32-bit expression is truncated to fit in 1-bit target.
+WARNING:HDLCompiler:413 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\FIFO.v" Line 59: Result of 5-bit expression is truncated to fit in 4-bit target.
+WARNING:HDLCompiler:413 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\FIFO.v" Line 81: Result of 5-bit expression is truncated to fit in 4-bit target.
+WARNING:HDLCompiler:413 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\FIFO.v" Line 88: Result of 6-bit expression is truncated to fit in 5-bit target.
+WARNING:HDLCompiler:413 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\FIFO.v" Line 89: Result of 32-bit expression is truncated to fit in 5-bit target.
+WARNING:HDLCompiler:413 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\FIFO.v" Line 91: Result of 6-bit expression is truncated to fit in 5-bit target.
+WARNING:HDLCompiler:413 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\FIFO.v" Line 92: Result of 32-bit expression is truncated to fit in 5-bit target.
+
+Elaborating module <UartTx>.
+WARNING:HDLCompiler:413 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\Peripherals\UART\UartTx.v" Line 62: Result of 17-bit expression is truncated to fit in 16-bit target.
+WARNING:HDLCompiler:413 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\Peripherals\UART\UartTx.v" Line 70: Result of 4-bit expression is truncated to fit in 3-bit target.
+WARNING:HDLCompiler:413 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\Peripherals\UART\UartTx.v" Line 78: Result of 17-bit expression is truncated to fit in 16-bit target.
+WARNING:HDLCompiler:413 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\Peripherals\UART\UartTx.v" Line 87: Result of 17-bit expression is truncated to fit in 16-bit target.
+WARNING:HDLCompiler:1127 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\Peripherals\UART\UartTx.v" Line 34: Assignment to r_UART_nCTS ignored, since the identifier is never used
+
+Elaborating module <FIFO(FWFT="TRUE",PROG_FULL_TRESHOLD=14,WIDTH=8,DEPTH=16)>.
+WARNING:HDLCompiler:413 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\FIFO.v" Line 34: Result of 32-bit expression is truncated to fit in 1-bit target.
+WARNING:HDLCompiler:413 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\FIFO.v" Line 35: Result of 32-bit expression is truncated to fit in 1-bit target.
+WARNING:HDLCompiler:413 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\FIFO.v" Line 37: Result of 32-bit expression is truncated to fit in 1-bit target.
+WARNING:HDLCompiler:413 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\FIFO.v" Line 38: Result of 32-bit expression is truncated to fit in 1-bit target.
+WARNING:HDLCompiler:413 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\FIFO.v" Line 59: Result of 5-bit expression is truncated to fit in 4-bit target.
+WARNING:HDLCompiler:413 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\FIFO.v" Line 72: Result of 5-bit expression is truncated to fit in 4-bit target.
+WARNING:HDLCompiler:413 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\FIFO.v" Line 88: Result of 6-bit expression is truncated to fit in 5-bit target.
+WARNING:HDLCompiler:413 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\FIFO.v" Line 89: Result of 32-bit expression is truncated to fit in 5-bit target.
+WARNING:HDLCompiler:413 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\FIFO.v" Line 91: Result of 6-bit expression is truncated to fit in 5-bit target.
+WARNING:HDLCompiler:413 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\FIFO.v" Line 92: Result of 32-bit expression is truncated to fit in 5-bit target.
+WARNING:HDLCompiler:1127 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\Peripherals\UART\UartBusInterface.v" Line 167: Assignment to w_RxFifo_Full ignored, since the identifier is never used
+
+Elaborating module <UartRx>.
+WARNING:HDLCompiler:413 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\Peripherals\UART\UartRx.v" Line 48: Result of 17-bit expression is truncated to fit in 16-bit target.
+WARNING:HDLCompiler:413 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\Peripherals\UART\UartRx.v" Line 58: Result of 4-bit expression is truncated to fit in 3-bit target.
+WARNING:HDLCompiler:413 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\Peripherals\UART\UartRx.v" Line 63: Result of 17-bit expression is truncated to fit in 16-bit target.
+WARNING:HDLCompiler:413 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\Peripherals\UART\UartRx.v" Line 71: Result of 17-bit expression is truncated to fit in 16-bit target.
+
+Elaborating module <I2SBusInterface(ADDR_SEL_BITS=20)>.
+
+Elaborating module <I2S_FIFO>.
+WARNING:HDLCompiler:1499 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\ipcore_dir\I2S_FIFO.v" Line 39: Empty module <I2S_FIFO> remains a black box.
+WARNING:HDLCompiler:1016 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\Peripherals\I2S\I2SDriver.v" Line 27: Port CE is not connected to this instance
+WARNING:HDLCompiler:1016 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\Peripherals\I2S\I2SDriver.v" Line 55: Port CE is not connected to this instance
+
+Elaborating module <I2SDriver>.
+
+Elaborating module <Power2Div(POWER_OF_TWO_DIV=32'sb01000000)>.
+WARNING:HDLCompiler:413 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\Power2Div.v" Line 15: Result of 7-bit expression is truncated to fit in 6-bit target.
+
+Elaborating module <Power2Div(POWER_OF_TWO_DIV=4)>.
+WARNING:HDLCompiler:413 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\Power2Div.v" Line 15: Result of 3-bit expression is truncated to fit in 2-bit target.
+WARNING:HDLCompiler:413 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\Peripherals\I2S\I2SDriver.v" Line 96: Result of 32-bit expression is truncated to fit in 5-bit target.
+
+Elaborating module <Timer(ADDR_SEL_BITS=20)>.
+WARNING:HDLCompiler:413 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\Peripherals\Timer\Timer.v" Line 144: Result of 9-bit expression is truncated to fit in 8-bit target.
+WARNING:HDLCompiler:413 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\Peripherals\Timer\Timer.v" Line 154: Result of 17-bit expression is truncated to fit in 16-bit target.
+
+=========================================================================
+*                           HDL Synthesis                               *
+=========================================================================
+
+Synthesizing Unit <SOC>.
+    Related source file is "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\SOC.v".
+        HorSyncTime = 44
+        HorBackPorch = 148
+        HorFrontPorch = 88
+        HorAddrVideoTime = 1920
+        HorEndCnt = 2200
+        VertSyncTime = 5
+        VertBackPorch = 36
+        VertFrontPorch = 4
+        VertAddrVideoTime = 1080
+        VertEndCnt = 1125
+        ADDR_TOP_SEL_BITS = 2
+        ADDR_TOP_MEM = 2'b00
+        ADDR_TOP_PERIPH = 2'b11
+        ADDR_MEM_SEL_BITS = 5
+        ADDR_MEM = 2'b00
+        ADDR_MEM_SDRAM0 = 3'b000
+        ADDR_MEM_SMALL_MEM = 3'b111
+        SDRAM0_SlaveAddr = 5'b00000
+        ADDR_SMALL_MEM_SEL_BITS = 8
+        ADDR_SMALL_MEM = 5'b00111
+        ADDR_SMALL_MEM_QSPI0 = 3'b000
+        QSPI0_SlaveAddr = 8'b00111000
+        ADDR_PERIPH_SEL_BITS = 10
+        ADDR_PERIPH = 2'b11
+        ADDR_PERIPH_RAM = 8'b00000000
+        ADDR_PERIPH_SMALL_PERIPH = 8'b11111111
+        RAM_SlaveAddr = 10'b1100000000
+        ADDR_SMALL_PERIPH_SEL_BITS = 20
+        ADDR_SMALL_PERIPH = 10'b1111111111
+        ADDR_SMALL_PERIPH_BOOT_ROM = 10'b0000000000
+        ADDR_SMALL_PERIPH_QSPI0_CNTRL = 10'b0000000001
+        ADDR_SMALL_PERIPH_GPIO = 10'b0000000010
+        ADDR_SMALL_PERIPH_WSG = 10'b0000000011
+        ADDR_SMALL_PERIPH_UART0 = 10'b0000000100
+        ADDR_SMALL_PERIPH_UART1 = 10'b0000000101
+        ADDR_SMALL_PERIPH_SPI0 = 10'b0000000110
+        ADDR_SMALL_PERIPH_SPI1 = 10'b0000000111
+        ADDR_SMALL_PERIPH_I2S0 = 10'b0000001000
+        ADDR_SMALL_PERIPH_TIMER0 = 10'b0000001001
+        ADDR_SMALL_PERIPH_TIMER1 = 10'b0000001010
+        BOOT_ROM_SlaveAddr = 20'b11111111110000000000
+        QSPI0_CNTRL_SlaveAddr = 20'b11111111110000000001
+        GPIO_SlaveAddr = 20'b11111111110000000010
+        UART0_SlaveAddr = 20'b11111111110000000100
+        I2S0_SlaveAddr = 20'b11111111110000001000
+        TIMER0_SlaveAddr = 20'b11111111110000001001
+INFO:Xst:3210 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\SOC.v" line 241: Output port <o_VidClk25M> of the instance <PLL_M_0> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\SOC.v" line 251: Output port <o_DBus_Req_E> of the instance <CPU0> is unconnected or connected to loadless signal.
+INFO:Xst:2774 - HDL ADVISOR - KEEP property attached to signal io_UserFlash_IO{1} may hinder XST clustering optimizations.
+    Summary:
+	no macro.
+Unit <SOC> synthesized.
+
+Synthesizing Unit <PLL_M>.
+    Related source file is "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\ipcore_dir\PLL_M.v".
+    Summary:
+	no macro.
+Unit <PLL_M> synthesized.
+
+Synthesizing Unit <CPU>.
+    Related source file is "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\CPU\CPU.v".
+        INITIAL_PC_VALUE = 32'b11111111110000000000000000000000
+    Found 19-bit register for signal <r_Control_E>.
+    Found 32-bit register for signal <r_PC_E>.
+    Found 32-bit register for signal <r_RS1_E>.
+    Found 32-bit register for signal <w_RS2_E>.
+    Found 32-bit register for signal <r_Immediate_E>.
+    Found 5-bit register for signal <r_RS1Addr_E>.
+    Found 5-bit register for signal <r_RS2Addr_E>.
+    Found 5-bit register for signal <r_RDAddr_E>.
+    Found 11-bit register for signal <r_Control_M>.
+    Found 32-bit register for signal <r_PCAdd4_M>.
+    Found 32-bit register for signal <r_PC_M>.
+    Found 32-bit register for signal <r_RS2_M>.
+    Found 32-bit register for signal <r_RS1_M>.
+    Found 1-bit register for signal <r_AluASign_M>.
+    Found 1-bit register for signal <r_AluBSign_M>.
+    Found 1-bit register for signal <r_AluCarry_M>.
+    Found 32-bit register for signal <r_ExeResult_M>.
+    Found 32-bit register for signal <r_Immediate_M>.
+    Found 5-bit register for signal <r_RS2Addr_M>.
+    Found 5-bit register for signal <r_RS1Addr_M>.
+    Found 5-bit register for signal <r_RDAddr_M>.
+    Found 4-bit register for signal <r_Control_W>.
+    Found 32-bit register for signal <r_PCAdd4_W>.
+    Found 32-bit register for signal <r_AluResult_W>.
+    Found 5-bit register for signal <r_RDAddr_W>.
+    Found 32-bit register for signal <r_PC_D>.
+    Found 32-bit adder for signal <w_PCPlus4_E> created at line 303.
+    Found 32-bit 4-to-1 multiplexer for signal <w_WBData_W> created at line 381.
+    Summary:
+	inferred   1 Adder/Subtractor(s).
+	inferred 488 D-type flip-flop(s).
+	inferred   8 Multiplexer(s).
+Unit <CPU> synthesized.
+
+Synthesizing Unit <PC>.
+    Related source file is "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\CPU\PC.v".
+        INITIAL_PC_VALUE = 32'b11111111110000000000000000000000
+    Found 32-bit register for signal <o_Pc>.
+    Found 32-bit adder for signal <w_PC_NextSeq> created at line 38.
+    Found 32-bit adder for signal <w_PC_Branch> created at line 39.
+    Summary:
+	inferred   1 Adder/Subtractor(s).
+	inferred  32 D-type flip-flop(s).
+	inferred   3 Multiplexer(s).
+Unit <PC> synthesized.
+
+Synthesizing Unit <BranchUnit>.
+    Related source file is "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\CPU\BranchUnit.v".
+        BEQ = 3'b000
+        BNE = 3'b001
+        BLT = 3'b100
+        BLTU = 3'b110
+        BGE = 3'b101
+        BGEU = 3'b111
+    Found 1-bit 7-to-1 multiplexer for signal <i_BranchType_M[2]_i_AluCarry_M_Mux_2_o> created at line 34.
+    Found 1-bit comparator not equal for signal <n0000> created at line 28
+    Found 1-bit comparator equal for signal <i_AluBSign_M_i_ResNeg_M_equal_2_o> created at line 28
+    Summary:
+	inferred   2 Comparator(s).
+	inferred   2 Multiplexer(s).
+Unit <BranchUnit> synthesized.
+
+Synthesizing Unit <IBusMaster>.
+    Related source file is "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\CPU\IBusMaster.v".
+WARNING:Xst:647 - Input <i_CpuAddr<1:0>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <i_IBus_WaitReq> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+    Found 32-bit register for signal <r_OldRd>.
+    Found 1-bit register for signal <r_Old_RdEn>.
+    Summary:
+	inferred  33 D-type flip-flop(s).
+	inferred   2 Multiplexer(s).
+Unit <IBusMaster> synthesized.
+
+Synthesizing Unit <Decoder>.
+    Related source file is "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\CPU\Decoder.v".
+        p_InstType_R = 7'b0110011
+        p_InstType_I = 7'b0010011
+        p_InstType_JALR = 7'b1100111
+        p_InstType_L = 7'b0000011
+        p_InstType_LUI = 7'b0110111
+        p_InstType_AUIPC = 7'b0010111
+        p_InstType_JAL = 7'b1101111
+        p_InstType_B = 7'b1100011
+        p_InstType_S = 7'b0100011
+        LU_LUI = 1'b0
+        LU_AUIPC = 1'b1
+        ALU_SRCB_RS2 = 1'b0
+        ALU_SRCB_IMM = 1'b1
+        ALU_ADD = 4'b0000
+        ALU_SUB = 4'b1000
+        ALU_AND = 4'b0111
+        ALU_OR = 4'b0110
+        ALU_XOR = 4'b0100
+        ALU_SLL = 4'b0001
+        ALU_SRL = 4'b0101
+        ALU_SRA = 4'b1101
+        ER_SRC_ALU = 0
+        ER_SRC_LU = 1
+        WB_SRC_PC_PLUS4 = 0
+        WB_SRC_ALU = 1
+        WB_SRC_DRAM = 2
+        BA_SRC_PC = 0
+        BA_SRC_REG1 = 1
+WARNING:Xst:647 - Input <i_Inst<11:7>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <i_Inst<29:15>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <i_Inst<31:31>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+    Summary:
+	inferred   1 Multiplexer(s).
+Unit <Decoder> synthesized.
+
+Synthesizing Unit <RegFile>.
+    Related source file is "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\CPU\RegFile.v".
+    Found 32x32-bit dual-port RAM <Mram_Registers> for signal <Registers>.
+    Summary:
+	inferred   2 RAM(s).
+	inferred   2 Multiplexer(s).
+Unit <RegFile> synthesized.
+
+Synthesizing Unit <ImmGen>.
+    Related source file is "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\CPU\ImmGen.v".
+        p_InstType_B = 7'b1100011
+        p_InstType_S = 7'b0100011
+        p_InstType_I = 7'b0010011
+        p_InstType_L = 7'b0000011
+        p_InstType_JALR = 7'b1100111
+        p_InstType_LUI = 7'b0110111
+        p_InstType_AUIP = 7'b0010111
+        p_InstType_JAL = 7'b1101111
+    Summary:
+	no macro.
+Unit <ImmGen> synthesized.
+
+Synthesizing Unit <ALU>.
+    Related source file is "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\CPU\ALU.v".
+        ALU_ADD = 4'b0000
+        ALU_SUB = 4'b1000
+        ALU_SLT = 4'b0010
+        ALU_SLTU = 4'b0011
+        ALU_AND = 4'b0111
+        ALU_OR = 4'b0110
+        ALU_XOR = 4'b0100
+        ALU_SLL = 4'b0001
+        ALU_SRL = 4'b0101
+        ALU_SRA = 4'b1101
+    Found 33-bit subtractor for signal <GND_13_o_GND_13_o_sub_3_OUT> created at line 38.
+    Found 32-bit adder for signal <i_A[31]_w_B[31]_add_1_OUT> created at line 35.
+    Found 32-bit shifter logical left for signal <i_A[31]_w_B[4]_shift_left_8_OUT> created at line 56
+    Found 32-bit shifter logical right for signal <i_A[31]_w_B[4]_shift_right_10_OUT> created at line 62
+    Summary:
+	inferred   2 Adder/Subtractor(s).
+	inferred  14 Multiplexer(s).
+	inferred   2 Combinational logic shifter(s).
+Unit <ALU> synthesized.
+
+Synthesizing Unit <LoadUpper>.
+    Related source file is "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\CPU\LoadUpper.v".
+        LU_LUI = 1'b0
+        LU_AUIPC = 1'b1
+    Found 32-bit adder for signal <i_PC[31]_i_Imm[31]_add_0_OUT> created at line 27.
+    Summary:
+	inferred   1 Adder/Subtractor(s).
+	inferred   1 Multiplexer(s).
+Unit <LoadUpper> synthesized.
+
+Synthesizing Unit <DBusMaster>.
+    Related source file is "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\CPU\DBusMaster.v".
+        p_BUS_BYTE_ACCESS = 2'b00
+        p_BUS_HALF_WORD_ACCESS = 2'b01
+        p_BUS_WORD_ACCESS = 2'b10
+    Found 2-bit register for signal <r_AddrRd>.
+    Found 30-bit register for signal <r_Old_DBus_Address>.
+    Found 4-bit register for signal <r_Old_DBus_ByteEn>.
+    Found 1-bit register for signal <r_Old_DBusRe>.
+    Found 1-bit register for signal <r_Old_DBusWe>.
+    Found 32-bit register for signal <r_Old_DBus_WriteData>.
+    Found 3-bit register for signal <r_BusModeRd>.
+    Found 4-bit shifter logical left for signal <GND_15_o_i_CpuAddr[1]_shift_left_24_OUT> created at line 131
+    Found 1-bit 4-to-1 multiplexer for signal <r_AddrRd[1]_i_DBus_ReadData[31]_Mux_14_o> created at line 86.
+    Found 1-bit 4-to-1 multiplexer for signal <r_AddrRd[1]_i_DBus_ReadData[30]_Mux_15_o> created at line 86.
+    Found 1-bit 4-to-1 multiplexer for signal <r_AddrRd[1]_i_DBus_ReadData[29]_Mux_16_o> created at line 86.
+    Found 1-bit 4-to-1 multiplexer for signal <r_AddrRd[1]_i_DBus_ReadData[28]_Mux_17_o> created at line 86.
+    Found 1-bit 4-to-1 multiplexer for signal <r_AddrRd[1]_i_DBus_ReadData[27]_Mux_18_o> created at line 86.
+    Found 1-bit 4-to-1 multiplexer for signal <r_AddrRd[1]_i_DBus_ReadData[26]_Mux_19_o> created at line 86.
+    Found 1-bit 4-to-1 multiplexer for signal <r_AddrRd[1]_i_DBus_ReadData[25]_Mux_20_o> created at line 86.
+    Found 1-bit 4-to-1 multiplexer for signal <r_AddrRd[1]_i_DBus_ReadData[24]_Mux_21_o> created at line 86.
+    Found 32-bit 4-to-1 multiplexer for signal <r_AddrRd[1]_GND_15_o_wide_mux_22_OUT> created at line 105.
+    Found 32-bit 4-to-1 multiplexer for signal <r_BusModeRd[1]_GND_15_o_wide_mux_23_OUT> created at line 81.
+    Found 32-bit 4-to-1 multiplexer for signal <i_CpuAddr[1]_i_CpuWd[7]_wide_mux_25_OUT> created at line 133.
+    Found 32-bit 4-to-1 multiplexer for signal <i_CpuAddr[1]_GND_15_o_wide_mux_26_OUT> created at line 149.
+    Found 32-bit 4-to-1 multiplexer for signal <i_BusMode[1]_GND_15_o_wide_mux_28_OUT> created at line 129.
+    Found 4-bit 4-to-1 multiplexer for signal <i_BusMode[1]_GND_15_o_wide_mux_29_OUT> created at line 129.
+    Found 1-bit tristate buffer for signal <o_DBus_Address{28}> created at line 29
+    Found 1-bit tristate buffer for signal <o_DBus_Address{27}> created at line 29
+    Found 1-bit tristate buffer for signal <o_DBus_Address{26}> created at line 29
+    Found 1-bit tristate buffer for signal <o_DBus_Address{25}> created at line 29
+    Found 1-bit tristate buffer for signal <o_DBus_Address{24}> created at line 29
+    Found 1-bit tristate buffer for signal <o_DBus_Address{23}> created at line 29
+    Found 1-bit tristate buffer for signal <o_DBus_Address{22}> created at line 29
+    Found 1-bit tristate buffer for signal <o_DBus_Address{21}> created at line 29
+    Found 1-bit tristate buffer for signal <o_DBus_Address{20}> created at line 29
+    Found 1-bit tristate buffer for signal <o_DBus_Address{19}> created at line 29
+    Found 1-bit tristate buffer for signal <o_DBus_Address{18}> created at line 29
+    Found 1-bit tristate buffer for signal <o_DBus_Address{17}> created at line 29
+    Found 1-bit tristate buffer for signal <o_DBus_Address{16}> created at line 29
+    Found 1-bit tristate buffer for signal <o_DBus_Address{15}> created at line 29
+    Found 1-bit tristate buffer for signal <o_DBus_Address{14}> created at line 29
+    Found 1-bit tristate buffer for signal <o_DBus_Address{13}> created at line 29
+    Found 1-bit tristate buffer for signal <o_DBus_Address{12}> created at line 29
+    Found 1-bit tristate buffer for signal <o_DBus_Address{11}> created at line 29
+    Found 1-bit tristate buffer for signal <o_DBus_Address{10}> created at line 29
+    Found 1-bit tristate buffer for signal <o_DBus_Address{9}> created at line 29
+    Found 1-bit tristate buffer for signal <o_DBus_Address{8}> created at line 29
+    Found 1-bit tristate buffer for signal <o_DBus_Address{7}> created at line 29
+    Found 1-bit tristate buffer for signal <o_DBus_Address{6}> created at line 29
+    Found 1-bit tristate buffer for signal <o_DBus_Address{5}> created at line 29
+    Found 1-bit tristate buffer for signal <o_DBus_Address{4}> created at line 29
+    Found 1-bit tristate buffer for signal <o_DBus_Address{3}> created at line 29
+    Found 1-bit tristate buffer for signal <o_DBus_Address{2}> created at line 29
+    Found 1-bit tristate buffer for signal <o_DBus_Address{1}> created at line 29
+    Found 1-bit tristate buffer for signal <o_DBus_Address{0}> created at line 29
+    Found 1-bit tristate buffer for signal <o_DBus_ByteEn{3}> created at line 30
+    Found 1-bit tristate buffer for signal <o_DBus_ByteEn{2}> created at line 30
+    Found 1-bit tristate buffer for signal <o_DBus_ByteEn{1}> created at line 30
+    Found 1-bit tristate buffer for signal <o_DBus_ByteEn{0}> created at line 30
+    Found 1-bit tristate buffer for signal <o_DBus_Read> created at line 31
+    Found 1-bit tristate buffer for signal <o_DBus_Write> created at line 32
+    Found 1-bit tristate buffer for signal <o_DBus_WriteData{31}> created at line 33
+    Found 1-bit tristate buffer for signal <o_DBus_WriteData{30}> created at line 33
+    Found 1-bit tristate buffer for signal <o_DBus_WriteData{29}> created at line 33
+    Found 1-bit tristate buffer for signal <o_DBus_WriteData{28}> created at line 33
+    Found 1-bit tristate buffer for signal <o_DBus_WriteData{27}> created at line 33
+    Found 1-bit tristate buffer for signal <o_DBus_WriteData{26}> created at line 33
+    Found 1-bit tristate buffer for signal <o_DBus_WriteData{25}> created at line 33
+    Found 1-bit tristate buffer for signal <o_DBus_WriteData{24}> created at line 33
+    Found 1-bit tristate buffer for signal <o_DBus_WriteData{23}> created at line 33
+    Found 1-bit tristate buffer for signal <o_DBus_WriteData{22}> created at line 33
+    Found 1-bit tristate buffer for signal <o_DBus_WriteData{21}> created at line 33
+    Found 1-bit tristate buffer for signal <o_DBus_WriteData{20}> created at line 33
+    Found 1-bit tristate buffer for signal <o_DBus_WriteData{19}> created at line 33
+    Found 1-bit tristate buffer for signal <o_DBus_WriteData{18}> created at line 33
+    Found 1-bit tristate buffer for signal <o_DBus_WriteData{17}> created at line 33
+    Found 1-bit tristate buffer for signal <o_DBus_WriteData{16}> created at line 33
+    Found 1-bit tristate buffer for signal <o_DBus_WriteData{15}> created at line 33
+    Found 1-bit tristate buffer for signal <o_DBus_WriteData{14}> created at line 33
+    Found 1-bit tristate buffer for signal <o_DBus_WriteData{13}> created at line 33
+    Found 1-bit tristate buffer for signal <o_DBus_WriteData{12}> created at line 33
+    Found 1-bit tristate buffer for signal <o_DBus_WriteData{11}> created at line 33
+    Found 1-bit tristate buffer for signal <o_DBus_WriteData{10}> created at line 33
+    Found 1-bit tristate buffer for signal <o_DBus_WriteData{9}> created at line 33
+    Found 1-bit tristate buffer for signal <o_DBus_WriteData{8}> created at line 33
+    Found 1-bit tristate buffer for signal <o_DBus_WriteData{7}> created at line 33
+    Found 1-bit tristate buffer for signal <o_DBus_WriteData{6}> created at line 33
+    Found 1-bit tristate buffer for signal <o_DBus_WriteData{5}> created at line 33
+    Found 1-bit tristate buffer for signal <o_DBus_WriteData{4}> created at line 33
+    Found 1-bit tristate buffer for signal <o_DBus_WriteData{3}> created at line 33
+    Found 1-bit tristate buffer for signal <o_DBus_WriteData{2}> created at line 33
+    Found 1-bit tristate buffer for signal <o_DBus_WriteData{1}> created at line 33
+    Found 1-bit tristate buffer for signal <o_DBus_WriteData{0}> created at line 33
+    Summary:
+	inferred  73 D-type flip-flop(s).
+	inferred  20 Multiplexer(s).
+	inferred   1 Combinational logic shifter(s).
+	inferred  67 Tristate(s).
+Unit <DBusMaster> synthesized.
+
+Synthesizing Unit <ForwardingUnit>.
+    Related source file is "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\CPU\ForwardingUnit.v".
+        p_SRC_REG = 2'b00
+        p_SRC_WB = 2'b01
+    Found 5-bit comparator equal for signal <i_RDAddr_M[4]_i_RS1Addr_D[4]_equal_2_o> created at line 26
+    Found 5-bit comparator equal for signal <i_RDAddr_M[4]_i_RS2Addr_D[4]_equal_4_o> created at line 33
+    Found 5-bit comparator equal for signal <i_RDAddr_M[4]_i_RS1Addr_E[4]_equal_6_o> created at line 40
+    Found 5-bit comparator equal for signal <i_RDAddr_M[4]_i_RS2Addr_E[4]_equal_8_o> created at line 47
+    Found 5-bit comparator equal for signal <i_RDAddr_M[4]_i_RS1Addr_M[4]_equal_10_o> created at line 54
+    Found 5-bit comparator equal for signal <i_RDAddr_M[4]_i_RS2Addr_M[4]_equal_12_o> created at line 61
+    Summary:
+	inferred   6 Comparator(s).
+Unit <ForwardingUnit> synthesized.
+
+Synthesizing Unit <HazardUnit>.
+    Related source file is "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\CPU\HazardUnit.v".
+WARNING:Xst:647 - Input <i_IBusWaitReq_D> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <i_IsJump_M> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+    Found 1-bit register for signal <r_StallCounter_q>.
+    Found 2-bit subtractor for signal <n0049> created at line 133.
+    Found 5-bit comparator equal for signal <i_RS1Addr_D[4]_i_RDAddr_E[4]_equal_1_o> created at line 62
+    Found 5-bit comparator equal for signal <i_RS2Addr_D[4]_i_RDAddr_E[4]_equal_2_o> created at line 62
+    Found 5-bit comparator equal for signal <i_RS1Addr_D[4]_i_RDAddr_M[4]_equal_3_o> created at line 63
+    Found 5-bit comparator equal for signal <i_RS2Addr_D[4]_i_RDAddr_M[4]_equal_4_o> created at line 63
+    Found 5-bit comparator equal for signal <i_RS1Addr_D[4]_i_RDAddr_W[4]_equal_5_o> created at line 64
+    Found 5-bit comparator equal for signal <i_RS2Addr_D[4]_i_RDAddr_W[4]_equal_6_o> created at line 64
+    Summary:
+	inferred   1 Adder/Subtractor(s).
+	inferred   1 D-type flip-flop(s).
+	inferred   6 Comparator(s).
+	inferred  10 Multiplexer(s).
+Unit <HazardUnit> synthesized.
+
+Synthesizing Unit <FlashBusInterface>.
+    Related source file is "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\Peripherals\Flash\FlashBusInterface.v".
+        MEM_ADDR_SEL_BITS = 8
+        CNTRL_ADDR_SEL_BITS = 20
+WARNING:Xst:647 - Input <i_AV_ByteEn<3:3>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <i_AV_WriteData<31:24>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+INFO:Xst:3210 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\Peripherals\Flash\FlashBusInterface.v" line 245: Output port <o_ProgFull> of the instance <WrFIFO> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\Peripherals\Flash\FlashBusInterface.v" line 245: Output port <o_ProgEmpty> of the instance <WrFIFO> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\Peripherals\Flash\FlashBusInterface.v" line 245: Output port <o_OverFlow> of the instance <WrFIFO> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\Peripherals\Flash\FlashBusInterface.v" line 245: Output port <o_UnderFlow> of the instance <WrFIFO> is unconnected or connected to loadless signal.
+    Found 1-bit register for signal <o_AV_WaitRequest>.
+    Found 1-bit register for signal <r_WRFifo_WrEn>.
+    Found 1-bit register for signal <r_WRFifo_RdEn>.
+    Found 1-bit register for signal <r_AReg_CMDEn>.
+    Found 24-bit register for signal <r_MM_CMDEn>.
+    Found 1-bit register for signal <r_FLASH_AckReq>.
+    Found 1-bit register for signal <r_MM_isReadTransaction>.
+    Found 24-bit register for signal <r_MM_ReadData>.
+    Found 1-bit register for signal <FSM_READ_state>.
+    Found 4-bit register for signal <r_MM_ReadByteCounter>.
+    Found 24-bit register for signal <r_MM_Addr>.
+    Found 4-bit register for signal <r_AReg_CMD>.
+    Found 24-bit register for signal <r_FLASH_Addr>.
+    Found 1-bit register for signal <r_isWriteTransaction>.
+    Found 7-bit register for signal <r_AReg_Count>.
+    Found 24-bit register for signal <r_AReg_Addr>.
+    Found 8-bit register for signal <r_WRFifo_WrData>.
+    Found 32-bit register for signal <o_AV_ReadData>.
+    Found 4-bit subtractor for signal <GND_85_o_GND_85_o_sub_2_OUT{3:0}> created at line 101.
+    Found 7-bit subtractor for signal <GND_85_o_GND_85_o_sub_69_OUT{6:0}> created at line 216.
+    Found 32-bit 4-to-1 multiplexer for signal <_n0299> created at line 187.
+    Summary:
+	inferred   2 Adder/Subtractor(s).
+	inferred 183 D-type flip-flop(s).
+	inferred  58 Multiplexer(s).
+Unit <FlashBusInterface> synthesized.
+
+Synthesizing Unit <FlashControler>.
+    Related source file is "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\Peripherals\Flash\FlashControler.v".
+        COMMAND_WRITE_ENABLE = 0
+        COMMAND_VOL_SR_WRITE_ENABLE = 1
+        COMMAND_SECTOR_ERASE_4KB = 2
+        COMMAND_BLOCK_ERASE_64KB = 3
+        COMMAND_CHIP_ERASE = 4
+        COMMAND_PROGRAM_PAGE = 5
+        COMMAND_READ = 6
+        COMMAND_READ_SR = 7
+        COMMAND_WRITE_SR = 8
+        FLASH_WRITE_ENABLE = 8'b00000110
+        FLASH_VOLATILE_SR_WRITE_ENABLE = 8'b01010000
+        FLASH_WRITE_DISABLE = 8'b00000100
+        FLASH_READ_DATA = 8'b00000011
+        FLASH_PAGE_PROGRAM = 8'b00000010
+        FLASH_SECTOR_ERASE_4KB = 8'b00100000
+        FLASH_BLOCK_ERASE_32KB = 8'b01010010
+        FLASH_BLOCK_ERASE_64KB = 8'b11011000
+        FLASH_CHIP_ERASE = 8'b11000111
+        FLASH_READ_STATUS_REG_1 = 8'b00000101
+        FLASH_WRITE_STATUS_REG_1 = 8'b00000001
+        FLASH_READ_STATUS_REG_2 = 8'b00110101
+        FLASH_WRITE_STATUS_REG_2 = 8'b00110001
+        FLASH_READ_STATUS_REG_3 = 8'b00010101
+        FLASH_WRITE_STATUS_REG_3 = 8'b00010001
+WARNING:Xst:2935 - Signal 'r_Flash_O{3}', unconnected in block 'FlashControler', is tied to its initial value (0).
+WARNING:Xst:2935 - Signal 'r_Flash_O{1}', unconnected in block 'FlashControler', is tied to its initial value (0).
+    Found 1-bit register for signal <o_NewDataAvailableNextClk>.
+    Found 4-bit register for signal <r_Flash_IO_SelectOutput>.
+    Found 3-bit register for signal <r_WaitRead>.
+    Found 1-bit register for signal <r_TmpByte{7}>.
+    Found 1-bit register for signal <r_TmpByte{6}>.
+    Found 1-bit register for signal <r_TmpByte{5}>.
+    Found 1-bit register for signal <r_TmpByte{4}>.
+    Found 1-bit register for signal <r_TmpByte{3}>.
+    Found 1-bit register for signal <r_TmpByte{2}>.
+    Found 1-bit register for signal <r_TmpByte{1}>.
+    Found 1-bit register for signal <r_TmpByte{0}>.
+    Found 3-bit register for signal <r_BitCounter>.
+    Found 8-bit register for signal <o_ReadData>.
+    Found 2-bit register for signal <FSM_state>.
+    Found 1-bit register for signal <o_ReqNextData>.
+    Found 1-bit register for signal <r_Flash_O{2}>.
+    Found 1-bit register for signal <r_Flash_O{0}>.
+    Found 2-bit register for signal <r_AddressByteCounter>.
+    Found 1-bit register for signal <r_SendAddress>.
+    Found 1-bit register for signal <o_Flash_nCS>.
+    Found 1-bit register for signal <r_CMDBusy>.
+    Found 1-bit register for signal <r_NumBytesHostDependant>.
+    Found 1-bit register for signal <r_ReceiveTrue>.
+    Found 1-bit register for signal <r_EnClk>.
+    Found finite state machine <FSM_0> for signal <FSM_state>.
+    -----------------------------------------------------------------------
+    | States             | 3                                              |
+    | Transitions        | 16                                             |
+    | Inputs             | 8                                              |
+    | Outputs            | 4                                              |
+    | Clock              | i_Clk (rising_edge)                            |
+    | Power Up State     | 00                                             |
+    | Encoding           | auto                                           |
+    | Implementation     | LUT                                            |
+    -----------------------------------------------------------------------
+    Found 4-bit subtractor for signal <GND_86_o_GND_86_o_sub_45_OUT> created at line 262.
+    Found 2-bit adder for signal <r_AddressByteCounter[1]_GND_86_o_add_22_OUT> created at line 209.
+    Found 3-bit adder for signal <r_BitCounter[2]_GND_86_o_add_47_OUT> created at line 263.
+    Found 3-bit subtractor for signal <GND_86_o_GND_86_o_sub_44_OUT{2:0}> created at line 259.
+    Found 4x1-bit Read Only RAM for signal <i_CMD[2]_PWR_23_o_Mux_7_o>
+    Found 8x5-bit Read Only RAM for signal <_n0876>
+    Found 1-bit 8-to-1 multiplexer for signal <GND_86_o_r_TmpByte[7]_Mux_18_o> created at line 193.
+    Found 1-bit tristate buffer for signal <io_Flash_IO{3}> created at line 60
+    Found 1-bit tristate buffer for signal <io_Flash_IO{2}> created at line 61
+    Found 1-bit tristate buffer for signal <io_Flash_IO{1}> created at line 62
+    Found 1-bit tristate buffer for signal <io_Flash_IO{0}> created at line 63
+    Found 32-bit comparator lessequal for signal <n0062> created at line 262
+    Summary:
+	inferred   2 RAM(s).
+	inferred   4 Adder/Subtractor(s).
+	inferred  38 D-type flip-flop(s).
+	inferred   1 Comparator(s).
+	inferred 115 Multiplexer(s).
+	inferred   4 Tristate(s).
+	inferred   1 Finite State Machine(s).
+Unit <FlashControler> synthesized.
+
+Synthesizing Unit <FIFO_1>.
+    Related source file is "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\FIFO.v".
+        FWFT = "FALSE"
+        PROG_FULL_TRESHOLD = 0
+        PROG_EMPTY_TRESHOLD = 0
+        WIDTH = 8
+        DEPTH = 64
+    Found 64x8-bit dual-port RAM <Mram_r_RAM> for signal <r_RAM>.
+    Found 6-bit register for signal <r_WrPointer>.
+    Found 1-bit register for signal <o_UnderFlow>.
+    Found 6-bit register for signal <r_RdPointer>.
+    Found 8-bit register for signal <o_RdData>.
+    Found 7-bit register for signal <r_Count>.
+    Found 1-bit register for signal <o_OverFlow>.
+    Found 6-bit adder for signal <r_WrPointer[5]_GND_92_o_add_7_OUT> created at line 59.
+    Found 6-bit adder for signal <r_RdPointer[5]_GND_92_o_add_11_OUT> created at line 81.
+    Found 7-bit adder for signal <r_Count[6]_GND_92_o_add_17_OUT> created at line 88.
+    Found 7-bit subtractor for signal <GND_92_o_GND_92_o_sub_19_OUT{6:0}> created at line 89.
+    Found 7-bit comparator lessequal for signal <n0005> created at line 38
+    Summary:
+	inferred   1 RAM(s).
+	inferred   4 Adder/Subtractor(s).
+	inferred  29 D-type flip-flop(s).
+	inferred   1 Comparator(s).
+Unit <FIFO_1> synthesized.
+
+Synthesizing Unit <BOOTROM>.
+    Related source file is "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\BOOTROM.v".
+        ADDR_SEL_BITS = 20
+        DEPTH = 1024
+WARNING:Xst:2999 - Signal 'Ram', unconnected in block 'BOOTROM', is tied to its initial value.
+    Found 1024x32-bit dual-port Read Only RAM <Mram_Ram> for signal <Ram>.
+    Found 32-bit register for signal <o_AV1_ReadData>.
+    Found 32-bit register for signal <o_AV0_ReadData>.
+    Summary:
+	inferred   1 RAM(s).
+	inferred  64 D-type flip-flop(s).
+Unit <BOOTROM> synthesized.
+
+Synthesizing Unit <RAM>.
+    Related source file is "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\RAM.v".
+        ADDR_SEL_BITS = 10
+        DEPTH = 1024
+WARNING:Xst:647 - Input <i_AV0_RegAddr<19:10>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <i_AV1_RegAddr<19:10>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+    Found 1024x32-bit dual-port RAM <Mram_Ram> for signal <Ram>.
+    Found 32-bit register for signal <o_AV1_ReadData>.
+    Found 32-bit register for signal <o_AV0_ReadData>.
+    Summary:
+	inferred   1 RAM(s).
+	inferred  64 D-type flip-flop(s).
+	inferred   8 Multiplexer(s).
+Unit <RAM> synthesized.
+
+Synthesizing Unit <GPIOBusInterface>.
+    Related source file is "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\Peripherals\GPIO\GPIOBusInterface.v".
+        ADDR_SEL_BITS = 20
+WARNING:Xst:647 - Input <i_AV_WriteData<7:7>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <i_AV_WriteData<15:15>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <i_AV_WriteData<23:23>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <i_AV_WriteData<31:25>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+    Found 7-bit register for signal <r_AReg_7SegOne>.
+    Found 7-bit register for signal <r_AReg_7SegTwo>.
+    Found 7-bit register for signal <r_AReg_7SegThree>.
+    Found 1-bit register for signal <r_AReg_7SegLUTModeEn>.
+    Found 32-bit register for signal <o_AV_ReadData>.
+    WARNING:Xst:2404 -  FFs/Latches <o_AV_WaitRequest<0:0>> (without init value) have a constant value of 0 in block <GPIOBusInterface>.
+    Summary:
+	inferred  54 D-type flip-flop(s).
+	inferred  22 Multiplexer(s).
+Unit <GPIOBusInterface> synthesized.
+
+Synthesizing Unit <Power2Div_1>.
+    Related source file is "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\Power2Div.v".
+        POWER_OF_TWO_DIV = 32768
+    Found 15-bit register for signal <r_Counter>.
+    Found 15-bit adder for signal <r_Counter[14]_GND_96_o_add_1_OUT> created at line 15.
+    Summary:
+	inferred   1 Adder/Subtractor(s).
+	inferred  15 D-type flip-flop(s).
+Unit <Power2Div_1> synthesized.
+
+Synthesizing Unit <SevenSegmentDriver>.
+    Related source file is "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\Peripherals\GPIO\SevenSegmentDriver.v".
+    Found 3-bit register for signal <o_7Seg_En>.
+    Found 7-bit register for signal <o_7Seg_Led>.
+    Found 3-bit register for signal <r_7SegSelCounter>.
+    Found 3-bit adder for signal <r_7SegSelCounter[2]_GND_97_o_add_9_OUT> created at line 49.
+    Summary:
+	inferred   1 Adder/Subtractor(s).
+	inferred  13 D-type flip-flop(s).
+	inferred   6 Multiplexer(s).
+Unit <SevenSegmentDriver> synthesized.
+
+Synthesizing Unit <UartBusInterface>.
+    Related source file is "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\Peripherals\UART\UartBusInterface.v".
+        ADDR_SEL_BITS = 20
+WARNING:Xst:647 - Input <i_AV_ByteEn<3:3>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <i_AV_WriteData<20:18>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <i_AV_WriteData<31:22>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+INFO:Xst:3210 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\Peripherals\UART\UartBusInterface.v" line 127: Output port <o_ProgFull> of the instance <TxFIFO> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\Peripherals\UART\UartBusInterface.v" line 127: Output port <o_ProgEmpty> of the instance <TxFIFO> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\Peripherals\UART\UartBusInterface.v" line 127: Output port <o_OverFlow> of the instance <TxFIFO> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\Peripherals\UART\UartBusInterface.v" line 127: Output port <o_UnderFlow> of the instance <TxFIFO> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\Peripherals\UART\UartBusInterface.v" line 158: Output port <o_Full> of the instance <RxFIFO> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\Peripherals\UART\UartBusInterface.v" line 158: Output port <o_ProgEmpty> of the instance <RxFIFO> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\Peripherals\UART\UartBusInterface.v" line 158: Output port <o_OverFlow> of the instance <RxFIFO> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\Peripherals\UART\UartBusInterface.v" line 158: Output port <o_UnderFlow> of the instance <RxFIFO> is unconnected or connected to loadless signal.
+    Found 1-bit register for signal <r_TxFifo_WrEn>.
+    Found 1-bit register for signal <r_RxFifo_RdEn>.
+    Found 16-bit register for signal <r_AReg_ClksPerBit>.
+    Found 1-bit register for signal <r_AReg_TxEn>.
+    Found 1-bit register for signal <r_AReg_RxEn>.
+    Found 1-bit register for signal <r_AReg_FlowControlEn>.
+    Found 8-bit register for signal <r_AReg_WrData>.
+    Found 1-bit register for signal <r_UartTX_En>.
+    Found 32-bit register for signal <o_AV_ReadData>.
+    WARNING:Xst:2404 -  FFs/Latches <o_AV_WaitRequest<0:0>> (without init value) have a constant value of 0 in block <UartBusInterface>.
+    Summary:
+	inferred  62 D-type flip-flop(s).
+	inferred  35 Multiplexer(s).
+Unit <UartBusInterface> synthesized.
+
+Synthesizing Unit <FIFO_2>.
+    Related source file is "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\FIFO.v".
+        FWFT = "FALSE"
+        PROG_FULL_TRESHOLD = 0
+        PROG_EMPTY_TRESHOLD = 0
+        WIDTH = 8
+        DEPTH = 16
+    Found 16x8-bit dual-port RAM <Mram_r_RAM> for signal <r_RAM>.
+    Found 4-bit register for signal <r_WrPointer>.
+    Found 1-bit register for signal <o_UnderFlow>.
+    Found 4-bit register for signal <r_RdPointer>.
+    Found 8-bit register for signal <o_RdData>.
+    Found 5-bit register for signal <r_Count>.
+    Found 1-bit register for signal <o_OverFlow>.
+    Found 4-bit adder for signal <r_WrPointer[3]_GND_99_o_add_7_OUT> created at line 59.
+    Found 4-bit adder for signal <r_RdPointer[3]_GND_99_o_add_11_OUT> created at line 81.
+    Found 5-bit adder for signal <r_Count[4]_GND_99_o_add_17_OUT> created at line 88.
+    Found 5-bit subtractor for signal <GND_99_o_GND_99_o_sub_19_OUT{4:0}> created at line 89.
+    Found 5-bit comparator lessequal for signal <n0005> created at line 38
+    Summary:
+	inferred   1 RAM(s).
+	inferred   4 Adder/Subtractor(s).
+	inferred  23 D-type flip-flop(s).
+	inferred   1 Comparator(s).
+Unit <FIFO_2> synthesized.
+
+Synthesizing Unit <UartTx>.
+    Related source file is "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\Peripherals\UART\UartTx.v".
+    Found 1-bit register for signal <o_UART_TX>.
+    Found 16-bit register for signal <r_ClksPerBitCounter>.
+    Found 2-bit register for signal <TXState>.
+    Found 3-bit register for signal <r_BitCounter>.
+    Found 1-bit register for signal <o_TxIdle>.
+    Found finite state machine <FSM_1> for signal <TXState>.
+    -----------------------------------------------------------------------
+    | States             | 4                                              |
+    | Transitions        | 10                                             |
+    | Inputs             | 4                                              |
+    | Outputs            | 2                                              |
+    | Clock              | i_Clk (rising_edge)                            |
+    | Power Up State     | 00                                             |
+    | Encoding           | auto                                           |
+    | Implementation     | LUT                                            |
+    -----------------------------------------------------------------------
+    Found 17-bit subtractor for signal <GND_100_o_GND_100_o_sub_23_OUT> created at line 83.
+    Found 3-bit adder for signal <r_BitCounter[2]_GND_100_o_add_14_OUT> created at line 70.
+    Found 16-bit adder for signal <r_ClksPerBitCounter[15]_GND_100_o_add_24_OUT> created at line 87.
+    Found 1-bit 8-to-1 multiplexer for signal <r_BitCounter[2]_i_Data[7]_Mux_11_o> created at line 67.
+    Found 1-bit 4-to-1 multiplexer for signal <TXState[1]_PWR_36_o_Mux_27_o> created at line 38.
+    Found 16-bit 3-to-1 multiplexer for signal <TXState[1]_r_ClksPerBitCounter[15]_wide_mux_28_OUT> created at line 38.
+    Found 32-bit comparator equal for signal <GND_100_o_GND_100_o_equal_24_o> created at line 83
+    Summary:
+	inferred   3 Adder/Subtractor(s).
+	inferred  21 D-type flip-flop(s).
+	inferred   1 Comparator(s).
+	inferred   8 Multiplexer(s).
+	inferred   1 Finite State Machine(s).
+Unit <UartTx> synthesized.
+
+Synthesizing Unit <FIFO_3>.
+    Related source file is "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\FIFO.v".
+        FWFT = "TRUE"
+        PROG_FULL_TRESHOLD = 14
+        PROG_EMPTY_TRESHOLD = 0
+        WIDTH = 8
+        DEPTH = 16
+    Found 16x8-bit dual-port RAM <Mram_r_RAM> for signal <r_RAM>.
+    Found 4-bit register for signal <r_WrPointer>.
+    Found 8-bit register for signal <o_RdData>.
+    Found 1-bit register for signal <o_UnderFlow>.
+    Found 4-bit register for signal <r_RdPointer>.
+    Found 5-bit register for signal <r_Count>.
+    Found 1-bit register for signal <o_OverFlow>.
+    Found 4-bit adder for signal <r_WrPointer[3]_GND_101_o_add_9_OUT> created at line 59.
+    Found 4-bit adder for signal <r_RdPointer[3]_GND_101_o_add_14_OUT> created at line 72.
+    Found 5-bit adder for signal <r_Count[4]_GND_101_o_add_17_OUT> created at line 88.
+    Found 5-bit subtractor for signal <GND_101_o_GND_101_o_sub_19_OUT{4:0}> created at line 89.
+    Found 5-bit comparator lessequal for signal <n0004> created at line 37
+    Found 5-bit comparator lessequal for signal <n0007> created at line 38
+    Summary:
+	inferred   1 RAM(s).
+	inferred   4 Adder/Subtractor(s).
+	inferred  23 D-type flip-flop(s).
+	inferred   2 Comparator(s).
+Unit <FIFO_3> synthesized.
+
+Synthesizing Unit <UartRx>.
+    Related source file is "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\Peripherals\UART\UartRx.v".
+    Found 1-bit register for signal <r_UART_Rx>.
+    Found 1-bit register for signal <r_OldRxState>.
+    Found 16-bit register for signal <r_ClksPerBitCounter>.
+    Found 2-bit register for signal <RXState>.
+    Found 3-bit register for signal <r_BitCounter>.
+    Found 8-bit register for signal <o_RxData>.
+    Found 1-bit register for signal <o_RxDataValid>.
+    Found finite state machine <FSM_2> for signal <RXState>.
+    -----------------------------------------------------------------------
+    | States             | 4                                              |
+    | Transitions        | 10                                             |
+    | Inputs             | 5                                              |
+    | Outputs            | 2                                              |
+    | Clock              | i_Clk (rising_edge)                            |
+    | Power Up State     | 00                                             |
+    | Encoding           | auto                                           |
+    | Implementation     | LUT                                            |
+    -----------------------------------------------------------------------
+    Found 16-bit subtractor for signal <GND_102_o_GND_102_o_sub_5_OUT> created at line 44.
+    Found 17-bit subtractor for signal <GND_102_o_GND_102_o_sub_10_OUT> created at line 52.
+    Found 3-bit adder for signal <r_BitCounter[2]_GND_102_o_add_12_OUT> created at line 58.
+    Found 16-bit adder for signal <r_ClksPerBitCounter[15]_GND_102_o_add_22_OUT> created at line 71.
+    Found 32-bit comparator equal for signal <GND_102_o_GND_102_o_equal_6_o> created at line 44
+    Found 32-bit comparator equal for signal <GND_102_o_GND_102_o_equal_11_o> created at line 52
+    Summary:
+	inferred   4 Adder/Subtractor(s).
+	inferred  30 D-type flip-flop(s).
+	inferred   2 Comparator(s).
+	inferred   4 Multiplexer(s).
+	inferred   1 Finite State Machine(s).
+Unit <UartRx> synthesized.
+
+Synthesizing Unit <I2SBusInterface>.
+    Related source file is "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\Peripherals\I2S\I2SBusInterface.v".
+        ADDR_SEL_BITS = 20
+WARNING:Xst:647 - Input <i_AV_ByteEn<3:3>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <i_AV_WriteData<31:24>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+    Found 1-bit register for signal <r_Fifo_WrEn>.
+    Found 48-bit register for signal <r_AReg_Fifo_DataIn>.
+    Found 1-bit register for signal <r_Fifo_RdEn>.
+    Found 1-bit register for signal <r_OldReqNextData>.
+    Found 48-bit register for signal <r_I2S_DataIn>.
+    Found 32-bit register for signal <o_AV_ReadData>.
+    Found 1-bit 4-to-1 multiplexer for signal <_n0128> created at line 82.
+    WARNING:Xst:2404 -  FFs/Latches <o_AV_WaitRequest<0:0>> (without init value) have a constant value of 0 in block <I2SBusInterface>.
+    Summary:
+	inferred 131 D-type flip-flop(s).
+	inferred  55 Multiplexer(s).
+Unit <I2SBusInterface> synthesized.
+
+Synthesizing Unit <I2SDriver>.
+    Related source file is "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\Peripherals\I2S\I2SDriver.v".
+    Found 1-bit register for signal <r_OldLRCK>.
+    Found 1-bit register for signal <o_ReqNextData>.
+    Found 1-bit register for signal <FSM_state>.
+    Found 5-bit register for signal <r_BitCounter>.
+    Found 1-bit register for signal <o_SDIN>.
+    Found 1-bit register for signal <o_LRCK>.
+    Found 5-bit subtractor for signal <GND_105_o_GND_105_o_sub_5_OUT{4:0}> created at line 96.
+    Found 1-bit 24-to-1 multiplexer for signal <r_BitCounter[4]_X_105_o_Mux_6_o> created at line 101.
+    Found 1-bit 24-to-1 multiplexer for signal <r_BitCounter[4]_X_105_o_Mux_7_o> created at line 104.
+    Found 1-bit comparator equal for signal <n0002> created at line 82
+    Summary:
+	inferred   1 Adder/Subtractor(s).
+	inferred  10 D-type flip-flop(s).
+	inferred   1 Comparator(s).
+	inferred   5 Multiplexer(s).
+Unit <I2SDriver> synthesized.
+
+Synthesizing Unit <Power2Div_2>.
+    Related source file is "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\Power2Div.v".
+        POWER_OF_TWO_DIV = 64
+    Found 6-bit register for signal <r_Counter>.
+    Found 6-bit adder for signal <r_Counter[5]_GND_106_o_add_1_OUT> created at line 15.
+    Summary:
+	inferred   1 Adder/Subtractor(s).
+	inferred   6 D-type flip-flop(s).
+Unit <Power2Div_2> synthesized.
+
+Synthesizing Unit <Power2Div_3>.
+    Related source file is "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\Power2Div.v".
+        POWER_OF_TWO_DIV = 4
+    Found 2-bit register for signal <r_Counter>.
+    Found 2-bit adder for signal <r_Counter[1]_GND_107_o_add_1_OUT> created at line 15.
+    Summary:
+	inferred   1 Adder/Subtractor(s).
+	inferred   2 D-type flip-flop(s).
+Unit <Power2Div_3> synthesized.
+
+Synthesizing Unit <Timer>.
+    Related source file is "I:\4-Git Repos\Arcadia Microcomputer\SOC\SOC\RTL\Peripherals\Timer\Timer.v".
+        ADDR_SEL_BITS = 20
+        ADDR_BLOCK = 0
+    Found 1-bit register for signal <r_AReg_Reset>.
+    Found 1-bit register for signal <r_AReg_OverFlowClr>.
+    Found 1-bit register for signal <r_AReg_Enable>.
+    Found 1-bit register for signal <r_AReg_EnablePreScalerN>.
+    Found 1-bit register for signal <r_AReg_EnablePreScalerM>.
+    Found 3-bit register for signal <r_AReg_PreScalerN>.
+    Found 16-bit register for signal <r_AReg_PreScalerM>.
+    Found 32-bit register for signal <r_AReg_Trigger>.
+    Found 16-bit register for signal <r_OldCounterM>.
+    Found 8-bit register for signal <r_CounterN>.
+    Found 16-bit register for signal <r_CounterM>.
+    Found 32-bit register for signal <r_Timer>.
+    Found 1-bit register for signal <r_OverFlow>.
+    Found 32-bit register for signal <o_AV_ReadData>.
+    Found 8-bit adder for signal <r_CounterN[7]_GND_108_o_add_38_OUT> created at line 144.
+    Found 16-bit adder for signal <r_CounterM[15]_GND_108_o_add_42_OUT> created at line 154.
+    Found 32-bit adder for signal <r_Timer[31]_GND_108_o_add_47_OUT> created at line 168.
+    Found 1-bit 8-to-1 multiplexer for signal <GND_108_o_GND_108_o_equal_33_o> created at line 106.
+    Found 32-bit 4-to-1 multiplexer for signal <_n0191> created at line 79.
+WARNING:Xst:737 - Found 1-bit latch for signal <r_TickOutN>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 1-bit latch for signal <r_TickOutM>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+    Found 16-bit comparator equal for signal <r_CounterM[15]_r_AReg_PreScalerM[15]_equal_34_o> created at line 117
+    Found 16-bit comparator not equal for signal <n0100> created at line 117
+    Found 32-bit comparator equal for signal <r_Timer[31]_r_AReg_Trigger[31]_equal_47_o> created at line 161
+    Summary:
+	inferred   3 Adder/Subtractor(s).
+	inferred 161 D-type flip-flop(s).
+	inferred   2 Latch(s).
+	inferred   3 Comparator(s).
+	inferred  63 Multiplexer(s).
+Unit <Timer> synthesized.
+
+=========================================================================
+HDL Synthesis Report
+
+Macro Statistics
+# RAMs                                                 : 9
+ 1024x32-bit dual-port RAM                             : 1
+ 1024x32-bit dual-port Read Only RAM                   : 1
+ 16x8-bit dual-port RAM                                : 2
+ 32x32-bit dual-port RAM                               : 2
+ 4x1-bit single-port Read Only RAM                     : 1
+ 64x8-bit dual-port RAM                                : 1
+ 8x5-bit single-port Read Only RAM                     : 1
+# Adders/Subtractors                                   : 39
+ 15-bit adder                                          : 1
+ 16-bit adder                                          : 3
+ 16-bit subtractor                                     : 1
+ 17-bit subtractor                                     : 2
+ 2-bit adder                                           : 2
+ 2-bit subtractor                                      : 1
+ 3-bit adder                                           : 4
+ 3-bit subtractor                                      : 1
+ 32-bit adder                                          : 5
+ 33-bit subtractor                                     : 1
+ 4-bit adder                                           : 4
+ 4-bit subtractor                                      : 2
+ 5-bit adder                                           : 2
+ 5-bit subtractor                                      : 3
+ 6-bit adder                                           : 3
+ 7-bit adder                                           : 1
+ 7-bit subtractor                                      : 2
+ 8-bit adder                                           : 1
+# Registers                                            : 156
+ 1-bit register                                        : 65
+ 11-bit register                                       : 1
+ 15-bit register                                       : 1
+ 16-bit register                                       : 6
+ 19-bit register                                       : 1
+ 2-bit register                                        : 3
+ 24-bit register                                       : 5
+ 3-bit register                                        : 8
+ 30-bit register                                       : 1
+ 32-bit register                                       : 27
+ 4-bit register                                        : 9
+ 48-bit register                                       : 2
+ 5-bit register                                        : 10
+ 6-bit register                                        : 3
+ 7-bit register                                        : 6
+ 8-bit register                                        : 8
+# Latches                                              : 2
+ 1-bit latch                                           : 2
+# Comparators                                          : 26
+ 1-bit comparator equal                                : 2
+ 1-bit comparator not equal                            : 1
+ 16-bit comparator equal                               : 1
+ 16-bit comparator not equal                           : 1
+ 32-bit comparator equal                               : 4
+ 32-bit comparator lessequal                           : 1
+ 5-bit comparator equal                                : 12
+ 5-bit comparator lessequal                            : 3
+ 7-bit comparator lessequal                            : 1
+# Multiplexers                                         : 442
+ 1-bit 2-to-1 multiplexer                              : 336
+ 1-bit 24-to-1 multiplexer                             : 2
+ 1-bit 4-to-1 multiplexer                              : 10
+ 1-bit 7-to-1 multiplexer                              : 1
+ 1-bit 8-to-1 multiplexer                              : 3
+ 16-bit 2-to-1 multiplexer                             : 6
+ 16-bit 3-to-1 multiplexer                             : 1
+ 24-bit 2-to-1 multiplexer                             : 5
+ 3-bit 2-to-1 multiplexer                              : 5
+ 30-bit 2-to-1 multiplexer                             : 1
+ 32-bit 2-to-1 multiplexer                             : 41
+ 32-bit 4-to-1 multiplexer                             : 8
+ 4-bit 2-to-1 multiplexer                              : 6
+ 4-bit 4-to-1 multiplexer                              : 1
+ 48-bit 2-to-1 multiplexer                             : 1
+ 5-bit 2-to-1 multiplexer                              : 1
+ 7-bit 2-to-1 multiplexer                              : 8
+ 8-bit 2-to-1 multiplexer                              : 6
+# Logic shifters                                       : 3
+ 32-bit shifter logical left                           : 1
+ 32-bit shifter logical right                          : 1
+ 4-bit shifter logical left                            : 1
+# Tristates                                            : 71
+ 1-bit tristate buffer                                 : 71
+# FSMs                                                 : 3
+# Xors                                                 : 2
+ 1-bit xor2                                            : 1
+ 32-bit xor2                                           : 1
+
+=========================================================================
+INFO:Xst:1767 - HDL ADVISOR - Resource sharing has identified that some arithmetic operations in this design can share the same physical resources for reduced device utilization. For improved clock frequency you may try to disable resource sharing.
+
+=========================================================================
+*                       Advanced HDL Synthesis                          *
+=========================================================================
+
+Reading core <../ipcore_dir/I2S_FIFO.ngc>.
+Loading core <I2S_FIFO> for timing and area information for instance <i2sFifo>.
+
+Synthesizing (advanced) Unit <BOOTROM>.
+INFO:Xst:3226 - The RAM <Mram_Ram> will be implemented as a BLOCK RAM, absorbing the following register(s): <o_AV1_ReadData> <o_AV0_ReadData>
+    -----------------------------------------------------------------------
+    | ram_type           | Block                               |          |
+    -----------------------------------------------------------------------
+    | Port A                                                              |
+    |     aspect ratio   | 1024-word x 32-bit                  |          |
+    |     mode           | write-first                         |          |
+    |     clkA           | connected to signal <i_Clk>         | rise     |
+    |     weA            | connected to signal <GND>           | high     |
+    |     addrA          | connected to signal <(i_AV1_RegAddr{9},i_AV1_RegAddr{8},i_AV1_RegAddr{7},i_AV1_RegAddr{6},i_AV1_RegAddr{5},i_AV1_RegAddr{4},i_AV1_RegAddr{3},i_AV1_RegAddr{2},i_AV1_RegAddr{1},i_AV1_RegAddr{0})> |          |
+    |     diA            | connected to signal <GND>           |          |
+    |     doA            | connected to signal <o_AV1_ReadData> |          |
+    |     dorstA         | connected to signal <i_AV1_SlaveSel_0> | high     |
+    | reset value        | 00000000000000000000000000000000               |
+    -----------------------------------------------------------------------
+    | optimization       | speed                               |          |
+    -----------------------------------------------------------------------
+    | Port B                                                              |
+    |     aspect ratio   | 1024-word x 32-bit                  |          |
+    |     mode           | write-first                         |          |
+    |     clkB           | connected to signal <i_Clk>         | rise     |
+    |     weB            | connected to signal <GND>           | high     |
+    |     addrB          | connected to signal <(i_AV0_RegAddr{9},i_AV0_RegAddr{8},i_AV0_RegAddr{7},i_AV0_RegAddr{6},i_AV0_RegAddr{5},i_AV0_RegAddr{4},i_AV0_RegAddr{3},i_AV0_RegAddr{2},i_AV0_RegAddr{1},i_AV0_RegAddr{0})> |          |
+    |     diB            | connected to signal <GND>           |          |
+    |     doB            | connected to signal <o_AV0_ReadData> |          |
+    |     dorstB         | connected to signal <i_AV0_SlaveSel_0> | high     |
+    | reset value        | 00000000000000000000000000000000               |
+    -----------------------------------------------------------------------
+    | optimization       | speed                               |          |
+    -----------------------------------------------------------------------
+Unit <BOOTROM> synthesized (advanced).
+
+Synthesizing (advanced) Unit <FIFO_1>.
+The following registers are absorbed into counter <r_WrPointer>: 1 register on signal <r_WrPointer>.
+The following registers are absorbed into counter <r_RdPointer>: 1 register on signal <r_RdPointer>.
+INFO:Xst:3231 - The small RAM <Mram_r_RAM> will be implemented on LUTs in order to maximize performance and save block RAM resources. If you want to force its implementation on block, use option/constraint ram_style.
+    -----------------------------------------------------------------------
+    | ram_type           | Distributed                         |          |
+    -----------------------------------------------------------------------
+    | Port A                                                              |
+    |     aspect ratio   | 64-word x 8-bit                     |          |
+    |     clkA           | connected to signal <i_Clk>         | rise     |
+    |     weA            | connected to signal <o_Full_0>      | low      |
+    |     addrA          | connected to signal <(r_WrPointer{5},r_WrPointer{4},r_WrPointer{3},r_WrPointer{2},r_WrPointer{1},r_WrPointer{0})> |          |
+    |     diA            | connected to signal <(i_WrData{7},i_WrData{6},i_WrData{5},i_WrData{4},i_WrData{3},i_WrData{2},i_WrData{1},i_WrData{0})> |          |
+    -----------------------------------------------------------------------
+    | Port B                                                              |
+    |     aspect ratio   | 64-word x 8-bit                     |          |
+    |     addrB          | connected to signal <(r_RdPointer{5},r_RdPointer{4},r_RdPointer{3},r_RdPointer{2},r_RdPointer{1},r_RdPointer{0})> |          |
+    |     doB            | connected to internal node          |          |
+    -----------------------------------------------------------------------
+Unit <FIFO_1> synthesized (advanced).
+
+Synthesizing (advanced) Unit <FIFO_2>.
+The following registers are absorbed into counter <r_WrPointer>: 1 register on signal <r_WrPointer>.
+The following registers are absorbed into counter <r_RdPointer>: 1 register on signal <r_RdPointer>.
+INFO:Xst:3231 - The small RAM <Mram_r_RAM> will be implemented on LUTs in order to maximize performance and save block RAM resources. If you want to force its implementation on block, use option/constraint ram_style.
+    -----------------------------------------------------------------------
+    | ram_type           | Distributed                         |          |
+    -----------------------------------------------------------------------
+    | Port A                                                              |
+    |     aspect ratio   | 16-word x 8-bit                     |          |
+    |     clkA           | connected to signal <i_Clk>         | rise     |
+    |     weA            | connected to signal <o_Full_0>      | low      |
+    |     addrA          | connected to signal <(r_WrPointer{3},r_WrPointer{2},r_WrPointer{1},r_WrPointer{0})> |          |
+    |     diA            | connected to signal <(i_WrData{7},i_WrData{6},i_WrData{5},i_WrData{4},i_WrData{3},i_WrData{2},i_WrData{1},i_WrData{0})> |          |
+    -----------------------------------------------------------------------
+    | Port B                                                              |
+    |     aspect ratio   | 16-word x 8-bit                     |          |
+    |     addrB          | connected to signal <(r_RdPointer{3},r_RdPointer{2},r_RdPointer{1},r_RdPointer{0})> |          |
+    |     doB            | connected to internal node          |          |
+    -----------------------------------------------------------------------
+Unit <FIFO_2> synthesized (advanced).
+
+Synthesizing (advanced) Unit <FIFO_3>.
+The following registers are absorbed into counter <r_WrPointer>: 1 register on signal <r_WrPointer>.
+The following registers are absorbed into counter <r_RdPointer>: 1 register on signal <r_RdPointer>.
+INFO:Xst:3231 - The small RAM <Mram_r_RAM> will be implemented on LUTs in order to maximize performance and save block RAM resources. If you want to force its implementation on block, use option/constraint ram_style.
+    -----------------------------------------------------------------------
+    | ram_type           | Distributed                         |          |
+    -----------------------------------------------------------------------
+    | Port A                                                              |
+    |     aspect ratio   | 16-word x 8-bit                     |          |
+    |     clkA           | connected to signal <i_Clk>         | rise     |
+    |     weA            | connected to signal <o_Full_0>      | low      |
+    |     addrA          | connected to signal <(r_WrPointer{3},r_WrPointer{2},r_WrPointer{1},r_WrPointer{0})> |          |
+    |     diA            | connected to signal <(i_WrData{7},i_WrData{6},i_WrData{5},i_WrData{4},i_WrData{3},i_WrData{2},i_WrData{1},i_WrData{0})> |          |
+    -----------------------------------------------------------------------
+    | Port B                                                              |
+    |     aspect ratio   | 16-word x 8-bit                     |          |
+    |     addrB          | connected to signal <(r_RdPointer{3},r_RdPointer{2},r_RdPointer{1},r_RdPointer{0})> |          |
+    |     doB            | connected to internal node          |          |
+    -----------------------------------------------------------------------
+Unit <FIFO_3> synthesized (advanced).
+
+Synthesizing (advanced) Unit <FlashBusInterface>.
+The following registers are absorbed into counter <r_MM_ReadByteCounter>: 1 register on signal <r_MM_ReadByteCounter>.
+Unit <FlashBusInterface> synthesized (advanced).
+
+Synthesizing (advanced) Unit <FlashControler>.
+The following registers are absorbed into counter <r_WaitRead>: 1 register on signal <r_WaitRead>.
+The following registers are absorbed into counter <r_BitCounter>: 1 register on signal <r_BitCounter>.
+The following registers are absorbed into counter <r_AddressByteCounter>: 1 register on signal <r_AddressByteCounter>.
+INFO:Xst:3231 - The small RAM <Mram_i_CMD[2]_PWR_23_o_Mux_7_o> will be implemented on LUTs in order to maximize performance and save block RAM resources. If you want to force its implementation on block, use option/constraint ram_style.
+    -----------------------------------------------------------------------
+    | ram_type           | Distributed                         |          |
+    -----------------------------------------------------------------------
+    | Port A                                                              |
+    |     aspect ratio   | 4-word x 1-bit                      |          |
+    |     weA            | connected to signal <GND>           | high     |
+    |     addrA          | connected to signal <(i_CMD{2},i_CMD{1})> |          |
+    |     diA            | connected to signal <GND>           |          |
+    |     doA            | connected to internal node          |          |
+    -----------------------------------------------------------------------
+INFO:Xst:3218 - HDL ADVISOR - The RAM <Mram__n0876> will be implemented on LUTs either because you have described an asynchronous read or because of currently unsupported block RAM features. If you have described an asynchronous read, making it synchronous would allow you to take advantage of available block RAM resources, for optimized device usage and improved timings. Please refer to your documentation for coding guidelines.
+    -----------------------------------------------------------------------
+    | ram_type           | Distributed                         |          |
+    -----------------------------------------------------------------------
+    | Port A                                                              |
+    |     aspect ratio   | 8-word x 5-bit                      |          |
+    |     weA            | connected to signal <GND>           | high     |
+    |     addrA          | connected to signal <(i_CMD{2},i_CMD{1},i_CMD{0})> |          |
+    |     diA            | connected to signal <GND>           |          |
+    |     doA            | connected to internal node          |          |
+    -----------------------------------------------------------------------
+Unit <FlashControler> synthesized (advanced).
+
+Synthesizing (advanced) Unit <HazardUnit>.
+The following registers are absorbed into counter <r_StallCounter_q>: 1 register on signal <r_StallCounter_q>.
+Unit <HazardUnit> synthesized (advanced).
+
+Synthesizing (advanced) Unit <I2SDriver>.
+The following registers are absorbed into counter <r_BitCounter>: 1 register on signal <r_BitCounter>.
+Unit <I2SDriver> synthesized (advanced).
+
+Synthesizing (advanced) Unit <Power2Div_1>.
+The following registers are absorbed into counter <r_Counter>: 1 register on signal <r_Counter>.
+Unit <Power2Div_1> synthesized (advanced).
+
+Synthesizing (advanced) Unit <Power2Div_2>.
+The following registers are absorbed into counter <r_Counter>: 1 register on signal <r_Counter>.
+Unit <Power2Div_2> synthesized (advanced).
+
+Synthesizing (advanced) Unit <Power2Div_3>.
+The following registers are absorbed into counter <r_Counter>: 1 register on signal <r_Counter>.
+Unit <Power2Div_3> synthesized (advanced).
+
+Synthesizing (advanced) Unit <RAM>.
+INFO:Xst:3226 - The RAM <Mram_Ram> will be implemented as a BLOCK RAM, absorbing the following register(s): <o_AV1_ReadData> <o_AV0_ReadData>
+    -----------------------------------------------------------------------
+    | ram_type           | Block                               |          |
+    -----------------------------------------------------------------------
+    | Port A                                                              |
+    |     aspect ratio   | 1024-word x 32-bit                  |          |
+    |     mode           | read-first                          |          |
+    |     clkA           | connected to signal <i_Clk>         | rise     |
+    |     enA            | connected to signal <i_AV1_SlaveSel_1> | high     |
+    |     weA{3}         | connected to internal node          | high     |
+    |     weA{2}         | connected to internal node          | high     |
+    |     weA{1}         | connected to internal node          | high     |
+    |     weA{0}         | connected to internal node          | high     |
+    |     addrA          | connected to signal <(i_AV1_RegAddr{9},i_AV1_RegAddr{8},i_AV1_RegAddr{7},i_AV1_RegAddr{6},i_AV1_RegAddr{5},i_AV1_RegAddr{4},i_AV1_RegAddr{3},i_AV1_RegAddr{2},i_AV1_RegAddr{1},i_AV1_RegAddr{0})> |          |
+    |     diA            | connected to signal <(i_AV1_WriteData{31},i_AV1_WriteData{30},i_AV1_WriteData{29},i_AV1_WriteData{28},i_AV1_WriteData{27},i_AV1_WriteData{26},i_AV1_WriteData{25},i_AV1_WriteData{24},i_AV1_WriteData{23},i_AV1_WriteData{22},i_AV1_WriteData{21},i_AV1_WriteData{20},i_AV1_WriteData{19},i_AV1_WriteData{18},i_AV1_WriteData{17},i_AV1_WriteData{16},i_AV1_WriteData{15},i_AV1_WriteData{14},i_AV1_WriteData{13},i_AV1_WriteData{12},i_AV1_WriteData{11},i_AV1_WriteData{10},i_AV1_WriteData{9},i_AV1_WriteData{8},i_AV1_WriteData{7},i_AV1_WriteData{6},i_AV1_WriteData{5},i_AV1_WriteData{4},i_AV1_WriteData{3},i_AV1_WriteData{2},i_AV1_WriteData{1},i_AV1_WriteData{0})> |          |
+    |     doA            | connected to signal <o_AV1_ReadData> |          |
+    |     dorstA         | connected to signal <i_AV1_SlaveSel_0> | high     |
+    | reset value        | 00000000000000000000000000000000               |
+    -----------------------------------------------------------------------
+    | optimization       | speed                               |          |
+    -----------------------------------------------------------------------
+    | Port B                                                              |
+    |     aspect ratio   | 1024-word x 32-bit                  |          |
+    |     mode           | write-first                         |          |
+    |     clkB           | connected to signal <i_Clk>         | rise     |
+    |     addrB          | connected to signal <(i_AV0_RegAddr{9},i_AV0_RegAddr{8},i_AV0_RegAddr{7},i_AV0_RegAddr{6},i_AV0_RegAddr{5},i_AV0_RegAddr{4},i_AV0_RegAddr{3},i_AV0_RegAddr{2},i_AV0_RegAddr{1},i_AV0_RegAddr{0})> |          |
+    |     doB            | connected to signal <o_AV0_ReadData> |          |
+    |     dorstB         | connected to signal <i_AV0_SlaveSel_0> | high     |
+    | reset value        | 00000000000000000000000000000000               |
+    -----------------------------------------------------------------------
+    | optimization       | speed                               |          |
+    -----------------------------------------------------------------------
+Unit <RAM> synthesized (advanced).
+
+Synthesizing (advanced) Unit <RegFile>.
+INFO:Xst:3218 - HDL ADVISOR - The RAM <Mram_Registers> will be implemented on LUTs either because you have described an asynchronous read or because of currently unsupported block RAM features. If you have described an asynchronous read, making it synchronous would allow you to take advantage of available block RAM resources, for optimized device usage and improved timings. Please refer to your documentation for coding guidelines.
+    -----------------------------------------------------------------------
+    | ram_type           | Distributed                         |          |
+    -----------------------------------------------------------------------
+    | Port A                                                              |
+    |     aspect ratio   | 32-word x 32-bit                    |          |
+    |     clkA           | connected to signal <i_Clk>         | fall     |
+    |     weA            | connected to signal <n0007_0>       | low      |
+    |     addrA          | connected to signal <(i_WrAddr{4},i_WrAddr{3},i_WrAddr{2},i_WrAddr{1},i_WrAddr{0})> |          |
+    |     diA            | connected to signal <(i_WrData{31},i_WrData{30},i_WrData{29},i_WrData{28},i_WrData{27},i_WrData{26},i_WrData{25},i_WrData{24},i_WrData{23},i_WrData{22},i_WrData{21},i_WrData{20},i_WrData{19},i_WrData{18},i_WrData{17},i_WrData{16},i_WrData{15},i_WrData{14},i_WrData{13},i_WrData{12},i_WrData{11},i_WrData{10},i_WrData{9},i_WrData{8},i_WrData{7},i_WrData{6},i_WrData{5},i_WrData{4},i_WrData{3},i_WrData{2},i_WrData{1},i_WrData{0})> |          |
+    -----------------------------------------------------------------------
+    | Port B                                                              |
+    |     aspect ratio   | 32-word x 32-bit                    |          |
+    |     addrB          | connected to signal <(i_AddrR1{4},i_AddrR1{3},i_AddrR1{2},i_AddrR1{1},i_AddrR1{0})> |          |
+    |     doB            | connected to internal node          |          |
+    -----------------------------------------------------------------------
+INFO:Xst:3218 - HDL ADVISOR - The RAM <Mram_Registers1> will be implemented on LUTs either because you have described an asynchronous read or because of currently unsupported block RAM features. If you have described an asynchronous read, making it synchronous would allow you to take advantage of available block RAM resources, for optimized device usage and improved timings. Please refer to your documentation for coding guidelines.
+    -----------------------------------------------------------------------
+    | ram_type           | Distributed                         |          |
+    -----------------------------------------------------------------------
+    | Port A                                                              |
+    |     aspect ratio   | 32-word x 32-bit                    |          |
+    |     clkA           | connected to signal <i_Clk>         | fall     |
+    |     weA            | connected to signal <n0007_1>       | low      |
+    |     addrA          | connected to signal <(i_WrAddr{4},i_WrAddr{3},i_WrAddr{2},i_WrAddr{1},i_WrAddr{0})> |          |
+    |     diA            | connected to signal <(i_WrData{31},i_WrData{30},i_WrData{29},i_WrData{28},i_WrData{27},i_WrData{26},i_WrData{25},i_WrData{24},i_WrData{23},i_WrData{22},i_WrData{21},i_WrData{20},i_WrData{19},i_WrData{18},i_WrData{17},i_WrData{16},i_WrData{15},i_WrData{14},i_WrData{13},i_WrData{12},i_WrData{11},i_WrData{10},i_WrData{9},i_WrData{8},i_WrData{7},i_WrData{6},i_WrData{5},i_WrData{4},i_WrData{3},i_WrData{2},i_WrData{1},i_WrData{0})> |          |
+    -----------------------------------------------------------------------
+    | Port B                                                              |
+    |     aspect ratio   | 32-word x 32-bit                    |          |
+    |     addrB          | connected to signal <(i_AddrR2{4},i_AddrR2{3},i_AddrR2{2},i_AddrR2{1},i_AddrR2{0})> |          |
+    |     doB            | connected to internal node          |          |
+    -----------------------------------------------------------------------
+Unit <RegFile> synthesized (advanced).
+
+Synthesizing (advanced) Unit <SevenSegmentDriver>.
+The following registers are absorbed into counter <r_7SegSelCounter>: 1 register on signal <r_7SegSelCounter>.
+Unit <SevenSegmentDriver> synthesized (advanced).
+
+Synthesizing (advanced) Unit <Timer>.
+The following registers are absorbed into counter <r_CounterM>: 1 register on signal <r_CounterM>.
+The following registers are absorbed into counter <r_CounterN>: 1 register on signal <r_CounterN>.
+The following registers are absorbed into counter <r_Timer>: 1 register on signal <r_Timer>.
+Unit <Timer> synthesized (advanced).
+
+Synthesizing (advanced) Unit <UartRx>.
+The following registers are absorbed into counter <r_BitCounter>: 1 register on signal <r_BitCounter>.
+Unit <UartRx> synthesized (advanced).
+WARNING:Xst:2677 - Node <r_Flash_IO_SelectOutput_1> of sequential type is unconnected in block <FlashControler>.
+WARNING:Xst:2677 - Node <r_Flash_IO_SelectOutput_3> of sequential type is unconnected in block <FlashControler>.
+
+=========================================================================
+Advanced HDL Synthesis Report
+
+Macro Statistics
+# RAMs                                                 : 9
+ 1024x32-bit dual-port block RAM                       : 1
+ 1024x32-bit dual-port block Read Only RAM             : 1
+ 16x8-bit dual-port distributed RAM                    : 2
+ 32x32-bit dual-port distributed RAM                   : 2
+ 4x1-bit single-port distributed Read Only RAM         : 1
+ 64x8-bit dual-port distributed RAM                    : 1
+ 8x5-bit single-port distributed Read Only RAM         : 1
+# Adders/Subtractors                                   : 19
+ 16-bit adder                                          : 2
+ 16-bit subtractor                                     : 1
+ 17-bit subtractor                                     : 2
+ 3-bit adder                                           : 1
+ 32-bit adder                                          : 4
+ 33-bit subtractor                                     : 1
+ 4-bit subtractor                                      : 1
+ 5-bit adder                                           : 2
+ 5-bit subtractor                                      : 2
+ 7-bit adder                                           : 1
+ 7-bit subtractor                                      : 2
+# Counters                                             : 20
+ 1-bit down counter                                    : 1
+ 15-bit up counter                                     : 1
+ 16-bit up counter                                     : 1
+ 2-bit up counter                                      : 2
+ 3-bit down counter                                    : 1
+ 3-bit up counter                                      : 3
+ 32-bit up counter                                     : 1
+ 4-bit down counter                                    : 1
+ 4-bit up counter                                      : 4
+ 5-bit down counter                                    : 1
+ 6-bit up counter                                      : 3
+ 8-bit up counter                                      : 1
+# Registers                                            : 1295
+ Flip-Flops                                            : 1295
+# Comparators                                          : 26
+ 1-bit comparator equal                                : 2
+ 1-bit comparator not equal                            : 1
+ 16-bit comparator equal                               : 1
+ 16-bit comparator not equal                           : 1
+ 32-bit comparator equal                               : 4
+ 32-bit comparator lessequal                           : 1
+ 5-bit comparator equal                                : 12
+ 5-bit comparator lessequal                            : 3
+ 7-bit comparator lessequal                            : 1
+# Multiplexers                                         : 463
+ 1-bit 2-to-1 multiplexer                              : 371
+ 1-bit 24-to-1 multiplexer                             : 2
+ 1-bit 4-to-1 multiplexer                              : 10
+ 1-bit 7-to-1 multiplexer                              : 1
+ 1-bit 8-to-1 multiplexer                              : 3
+ 16-bit 2-to-1 multiplexer                             : 5
+ 16-bit 3-to-1 multiplexer                             : 1
+ 24-bit 2-to-1 multiplexer                             : 5
+ 3-bit 2-to-1 multiplexer                              : 3
+ 30-bit 2-to-1 multiplexer                             : 1
+ 32-bit 2-to-1 multiplexer                             : 39
+ 32-bit 4-to-1 multiplexer                             : 8
+ 4-bit 2-to-1 multiplexer                              : 3
+ 4-bit 4-to-1 multiplexer                              : 1
+ 48-bit 2-to-1 multiplexer                             : 1
+ 7-bit 2-to-1 multiplexer                              : 8
+ 8-bit 2-to-1 multiplexer                              : 1
+# Logic shifters                                       : 3
+ 32-bit shifter logical left                           : 1
+ 32-bit shifter logical right                          : 1
+ 4-bit shifter logical left                            : 1
+# FSMs                                                 : 3
+# Xors                                                 : 2
+ 1-bit xor2                                            : 1
+ 32-bit xor2                                           : 1
+
+=========================================================================
+
+=========================================================================
+*                         Low Level Synthesis                           *
+=========================================================================
+WARNING:Xst:1293 - FF/Latch <r_MM_CMDEn_23> has a constant value of 0 in block <FlashBusInterface>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <r_MM_CMDEn_22> has a constant value of 0 in block <FlashBusInterface>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <r_MM_CMDEn_21> has a constant value of 0 in block <FlashBusInterface>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <r_MM_CMDEn_20> has a constant value of 0 in block <FlashBusInterface>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <r_MM_CMDEn_19> has a constant value of 0 in block <FlashBusInterface>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <r_MM_CMDEn_18> has a constant value of 0 in block <FlashBusInterface>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <r_MM_CMDEn_17> has a constant value of 0 in block <FlashBusInterface>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <r_MM_CMDEn_16> has a constant value of 0 in block <FlashBusInterface>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <r_MM_CMDEn_15> has a constant value of 0 in block <FlashBusInterface>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <r_MM_CMDEn_14> has a constant value of 0 in block <FlashBusInterface>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <r_MM_CMDEn_13> has a constant value of 0 in block <FlashBusInterface>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <r_MM_CMDEn_12> has a constant value of 0 in block <FlashBusInterface>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <r_MM_CMDEn_11> has a constant value of 0 in block <FlashBusInterface>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <r_MM_CMDEn_10> has a constant value of 0 in block <FlashBusInterface>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <r_MM_CMDEn_9> has a constant value of 0 in block <FlashBusInterface>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <r_MM_CMDEn_8> has a constant value of 0 in block <FlashBusInterface>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <r_MM_CMDEn_7> has a constant value of 0 in block <FlashBusInterface>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <r_MM_CMDEn_6> has a constant value of 0 in block <FlashBusInterface>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <r_MM_CMDEn_5> has a constant value of 0 in block <FlashBusInterface>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <r_MM_CMDEn_4> has a constant value of 0 in block <FlashBusInterface>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <r_MM_CMDEn_3> has a constant value of 0 in block <FlashBusInterface>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <r_MM_CMDEn_2> has a constant value of 0 in block <FlashBusInterface>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <r_MM_CMDEn_1> has a constant value of 0 in block <FlashBusInterface>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <r_MM_Addr_1> has a constant value of 0 in block <FlashBusInterface>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <r_MM_Addr_0> has a constant value of 0 in block <FlashBusInterface>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <o_AV_ReadData_22> has a constant value of 0 in block <GPIOBusInterface>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <o_AV_ReadData_23> has a constant value of 0 in block <GPIOBusInterface>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <o_AV_ReadData_24> has a constant value of 0 in block <GPIOBusInterface>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <o_AV_ReadData_25> has a constant value of 0 in block <GPIOBusInterface>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <o_AV_ReadData_26> has a constant value of 0 in block <GPIOBusInterface>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <o_AV_ReadData_27> has a constant value of 0 in block <GPIOBusInterface>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <o_AV_ReadData_28> has a constant value of 0 in block <GPIOBusInterface>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <o_AV_ReadData_29> has a constant value of 0 in block <GPIOBusInterface>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <o_AV_ReadData_30> has a constant value of 0 in block <GPIOBusInterface>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <o_AV_ReadData_31> has a constant value of 0 in block <GPIOBusInterface>. This FF/Latch will be trimmed during the optimization process.
+INFO:Xst:2261 - The FF/Latch <r_RS1_M_31> in Unit <CPU> is equivalent to the following FF/Latch, which will be removed : <r_AluASign_M> 
+INFO:Xst:2261 - The FF/Latch <r_RS2_M_31> in Unit <CPU> is equivalent to the following FF/Latch, which will be removed : <r_AluBSign_M> 
+INFO:Xst:2261 - The FF/Latch <r_OldLRCK> in Unit <I2SDriver> is equivalent to the following FF/Latch, which will be removed : <o_LRCK> 
+Analyzing FSM <MFsm> for best encoding.
+Optimizing FSM <UART0/TX/FSM_1> on signal <TXState[1:2]> with gray encoding.
+-------------------
+ State | Encoding
+-------------------
+ 00    | 00
+ 01    | 01
+ 10    | 11
+ 11    | 10
+-------------------
+Analyzing FSM <MFsm> for best encoding.
+Optimizing FSM <UART0/RX/FSM_2> on signal <RXState[1:2]> with gray encoding.
+-------------------
+ State | Encoding
+-------------------
+ 00    | 00
+ 01    | 01
+ 10    | 11
+ 11    | 10
+-------------------
+Analyzing FSM <MFsm> for best encoding.
+Optimizing FSM <QSPI0/FlashControler0/FSM_0> on signal <FSM_state[1:2]> with user encoding.
+-------------------
+ State | Encoding
+-------------------
+ 00    | 00
+ 01    | 01
+ 10    | 10
+-------------------
+WARNING:Xst:1293 - FF/Latch <o_AV_ReadData_22> has a constant value of 0 in block <UartBusInterface>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <o_AV_ReadData_23> has a constant value of 0 in block <UartBusInterface>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <o_AV_ReadData_24> has a constant value of 0 in block <UartBusInterface>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <o_AV_ReadData_25> has a constant value of 0 in block <UartBusInterface>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <o_AV_ReadData_26> has a constant value of 0 in block <UartBusInterface>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <o_AV_ReadData_27> has a constant value of 0 in block <UartBusInterface>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <o_AV_ReadData_28> has a constant value of 0 in block <UartBusInterface>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <o_AV_ReadData_29> has a constant value of 0 in block <UartBusInterface>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <o_AV_ReadData_30> has a constant value of 0 in block <UartBusInterface>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <o_AV_ReadData_31> has a constant value of 0 in block <UartBusInterface>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <o_AV_ReadData_24> has a constant value of 0 in block <I2SBusInterface>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <o_AV_ReadData_25> has a constant value of 0 in block <I2SBusInterface>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <o_AV_ReadData_26> has a constant value of 0 in block <I2SBusInterface>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <o_AV_ReadData_27> has a constant value of 0 in block <I2SBusInterface>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <o_AV_ReadData_28> has a constant value of 0 in block <I2SBusInterface>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <o_AV_ReadData_29> has a constant value of 0 in block <I2SBusInterface>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <o_AV_ReadData_30> has a constant value of 0 in block <I2SBusInterface>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <o_AV_ReadData_31> has a constant value of 0 in block <I2SBusInterface>. This FF/Latch will be trimmed during the optimization process.
+INFO:Xst:1901 - Instance pll_base_inst in unit pll_base_inst of type PLL_BASE has been replaced by PLL_ADV
+INFO:Xst:2261 - The FF/Latch <r_PC_M_1> in Unit <CPU> is equivalent to the following FF/Latch, which will be removed : <r_PCAdd4_M_1> 
+INFO:Xst:2261 - The FF/Latch <r_PC_M_0> in Unit <CPU> is equivalent to the following FF/Latch, which will be removed : <r_PCAdd4_M_0> 
+
+Optimizing unit <PLL_M> ...
+
+Optimizing unit <Power2Div_1> ...
+
+Optimizing unit <SOC> ...
+
+Optimizing unit <UartBusInterface> ...
+
+Optimizing unit <FIFO_2> ...
+
+Optimizing unit <UartTx> ...
+
+Optimizing unit <FIFO_3> ...
+
+Optimizing unit <UartRx> ...
+
+Optimizing unit <CPU> ...
+
+Optimizing unit <IBusMaster> ...
+
+Optimizing unit <DBusMaster> ...
+
+Optimizing unit <PC> ...
+
+Optimizing unit <BranchUnit> ...
+
+Optimizing unit <RegFile> ...
+
+Optimizing unit <HazardUnit> ...
+
+Optimizing unit <Decoder> ...
+
+Optimizing unit <ImmGen> ...
+
+Optimizing unit <LoadUpper> ...
+
+Optimizing unit <ALU> ...
+
+Optimizing unit <ForwardingUnit> ...
+
+Optimizing unit <FlashBusInterface> ...
+
+Optimizing unit <FlashControler> ...
+
+Optimizing unit <FIFO_1> ...
+
+Optimizing unit <BOOTROM> ...
+
+Optimizing unit <RAM> ...
+
+Optimizing unit <GPIOBusInterface> ...
+
+Optimizing unit <SevenSegmentDriver> ...
+
+Optimizing unit <I2SBusInterface> ...
+
+Optimizing unit <I2SDriver> ...
+
+Optimizing unit <Power2Div_3> ...
+
+Optimizing unit <Power2Div_2> ...
+
+Optimizing unit <Timer> ...
+WARNING:Xst:2677 - Node <o_UnderFlow> of sequential type is unconnected in block <TxFIFO>.
+WARNING:Xst:2677 - Node <o_OverFlow> of sequential type is unconnected in block <TxFIFO>.
+WARNING:Xst:2677 - Node <o_UnderFlow> of sequential type is unconnected in block <RxFIFO>.
+WARNING:Xst:2677 - Node <o_OverFlow> of sequential type is unconnected in block <RxFIFO>.
+WARNING:Xst:2677 - Node <r_Control_E_0> of sequential type is unconnected in block <CPU0>.
+WARNING:Xst:2677 - Node <o_UnderFlow> of sequential type is unconnected in block <WrFIFO>.
+WARNING:Xst:2677 - Node <o_OverFlow> of sequential type is unconnected in block <WrFIFO>.
+WARNING:Xst:1293 - FF/Latch <r_WaitRead_1> has a constant value of 0 in block <FlashControler0>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <r_WaitRead_2> has a constant value of 0 in block <FlashControler0>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <r_MM_ReadByteCounter_3> has a constant value of 0 in block <QSPI0>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <r_7SegSelCounter_2> has a constant value of 0 in block <SevenSegmentDriver0>. This FF/Latch will be trimmed during the optimization process.
+INFO:Xst:2261 - The FF/Latch <r_MM_isReadTransaction> in Unit <QSPI0> is equivalent to the following FF/Latch, which will be removed : <o_AV_WaitRequest> 
+INFO:Xst:3203 - The FF/Latch <o_Flash_nCS> in Unit <FlashControler0> is the opposite to the following FF/Latch, which will be removed : <r_CMDBusy> 
+INFO:Xst:2261 - The FF/Latch <o_7Seg_En_0> in Unit <SevenSegmentDriver0> is equivalent to the following FF/Latch, which will be removed : <r_7SegSelCounter_0> 
+INFO:Xst:2261 - The FF/Latch <o_7Seg_En_1> in Unit <SevenSegmentDriver0> is equivalent to the following FF/Latch, which will be removed : <r_7SegSelCounter_1> 
+
+Mapping all equations...
+Building and optimizing final netlist ...
+Replicating register r_Flash_IO_SelectOutput_2 to handle IOB=TRUE attribute
+Changing polarity of register r_Flash_IO_SelectOutput_2 to handle IOB=TRUE attribute
+Changing polarity of register r_Flash_IO_SelectOutput_0 to handle IOB=TRUE attribute
+Found area constraint ratio of 100 (+ 5) on block SOC, actual ratio is 16.
+INFO:Xst:2260 - The FF/Latch <U0/xst_fifo_generator/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/gras.rsts/ram_empty_i> in Unit <i2sFifo> is equivalent to the following FF/Latch : <U0/xst_fifo_generator/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/gras.rsts/ram_empty_fb_i> 
+INFO:Xst:2260 - The FF/Latch <U0/xst_fifo_generator/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwas.wsts/ram_full_i> in Unit <i2sFifo> is equivalent to the following FF/Latch : <U0/xst_fifo_generator/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwas.wsts/ram_full_fb_i> 
+INFO:Xst:2260 - The FF/Latch <U0/xst_fifo_generator/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/gras.rsts/ram_empty_i> in Unit <i2sFifo> is equivalent to the following FF/Latch : <U0/xst_fifo_generator/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/gras.rsts/ram_empty_fb_i> 
+INFO:Xst:2260 - The FF/Latch <U0/xst_fifo_generator/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwas.wsts/ram_full_i> in Unit <i2sFifo> is equivalent to the following FF/Latch : <U0/xst_fifo_generator/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwas.wsts/ram_full_fb_i> 
+INFO:Xst:2260 - The FF/Latch <U0/xst_fifo_generator/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/gras.rsts/ram_empty_i> in Unit <i2sFifo> is equivalent to the following FF/Latch : <U0/xst_fifo_generator/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/gras.rsts/ram_empty_fb_i> 
+INFO:Xst:2260 - The FF/Latch <U0/xst_fifo_generator/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwas.wsts/ram_full_i> in Unit <i2sFifo> is equivalent to the following FF/Latch : <U0/xst_fifo_generator/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwas.wsts/ram_full_fb_i> 
+FlipFlop QSPI0/FlashControler0/r_Flash_IO_SelectOutput_2 has been replicated 1 time(s)
+
+Final Macro Processing ...
+
+=========================================================================
+Final Register Report
+
+Macro Statistics
+# Registers                                            : 1362
+ Flip-Flops                                            : 1362
+
+=========================================================================
+
+=========================================================================
+*                           Partition Report                            *
+=========================================================================
+
+Partition Implementation Status
+-------------------------------
+
+  No Partitions were found in this design.
+
+-------------------------------
+
+=========================================================================
+*                            Design Summary                             *
+=========================================================================
+
+Top Level Output File Name         : SOC.ngc
+
+Primitive and Black Box Usage:
+------------------------------
+# BELS                             : 3064
+#      GND                         : 17
+#      INV                         : 75
+#      LUT1                        : 75
+#      LUT2                        : 202
+#      LUT3                        : 704
+#      LUT4                        : 249
+#      LUT5                        : 355
+#      LUT6                        : 707
+#      MUXCY                       : 339
+#      MUXF7                       : 19
+#      VCC                         : 10
+#      XORCY                       : 312
+# FlipFlops/Latches                : 1422
+#      FD                          : 160
+#      FDE                         : 499
+#      FDR                         : 139
+#      FDRE                        : 619
+#      LD                          : 2
+#      ODDR2                       : 3
+# RAMS                             : 94
+#      RAM16X1D                    : 16
+#      RAM32X1D                    : 64
+#      RAM64X1D                    : 8
+#      RAMB16BWER                  : 4
+#      RAMB8BWER                   : 2
+# Clock Buffers                    : 4
+#      BUFG                        : 4
+# IO Buffers                       : 45
+#      IBUF                        : 2
+#      IBUFG                       : 1
+#      IOBUF                       : 1
+#      OBUF                        : 38
+#      OBUFT                       : 3
+# Others                           : 1
+#      PLL_ADV                     : 1
+
+Device utilization summary:
+---------------------------
+
+Selected Device : 6slx16ftg256-2 
+
+
+Slice Logic Utilization: 
+ Number of Slice Registers:            1418  out of  18224     7%  
+ Number of Slice LUTs:                 2543  out of   9112    27%  
+    Number used as Logic:              2367  out of   9112    25%  
+    Number used as Memory:              176  out of   2176     8%  
+       Number used as RAM:              176
+
+Slice Logic Distribution: 
+ Number of LUT Flip Flop pairs used:   3078
+   Number with an unused Flip Flop:    1660  out of   3078    53%  
+   Number with an unused LUT:           535  out of   3078    17%  
+   Number of fully used LUT-FF pairs:   883  out of   3078    28%  
+   Number of unique control sets:        79
+
+IO Utilization: 
+ Number of IOs:                          45
+ Number of bonded IOBs:                  44  out of    186    23%  
+    IOB Flip Flops/Latches:               4
+
+Specific Feature Utilization:
+ Number of Block RAM/FIFO:                5  out of     32    15%  
+    Number using Block RAM only:          5
+ Number of BUFG/BUFGCTRLs:                4  out of     16    25%  
+ Number of PLL_ADVs:                      1  out of      2    50%  
+
+---------------------------
+Partition Resource Summary:
+---------------------------
+
+  No Partitions were found in this design.
+
+---------------------------
+
+
+=========================================================================
+Timing Report
+
+NOTE: THESE TIMING NUMBERS ARE ONLY A SYNTHESIS ESTIMATE.
+      FOR ACCURATE TIMING INFORMATION PLEASE REFER TO THE TRACE REPORT
+      GENERATED AFTER PLACE-and-ROUTE.
+
+Clock Information:
+------------------
+------------------------------------------+--------------------------------------------+-------+
+Clock Signal                              | Clock buffer(FF name)                      | Load  |
+------------------------------------------+--------------------------------------------+-------+
+PLL_M_0/pll_base_inst/CLKOUT0             | BUFG                                       | 1411  |
+GPIO0/SegDivClk/r_Counter_14              | NONE(GPIO0/SevenSegmentDriver0/o_7Seg_En_0)| 10    |
+PLL_M_0/pll_base_inst/CLKOUT2             | BUFG                                       | 81    |
+I2S0/I2SDriver0/SCLK_Power2Div/r_Counter_1| NONE(I2S0/I2SDriver0/r_OldLRCK)            | 17    |
+TIMER0/r_AReg_Enable                      | NONE(TIMER0/r_TickOutN)                    | 2     |
+------------------------------------------+--------------------------------------------+-------+
+INFO:Xst:2169 - HDL ADVISOR - Some clock signals were not automatically buffered by XST with BUFG/BUFR resources. Please use the buffer_type constraint in order to insert these buffers to the clock signals to help prevent skew problems.
+
+Asynchronous Control Signals Information:
+----------------------------------------
+No asynchronous control signals found in this design
+
+Timing Summary:
+---------------
+Speed Grade: -2
+
+   Minimum period: 16.978ns (Maximum Frequency: 58.900MHz)
+   Minimum input arrival time before clock: 3.962ns
+   Maximum output required time after clock: 6.528ns
+   Maximum combinational path delay: No path found
+
+Timing Details:
+---------------
+All values displayed in nanoseconds (ns)
+
+=========================================================================
+Timing constraint: Default period analysis for Clock 'PLL_M_0/pll_base_inst/CLKOUT0'
+  Clock period: 16.978ns (frequency: 58.900MHz)
+  Total number of paths / destination ports: 538179 / 4256
+-------------------------------------------------------------------------
+Delay:               8.489ns (Levels of Logic = 8)
+  Source:            RAM0/Mram_Ram1 (RAM)
+  Destination:       CPU0/RegFile0/Mram_Registers18 (RAM)
+  Source Clock:      PLL_M_0/pll_base_inst/CLKOUT0 rising
+  Destination Clock: PLL_M_0/pll_base_inst/CLKOUT0 falling
+
+  Data Path: RAM0/Mram_Ram1 to CPU0/RegFile0/Mram_Registers18
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     RAMB16BWER:CLKA->DOA15    1   2.100   0.790  Mram_Ram1 (N19)
+     LUT3:I1->O            1   0.250   1.137  inst_LPM_MUX1511 (o_AV1_ReadData{15})
+     end scope: 'RAM0:o_AV1_ReadData{15}'
+     LUT6:I0->O            4   0.254   1.234  w_DBus_ReadData{15} (w_DBus_ReadData{15})
+     begin scope: 'CPU0:i_DBus_ReadData{15}'
+     begin scope: 'CPU0/DBusMaster0:i_DBus_ReadData{15}'
+     LUT6:I1->O           16   0.254   1.182  o_CpuRd{16}11 (o_CpuRd{16}_bdd0)
+     LUT5:I4->O            1   0.254   0.682  o_CpuRd{31}1 (o_CpuRd{31})
+     end scope: 'CPU0/DBusMaster0:o_CpuRd{31}'
+     LUT5:I4->O            2   0.254   0.000  Mmux_w_WBData_W251 (w_WBData_W{31})
+     begin scope: 'CPU0/RegFile0:i_WrData{31}'
+     RAM32X1D:D                0.098          Mram_Registers33
+    ----------------------------------------
+    Total                      8.489ns (3.464ns logic, 5.025ns route)
+                                       (40.8% logic, 59.2% route)
+
+=========================================================================
+Timing constraint: Default period analysis for Clock 'GPIO0/SegDivClk/r_Counter_14'
+  Clock period: 3.635ns (frequency: 275.103MHz)
+  Total number of paths / destination ports: 47 / 20
+-------------------------------------------------------------------------
+Delay:               3.635ns (Levels of Logic = 2)
+  Source:            GPIO0/SevenSegmentDriver0/o_7Seg_En_0 (FF)
+  Destination:       GPIO0/SevenSegmentDriver0/o_7Seg_Led_0 (FF)
+  Source Clock:      GPIO0/SegDivClk/r_Counter_14 rising
+  Destination Clock: GPIO0/SegDivClk/r_Counter_14 rising
+
+  Data Path: GPIO0/SevenSegmentDriver0/o_7Seg_En_0 to GPIO0/SevenSegmentDriver0/o_7Seg_Led_0
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDE:C->Q             16   0.525   1.637  o_7Seg_En_0 (o_7Seg_En_0)
+     LUT6:I0->O            1   0.254   0.910  Mmux__n005613 (Mmux__n005612)
+     LUT5:I2->O            1   0.235   0.000  Mmux__n005615 (_n0056{0})
+     FDE:D                     0.074          o_7Seg_Led_0
+    ----------------------------------------
+    Total                      3.635ns (1.088ns logic, 2.547ns route)
+                                       (29.9% logic, 70.1% route)
+
+=========================================================================
+Timing constraint: Default period analysis for Clock 'PLL_M_0/pll_base_inst/CLKOUT2'
+  Clock period: 3.895ns (frequency: 256.768MHz)
+  Total number of paths / destination ports: 291 / 185
+-------------------------------------------------------------------------
+Delay:               3.895ns (Levels of Logic = 1)
+  Source:            I2S0/r_OldReqNextData (FF)
+  Destination:       I2S0/r_I2S_DataIn_0 (FF)
+  Source Clock:      PLL_M_0/pll_base_inst/CLKOUT2 rising
+  Destination Clock: PLL_M_0/pll_base_inst/CLKOUT2 rising
+
+  Data Path: I2S0/r_OldReqNextData to I2S0/r_I2S_DataIn_0
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FD:C->Q               3   0.525   0.874  r_OldReqNextData (r_OldReqNextData)
+     LUT3:I1->O           48   0.250   1.787  _n014311 (_n0143)
+     FDRE:R                    0.459          r_I2S_DataIn_0
+    ----------------------------------------
+    Total                      3.895ns (1.234ns logic, 2.661ns route)
+                                       (31.7% logic, 68.3% route)
+
+=========================================================================
+Timing constraint: Default period analysis for Clock 'I2S0/I2SDriver0/SCLK_Power2Div/r_Counter_1'
+  Clock period: 5.929ns (frequency: 168.662MHz)
+  Total number of paths / destination ports: 133 / 20
+-------------------------------------------------------------------------
+Delay:               5.929ns (Levels of Logic = 4)
+  Source:            I2S0/I2SDriver0/r_BitCounter_1 (FF)
+  Destination:       I2S0/I2SDriver0/o_SDIN (FF)
+  Source Clock:      I2S0/I2SDriver0/SCLK_Power2Div/r_Counter_1 rising
+  Destination Clock: I2S0/I2SDriver0/SCLK_Power2Div/r_Counter_1 rising
+
+  Data Path: I2S0/I2SDriver0/r_BitCounter_1 to I2S0/I2SDriver0/o_SDIN
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDE:C->Q             19   0.525   1.716  r_BitCounter_1 (r_BitCounter_1)
+     LUT6:I0->O            1   0.254   0.958  Mmux_r_BitCounter[4]_X_105_o_Mux_7_o_11 (Mmux_r_BitCounter[4]_X_105_o_Mux_7_o_11)
+     LUT6:I2->O            1   0.254   0.958  Mmux_r_BitCounter[4]_r_BitCounter[4]_MUX_971_o11 (Mmux_r_BitCounter[4]_r_BitCounter[4]_MUX_971_o1)
+     LUT5:I1->O            1   0.254   0.682  Mmux_r_BitCounter[4]_r_BitCounter[4]_MUX_971_o14 (r_BitCounter[4]_r_BitCounter[4]_MUX_971_o)
+     LUT3:I2->O            1   0.254   0.000  o_SDIN_rstpot (o_SDIN_rstpot)
+     FD:D                      0.074          o_SDIN
+    ----------------------------------------
+    Total                      5.929ns (1.615ns logic, 4.314ns route)
+                                       (27.2% logic, 72.8% route)
+
+=========================================================================
+Timing constraint: Default OFFSET IN BEFORE for Clock 'PLL_M_0/pll_base_inst/CLKOUT0'
+  Total number of paths / destination ports: 19 / 19
+-------------------------------------------------------------------------
+Offset:              3.962ns (Levels of Logic = 4)
+  Source:            UART0_nCTS (PAD)
+  Destination:       UART0/TX/r_ClksPerBitCounter_0 (FF)
+  Destination Clock: PLL_M_0/pll_base_inst/CLKOUT0 rising
+
+  Data Path: UART0_nCTS to UART0/TX/r_ClksPerBitCounter_0
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     IBUF:I->O             3   1.328   0.766  UART0_nCTS_IBUF (UART0_nCTS_IBUF)
+     begin scope: 'UART0:i_UART_nCTS'
+     begin scope: 'UART0/TX:i_UART_nCTS'
+     LUT2:I1->O           16   0.254   1.290  TXState[1]_r_ClksPerBitCounter[15]_wide_mux_28_OUT{9}_SW0 (N2)
+     LUT6:I4->O            1   0.250   0.000  TXState[1]_r_ClksPerBitCounter[15]_wide_mux_28_OUT{9} (TXState[1]_r_ClksPerBitCounter[15]_wide_mux_28_OUT{9})
+     FD:D                      0.074          r_ClksPerBitCounter_9
+    ----------------------------------------
+    Total                      3.962ns (1.906ns logic, 2.056ns route)
+                                       (48.1% logic, 51.9% route)
+
+=========================================================================
+Timing constraint: Default OFFSET OUT AFTER for Clock 'PLL_M_0/pll_base_inst/CLKOUT0'
+  Total number of paths / destination ports: 11 / 5
+-------------------------------------------------------------------------
+Offset:              6.528ns (Levels of Logic = 4)
+  Source:            UART0/RxFIFO/r_Count_4 (FF)
+  Destination:       UART0_nRTS (PAD)
+  Source Clock:      PLL_M_0/pll_base_inst/CLKOUT0 rising
+
+  Data Path: UART0/RxFIFO/r_Count_4 to UART0_nRTS
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FD:C->Q               8   0.525   1.220  r_Count_4 (r_Count_4)
+     LUT4:I0->O            1   0.254   0.682  GND_101_o_r_Count[4]_LessThan_5_o1 (o_ProgFull)
+     end scope: 'UART0/RxFIFO:o_ProgFull'
+     LUT2:I1->O            1   0.254   0.681  Mmux_o_UART_nRTS11 (o_UART_nRTS)
+     end scope: 'UART0:o_UART_nRTS'
+     OBUF:I->O                 2.912          UART0_nRTS_OBUF (UART0_nRTS)
+    ----------------------------------------
+    Total                      6.528ns (3.945ns logic, 2.583ns route)
+                                       (60.4% logic, 39.6% route)
+
+=========================================================================
+Timing constraint: Default OFFSET OUT AFTER for Clock 'GPIO0/SegDivClk/r_Counter_14'
+  Total number of paths / destination ports: 10 / 10
+-------------------------------------------------------------------------
+Offset:              4.618ns (Levels of Logic = 2)
+  Source:            GPIO0/SevenSegmentDriver0/o_7Seg_En_0 (FF)
+  Destination:       o_7Seg_En{0} (PAD)
+  Source Clock:      GPIO0/SegDivClk/r_Counter_14 rising
+
+  Data Path: GPIO0/SevenSegmentDriver0/o_7Seg_En_0 to o_7Seg_En{0}
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDE:C->Q             16   0.525   1.181  o_7Seg_En_0 (o_7Seg_En_0)
+     end scope: 'GPIO0/SevenSegmentDriver0:o_7Seg_En{0}'
+     end scope: 'GPIO0:o_7Seg_En{0}'
+     OBUF:I->O                 2.912          o_7Seg_En_0_OBUF (o_7Seg_En{0})
+    ----------------------------------------
+    Total                      4.618ns (3.437ns logic, 1.181ns route)
+                                       (74.4% logic, 25.6% route)
+
+=========================================================================
+Timing constraint: Default OFFSET OUT AFTER for Clock 'I2S0/I2SDriver0/SCLK_Power2Div/r_Counter_1'
+  Total number of paths / destination ports: 2 / 2
+-------------------------------------------------------------------------
+Offset:              4.202ns (Levels of Logic = 2)
+  Source:            I2S0/I2SDriver0/r_OldLRCK (FF)
+  Destination:       o_I2S_LCLK (PAD)
+  Source Clock:      I2S0/I2SDriver0/SCLK_Power2Div/r_Counter_1 rising
+
+  Data Path: I2S0/I2SDriver0/r_OldLRCK to o_I2S_LCLK
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FD:C->Q               3   0.525   0.765  r_OldLRCK (r_OldLRCK)
+     end scope: 'I2S0/I2SDriver0:o_LRCK'
+     end scope: 'I2S0:o_I2S0_LRCK'
+     OBUF:I->O                 2.912          o_I2S_LCLK_OBUF (o_I2S_LCLK)
+    ----------------------------------------
+    Total                      4.202ns (3.437ns logic, 0.765ns route)
+                                       (81.8% logic, 18.2% route)
+
+=========================================================================
+
+Cross Clock Domains Report:
+--------------------------
+
+Clock to Setup on destination clock GPIO0/SegDivClk/r_Counter_14
+-----------------------------+---------+---------+---------+---------+
+                             | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
+Source Clock                 |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
+-----------------------------+---------+---------+---------+---------+
+GPIO0/SegDivClk/r_Counter_14 |    3.635|         |         |         |
+PLL_M_0/pll_base_inst/CLKOUT0|    4.218|         |         |         |
+-----------------------------+---------+---------+---------+---------+
+
+Clock to Setup on destination clock I2S0/I2SDriver0/SCLK_Power2Div/r_Counter_1
+------------------------------------------+---------+---------+---------+---------+
+                                          | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
+Source Clock                              |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
+------------------------------------------+---------+---------+---------+---------+
+I2S0/I2SDriver0/SCLK_Power2Div/r_Counter_1|    5.929|         |         |         |
+PLL_M_0/pll_base_inst/CLKOUT2             |    5.171|         |         |         |
+------------------------------------------+---------+---------+---------+---------+
+
+Clock to Setup on destination clock PLL_M_0/pll_base_inst/CLKOUT0
+-----------------------------+---------+---------+---------+---------+
+                             | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
+Source Clock                 |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
+-----------------------------+---------+---------+---------+---------+
+PLL_M_0/pll_base_inst/CLKOUT0|   16.828|    3.517|    8.489|         |
+PLL_M_0/pll_base_inst/CLKOUT2|    1.280|         |         |         |
+TIMER0/r_AReg_Enable         |         |    3.382|         |         |
+-----------------------------+---------+---------+---------+---------+
+
+Clock to Setup on destination clock PLL_M_0/pll_base_inst/CLKOUT2
+------------------------------------------+---------+---------+---------+---------+
+                                          | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
+Source Clock                              |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
+------------------------------------------+---------+---------+---------+---------+
+I2S0/I2SDriver0/SCLK_Power2Div/r_Counter_1|    4.038|         |         |         |
+PLL_M_0/pll_base_inst/CLKOUT0             |    1.280|         |         |         |
+PLL_M_0/pll_base_inst/CLKOUT2             |    3.895|         |         |         |
+------------------------------------------+---------+---------+---------+---------+
+
+Clock to Setup on destination clock TIMER0/r_AReg_Enable
+-----------------------------+---------+---------+---------+---------+
+                             | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
+Source Clock                 |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
+-----------------------------+---------+---------+---------+---------+
+PLL_M_0/pll_base_inst/CLKOUT0|         |         |    4.106|         |
+-----------------------------+---------+---------+---------+---------+
+
+=========================================================================
+
+
+Total REAL time to Xst completion: 146.00 secs
+Total CPU time to Xst completion: 145.98 secs
+ 
+--> 
+
+Total memory usage is 4591528 kilobytes
+
+Number of errors   :    0 (   0 filtered)
+Number of warnings :  163 (   0 filtered)
+Number of infos    :   42 (   0 filtered)
+

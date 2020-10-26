@@ -277,12 +277,10 @@ module SOC(
         .i_Clk(w_SysClk),
 
         //DBUS
-        .i_MEM_SlaveSel(w_DBUS_QSPI0_Sel),
-        .i_MEM_RegAddr(w_DBus_SMALL_MEM_RegSelAddr),
-        
+        .i_AV_MEM_SlaveSel(w_DBUS_QSPI0_Sel),
+        .i_AV_MEM_RegAddr(w_DBus_SMALL_MEM_RegSelAddr),
         .i_CNTRL_SlaveSel(w_DBUS_QSPI0_CNTRL_Sel),
         .i_CNTRL_RegAddr(w_DBus_SMALL_PERIPH_RegSelAddr),
-
         .i_AV_ByteEn(w_DBus_ByteEn),
         .i_AV_Read(w_DBus_Read),
         .i_AV_Write(w_DBus_Write),
@@ -304,7 +302,6 @@ module SOC(
         //IBus Slave
         .i_AV0_SlaveSel(w_IBUS_BOOT_ROM_Sel),
         .i_AV0_RegAddr(w_IBus_SMALL_PERIPH_RegSelAddr),
-
         .i_AV0_Read(w_IBus_Read),
         .o_AV0_ReadData(w_IBUS_BOOT_ROM_ReadData),
         .o_AV0_WaitRequest(w_IBUS_BOOT_ROM_WaitRequest),
@@ -312,7 +309,6 @@ module SOC(
         //DBus Slave
         .i_AV1_SlaveSel(w_DBUS_BOOT_ROM_Sel),
         .i_AV1_RegAddr(w_DBus_SMALL_PERIPH_RegSelAddr),
-
         .i_AV1_Read(w_DBus_Read),
         .o_AV1_ReadData(w_DBUS_BOOT_ROM_ReadData),
         .o_AV1_WaitRequest(w_DBUS_BOOT_ROM_WaitRequest)
@@ -348,9 +344,8 @@ module SOC(
         .i_Clk(w_SysClk),
 
         //DBus Slave
-        .i_SlaveSel(w_DBUS_GPIO_Sel),
-        .i_RegAddr(w_DBus_SMALL_PERIPH_RegSelAddr),
-
+        .i_AV_SlaveSel(w_DBUS_GPIO_Sel),
+        .i_AV_RegAddr(w_DBus_SMALL_PERIPH_RegSelAddr),
         .i_AV_ByteEn(w_DBus_ByteEn),
         .i_AV_Read(w_DBus_Read),
         .i_AV_Write(w_DBus_Write),
@@ -369,9 +364,8 @@ module SOC(
         .i_Clk(w_SysClk),
         
         //DBus Slave
-        .i_SlaveSel(w_DBUS_UART0_Sel),
-        .i_RegAddr(w_DBus_SMALL_PERIPH_RegSelAddr),
-
+        .i_AV_SlaveSel(w_DBUS_UART0_Sel),
+        .i_AV_RegAddr(w_DBus_SMALL_PERIPH_RegSelAddr),
         .i_AV_ByteEn(w_DBus_ByteEn),
         .i_AV_Read(w_DBus_Read),
         .i_AV_Write(w_DBus_Write),
@@ -391,9 +385,8 @@ module SOC(
         .i_Clk(w_SysClk),
 
         //DBus Slave
-        .i_SlaveSel(w_DBUS_I2S0_Sel),
-        .i_RegAddr(w_DBus_SMALL_PERIPH_RegSelAddr),
-
+        .i_AV_SlaveSel(w_DBUS_I2S0_Sel),
+        .i_AV_RegAddr(w_DBus_SMALL_PERIPH_RegSelAddr),
         .i_AV_ByteEn(w_DBus_ByteEn),
         .i_AV_Read(w_DBus_Read),
         .i_AV_Write(w_DBus_Write),
@@ -409,15 +402,14 @@ module SOC(
         .o_I2S0_MCLK(o_I2S_MCLK)
     );
 
-    Counter #(
+    Timer #(
         .ADDR_SEL_BITS(ADDR_SMALL_PERIPH_SEL_BITS)
     )TIMER0(
         .i_Clk(w_SysClk),
         
         //DBus Slave
-        .i_SlaveSel(w_DBUS_TIMER0_Sel),
-        .i_RegAddr(w_DBus_SMALL_PERIPH_RegSelAddr),
-
+        .i_AV_SlaveSel(w_DBUS_TIMER0_Sel),
+        .i_AV_RegAddr(w_DBus_SMALL_PERIPH_RegSelAddr),
         .i_AV_ByteEn(w_DBus_ByteEn),
         .i_AV_Read(w_DBus_Read),
         .i_AV_Write(w_DBus_Write),
@@ -445,8 +437,8 @@ module SOC(
     //     .i_Clk(w_SysClk),
 
     //     //DBus Slave
-    //     .i_SlaveSel(w_DBUS_TVRAM_Sel),
-    //     .i_RegAddr(w_DBus_SMALL_PERIPH_RegSelAddr),
+    //     .i_AV_SlaveSel(w_DBUS_TVRAM_Sel),
+    //     .i_AV_RegAddr(w_DBus_SMALL_PERIPH_RegSelAddr),
 
     //     .i_AV_ByteEn(w_DBus_ByteEn),
     //     .i_AV_Read(w_DBus_Read),

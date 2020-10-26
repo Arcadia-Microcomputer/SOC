@@ -20,9 +20,8 @@ module VideoDriver#(
     input i_Clk,
 
     //Avalon RW slave
-    input i_SlaveSel,
-    input [29-ADDR_SEL_BITS:0]i_RegAddr,
-
+    input i_AV_SlaveSel,
+    input [29-ADDR_SEL_BITS:0]i_AV_RegAddr,
     input [3:0]i_AV_ByteEn,
     input i_AV_Read,
     input i_AV_Write,
@@ -67,20 +66,20 @@ module VideoDriver#(
         o_AV_ReadData <= 0;
         r_VRAM_WE <= 0;
 
-        if (i_SlaveSel) begin
+        if (i_AV_SlaveSel) begin
             //Write transaction
             if(i_AV_Write)begin
-                if(i_RegAddr < 8100)begin
+                if(i_AV_RegAddr < 8100)begin
                     r_VRAM_WE <= 1;
                     r_VRAM_ByteEn <= i_AV_ByteEn;
-                    r_VRAM_WriteAddr <= i_RegAddr[14:0];
+                    r_VRAM_WriteAddr <= i_AV_RegAddr[14:0];
                     r_VRAM_WData <= i_AV_WriteData;
                 end
             end
             
             //Read transaction
             // if(i_AV_Read)begin
-            //     case (i_RegAddr)
+            //     case (i_AV_RegAddr)
             //         :begin
             //         end
             //         default:begin

@@ -1,0 +1,6 @@
+xst -intstyle ise -ifn "I:/4-Git Repos/Arcadia Microcomputer/SOC/SOC/WorkinDir/SOC.xst" -ofn "I:/4-Git Repos/Arcadia Microcomputer/SOC/SOC/WorkinDir/SOC.syr" 
+ngdbuild -intstyle ise -dd _ngo -sd ../ipcore_dir -nt timestamp -uc "I:/4-Git Repos/Arcadia Microcomputer/SOC/SOC/RTL/SOC.ucf" -p xc6slx16-ftg256-2 "SOC.ngc" SOC.ngd  
+map -intstyle ise -p xc6slx16-ftg256-2 -w -logic_opt on -ol high -xe n -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir all -pr b -lc off -power off -o SOC_map.ncd SOC.ngd SOC.pcf 
+par -w -intstyle ise -ol high -xe n -mt off SOC_map.ncd SOC.ncd SOC.pcf 
+trce -intstyle ise -v 3 -s 2 -n 3 -fastpaths -xml SOC.twx SOC.ncd -o SOC.twr SOC.pcf 
+bitgen -intstyle ise -f SOC.ut SOC.ncd 
