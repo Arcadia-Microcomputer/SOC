@@ -14,8 +14,8 @@ SOCSchem/sym-lib-table
 SOC/ipcore_dir/*
 !SOC/ipcore_dir/coregen.cgp
 !SOC/ipcore_dir/PLL_M.xco
-SOC/WorkingDir/*
-!SOC/WorkingDir/SOC.bit
+SOC/WorkinDir/*
+!SOC/WorkinDir/SOC.bit
 SOC/iseconfig
 SOC/**/*.twx
 SOC/**/*.svf

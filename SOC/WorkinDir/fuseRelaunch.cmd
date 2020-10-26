@@ -1,1 +1,0 @@
--intstyle "ise" -incremental -lib "unisims_ver" -lib "unimacro_ver" -lib "xilinxcorelib_ver" -lib "secureip" -o "I:/4-Git Repos/Arcadia Microcomputer/SOC/SOC/WorkinDir/SOC_tb_isim_beh.exe" -prj "I:/4-Git Repos/Arcadia Microcomputer/SOC/SOC/WorkinDir/SOC_tb_beh.prj" "work.SOC_tb" "work.glbl" 
