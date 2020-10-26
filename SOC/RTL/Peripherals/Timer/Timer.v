@@ -45,6 +45,7 @@ module Timer #(
     reg [31:0] r_Timer = 0;
     reg r_OverFlow = 0;
 
+    reg r_OldBitN = 0;
     reg r_TickOutN = 0;
     reg r_TickOutM = 0;
 
@@ -103,7 +104,7 @@ module Timer #(
         if(r_AReg_Enable)begin
             //PreScaler N tick generator
             if(r_AReg_EnablePreScalerN)begin
-                if(r_CounterN[r_AReg_PreScalerN] == 1)begin
+                if(r_CounterN[r_AReg_PreScalerN] != r_OldBitN)begin
                     r_TickOutN = 1;
                 end else begin
                     r_TickOutN = 0;
@@ -128,6 +129,7 @@ module Timer #(
 
     always @(posedge i_Clk) begin
         r_OldCounterM <= r_CounterM;
+        r_OldBitN <= r_CounterN[r_AReg_PreScalerN];
 
         if(r_AReg_Enable)begin
             if(r_AReg_Reset)begin
@@ -138,11 +140,7 @@ module Timer #(
 
                 //PreScaler N
                 if(r_AReg_EnablePreScalerN)begin
-                    if(r_CounterN[r_AReg_PreScalerN] == 1)begin
-                        r_CounterN <= 0;
-                    end else begin
-                        r_CounterN <= r_CounterN + 1;
-                    end
+                    r_CounterN <= r_CounterN + 1;
                 end
 
                 //PreScaler M
