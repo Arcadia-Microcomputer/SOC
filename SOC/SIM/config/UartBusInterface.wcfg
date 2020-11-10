@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="I:/4-Git Repos/Arcadia Microcomputer/SOC/SOC/WorkinDir/UartBusInterface_tb_isim_beh.wdb" id="1" type="auto">
+         <top_modules>
+            <top_module name="UartBusInterface_tb" />
+            <top_module name="glbl" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <WVObjectSize size="21" />
+   <wvobject fp_name="/UartBusInterface_tb/r_Clk" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">r_Clk</obj_property>
+      <obj_property name="ObjectShortName">r_Clk</obj_property>
+   </wvobject>
+   <wvobject fp_name="/UartBusInterface_tb/r_AV_Addr" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">r_AV_Addr[29:0]</obj_property>
+      <obj_property name="ObjectShortName">r_AV_Addr[29:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ff00ff</obj_property>
+   </wvobject>
+   <wvobject fp_name="/UartBusInterface_tb/r_AV_ByteEn" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">r_AV_ByteEn[3:0]</obj_property>
+      <obj_property name="ObjectShortName">r_AV_ByteEn[3:0]</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ff00ff</obj_property>
+   </wvobject>
+   <wvobject fp_name="/UartBusInterface_tb/r_AV_Read" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">r_AV_Read</obj_property>
+      <obj_property name="ObjectShortName">r_AV_Read</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ff00ff</obj_property>
+   </wvobject>
+   <wvobject fp_name="/UartBusInterface_tb/w_AV_ReadData" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">w_AV_ReadData[31:0]</obj_property>
+      <obj_property name="ObjectShortName">w_AV_ReadData[31:0]</obj_property>
+      <obj_property name="Radix">HEXRADIX</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ff00ff</obj_property>
+   </wvobject>
+   <wvobject fp_name="/UartBusInterface_tb/r_AV_Write" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">r_AV_Write</obj_property>
+      <obj_property name="ObjectShortName">r_AV_Write</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ff00ff</obj_property>
+   </wvobject>
+   <wvobject fp_name="/UartBusInterface_tb/r_AV_WriteData" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">r_AV_WriteData[31:0]</obj_property>
+      <obj_property name="ObjectShortName">r_AV_WriteData[31:0]</obj_property>
+      <obj_property name="Radix">HEXRADIX</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ff00ff</obj_property>
+   </wvobject>
+   <wvobject fp_name="/UartBusInterface_tb/w_AV_WaitRequest" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">w_AV_WaitRequest</obj_property>
+      <obj_property name="ObjectShortName">w_AV_WaitRequest</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ffff00</obj_property>
+   </wvobject>
+   <wvobject fp_name="/UartBusInterface_tb/UartBusInterface0/r_AReg_TxEn" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">r_AReg_TxEn</obj_property>
+      <obj_property name="ObjectShortName">r_AReg_TxEn</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ffff00</obj_property>
+   </wvobject>
+   <wvobject fp_name="/UartBusInterface_tb/UartBusInterface0/r_AReg_RxEn" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">r_AReg_RxEn</obj_property>
+      <obj_property name="ObjectShortName">r_AReg_RxEn</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ffff00</obj_property>
+   </wvobject>
+   <wvobject fp_name="/UartBusInterface_tb/UartBusInterface0/r_AReg_FlowControlEn" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">r_AReg_FlowControlEn</obj_property>
+      <obj_property name="ObjectShortName">r_AReg_FlowControlEn</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ffff00</obj_property>
+   </wvobject>
+   <wvobject fp_name="/UartBusInterface_tb/UartBusInterface0/r_AReg_WrData" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">r_AReg_WrData[7:0]</obj_property>
+      <obj_property name="ObjectShortName">r_AReg_WrData[7:0]</obj_property>
+      <obj_property name="Radix">ASCIIRADIX</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ffff00</obj_property>
+   </wvobject>
+   <wvobject fp_name="/UartBusInterface_tb/UartBusInterface0/r_AReg_RdData" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">r_AReg_RdData[7:0]</obj_property>
+      <obj_property name="ObjectShortName">r_AReg_RdData[7:0]</obj_property>
+      <obj_property name="Radix">ASCIIRADIX</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ffff00</obj_property>
+   </wvobject>
+   <wvobject fp_name="/UartBusInterface_tb/UartBusInterface0/r_TxFifo_WrEn" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">r_TxFifo_WrEn</obj_property>
+      <obj_property name="ObjectShortName">r_TxFifo_WrEn</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ffa500</obj_property>
+   </wvobject>
+   <wvobject fp_name="/UartBusInterface_tb/UartBusInterface0/w_TxFifo_RdData" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">w_TxFifo_RdData[7:0]</obj_property>
+      <obj_property name="ObjectShortName">w_TxFifo_RdData[7:0]</obj_property>
+      <obj_property name="Radix">ASCIIRADIX</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ffa500</obj_property>
+   </wvobject>
+   <wvobject fp_name="/UartBusInterface_tb/UartBusInterface0/w_TxFifo_Full" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">w_TxFifo_Full</obj_property>
+      <obj_property name="ObjectShortName">w_TxFifo_Full</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ffa500</obj_property>
+   </wvobject>
+   <wvobject fp_name="/UartBusInterface_tb/UartBusInterface0/w_TxFifo_Empty" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">w_TxFifo_Empty</obj_property>
+      <obj_property name="ObjectShortName">w_TxFifo_Empty</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ffa500</obj_property>
+   </wvobject>
+   <wvobject fp_name="/UartBusInterface_tb/UartBusInterface0/o_UART_TX" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">o_UART_TX</obj_property>
+      <obj_property name="ObjectShortName">o_UART_TX</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#00ffff</obj_property>
+   </wvobject>
+   <wvobject fp_name="/UartBusInterface_tb/UartBusInterface0/i_UART_nCTS" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">i_UART_nCTS</obj_property>
+      <obj_property name="ObjectShortName">i_UART_nCTS</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#00ffff</obj_property>
+   </wvobject>
+   <wvobject fp_name="/UartBusInterface_tb/UartBusInterface0/i_UART_RX" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">i_UART_RX</obj_property>
+      <obj_property name="ObjectShortName">i_UART_RX</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#00ffff</obj_property>
+   </wvobject>
+   <wvobject fp_name="/UartBusInterface_tb/UartBusInterface0/o_UART_nRTS" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">o_UART_nRTS</obj_property>
+      <obj_property name="ObjectShortName">o_UART_nRTS</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#00ffff</obj_property>
+   </wvobject>
+</wave_config>

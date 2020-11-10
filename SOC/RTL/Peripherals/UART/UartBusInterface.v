@@ -1,32 +1,36 @@
 `timescale 1ns / 1ps
 
 module UartBusInterface #(
-    parameter ADDR_SEL_BITS = 0
+    parameter NUM_PERIPH_SEL_BITS = 5,
+    parameter PERIPH_SEL_VAL = 0
     )(
     input i_Clk,
 
     //Avalon RW slave
-    input i_AV_SlaveSel,
-    input [29-ADDR_SEL_BITS:0]i_AV_RegAddr,
+    input [29:0]i_AV_Addr,
     input [3:0]i_AV_ByteEn,
     input i_AV_Read,
-    input i_AV_Write,
     output reg [31:0]o_AV_ReadData,
+    input i_AV_Write,
     input [31:0]i_AV_WriteData,
     output reg o_AV_WaitRequest,
+    input [7:0]i_AV_BurstCount,
 
-    //UART
+    //UART IO
     output o_UART_TX,
     input i_UART_nCTS,
     input i_UART_RX,
     output o_UART_nRTS
     );
 
-    //DBus Signals
     initial begin
         o_AV_ReadData <= 0;
         o_AV_WaitRequest <= 0;
     end
+
+    //DBUS Signals
+    assign w_SlaveSel = (i_AV_Addr[29:30-NUM_PERIPH_SEL_BITS] == PERIPH_SEL_VAL)? 1 : 0;
+	wire [29-NUM_PERIPH_SEL_BITS:0]w_RegAddr = i_AV_Addr[29-NUM_PERIPH_SEL_BITS:0];
 
     //The various register addresses
     parameter p_REG_ADDR_CTRL   = 0;
@@ -64,15 +68,14 @@ module UartBusInterface #(
     assign o_UART_nRTS = r_AReg_FlowControlEn? w_RxFifo_ProgFull: 1'b0;
 
     always @(posedge i_Clk)begin
-        o_AV_ReadData <= 0;
         o_AV_WaitRequest <= 0;
         r_TxFifo_WrEn <= 0;
         r_RxFifo_RdEn <= 0;
 
-        if (i_AV_SlaveSel) begin
+        if (w_SlaveSel) begin
             //Write transaction
             if(i_AV_Write)begin
-                case (i_AV_RegAddr)
+                case (w_RegAddr)
                     p_REG_ADDR_CTRL:begin
                         if(i_AV_ByteEn[0]) r_AReg_ClksPerBit[7:0] <= i_AV_WriteData[7:0];
                         if(i_AV_ByteEn[1]) r_AReg_ClksPerBit[15:8] <= i_AV_WriteData[15:8];
@@ -93,7 +96,7 @@ module UartBusInterface #(
             
             //Read transaction
             if(i_AV_Read)begin
-                case (i_AV_RegAddr)
+                case (w_RegAddr[1:0])
                     p_REG_ADDR_CTRL:begin
                         o_AV_ReadData <= {10'b0, r_AReg_FlowControlEn, !w_RxFifo_Empty, w_TxFifo_Full, (w_TxFifo_Empty && w_UartTX_Idle),
                                           r_AReg_RxEn, r_AReg_TxEn, r_AReg_ClksPerBit};
@@ -107,6 +110,8 @@ module UartBusInterface #(
                     end
                 endcase
             end
+        end else begin
+            o_AV_ReadData <= 0;
         end
     end
 
