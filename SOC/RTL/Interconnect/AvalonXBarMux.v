@@ -6,7 +6,7 @@ localparam NUM_OUTPUTS = 5;
 module AvalonXBarMux (
     input i_Clk,
 
-    input [($clog2(NUM_INPUTS) * NUM_OUTPUTS)-1:0]i_MuxSel,
+    input [($clog2(NUM_INPUTS+1) * NUM_OUTPUTS)-1:0]i_MuxSel,
 
     //Avalon inputs
     input [(30*NUM_INPUTS)-1:0]i_AVIn_Addr,
@@ -28,10 +28,11 @@ module AvalonXBarMux (
     input [NUM_OUTPUTS-1:0]i_AVOut_WaitRequest,
     output [(8*NUM_OUTPUTS)-1:0]o_AVOut_BurstCount
     );
+    reg [($clog2(NUM_INPUTS+1) * NUM_OUTPUTS)-1:0]r_Old_MuxSel = 0;
 
-    wire [NUM_INPUTS-1:0]w_TmpWaitRequest[NUM_OUTPUTS-1:0];
-    wire [32*NUM_INPUTS-1:0]w_TmpReadData[NUM_OUTPUTS-1:0];
-
+    wire w_TmpWaitRequest[NUM_OUTPUTS-1:0];
+    wire [31:0]w_TmpReadData[NUM_OUTPUTS-1:0];
+    
     for(genvar i = 0; i < NUM_OUTPUTS; i = i + 1)begin
         AvalonTerminatedMux#(
             .NUM_INPUTS(NUM_INPUTS)
@@ -59,30 +60,34 @@ module AvalonXBarMux (
         );
     end
 
+    always @(posedge i_Clk) begin
+        r_Old_MuxSel <= i_MuxSel;
+    end
+
     //Take care of the (output -> input) signals
     integer i;
     always @(*) begin
         for(i = 0; i < NUM_INPUTS; i = i + 1)begin
-            if(i_MuxSel[2:0] == i)begin
+            if(r_Old_MuxSel[2:0] == i)begin
                 //Link data from Output 0 to Input i
-                o_AVIn_ReadData[32*i +:32] <= w_TmpReadData[i][(0*32) +: 32];
-                o_AVIn_WaitRequest[i] <= w_TmpWaitRequest[0][i];
-            end else if(i_MuxSel[5:3] == i) begin
+                o_AVIn_ReadData[32*i +:32] <= w_TmpReadData[0];
+                o_AVIn_WaitRequest[i] <= w_TmpWaitRequest[0];
+            end else if(r_Old_MuxSel[5:3] == i) begin
                 //Link data from Output 1 to Input i
-                o_AVIn_ReadData[32*i +:32] <= w_TmpReadData[i][(1*32) +: 32];
-                o_AVIn_WaitRequest[i] <= w_TmpWaitRequest[1][i];
-            end else if(i_MuxSel[8:6] == i) begin
+                o_AVIn_ReadData[32*i +:32] <= w_TmpReadData[1];
+                o_AVIn_WaitRequest[i] <= w_TmpWaitRequest[1];
+            end else if(r_Old_MuxSel[8:6] == i) begin
                 //Link data from Output 2 to Input i
-                o_AVIn_ReadData[32*i +:32] <= w_TmpReadData[i][(2*32) +: 32];
-                o_AVIn_WaitRequest[i] <= w_TmpWaitRequest[2][i];
-            end else if(i_MuxSel[11:9] == i) begin
+                o_AVIn_ReadData[32*i +:32] <= w_TmpReadData[2];
+                o_AVIn_WaitRequest[i] <= w_TmpWaitRequest[2];
+            end else if(r_Old_MuxSel[11:9] == i) begin
                 //Link data from Output 3 to Input i
-                o_AVIn_ReadData[32*i +:32] <= w_TmpReadData[i][(3*32) +: 32];
-                o_AVIn_WaitRequest[i] <= w_TmpWaitRequest[3][i];
-            end else if(i_MuxSel[14:12] == i) begin
+                o_AVIn_ReadData[32*i +:32] <= w_TmpReadData[3];
+                o_AVIn_WaitRequest[i] <= w_TmpWaitRequest[3];
+            end else if(r_Old_MuxSel[14:12] == i) begin
                 //Link data from Output 4 to Input i
-                o_AVIn_ReadData[32*i +:32] <= w_TmpReadData[i][(4*32) +: 32];
-                o_AVIn_WaitRequest[i] <= w_TmpWaitRequest[4][i];
+                o_AVIn_ReadData[32*i +:32] <= w_TmpReadData[4];
+                o_AVIn_WaitRequest[i] <= w_TmpWaitRequest[4];
             end else begin
                 o_AVIn_ReadData[32*i +:32] <= 0;
                 o_AVIn_WaitRequest[i] <= 0;
