@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="I:/4-Git Repos/Arcadia Microcomputer/SOC/SOC/WorkinDir/OutputArbiter_tb_isim_beh.wdb" id="1" type="auto">
+         <top_modules>
+            <top_module name="OutputArbiter_tb" />
+            <top_module name="glbl" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <WVObjectSize size="4" />
+   <wvobject fp_name="/OutputArbiter_tb/r_Clk" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">r_Clk</obj_property>
+      <obj_property name="ObjectShortName">r_Clk</obj_property>
+   </wvobject>
+   <wvobject fp_name="/OutputArbiter_tb/r_In_Req" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">r_In_Req[4:0]</obj_property>
+      <obj_property name="ObjectShortName">r_In_Req[4:0]</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#00ffff</obj_property>
+   </wvobject>
+   <wvobject fp_name="/OutputArbiter_tb/r_In_NewTransaction" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">r_In_NewTransaction[4:0]</obj_property>
+      <obj_property name="ObjectShortName">r_In_NewTransaction[4:0]</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#00ffff</obj_property>
+   </wvobject>
+   <wvobject fp_name="/OutputArbiter_tb/w_MuxSel" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">w_MuxSel[2:0]</obj_property>
+      <obj_property name="ObjectShortName">w_MuxSel[2:0]</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#00ffff</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+</wave_config>

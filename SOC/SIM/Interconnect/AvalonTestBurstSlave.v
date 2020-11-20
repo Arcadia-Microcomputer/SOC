@@ -26,7 +26,7 @@ module AvalonTestBurstSlave #(
     //DBUS Signals
     assign w_SlaveSel = (i_AV_Addr[29:30-NUM_PERIPH_SEL_BITS] == PERIPH_SEL_VAL)? 1 : 0;
 	wire [29-NUM_PERIPH_SEL_BITS:0]w_InRegAddr = i_AV_Addr[29-NUM_PERIPH_SEL_BITS:0];
-    wire [29-NUM_PERIPH_SEL_BITS:0]w_CurrentRegAddr = (r_Old_BurstCounter == 0)? w_InRegAddr: r_BurstAddr;
+    wire [29-NUM_PERIPH_SEL_BITS:0]w_CurrentRegAddr = (r_BurstCounter == 0)? w_InRegAddr: r_BurstAddr;
     
     reg [29-NUM_PERIPH_SEL_BITS:0]r_BurstAddr = 0;
     reg [7:0]r_BurstCounter = 0;

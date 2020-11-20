@@ -67,12 +67,6 @@
       <obj_property name="CustomSignalColor">#ffa500</obj_property>
       <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
    </wvobject>
-   <wvobject fp_name="/AvalonTestBurstSlave_tb/AvalonTestSlave0/w_Sel" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">w_Sel</obj_property>
-      <obj_property name="ObjectShortName">w_Sel</obj_property>
-      <obj_property name="UseCustomSignalColor">true</obj_property>
-      <obj_property name="CustomSignalColor">#00ffff</obj_property>
-   </wvobject>
    <wvobject fp_name="/AvalonTestBurstSlave_tb/AvalonTestSlave0/r_Write_WaitReqCounter" type="array" db_ref_id="1">
       <obj_property name="ElementShortName">r_Write_WaitReqCounter[1:0]</obj_property>
       <obj_property name="ObjectShortName">r_Write_WaitReqCounter[1:0]</obj_property>
@@ -81,8 +75,15 @@
       <obj_property name="CustomSignalColor">#00ffff</obj_property>
    </wvobject>
    <wvobject fp_name="/AvalonTestBurstSlave_tb/AvalonTestSlave0/r_Read_WaitReqCounter" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">r_Read_WaitReqCounter[0:0]</obj_property>
-      <obj_property name="ObjectShortName">r_Read_WaitReqCounter[0:0]</obj_property>
+      <obj_property name="ElementShortName">r_Read_WaitReqCounter[3:0]</obj_property>
+      <obj_property name="ObjectShortName">r_Read_WaitReqCounter[3:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#00ffff</obj_property>
+   </wvobject>
+   <wvobject fp_name="/AvalonTestBurstSlave_tb/AvalonTestSlave0/r_Old_BurstCounter" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">r_Old_BurstCounter[7:0]</obj_property>
+      <obj_property name="ObjectShortName">r_Old_BurstCounter[7:0]</obj_property>
       <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
       <obj_property name="UseCustomSignalColor">true</obj_property>
       <obj_property name="CustomSignalColor">#00ffff</obj_property>

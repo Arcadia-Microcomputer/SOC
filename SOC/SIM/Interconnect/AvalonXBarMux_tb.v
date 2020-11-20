@@ -123,7 +123,7 @@ module AvalonXBarMux_tb();
         r_AV_M0_Write <= 0;
         #400;
         @(posedge r_Clk);
-        r_AV_M0_Addr <= 32'h2000003;
+        r_AV_M0_Addr <= 30'h2000003;
         r_AV_M0_WriteData <= 32'h12345678;
         r_AV_M0_Write <= 1;
         @(negedge w_AV_M0_WaitRequest);
@@ -132,7 +132,7 @@ module AvalonXBarMux_tb();
     end
 
     initial begin
-        //Master 0
+        //Master 1
         #400;
         r_AV_M1_Addr <= 3; //32'h2000000;
         r_AV_M1_Read <= 1;

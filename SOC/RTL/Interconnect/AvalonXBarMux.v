@@ -1,41 +1,41 @@
 `timescale 1ns / 1ps
 
-localparam NUM_INPUTS = 5;
-localparam NUM_OUTPUTS = 5;
+`define NUM_INPUTS 5
+`define NUM_OUTPUTS 5
 
 module AvalonXBarMux (
     input i_Clk,
 
-    input [($clog2(NUM_INPUTS+1) * NUM_OUTPUTS)-1:0]i_MuxSel,
+    input [($clog2(`NUM_INPUTS+1) * `NUM_OUTPUTS)-1:0]i_MuxSel,
 
     //Avalon inputs
-    input [(30*NUM_INPUTS)-1:0]i_AVIn_Addr,
-    input [(4*NUM_INPUTS)-1:0]i_AVIn_ByteEn,
-    input [NUM_INPUTS-1:0]i_AVIn_Read,
-    output reg[(32*NUM_INPUTS)-1:0]o_AVIn_ReadData,
-    input [NUM_INPUTS-1:0]i_AVIn_Write,
-    input [(32*NUM_INPUTS-1):0]i_AVIn_WriteData,
-    output reg[NUM_INPUTS-1:0]o_AVIn_WaitRequest,
-    input [(8*NUM_INPUTS)-1:0]i_AVIn_BurstCount,
+    input [(30*`NUM_INPUTS)-1:0]i_AVIn_Addr,
+    input [(4*`NUM_INPUTS)-1:0]i_AVIn_ByteEn,
+    input [`NUM_INPUTS-1:0]i_AVIn_Read,
+    output reg[(32*`NUM_INPUTS)-1:0]o_AVIn_ReadData,
+    input [`NUM_INPUTS-1:0]i_AVIn_Write,
+    input [(32*`NUM_INPUTS-1):0]i_AVIn_WriteData,
+    output reg[`NUM_INPUTS-1:0]o_AVIn_WaitRequest,
+    input [(8*`NUM_INPUTS)-1:0]i_AVIn_BurstCount,
 
     //Avalon outputs
-    output [(30*NUM_OUTPUTS)-1:0]o_AVOut_Addr,
-    output [(4*NUM_OUTPUTS)-1:0]o_AVOut_ByteEn,
-    output [NUM_OUTPUTS-1:0]o_AVOut_Read,
-    input [(32*NUM_OUTPUTS)-1:0]i_AVOut_ReadData,
-    output [NUM_OUTPUTS-1:0]o_AVOut_Write,
-    output [(32*NUM_OUTPUTS-1):0]o_AVOut_WriteData,
-    input [NUM_OUTPUTS-1:0]i_AVOut_WaitRequest,
-    output [(8*NUM_OUTPUTS)-1:0]o_AVOut_BurstCount
+    output [(30*`NUM_OUTPUTS)-1:0]o_AVOut_Addr,
+    output [(4*`NUM_OUTPUTS)-1:0]o_AVOut_ByteEn,
+    output [`NUM_OUTPUTS-1:0]o_AVOut_Read,
+    input [(32*`NUM_OUTPUTS)-1:0]i_AVOut_ReadData,
+    output [`NUM_OUTPUTS-1:0]o_AVOut_Write,
+    output [(32*`NUM_OUTPUTS-1):0]o_AVOut_WriteData,
+    input [`NUM_OUTPUTS-1:0]i_AVOut_WaitRequest,
+    output [(8*`NUM_OUTPUTS)-1:0]o_AVOut_BurstCount
     );
-    reg [($clog2(NUM_INPUTS+1) * NUM_OUTPUTS)-1:0]r_Old_MuxSel = 0;
+    reg [($clog2(`NUM_INPUTS+1) * `NUM_OUTPUTS)-1:0]r_Old_MuxSel = 0;
 
-    wire w_TmpWaitRequest[NUM_OUTPUTS-1:0];
-    wire [31:0]w_TmpReadData[NUM_OUTPUTS-1:0];
+    wire w_TmpWaitRequest[`NUM_OUTPUTS-1:0];
+    wire [31:0]w_TmpReadData[`NUM_OUTPUTS-1:0];
     
-    for(genvar i = 0; i < NUM_OUTPUTS; i = i + 1)begin
+    for(genvar i = 0; i < `NUM_OUTPUTS; i = i + 1)begin
         AvalonTerminatedMux#(
-            .NUM_INPUTS(NUM_INPUTS)
+            .NUM_INPUTS(`NUM_INPUTS)
         )busMux(
             .i_Clk(i_Clk),
             .i_MuxSel(i_MuxSel[3*i +:3]),
@@ -67,7 +67,7 @@ module AvalonXBarMux (
     //Take care of the (output -> input) signals
     integer i;
     always @(*) begin
-        for(i = 0; i < NUM_INPUTS; i = i + 1)begin
+        for(i = 0; i < `NUM_INPUTS; i = i + 1)begin
             if(r_Old_MuxSel[2:0] == i)begin
                 //Link data from Output 0 to Input i
                 o_AVIn_ReadData[32*i +:32] <= w_TmpReadData[0];
