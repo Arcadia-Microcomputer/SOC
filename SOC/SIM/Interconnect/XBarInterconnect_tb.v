@@ -158,6 +158,8 @@ module XBarInterconnect_tb();
         r_AV_M1_Write <= 1;
         r_AV_M1_WriteData <= 32'hA;
         r_AV_M1_BurstCount <= 1;
+        @(negedge w_AV_M1_WaitRequest);
+        #1;
         @(posedge r_Clk);
         r_AV_M1_Write <= 0;
 

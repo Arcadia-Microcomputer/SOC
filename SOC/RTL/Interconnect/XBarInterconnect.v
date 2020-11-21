@@ -84,6 +84,7 @@ module XBarInterconnect #(
     AvalonXBarMux AvalonXBarMux(
         .i_Clk(i_Clk),
 
+        .i_M_SReq({w_M_SReq[4], w_M_SReq[3], w_M_SReq[2], w_M_SReq[1], w_M_SReq[0]}),
         .i_MuxSel(w_MuxSel),
 
         //Inputs

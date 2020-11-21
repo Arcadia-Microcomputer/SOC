@@ -6,6 +6,7 @@
 module AvalonXBarMux (
     input i_Clk,
 
+    input [(`NUM_OUTPUTS*`NUM_INPUTS)-1:0]i_M_SReq,
     input [($clog2(`NUM_INPUTS+1) * `NUM_OUTPUTS)-1:0]i_MuxSel,
 
     //Avalon inputs
@@ -71,30 +72,44 @@ module AvalonXBarMux (
             if(r_Old_MuxSel[2:0] == i)begin
                 //Link data from Output 0 to Input i
                 o_AVIn_ReadData[32*i +:32] <= w_TmpReadData[0];
-                o_AVIn_WaitRequest[i] <= w_TmpWaitRequest[0];
             end else if(r_Old_MuxSel[5:3] == i) begin
                 //Link data from Output 1 to Input i
                 o_AVIn_ReadData[32*i +:32] <= w_TmpReadData[1];
-                o_AVIn_WaitRequest[i] <= w_TmpWaitRequest[1];
             end else if(r_Old_MuxSel[8:6] == i) begin
                 //Link data from Output 2 to Input i
                 o_AVIn_ReadData[32*i +:32] <= w_TmpReadData[2];
-                o_AVIn_WaitRequest[i] <= w_TmpWaitRequest[2];
             end else if(r_Old_MuxSel[11:9] == i) begin
                 //Link data from Output 3 to Input i
                 o_AVIn_ReadData[32*i +:32] <= w_TmpReadData[3];
-                o_AVIn_WaitRequest[i] <= w_TmpWaitRequest[3];
             end else if(r_Old_MuxSel[14:12] == i) begin
                 //Link data from Output 4 to Input i
                 o_AVIn_ReadData[32*i +:32] <= w_TmpReadData[4];
-                o_AVIn_WaitRequest[i] <= w_TmpWaitRequest[4];
             end else begin
                 o_AVIn_ReadData[32*i +:32] <= 0;
-                o_AVIn_WaitRequest[i] <= 0;
+            end
+
+            if(i_MuxSel[2:0] == i)begin
+                //Link data from Output 0 to Input i
+                o_AVIn_WaitRequest[i] <= w_TmpWaitRequest[0];
+            end else if(i_MuxSel[5:3] == i) begin
+                //Link data from Output 1 to Input i
+                o_AVIn_WaitRequest[i] <= w_TmpWaitRequest[1];
+            end else if(i_MuxSel[8:6] == i) begin
+                //Link data from Output 2 to Input i
+                o_AVIn_WaitRequest[i] <= w_TmpWaitRequest[2];
+            end else if(i_MuxSel[11:9] == i) begin
+                //Link data from Output 3 to Input i
+                o_AVIn_WaitRequest[i] <= w_TmpWaitRequest[3];
+            end else if(i_MuxSel[14:12] == i) begin
+                //Link data from Output 4 to Input i
+                o_AVIn_WaitRequest[i] <= w_TmpWaitRequest[4];
+            end else begin
+                //Master wasn't selected, did it make a request though?
+                //If so assert wait request until the master wins arbitration
+                o_AVIn_WaitRequest[i] <= |i_M_SReq[i*3+:3];
             end
         end        
     end
-
 endmodule
 
 

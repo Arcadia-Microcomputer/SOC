@@ -54,6 +54,8 @@ module InputDecoder #(
     end
 
     reg r_Old_WaitRequest = 0;
+    reg r_Old_Read = 0;
+    reg r_Old_Write = 0;
     reg [7:0]r_BurstCounter_d, r_BurstCounter_q = 0;
     
     always @(*) begin
@@ -65,7 +67,7 @@ module InputDecoder #(
             //Transaction in progress
             o_Out_Req[r_OSel] <= 1;
             
-            if(!r_Old_WaitRequest)begin 
+            if((!i_AV_WaitRequest && r_Old_Read) || (!i_AV_WaitRequest && r_Old_Write))begin 
                 r_BurstCounter_d <= r_BurstCounter_q - 1;
 
                 if(r_BurstCounter_q == 1)begin
@@ -92,6 +94,8 @@ module InputDecoder #(
 
     always @(posedge i_Clk) begin
         r_Old_WaitRequest <= i_AV_WaitRequest;
+        r_Old_Read <= i_AV_Read;
+        r_Old_Write <= i_AV_Write;
         r_BurstCounter_q <= r_BurstCounter_d;
     end
 endmodule

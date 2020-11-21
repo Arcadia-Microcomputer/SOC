@@ -146,6 +146,32 @@
          <obj_property name="UseCustomSignalColor">true</obj_property>
          <obj_property name="CustomSignalColor">#00ffff</obj_property>
       </wvobject>
+      <wvobject fp_name="/XBarInterconnect_tb/XBarInterconnect0/\[0].InputDecoder /o_Out_Req" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">o_Out_Req[4:0]</obj_property>
+         <obj_property name="ObjectShortName">o_Out_Req[4:0]</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
+         <obj_property name="CustomSignalColor">#ff00ff</obj_property>
+      </wvobject>
+      <wvobject fp_name="/XBarInterconnect_tb/XBarInterconnect0/\[0].InputDecoder /o_Out_NewTransaction" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">o_Out_NewTransaction[4:0]</obj_property>
+         <obj_property name="ObjectShortName">o_Out_NewTransaction[4:0]</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
+         <obj_property name="CustomSignalColor">#ff00ff</obj_property>
+      </wvobject>
+      <wvobject fp_name="/XBarInterconnect_tb/XBarInterconnect0/\[0].InputDecoder /r_BurstCounter_d" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">r_BurstCounter_d[7:0]</obj_property>
+         <obj_property name="ObjectShortName">r_BurstCounter_d[7:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
+         <obj_property name="CustomSignalColor">#ff00ff</obj_property>
+      </wvobject>
+      <wvobject fp_name="/XBarInterconnect_tb/XBarInterconnect0/\[0].InputDecoder /r_BurstCounter_q" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">r_BurstCounter_q[7:0]</obj_property>
+         <obj_property name="ObjectShortName">r_BurstCounter_q[7:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
+         <obj_property name="CustomSignalColor">#ff00ff</obj_property>
+      </wvobject>
    </wvobject>
    <wvobject fp_name="group105" type="group">
       <obj_property name="label">Master1</obj_property>
@@ -201,6 +227,18 @@
          <obj_property name="ObjectShortName">w_AV_M1_WaitRequest</obj_property>
          <obj_property name="UseCustomSignalColor">true</obj_property>
          <obj_property name="CustomSignalColor">#00ffff</obj_property>
+      </wvobject>
+      <wvobject fp_name="/XBarInterconnect_tb/XBarInterconnect0/\[1].InputDecoder /o_Out_Req" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">o_Out_Req[4:0]</obj_property>
+         <obj_property name="ObjectShortName">o_Out_Req[4:0]</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
+         <obj_property name="CustomSignalColor">#ff00ff</obj_property>
+      </wvobject>
+      <wvobject fp_name="/XBarInterconnect_tb/XBarInterconnect0/\[1].InputDecoder /o_Out_NewTransaction" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">o_Out_NewTransaction[4:0]</obj_property>
+         <obj_property name="ObjectShortName">o_Out_NewTransaction[4:0]</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
+         <obj_property name="CustomSignalColor">#ff00ff</obj_property>
       </wvobject>
    </wvobject>
    <wvobject fp_name="group106" type="group">
@@ -373,6 +411,32 @@
    <wvobject fp_name="group109" type="group">
       <obj_property name="label">Slave0</obj_property>
       <obj_property name="DisplayName">label</obj_property>
+      <wvobject fp_name="/XBarInterconnect_tb/XBarInterconnect0/\[0].OutputArbiter /i_In_Req" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">i_In_Req[4:0]</obj_property>
+         <obj_property name="ObjectShortName">i_In_Req[4:0]</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
+         <obj_property name="CustomSignalColor">#00ffff</obj_property>
+      </wvobject>
+      <wvobject fp_name="/XBarInterconnect_tb/XBarInterconnect0/\[0].OutputArbiter /i_In_NewTransaction" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">i_In_NewTransaction[4:0]</obj_property>
+         <obj_property name="ObjectShortName">i_In_NewTransaction[4:0]</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
+         <obj_property name="CustomSignalColor">#00ffff</obj_property>
+      </wvobject>
+      <wvobject fp_name="/XBarInterconnect_tb/XBarInterconnect0/\[0].OutputArbiter /o_MuxSel" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">o_MuxSel[2:0]</obj_property>
+         <obj_property name="ObjectShortName">o_MuxSel[2:0]</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
+         <obj_property name="CustomSignalColor">#00ffff</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/XBarInterconnect_tb/XBarInterconnect0/\[0].OutputArbiter /r_Old_MuxSel" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">r_Old_MuxSel[2:0]</obj_property>
+         <obj_property name="ObjectShortName">r_Old_MuxSel[2:0]</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
+         <obj_property name="CustomSignalColor">#00ffff</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
       <wvobject fp_name="/XBarInterconnect_tb/w_AV_S0_Addr" type="array" db_ref_id="1">
          <obj_property name="ElementShortName">w_AV_S0_Addr[29:0]</obj_property>
          <obj_property name="ObjectShortName">w_AV_S0_Addr[29:0]</obj_property>
@@ -417,6 +481,7 @@
          <obj_property name="ObjectShortName">w_AV_S0_BurstCount[7:0]</obj_property>
          <obj_property name="UseCustomSignalColor">true</obj_property>
          <obj_property name="CustomSignalColor">#ffa500</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
       </wvobject>
       <wvobject fp_name="/XBarInterconnect_tb/w_AV_S0_WaitRequest" type="logic" db_ref_id="1">
          <obj_property name="ElementShortName">w_AV_S0_WaitRequest</obj_property>
