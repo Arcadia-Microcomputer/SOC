@@ -8,9 +8,7 @@ module InputDecoder #(
     parameter ADDR_SEL_BITS_O2 = 5,
     parameter ADDR_SEL_O2 = 2,
     parameter ADDR_SEL_BITS_O3 = 5,
-    parameter ADDR_SEL_O3 = 3,
-    parameter ADDR_SEL_BITS_O4 = 5,
-    parameter ADDR_SEL_O4 = 4
+    parameter ADDR_SEL_O3 = 3
     )(
     input i_Clk,
 
@@ -20,8 +18,8 @@ module InputDecoder #(
     input i_AV_WaitRequest,
     input [7:0]i_AV_BurstCount,
 
-    output reg [4:0]o_Out_Req,
-    output reg [4:0]o_Out_NewTransaction
+    output reg [3:0]o_Out_Req,
+    output reg [3:0]o_Out_NewTransaction
     );
     
     initial begin
@@ -35,7 +33,6 @@ module InputDecoder #(
     wire [30-ADDR_SEL_BITS_O1:0]w_AddrSel_O1 = i_AV_Addr[29:30-ADDR_SEL_BITS_O1];
     wire [30-ADDR_SEL_BITS_O2:0]w_AddrSel_O2 = i_AV_Addr[29:30-ADDR_SEL_BITS_O2];
     wire [30-ADDR_SEL_BITS_O3:0]w_AddrSel_O3 = i_AV_Addr[29:30-ADDR_SEL_BITS_O3];
-    wire [30-ADDR_SEL_BITS_O4:0]w_AddrSel_O4 = i_AV_Addr[29:30-ADDR_SEL_BITS_O4];
     
     always @(*) begin
         if(w_AddrSel_O0 == ADDR_SEL_O0)begin
@@ -46,8 +43,6 @@ module InputDecoder #(
             r_OSel <= 2;
         end else if(w_AddrSel_O3 == ADDR_SEL_O3)begin
             r_OSel <= 3;
-        end else if(w_AddrSel_O4 == ADDR_SEL_O4)begin
-            r_OSel <= 4;
         end else begin
             r_OSel <= 0;
         end

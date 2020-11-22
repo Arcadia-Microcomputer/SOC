@@ -13,10 +13,8 @@ module HazardUnit(
     input [4:0]i_RDAddr_M,
     input [4:0]i_RDAddr_W,
 
-    input i_IBusWaitReq_D,
-
-    input i_DBusGnt_M,
-    input i_DBusWaitReq_W,
+    input i_IBusWaitReq_F,
+    input i_DBusWaitReq_M,
 
     input i_IsMemRead_E,
     input i_IsMemRead_M,
@@ -67,6 +65,8 @@ module HazardUnit(
     reg r_StallCounter_d = 2'b0;
     reg r_StallCounter_q = 2'b0;
 
+    reg r_DBusWaitReq_W = 0;
+
     always @(*) begin
         o_PcEn   <= 1'b1;
         o_IBusRdEn  <= 1'b1;
@@ -85,7 +85,7 @@ module HazardUnit(
 
         r_StallCounter_d <= r_StallCounter_q;
 
-        if(i_DBusWaitReq_W && i_DBusGnt_M) begin
+        if(r_DBusWaitReq_W) begin
             //If there is a load data hazzard due to:
             //  -Slave asserting WaitReq
 
@@ -136,5 +136,6 @@ module HazardUnit(
 
     always @(posedge i_Clk ) begin
         r_StallCounter_q <= r_StallCounter_d;
+        r_DBusWaitReq_W <= i_DBusWaitReq_M;
     end
 endmodule

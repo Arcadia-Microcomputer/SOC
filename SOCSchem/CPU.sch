@@ -1,10 +1,9 @@
 EESchema Schematic File Version 4
-LIBS:SOCSchem-cache
 EELAYER 30 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 2 2
+Sheet 1 1
 Title ""
 Date ""
 Rev ""
@@ -68,7 +67,7 @@ Text Label 6100 4525 2    31   ~ 0
 RS1Addr_E
 Text Label 5475 4225 0    31   ~ 0
 RDAddr_E
-Text Label 5475 2350 0    31   ~ 0
+Text Label 5475 2400 0    31   ~ 0
 WBSrc_E
 Wire Wire Line
 	4975 2650 4975 2600
@@ -106,11 +105,11 @@ Text Label 5400 4400 3    31   ~ 0
 Clr_E
 Text Label 5475 3100 0    31   ~ 0
 PC_E
-Text Label 8900 3650 2    31   ~ 0
+Text Label 8800 3650 2    31   ~ 0
 DBusWe_M
-Text Label 8900 3575 2    31   ~ 0
+Text Label 8800 3575 2    31   ~ 0
 DBusRe_M
-Text Label 8900 3425 2    31   ~ 0
+Text Label 8800 3425 2    31   ~ 0
 Func3_M
 Text Label 7300 3575 2    31   ~ 0
 Imm_E
@@ -119,14 +118,14 @@ RDAddr_E
 $Comp
 L SOC:DBUS_MASTER U?
 U 1 1 5EBA31C6
-P 9150 3450
+P 9050 3450
 AR Path="/5EBA31C6" Ref="U?"  Part="1" 
 AR Path="/5EB97B98/5EBA31C6" Ref="U?"  Part="1" 
-F 0 "U?" H 9000 3750 50  0001 C CNN
-F 1 "DBUS_MASTER" H 9150 3650 39  0000 C CNN
-F 2 "" H 9050 3700 50  0001 C CNN
-F 3 "" H 9050 3700 50  0001 C CNN
-	1    9150 3450
+F 0 "U?" H 8900 3750 50  0001 C CNN
+F 1 "DBUS_MASTER" H 9050 3550 39  0000 C CNN
+F 2 "" H 8950 3700 50  0001 C CNN
+F 3 "" H 8950 3700 50  0001 C CNN
+	1    9050 3450
 	1    0    0    -1  
 $EndComp
 Text Label 7500 3325 0    31   ~ 0
@@ -164,21 +163,19 @@ F 3 "" H 6450 4475 31  0001 C CNN
 	1    6450 4475
 	1    0    0    -1  
 $EndComp
-Text HLabel 9700 3625 2    31   Output ~ 0
+Text HLabel 9600 3625 2    31   Output ~ 0
 DBUS_Addr
-Text HLabel 9700 3675 2    31   Output ~ 0
+Text HLabel 9600 3675 2    31   Output ~ 0
 DBUS_ByteEn
-Text HLabel 9700 3725 2    31   Output ~ 0
+Text HLabel 9600 3725 2    31   Output ~ 0
 DBUS_Read
-Text HLabel 9700 3775 2    31   Output ~ 0
+Text HLabel 9600 3775 2    31   Output ~ 0
 DBUS_Write
-Text HLabel 9700 3825 2    31   Input ~ 0
+Text HLabel 9600 3825 2    31   Input ~ 0
 DBUS_Rd
-Text HLabel 9700 3875 2    31   Output ~ 0
+Text HLabel 9600 3875 2    31   Output ~ 0
 DBUS_Wd
-Text HLabel 5475 2900 2    31   Output ~ 0
-DBUS_Req
-Text Label 8900 3875 2    31   ~ 0
+Text Label 8800 3875 2    31   ~ 0
 DBusTranslatorEn_M
 Wire Wire Line
 	4975 2900 4975 2950
@@ -198,9 +195,7 @@ Text Label 6100 4900 2    31   ~ 0
 RegWrEn_M
 Text Label 7500 2700 0    31   ~ 0
 Func3_M
-Text HLabel 8900 3350 0    31   Input ~ 0
-DBUS_Gnt
-Text Label 5475 2550 0    31   ~ 0
+Text Label 5475 2600 0    31   ~ 0
 Func3_E
 $Comp
 L SOC:2-1Mux U?
@@ -273,7 +268,7 @@ Text Label 2200 1600 2    31   ~ 0
 RS2Addr_D
 Text Label 2200 1700 2    31   ~ 0
 RDAddr_E
-Text Label 2200 2550 2    31   ~ 0
+Text Label 2200 2450 2    31   ~ 0
 IsBranch_M
 $Comp
 L SOC:BRANCH_UNIT U?
@@ -292,7 +287,7 @@ Text Label 1575 3300 2    31   ~ 0
 IsBranch_M
 Text Label 2575 3225 0    31   ~ 0
 TakeBranch_M
-Text Label 2200 2625 2    31   ~ 0
+Text Label 2200 2525 2    31   ~ 0
 TakeBranch
 Text Label 3675 3400 3    31   ~ 0
 En_D
@@ -390,10 +385,8 @@ Wire Wire Line
 	2575 3225 2650 3225
 Text Label 1575 3525 2    31   ~ 0
 AluSignNeg_M
-Text HLabel 2200 2050 0    31   Input ~ 0
-DBUS_Gnt
-Text HLabel 2200 2125 0    31   Input ~ 0
-DBUS_WaitReq
+Text HLabel 2200 2025 0    31   Input ~ 0
+DBUS_WaitReq_M
 Text Label 3325 1525 0    31   ~ 0
 DBusTranslatorEn_E
 Text Label 2200 1525 2    31   ~ 0
@@ -433,9 +426,9 @@ Wire Wire Line
 	5250 3475 5275 3475
 Wire Wire Line
 	5475 3275 5500 3275
-Text Label 5475 2650 0    31   ~ 0
+Text Label 5475 2700 0    31   ~ 0
 IsBranch_E
-Text Label 2200 2225 2    31   ~ 0
+Text Label 2200 2125 2    31   ~ 0
 DBusRe_E
 Wire Wire Line
 	4975 2550 4975 2500
@@ -444,9 +437,9 @@ Wire Wire Line
 Connection ~ 4975 2550
 Text Label 7500 2750 0    31   ~ 0
 IsJump_M
-Text Label 5475 2600 0    31   ~ 0
+Text Label 5475 2650 0    31   ~ 0
 IsJump_E
-Text Label 2200 2475 2    31   ~ 0
+Text Label 2200 2375 2    31   ~ 0
 IsBranch_E
 Text Label 1575 3225 2    31   ~ 0
 IsJump_M
@@ -662,7 +655,7 @@ Wire Wire Line
 Wire Wire Line
 	9350 2750 9725 2750
 Wire Wire Line
-	9700 2825 9725 2825
+	9675 2825 9725 2825
 Wire Wire Line
 	9350 2500 9800 2500
 Text Label 4275 3450 2    31   ~ 0
@@ -715,7 +708,7 @@ Text Label 8100 3000 2    31   ~ 0
 AluRes_M
 Text Label 8200 2975 0    31   ~ 0
 Rs2For_M
-Text Label 8900 3725 2    31   ~ 0
+Text Label 8800 3725 2    31   ~ 0
 Rs2For_M
 Text Label 6975 4750 0    31   ~ 0
 Rs2ForSel_M
@@ -836,19 +829,19 @@ F 3 "" H 6650 4175 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	5475 2650 6875 2650
+	5475 2700 6875 2700
 Wire Wire Line
-	5475 2600 6925 2600
+	5475 2650 6925 2650
 Wire Wire Line
-	5475 2550 6975 2550
+	5475 2600 6975 2600
 Wire Wire Line
-	5475 2500 7025 2500
+	5475 2550 7025 2550
 Wire Wire Line
-	5475 2450 7125 2450
+	5475 2500 7125 2500
 Wire Wire Line
-	5475 2400 7175 2400
+	5475 2450 7175 2450
 Wire Wire Line
-	5475 2350 7225 2350
+	5475 2400 7225 2400
 $Comp
 L SOC:2-1Mux U?
 U 1 1 5EB931AF
@@ -866,8 +859,6 @@ Wire Wire Line
 	6775 3775 6775 3525
 Wire Wire Line
 	6775 3525 7050 3525
-Wire Wire Line
-	7500 3500 7875 3500
 Wire Wire Line
 	6675 3375 6775 3375
 Wire Wire Line
@@ -888,51 +879,22 @@ Wire Wire Line
 Wire Wire Line
 	4975 2350 4975 2400
 Connection ~ 4975 2400
-Wire Wire Line
-	5275 2300 4975 2300
-Wire Wire Line
-	4975 2300 4975 2350
-Connection ~ 4975 2350
-Wire Wire Line
-	6875 2650 6875 2800
-Wire Wire Line
-	6925 2600 6925 2750
-Wire Wire Line
-	6975 2550 6975 2700
-Wire Wire Line
-	7225 2350 7225 2500
-Wire Wire Line
-	7175 2400 7175 2550
-Wire Wire Line
-	7125 2450 7125 2600
-Wire Wire Line
-	7025 2500 7025 2650
 Text Label 2200 1850 2    31   ~ 0
 RDAddr_W
-Text Label 2200 2300 2    31   ~ 0
+Text Label 2200 2200 2    31   ~ 0
 DBusRe_M
-Text Label 2200 2375 2    31   ~ 0
+Text Label 2200 2275 2    31   ~ 0
 DBusRe_W
-Wire Wire Line
-	6525 2750 5475 2750
-Text Label 5475 2800 0    31   ~ 0
-AluBSel_E
-Wire Wire Line
-	6525 2750 6525 3200
 Text Label 5475 2850 0    31   ~ 0
+AluBSel_E
+Text Label 5475 2900 0    31   ~ 0
 LoadUpperOp_E
 Text Label 6225 3775 2    31   ~ 0
 LoadUpperOp_E
-Text Label 5475 2700 0    31   ~ 0
+Text Label 5475 2750 0    31   ~ 0
 ExeResSel_E
 Text Label 7100 3400 2    31   ~ 0
 ExeResSel_E
-Wire Wire Line
-	9700 2825 9700 3325
-Wire Wire Line
-	5475 2300 7275 2300
-Wire Wire Line
-	7275 2300 7275 2450
 Text Label 7500 3500 0    31   ~ 0
 ExeRes_M
 Wire Wire Line
@@ -963,9 +925,6 @@ Wire Wire Line
 	7500 2550 9150 2550
 Wire Wire Line
 	9800 2500 9800 2600
-Connection ~ 7875 3500
-Wire Wire Line
-	7875 3500 8900 3500
 $Comp
 L SOC:IBUS U?
 U 1 1 5ED7A87C
@@ -977,12 +936,43 @@ F 3 "" H 3525 4250 50  0001 C CNN
 	1    3675 4075
 	1    0    0    -1  
 $EndComp
-Text Label 3900 4050 0    31   ~ 0
-IBus_WaitReq_D
-Text Label 3650 4225 3    31   ~ 0
+Text Label 3650 4175 3    31   ~ 0
 IBusRdEn_D
-Text Label 3700 4225 3    31   ~ 0
+Text Label 3700 4175 3    31   ~ 0
 IBusOZero_D
-Text Label 2200 1950 2    31   ~ 0
+Wire Wire Line
+	6875 2700 6875 2800
+Wire Wire Line
+	6925 2650 6925 2750
+Wire Wire Line
+	6975 2600 6975 2700
+Wire Wire Line
+	7025 2550 7025 2650
+Wire Wire Line
+	7125 2500 7125 2600
+Wire Wire Line
+	7175 2450 7175 2550
+Wire Wire Line
+	7225 2400 7225 2500
+Wire Wire Line
+	7275 2350 7275 2450
+Wire Wire Line
+	5475 2350 7275 2350
+Wire Wire Line
+	5475 2800 6525 2800
+Wire Wire Line
+	6525 2800 6525 3200
+Wire Wire Line
+	9675 2825 9675 3425
+Wire Wire Line
+	7500 3500 7875 3500
+Wire Wire Line
+	9600 3425 9675 3425
+Wire Wire Line
+	8800 3500 7875 3500
+Connection ~ 7875 3500
+Text Label 5475 2450 0    31   ~ 0
+DBusRe_E
+Text HLabel 2200 1950 0    31   Input ~ 0
 IBus_WaitReq_D
 $EndSCHEMATC

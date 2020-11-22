@@ -3,7 +3,7 @@
 module Decoder(
     input [31:0]i_Inst,
 
-    output [20:0]o_Control
+    output [19:0]o_Control
     );
 
     //Instruction Opcodes 
@@ -66,11 +66,10 @@ module Decoder(
     reg [3:0]r_ALuOp = 0;
     reg r_AluBSel = 0;
     reg r_LoadUpperOp = 0;
-    reg r_DBusReq = 0;
     wire w_RS2Valid = ((w_OpCode == p_InstType_R)    || (w_OpCode == p_InstType_B)     || (w_OpCode == p_InstType_S));
     wire w_RS1Valid = !((w_OpCode == p_InstType_LUI) || (w_OpCode == p_InstType_AUIPC) || (w_OpCode == p_InstType_JAL));
 
-    assign o_Control = {r_RegWe, r_WBSrc, r_DBusRe, r_DBusWe, r_BranchAdderBSel, w_func3, r_IsJump, r_IsBranch, r_ExeResSel, r_ALuOp, r_AluBSel, r_LoadUpperOp, r_DBusReq, w_RS2Valid, w_RS1Valid};
+    assign o_Control = {r_RegWe, r_WBSrc, r_DBusRe, r_DBusWe, r_BranchAdderBSel, w_func3, r_IsJump, r_IsBranch, r_ExeResSel, r_ALuOp, r_AluBSel, r_LoadUpperOp, w_RS2Valid, w_RS1Valid};
 
     always @(*) begin
         r_RegWe <= 1'b0;
@@ -84,7 +83,6 @@ module Decoder(
         r_ALuOp <= ALU_ADD;
         r_AluBSel <= ALU_SRCB_RS2;
         r_LoadUpperOp <= LU_LUI;
-        r_DBusReq <= 1'b0;
         
         case (w_OpCode)
             p_InstType_R:begin
@@ -120,7 +118,6 @@ module Decoder(
                 r_ExeResSel <= ER_SRC_ALU;
                 r_ALuOp <= ALU_ADD;
                 r_AluBSel <= ALU_SRCB_IMM;
-                r_DBusReq <= 1'b1;
             end
             p_InstType_LUI:begin
                 r_RegWe <= 1'b1;
@@ -152,7 +149,6 @@ module Decoder(
                 r_ExeResSel <= ER_SRC_ALU;
                 r_ALuOp <= ALU_ADD;
                 r_AluBSel <= ALU_SRCB_IMM;
-                r_DBusReq <= 1'b1;
             end
         endcase    
     end

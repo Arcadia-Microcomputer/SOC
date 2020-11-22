@@ -5,7 +5,6 @@ module DBusMaster(
     input i_DBusTranslatorEn,
 
     //DBUS
-    input i_DBus_Gnt,
     output [29:0]o_DBus_Address,
     output [3:0] o_DBus_ByteEn,
     output o_DBus_Read,
@@ -14,8 +13,8 @@ module DBusMaster(
     output [31:0] o_DBus_WriteData,
 
     //CPU
-    input [2:0] i_BusMode,
-    input [31:0] i_CpuAddr,
+    input [2:0]i_BusMode,
+    input [31:0]i_CpuAddr,
     input i_CpuRe,
     input i_CpuWe,
     output reg [31:0] o_CpuRd,
@@ -26,11 +25,11 @@ module DBusMaster(
         o_CpuRd <= 32'b0;
     end
 
-    assign o_DBus_Address = i_DBus_Gnt? r_DBus_Address: 29'bz;
-    assign o_DBus_ByteEn =  i_DBus_Gnt? r_DBus_ByteEn: 4'bz;
-    assign o_DBus_Read =  i_DBus_Gnt? r_DBusRe: 1'bz;
-    assign o_DBus_Write = i_DBus_Gnt? r_DBusWe: 1'bz;
-    assign o_DBus_WriteData =  i_DBus_Gnt? r_DBus_WriteData: 32'bz;
+    assign o_DBus_Address = r_DBus_Address;
+    assign o_DBus_ByteEn = r_DBus_ByteEn;
+    assign o_DBus_Read = r_DBusRe;
+    assign o_DBus_Write = r_DBusWe;
+    assign o_DBus_WriteData = r_DBus_WriteData;
 
     reg [29:0]r_DBus_Address = 30'b0;
     reg [3:0]r_DBus_ByteEn = 4'b1111;
@@ -52,7 +51,6 @@ module DBusMaster(
 
      //Whether the bus read transaction is signed or now
     wire w_SignedRd = !r_BusModeRd[2];
-   
 
     parameter p_BUS_BYTE_ACCESS         = 2'b00;
     parameter p_BUS_HALF_WORD_ACCESS    = 2'b01;
@@ -156,7 +154,7 @@ module DBusMaster(
                             r_DBus_ByteEn <= 4'b0110;
                         end
                         2:begin
-                            r_DBus_WriteData <= {16'b0, i_CpuWd[15:0]};
+                            r_DBus_WriteData <= {i_CpuWd[15:0], 16'b0};
                             r_DBus_ByteEn <= 4'b1100;
                         end
                         default:begin

@@ -1,7 +1,7 @@
 `timescale 1ns / 1ps
 
 `define NUM_INPUTS 5
-`define NUM_OUTPUTS 5
+`define NUM_OUTPUTS 4
 
 module OutputArbiter(
     input i_Clk,
@@ -28,8 +28,6 @@ module OutputArbiter(
             o_MuxSel <= 2;
         end else if(i_In_Req[3])begin
             o_MuxSel <= 3;
-        end else if(i_In_Req[4])begin
-            o_MuxSel <= 4;
         end else begin
             //Select the no master input
             o_MuxSel <= `NUM_OUTPUTS;

@@ -12,9 +12,6 @@ module CPU #(
     input i_IBus_WaitReq,
 
     //DBus Master// 
-    output o_DBus_Req_E,
-    input i_DBus_Gnt_M,
-
     output [29:0]o_DBus_Address,
     output [3:0]o_DBus_ByteEn,
     output o_DBus_Read,
@@ -35,7 +32,7 @@ module CPU #(
     reg [31:0]r_PC_D = 0;
 
     //Decoder Signals
-    localparam p_CONTROL_D_SIZE = 21;
+    localparam p_CONTROL_D_SIZE = 20;
     wire [p_CONTROL_D_SIZE-1:0]w_Control_D;
     wire w_RS1Valid_D = w_Control_D[0];
     wire w_RS2Valid_D = w_Control_D[1];
@@ -55,14 +52,13 @@ module CPU #(
     wire [31:0]w_RS2For_D;
 
     //ID_IE Signals
-    localparam p_CONTROL_E_SIZE = 19;
+    localparam p_CONTROL_E_SIZE = 18;
     reg [p_CONTROL_E_SIZE-1:0]r_Control_E = 0;
-    assign o_DBus_Req_E = r_Control_E[0];   
-    wire w_LoadUpperOp_E = r_Control_E[1];
-    wire w_AluBSel_E = r_Control_E[2];
-    wire [3:0]w_AluOp_E = r_Control_E[6:3];
-    wire w_ExeResSel_E = r_Control_E[7];
-    wire w_DBusRe_E = r_Control_E[15];
+    wire w_LoadUpperOp_E = r_Control_E[0];
+    wire w_AluBSel_E = r_Control_E[1];
+    wire [3:0]w_AluOp_E = r_Control_E[5:2];
+    wire w_ExeResSel_E = r_Control_E[6];
+    wire w_DBusRe_E = r_Control_E[14];
 
     reg [31:0]r_PC_E = 0;
 
@@ -80,7 +76,7 @@ module CPU #(
     wire [31:0]w_RS2For_E;
 
     //ALU Signals
-    wire [31:0] w_AluResult_E;
+    wire [31:0]w_AluResult_E;
     wire w_AluCarry_E;
 
     //Load Upper Signals
@@ -340,7 +336,6 @@ module CPU #(
         .i_DBusTranslatorEn(w_DBusTranslatorEn_M),
 
         //DBus
-        .i_DBus_Gnt(i_DBus_Gnt_M),
         .o_DBus_Address(o_DBus_Address),
         .o_DBus_ByteEn(o_DBus_ByteEn),
         .o_DBus_Read(o_DBus_Read),
@@ -418,10 +413,8 @@ module CPU #(
         .i_RDAddr_M(r_RDAddr_M),
         .i_RDAddr_W(r_RDAddr_W),
         
-        .i_IBusWaitReq_D(i_IBus_WaitReq),
-
-        .i_DBusGnt_M(i_DBus_Gnt_M),
-        .i_DBusWaitReq_W(i_DBus_WaitRequest),
+        .i_IBusWaitReq_F(i_IBus_WaitReq),
+        .i_DBusWaitReq_M(i_DBus_WaitRequest),
 
         .i_IsMemRead_E(w_DBusRe_E),
         .i_IsMemRead_M(w_DBusRe_M),

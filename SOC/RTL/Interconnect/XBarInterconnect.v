@@ -1,7 +1,7 @@
 `timescale 1ns / 1ps
 
 `define NUM_INPUTS 5
-`define NUM_OUTPUTS 5
+`define NUM_OUTPUTS 4
 
 module XBarInterconnect #(
     parameter ADDR_SEL_BITS_O0 = 5,
@@ -11,9 +11,7 @@ module XBarInterconnect #(
     parameter ADDR_SEL_BITS_O2 = 5,
     parameter ADDR_SEL_O2 = 2,
     parameter ADDR_SEL_BITS_O3 = 5,
-    parameter ADDR_SEL_O3 = 3,
-    parameter ADDR_SEL_BITS_O4 = 5,
-    parameter ADDR_SEL_O4 = 4
+    parameter ADDR_SEL_O3 = 3
     )(
     input i_Clk,
 
@@ -52,9 +50,7 @@ module XBarInterconnect #(
             .ADDR_SEL_BITS_O2(ADDR_SEL_BITS_O2),
             .ADDR_SEL_O2(ADDR_SEL_O2),
             .ADDR_SEL_BITS_O3(ADDR_SEL_BITS_O3),
-            .ADDR_SEL_O3(ADDR_SEL_O3),
-            .ADDR_SEL_BITS_O4(ADDR_SEL_BITS_O4),
-            .ADDR_SEL_O4(ADDR_SEL_O4)
+            .ADDR_SEL_O3(ADDR_SEL_O3)
         )InputDecoder(
             .i_Clk(i_Clk),
 

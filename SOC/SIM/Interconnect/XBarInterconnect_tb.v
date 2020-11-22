@@ -93,16 +93,6 @@ module XBarInterconnect_tb();
     wire w_AV_S3_WaitRequest = 0;
     wire [7:0]w_AV_S3_BurstCount;
 
-    //Avalon Slave Bus 4 signals
-    wire [29:0]w_AV_S4_Addr;
-    wire [3:0]w_AV_S4_ByteEn;
-    wire w_AV_S4_Read;
-    wire [31:0]w_AV_S4_ReadData = 0;
-    wire w_AV_S4_Write;
-    wire [31:0]w_AV_S4_WriteData;
-    wire w_AV_S4_WaitRequest = 0;
-    wire [7:0]w_AV_S4_BurstCount;
-
     //Generate the clock
     initial begin
         #10;
@@ -171,14 +161,6 @@ module XBarInterconnect_tb();
         r_AV_M1_BurstCount <= 1;
         @(posedge r_Clk);
         r_AV_M1_Write <= 0;
-
-        //Slave 4
-        r_AV_M1_Addr <= 30'h8000000;
-        r_AV_M1_Write <= 1;
-        r_AV_M1_WriteData <= 32'hB;
-        r_AV_M1_BurstCount <= 1;
-        @(posedge r_Clk);
-        r_AV_M1_Write <= 0;
     end
 
     XBarInterconnect #(
@@ -189,9 +171,7 @@ module XBarInterconnect_tb();
         .ADDR_SEL_BITS_O2(5),
         .ADDR_SEL_O2(2),
         .ADDR_SEL_BITS_O3(5),
-        .ADDR_SEL_O3(3),
-        .ADDR_SEL_BITS_O4(5),
-        .ADDR_SEL_O4(4)
+        .ADDR_SEL_O3(3)
     )XBarInterconnect0(
         .i_Clk(r_Clk),
 
@@ -206,14 +186,14 @@ module XBarInterconnect_tb();
         .i_AVIn_BurstCount({r_AV_M4_BurstCount, r_AV_M3_BurstCount, r_AV_M2_BurstCount, r_AV_M1_BurstCount, r_AV_M0_BurstCount}),
 
         //Output
-        .o_AVOut_Addr({w_AV_S4_Addr, w_AV_S3_Addr, w_AV_S2_Addr, w_AV_S1_Addr, w_AV_S0_Addr}),
-        .o_AVOut_ByteEn({w_AV_S4_ByteEn, w_AV_S3_ByteEn, w_AV_S2_ByteEn, w_AV_S1_ByteEn, w_AV_S0_ByteEn}),
-        .o_AVOut_Read({w_AV_S4_Read, w_AV_S3_Read, w_AV_S2_Read, w_AV_S1_Read, w_AV_S0_Read}),
-        .i_AVOut_ReadData({w_AV_S4_ReadData, w_AV_S3_ReadData, w_AV_S2_ReadData, w_AV_S1_ReadData, w_AV_S0_ReadData}),
-        .o_AVOut_Write({w_AV_S4_Write, w_AV_S3_Write, w_AV_S2_Write, w_AV_S1_Write, w_AV_S0_Write}),
-        .o_AVOut_WriteData({w_AV_S4_WriteData, w_AV_S3_WriteData, w_AV_S2_WriteData, w_AV_S1_WriteData, w_AV_S0_WriteData}),
-        .i_AVOut_WaitRequest({w_AV_S4_WaitRequest, w_AV_S3_WaitRequest, w_AV_S2_WaitRequest, w_AV_S1_WaitRequest, w_AV_S0_WaitRequest}),
-        .o_AVOut_BurstCount({w_AV_S4_BurstCount, w_AV_S3_BurstCount, w_AV_S2_BurstCount, w_AV_S1_BurstCount, w_AV_S0_BurstCount})
+        .o_AVOut_Addr({w_AV_S3_Addr, w_AV_S2_Addr, w_AV_S1_Addr, w_AV_S0_Addr}),
+        .o_AVOut_ByteEn({w_AV_S3_ByteEn, w_AV_S2_ByteEn, w_AV_S1_ByteEn, w_AV_S0_ByteEn}),
+        .o_AVOut_Read({w_AV_S3_Read, w_AV_S2_Read, w_AV_S1_Read, w_AV_S0_Read}),
+        .i_AVOut_ReadData({w_AV_S3_ReadData, w_AV_S2_ReadData, w_AV_S1_ReadData, w_AV_S0_ReadData}),
+        .o_AVOut_Write({w_AV_S3_Write, w_AV_S2_Write, w_AV_S1_Write, w_AV_S0_Write}),
+        .o_AVOut_WriteData({w_AV_S3_WriteData, w_AV_S2_WriteData, w_AV_S1_WriteData, w_AV_S0_WriteData}),
+        .i_AVOut_WaitRequest({w_AV_S3_WaitRequest, w_AV_S2_WaitRequest, w_AV_S1_WaitRequest, w_AV_S0_WaitRequest}),
+        .o_AVOut_BurstCount({w_AV_S3_BurstCount, w_AV_S2_BurstCount, w_AV_S1_BurstCount, w_AV_S0_BurstCount})
     );
 
     AvalonTestBurstSlave #(

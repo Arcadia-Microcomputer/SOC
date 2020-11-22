@@ -1,7 +1,7 @@
 `timescale 1ns / 1ps
 
 `define NUM_INPUTS 5
-`define NUM_OUTPUTS 5
+`define NUM_OUTPUTS 4
 
 module AvalonXBarMux (
     input i_Clk,
@@ -81,9 +81,6 @@ module AvalonXBarMux (
             end else if(r_Old_MuxSel[11:9] == i) begin
                 //Link data from Output 3 to Input i
                 o_AVIn_ReadData[32*i +:32] <= w_TmpReadData[3];
-            end else if(r_Old_MuxSel[14:12] == i) begin
-                //Link data from Output 4 to Input i
-                o_AVIn_ReadData[32*i +:32] <= w_TmpReadData[4];
             end else begin
                 o_AVIn_ReadData[32*i +:32] <= 0;
             end
@@ -100,13 +97,10 @@ module AvalonXBarMux (
             end else if(i_MuxSel[11:9] == i) begin
                 //Link data from Output 3 to Input i
                 o_AVIn_WaitRequest[i] <= w_TmpWaitRequest[3];
-            end else if(i_MuxSel[14:12] == i) begin
-                //Link data from Output 4 to Input i
-                o_AVIn_WaitRequest[i] <= w_TmpWaitRequest[4];
             end else begin
                 //Master wasn't selected, did it make a request though?
                 //If so assert wait request until the master wins arbitration
-                o_AVIn_WaitRequest[i] <= |i_M_SReq[i*3+:3];
+                o_AVIn_WaitRequest[i] <= |i_M_SReq[i*4+:4];
             end
         end        
     end
