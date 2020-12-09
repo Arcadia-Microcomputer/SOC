@@ -100,7 +100,8 @@ module XBarInterconnect_tb();
     end
 
     reg [31:0]i;
-    
+    reg [31:0]r_RdData = 0;
+
     //Master 0
     initial begin
         //Slave 0
@@ -134,10 +135,13 @@ module XBarInterconnect_tb();
         r_AV_M0_BurstCount <= 4;
         for(i = 0; i < 4; i = i + 1)begin
             @(posedge r_Clk);    
+            r_RdData <= w_AV_M0_ReadData;
         end
         @(negedge w_AV_M0_WaitRequest);
-        @(posedge r_Clk); 
+        @(posedge r_Clk);
         r_AV_M0_Read <= 0;
+        @(posedge r_Clk); 
+        r_RdData <= w_AV_M0_ReadData;
     end
 
     //Master 1

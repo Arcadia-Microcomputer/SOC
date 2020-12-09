@@ -1,4 +1,5 @@
 EESchema Schematic File Version 4
+LIBS:CPUSchem-cache
 EELAYER 30 0
 EELAYER END
 $Descr A4 11693 8268
@@ -14,7 +15,7 @@ Comment3 ""
 Comment4 ""
 $EndDescr
 $Comp
-L SOC:IMM_GEN U?
+L CPUSchem:IMM_GEN U?
 U 1 1 5EBA30B4
 P 4925 3875
 F 0 "U?" H 4775 4075 39  0001 C CNN
@@ -47,7 +48,7 @@ RDAddr_D
 Text Label 5475 3825 0    31   ~ 0
 Imm_E
 $Comp
-L SOC:DECODER U?
+L CPUSchem:DECODER U?
 U 1 1 5EBA30F0
 P 4900 2875
 F 0 "U?" H 4900 3025 39  0001 C CNN
@@ -116,7 +117,7 @@ Imm_E
 Text Label 7300 3800 2    31   ~ 0
 RDAddr_E
 $Comp
-L SOC:DBUS_MASTER U?
+L CPUSchem:DBUS_MASTER U?
 U 1 1 5EBA31C6
 P 9050 3450
 AR Path="/5EBA31C6" Ref="U?"  Part="1" 
@@ -151,7 +152,7 @@ Clr_M
 Text Label 7375 3875 3    31   ~ 0
 En_M
 $Comp
-L SOC:FORWARDING_UNIT U?
+L CPUSchem:FORWARDING_UNIT U?
 U 1 1 5EBA3206
 P 6450 4475
 AR Path="/5EBA3206" Ref="U?"  Part="1" 
@@ -198,7 +199,7 @@ Func3_M
 Text Label 5475 2600 0    31   ~ 0
 Func3_E
 $Comp
-L SOC:2-1Mux U?
+L CPUSchem:2-1Mux U?
 U 1 1 5EADDABA
 P 5725 3500
 F 0 "U?" H 5750 3825 50  0001 C CNN
@@ -214,7 +215,7 @@ Wire Wire Line
 	5475 3475 5675 3475
 Text Label 5775 3500 0    31   ~ 0
 Rs2For_E
-Text Label 2275 3850 2    39   ~ 0
+Text Label 1975 3850 2    39   ~ 0
 4
 Wire Wire Line
 	3975 2875 4325 2875
@@ -224,25 +225,25 @@ Text Label 4000 2950 0    31   ~ 0
 Inst[24:20]
 Text Label 4000 2875 0    31   ~ 0
 Inst[19:15]
-Connection ~ 3425 4000
+Connection ~ 3125 4000
 Wire Wire Line
-	3425 3100 3600 3100
+	3125 3100 3300 3100
 Wire Wire Line
-	3425 3100 3425 4000
+	3125 3100 3125 4000
 $Comp
-L SOC:PC U?
+L CPUSchem:PC U?
 U 1 1 5EBA30C0
-P 3075 4150
-F 0 "U?" H 3025 4300 50  0001 C CNN
-F 1 "PC" H 2900 4400 39  0000 C CNN
-F 2 "" H 2900 4350 50  0001 C CNN
-F 3 "" H 2900 4350 50  0001 C CNN
-	1    3075 4150
+P 2775 4150
+F 0 "U?" H 2725 4300 50  0001 C CNN
+F 1 "PC" H 2600 4400 39  0000 C CNN
+F 2 "" H 2600 4350 50  0001 C CNN
+F 3 "" H 2600 4350 50  0001 C CNN
+	1    2775 4150
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
 	3975 2700 3975 2875
-Text Label 2075 4325 2    31   ~ 0
+Text Label 1775 4325 2    31   ~ 0
 PC_M
 Connection ~ 3975 2950
 Connection ~ 3975 2875
@@ -259,7 +260,7 @@ Wire Wire Line
 	3975 3025 3975 3825
 Connection ~ 3975 3825
 Wire Wire Line
-	3975 3825 3975 4000
+	3975 3825 3975 3950
 Text Label 3325 1375 0    31   ~ 0
 PcEn
 Text Label 2200 1450 2    31   ~ 0
@@ -271,21 +272,21 @@ RDAddr_E
 Text Label 2200 2450 2    31   ~ 0
 IsBranch_M
 $Comp
-L SOC:BRANCH_UNIT U?
+L CPUSchem:BRANCH_UNIT U?
 U 1 1 5EBA312E
-P 2100 3350
-F 0 "U?" H 2000 3725 31  0001 C CNN
-F 1 "BRANCH_UNIT" H 1800 3550 39  0000 C CNN
-F 2 "" H 2000 3725 31  0001 C CNN
-F 3 "" H 2000 3725 31  0001 C CNN
-	1    2100 3350
+P 1800 3350
+F 0 "U?" H 1700 3725 31  0001 C CNN
+F 1 "BRANCH_UNIT" H 1500 3550 39  0000 C CNN
+F 2 "" H 1700 3725 31  0001 C CNN
+F 3 "" H 1700 3725 31  0001 C CNN
+	1    1800 3350
 	1    0    0    -1  
 $EndComp
-Text Label 1575 3375 2    31   ~ 0
+Text Label 1275 3375 2    31   ~ 0
 Func3_M
-Text Label 1575 3300 2    31   ~ 0
+Text Label 1275 3300 2    31   ~ 0
 IsBranch_M
-Text Label 2575 3225 0    31   ~ 0
+Text Label 2275 3225 0    31   ~ 0
 TakeBranch_M
 Text Label 2200 2525 2    31   ~ 0
 TakeBranch
@@ -305,10 +306,10 @@ Text Label 3325 1725 0    31   ~ 0
 En_M
 Text Label 3325 1975 0    31   ~ 0
 Clr_M
-Text Label 2825 4000 2    31   ~ 0
+Text Label 2525 4000 2    31   ~ 0
 PcEn
 $Comp
-L SOC:HAZARD_UNIT U?
+L CPUSchem:HAZARD_UNIT U?
 U 1 1 5EBA3150
 P 2600 1525
 AR Path="/5EBA3150" Ref="U?"  Part="1" 
@@ -320,73 +321,73 @@ F 3 "" H 2500 1900 31  0001 C CNN
 	1    2600 1525
 	1    0    0    -1  
 $EndComp
-Text Label 1575 3450 2    31   ~ 0
+Text Label 1275 3450 2    31   ~ 0
 AluZero_M
 Text Label 2200 1775 2    31   ~ 0
 RDAddr_M
 Wire Wire Line
-	3300 4000 3425 4000
+	3000 4000 3125 4000
 Wire Wire Line
-	3475 4000 3425 4000
+	3175 4000 3125 4000
 Text Label 3325 1425 0    31   ~ 0
 IBusRdEn_D
 Text Label 3325 1475 0    31   ~ 0
 IBusOZero_D
 $Comp
-L SOC:ADDER U?
+L CPUSchem:ADDER U?
 U 1 1 5EBA3168
-P 2350 3900
-F 0 "U?" H 2325 4150 50  0001 C CNN
-F 1 "PC_ADDER" H 2350 4050 39  0000 C CNN
-F 2 "" H 2500 3925 50  0001 C CNN
-F 3 "" H 2500 3925 50  0001 C CNN
-	1    2350 3900
+P 2050 3900
+F 0 "U?" H 2025 4150 50  0001 C CNN
+F 1 "PC_ADDER" H 2050 4050 39  0000 C CNN
+F 2 "" H 2200 3925 50  0001 C CNN
+F 3 "" H 2200 3925 50  0001 C CNN
+	1    2050 3900
 	1    0    0    -1  
 $EndComp
 $Comp
-L SOC:ADDER U?
+L CPUSchem:ADDER U?
 U 1 1 5EBA316E
-P 2350 4225
-F 0 "U?" H 2325 4475 50  0001 C CNN
-F 1 "BRANCH_ADDER" H 2325 4350 39  0000 C CNN
-F 2 "" H 2500 4250 50  0001 C CNN
-F 3 "" H 2500 4250 50  0001 C CNN
-	1    2350 4225
+P 2050 4225
+F 0 "U?" H 2025 4475 50  0001 C CNN
+F 1 "BRANCH_ADDER" H 2025 4350 39  0000 C CNN
+F 2 "" H 2200 4250 50  0001 C CNN
+F 3 "" H 2200 4250 50  0001 C CNN
+	1    2050 4225
 	1    0    0    -1  
 $EndComp
 $Comp
-L SOC:2-1Mux U?
+L CPUSchem:2-1Mux U?
 U 1 1 5EBA3174
-P 2650 4075
-F 0 "U?" H 2675 4400 50  0001 C CNN
-F 1 "2-1Mux" H 2650 4225 50  0001 C CNN
-F 2 "" H 2675 4400 50  0001 C CNN
-F 3 "" H 2675 4400 50  0001 C CNN
-	1    2650 4075
+P 2350 4075
+F 0 "U?" H 2375 4400 50  0001 C CNN
+F 1 "2-1Mux" H 2350 4225 50  0001 C CNN
+F 2 "" H 2375 4400 50  0001 C CNN
+F 3 "" H 2375 4400 50  0001 C CNN
+	1    2350 4075
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	2550 4050 2600 4050
+	2250 4050 2300 4050
 Wire Wire Line
-	2550 4225 2550 4100
+	2250 4225 2250 4100
 Wire Wire Line
-	2550 4100 2600 4100
+	2250 4100 2300 4100
 Wire Wire Line
-	2650 3975 2650 3225
-Text Label 2275 4175 2    31   ~ 0
+	2350 3975 2350 3225
+Text Label 1975 4175 2    31   ~ 0
 Imm_M
-Text Label 3300 4000 0    28   ~ 0
+Text Label 3000 4000 0    28   ~ 0
 PC_F
-Text Label 2275 3950 2    28   ~ 0
+Text Label 1975 3950 2    28   ~ 0
 PC_F
 Wire Wire Line
-	2700 4075 2825 4075
+	2400 4075 2525 4075
 Wire Wire Line
-	2575 3225 2650 3225
-Text Label 1575 3525 2    31   ~ 0
+	2275 3225 2350 3225
+Text Label 1275 3525 2    31   ~ 0
 AluSignNeg_M
 Text HLabel 2200 2025 0    31   Input ~ 0
-DBUS_WaitReq_M
+DBus_WaitReq_M
 Text Label 3325 1525 0    31   ~ 0
 DBusTranslatorEn_E
 Text Label 2200 1525 2    31   ~ 0
@@ -410,7 +411,7 @@ RS1_D
 Text Label 4275 3325 2    31   ~ 0
 RS2_D
 $Comp
-L SOC:REGFILE U?
+L CPUSchem:REGFILE U?
 U 1 1 5EBA30AE
 P 4625 3450
 F 0 "U?" H 4500 3850 50  0001 C CNN
@@ -441,10 +442,10 @@ Text Label 5475 2650 0    31   ~ 0
 IsJump_E
 Text Label 2200 2375 2    31   ~ 0
 IsBranch_E
-Text Label 1575 3225 2    31   ~ 0
+Text Label 1275 3225 2    31   ~ 0
 IsJump_M
 $Comp
-L SOC:3-1MUX U?
+L CPUSchem:3-1MUX U?
 U 1 1 5EB6BAFC
 P 9825 2725
 F 0 "U?" H 9825 2975 31  0001 C CNN
@@ -455,11 +456,11 @@ F 3 "" H 9825 2975 31  0001 C CNN
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	2425 3900 2550 3900
+	2125 3900 2250 3900
 Wire Wire Line
-	2425 4225 2550 4225
+	2125 4225 2250 4225
 Wire Wire Line
-	2550 3900 2550 4050
+	2250 3900 2250 4050
 Text Label 7500 2875 0    31   ~ 0
 PC_Plus4_M
 Text Label 7300 2950 2    31   ~ 0
@@ -485,7 +486,7 @@ B_E
 Wire Wire Line
 	5825 3550 6125 3550
 $Comp
-L SOC:2-1Mux U?
+L CPUSchem:2-1Mux U?
 U 1 1 5EBA3184
 P 6175 3525
 F 0 "U?" H 6200 3850 50  0001 C CNN
@@ -496,22 +497,22 @@ F 3 "" H 6200 3850 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L SOC:2-1Mux U?
+L CPUSchem:2-1Mux U?
 U 1 1 5EC4C00F
-P 2125 4350
-F 0 "U?" H 2150 4675 50  0001 C CNN
-F 1 "2-1Mux" H 2125 4500 50  0001 C CNN
-F 2 "" H 2150 4675 50  0001 C CNN
-F 3 "" H 2150 4675 50  0001 C CNN
-	1    2125 4350
+P 1825 4350
+F 0 "U?" H 1850 4675 50  0001 C CNN
+F 1 "2-1Mux" H 1825 4500 50  0001 C CNN
+F 2 "" H 1850 4675 50  0001 C CNN
+F 3 "" H 1850 4675 50  0001 C CNN
+	1    1825 4350
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	2175 4350 2225 4350
+	1875 4350 1925 4350
 Wire Wire Line
-	2225 4350 2225 4275
+	1925 4350 1925 4275
 Wire Wire Line
-	2225 4275 2275 4275
+	1925 4275 1975 4275
 Wire Wire Line
 	5775 3500 6125 3500
 Wire Wire Line
@@ -523,7 +524,7 @@ Wire Wire Line
 Wire Wire Line
 	7100 2875 7300 2875
 $Comp
-L SOC:ALU U?
+L CPUSchem:ALU U?
 U 1 1 5EBA318F
 P 6400 3375
 F 0 "U?" H 6475 3625 50  0001 C CNN
@@ -534,7 +535,7 @@ F 3 "" H 6475 3625 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L SOC:ADDER U?
+L CPUSchem:ADDER U?
 U 1 1 5EB700C9
 P 6975 2950
 F 0 "U?" H 6950 3200 50  0001 C CNN
@@ -561,7 +562,7 @@ Rs1ForSel_M
 Text Label 5975 3200 0    31   ~ 0
 Rs1For_E
 $Comp
-L SOC:2-1Mux U?
+L CPUSchem:2-1Mux U?
 U 1 1 5EB3AFB0
 P 8150 3225
 F 0 "U?" H 8175 3550 50  0001 C CNN
@@ -580,12 +581,12 @@ Wire Wire Line
 Wire Wire Line
 	4975 2450 4975 2500
 Connection ~ 4975 2500
-Text Label 2125 4250 2    31   ~ 0
+Text Label 1825 4250 2    31   ~ 0
 BranchAdderBSel_M
 Text Label 7500 2650 0    31   ~ 0
 BranchAdderBSel_M
 $Comp
-L SOC:ID_IE U?
+L CPUSchem:ID_IE U?
 U 1 1 5EB8A9BC
 P 5375 2975
 F 0 "U?" H 5425 3625 50  0001 C CNN
@@ -596,18 +597,7 @@ F 3 "" H 5400 2700 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L SOC:IF_ID U?
-U 1 1 5EB8D32B
-P 3700 3575
-F 0 "U?" H 3700 4250 50  0001 C CNN
-F 1 "IF_ID" H 3700 4241 39  0000 C CNN
-F 2 "" H 3725 3700 50  0001 C CNN
-F 3 "" H 3725 3700 50  0001 C CNN
-	1    3700 3575
-	1    0    0    -1  
-$EndComp
-$Comp
-L SOC:IE_MEM U?
+L CPUSchem:IE_MEM U?
 U 1 1 5EB8DE08
 P 7400 3000
 F 0 "U?" H 7400 3575 50  0001 C CNN
@@ -621,7 +611,7 @@ Text Label 5725 3400 2    31   ~ 0
 Rs2ForSel_E
 Text Label 8150 3125 2    31   ~ 0
 Rs1ForSel_M
-Text Label 2075 4375 2    31   ~ 0
+Text Label 1775 4375 2    31   ~ 0
 Rs1For_M
 Text Label 7300 3100 2    31   ~ 0
 Rs1For_E
@@ -632,7 +622,7 @@ RS1Addr_M
 Text Label 6100 4675 2    31   ~ 0
 RS1Addr_M
 $Comp
-L SOC:MEM_WB U?
+L CPUSchem:MEM_WB U?
 U 1 1 5EB3DE22
 P 9250 2600
 F 0 "U?" H 9250 2825 50  0001 C CNN
@@ -692,7 +682,7 @@ Wire Wire Line
 Text Label 7300 3025 2    31   ~ 0
 Rs2For_E
 $Comp
-L SOC:2-1Mux U?
+L CPUSchem:2-1Mux U?
 U 1 1 5ED0AAB6
 P 8150 2975
 F 0 "U?" H 8175 3300 50  0001 C CNN
@@ -715,7 +705,7 @@ Rs2ForSel_M
 Text Label 8075 3650 0    31   ~ 0
 ExeZero_M
 $Comp
-L SOC:0Comparator U?
+L CPUSchem:0Comparator U?
 U 1 1 5EBA31D6
 P 8000 3650
 F 0 "U?" H 8200 3925 31  0001 C CNN
@@ -741,7 +731,7 @@ Wire Wire Line
 Text Label 5925 3100 2    31   ~ 0
 Rs1ForSel_E
 $Comp
-L SOC:2-1Mux U?
+L CPUSchem:2-1Mux U?
 U 1 1 5EADD59E
 P 5925 3200
 F 0 "U?" H 5950 3525 50  0001 C CNN
@@ -752,7 +742,7 @@ F 3 "" H 5950 3525 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L SOC:2-1Mux U?
+L CPUSchem:2-1Mux U?
 U 1 1 5ED695AC
 P 5200 3275
 F 0 "U?" H 5225 3600 50  0001 C CNN
@@ -763,7 +753,7 @@ F 3 "" H 5225 3600 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L SOC:2-1Mux U?
+L CPUSchem:2-1Mux U?
 U 1 1 5ED6DABA
 P 5200 3500
 F 0 "U?" H 5225 3825 50  0001 C CNN
@@ -780,9 +770,7 @@ Rs2ForSel_D
 Wire Wire Line
 	5250 3500 5250 3475
 Wire Wire Line
-	3900 4000 3975 4000
-Wire Wire Line
-	3800 3100 5275 3100
+	3500 3100 3600 3100
 Wire Wire Line
 	4900 3475 5150 3475
 Wire Wire Line
@@ -818,7 +806,7 @@ DBusRe_W
 Text Label 6175 3425 2    31   ~ 0
 AluBSel_E
 $Comp
-L SOC:LOAD_UPPER U?
+L CPUSchem:LOAD_UPPER U?
 U 1 1 5EB59563
 P 6475 3900
 F 0 "U?" H 6650 4175 50  0001 C CNN
@@ -843,7 +831,7 @@ Wire Wire Line
 Wire Wire Line
 	5475 2400 7225 2400
 $Comp
-L SOC:2-1Mux U?
+L CPUSchem:2-1Mux U?
 U 1 1 5EB931AF
 P 7100 3500
 F 0 "U?" H 7125 3825 50  0001 C CNN
@@ -926,19 +914,19 @@ Wire Wire Line
 Wire Wire Line
 	9800 2500 9800 2600
 $Comp
-L SOC:IBUS U?
+L CPUSchem:IBUS U?
 U 1 1 5ED7A87C
-P 3675 4075
-F 0 "U?" H 3575 4325 50  0001 C CNN
-F 1 "IBUS" H 3675 4250 39  0000 C CNN
-F 2 "" H 3525 4250 50  0001 C CNN
-F 3 "" H 3525 4250 50  0001 C CNN
-	1    3675 4075
+P 3550 4025
+F 0 "U?" H 3450 4275 50  0001 C CNN
+F 1 "IBUS" H 3525 4175 39  0000 C CNN
+F 2 "" H 3400 4200 50  0001 C CNN
+F 3 "" H 3400 4200 50  0001 C CNN
+	1    3550 4025
 	1    0    0    -1  
 $EndComp
-Text Label 3650 4175 3    31   ~ 0
+Text Label 3525 4150 3    31   ~ 0
 IBusRdEn_D
-Text Label 3700 4175 3    31   ~ 0
+Text Label 3575 4150 3    31   ~ 0
 IBusOZero_D
 Wire Wire Line
 	6875 2700 6875 2800
@@ -975,4 +963,36 @@ Text Label 5475 2450 0    31   ~ 0
 DBusRe_E
 Text HLabel 2200 1950 0    31   Input ~ 0
 IBus_WaitReq_D
+$Comp
+L CPUSchem:IF1_IF2 U?
+U 1 1 5FBEDD6A
+P 3400 3575
+F 0 "U?" H 3400 4250 50  0001 C CNN
+F 1 "IF1_IF2" H 3400 4241 39  0000 C CNN
+F 2 "" H 3425 3700 50  0001 C CNN
+F 3 "" H 3425 3700 50  0001 C CNN
+	1    3400 3575
+	1    0    0    -1  
+$EndComp
+$Comp
+L CPUSchem:IF2_ID U?
+U 1 1 5FBEE615
+P 3700 3225
+F 0 "U?" H 3775 3625 50  0001 C CNN
+F 1 "IF2_ID" H 3700 3541 39  0000 C CNN
+F 2 "" H 3775 3625 50  0001 C CNN
+F 3 "" H 3775 3625 50  0001 C CNN
+	1    3700 3225
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5275 3100 3800 3100
+Wire Wire Line
+	3900 3950 3975 3950
+Text Notes 3600 4225 0    39   ~ 0
+Two Stage\nPipelined
+Text Label 3375 3400 3    31   ~ 0
+En_F2
+Text Label 3425 3400 3    31   ~ 0
+Clr_F2
 $EndSCHEMATC

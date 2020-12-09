@@ -27,8 +27,11 @@ module CPU #(
 
     //IBusMaster Signals
     wire [31:0]w_Inst_D;
+    
+    //IF1_IF2 Signals
+    reg [31:0]r_PC_IF2 = 0;
 
-    //IF_ID Signals
+    //I2_ID Signals
     reg [31:0]r_PC_D = 0;
 
     //Decoder Signals
@@ -150,11 +153,13 @@ module CPU #(
     wire w_IBusRdEn;
     wire w_DBusTranslatorEn_M;
 
+    wire w_RegEn_IF2;
     wire w_RegEn_D;
     wire w_RegEn_E;
     wire w_RegEn_M;
     wire w_RegEn_W;
 
+    wire w_RegClr_IF2;
     wire w_RegClr_D;
     wire w_RegClr_E;
     wire w_RegClr_M;
@@ -205,12 +210,21 @@ module CPU #(
         .o_CpuRd(w_Inst_D)
     );
 
+    //--Instruction Fetch 2 Stage--//
+    always @(posedge i_Clk) begin
+        if(w_RegClr_IF2)begin
+            r_PC_IF2 <= 0;
+        end else if(w_RegEn_IF2)begin
+            r_PC_IF2 <= w_PC_F;
+        end
+    end
+
     //--Decode Stage--//
     always @(posedge i_Clk) begin
         if(w_RegClr_D)begin
             r_PC_D <= 0;
         end else if(w_RegEn_D)begin
-            r_PC_D <= w_PC_F;
+            r_PC_D <= r_PC_IF2;
         end
     end
 
@@ -429,11 +443,13 @@ module CPU #(
         .o_IBusOZero(w_IBusOZero),
         .o_DBusTranslatorEn(w_DBusTranslatorEn_M),
 
+        .o_RegEn_IF2(w_RegEn_IF2),
         .o_RegEn_D(w_RegEn_D),
         .o_RegEn_E(w_RegEn_E),
         .o_RegEn_M(w_RegEn_M),
         .o_RegEn_W(w_RegEn_W),
 
+        .o_RegClr_IF2(w_RegClr_IF2),
         .o_RegClr_D(w_RegClr_D),
         .o_RegClr_E(w_RegClr_E),
         .o_RegClr_M(w_RegClr_M),

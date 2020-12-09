@@ -30,6 +30,7 @@ module AvalonXBarMux (
     output [(8*`NUM_OUTPUTS)-1:0]o_AVOut_BurstCount
     );
     reg [($clog2(`NUM_INPUTS+1) * `NUM_OUTPUTS)-1:0]r_Old_MuxSel = 0;
+    reg [(`NUM_OUTPUTS*`NUM_INPUTS)-1:0]r_Old_M_SReq = 0;
 
     wire w_TmpWaitRequest[`NUM_OUTPUTS-1:0];
     wire [31:0]w_TmpReadData[`NUM_OUTPUTS-1:0];
@@ -62,12 +63,13 @@ module AvalonXBarMux (
     end
 
     always @(posedge i_Clk) begin
+        r_Old_M_SReq <= i_M_SReq;
         r_Old_MuxSel <= i_MuxSel;
     end
 
     //Take care of the (output -> input) signals
     integer i;
-    always @(*) begin
+    always @(i_Clk) begin
         for(i = 0; i < `NUM_INPUTS; i = i + 1)begin
             if(r_Old_MuxSel[2:0] == i)begin
                 //Link data from Output 0 to Input i
@@ -84,7 +86,11 @@ module AvalonXBarMux (
             end else begin
                 o_AVIn_ReadData[32*i +:32] <= 0;
             end
+        end        
+    end
 
+    always @(*) begin
+        for(i = 0; i < `NUM_INPUTS; i = i + 1)begin
             if(i_MuxSel[2:0] == i)begin
                 //Link data from Output 0 to Input i
                 o_AVIn_WaitRequest[i] <= w_TmpWaitRequest[0];
@@ -102,7 +108,7 @@ module AvalonXBarMux (
                 //If so assert wait request until the master wins arbitration
                 o_AVIn_WaitRequest[i] <= |i_M_SReq[i*4+:4];
             end
-        end        
+        end
     end
 endmodule
 

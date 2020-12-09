@@ -10,86 +10,91 @@
          </top_modules>
       </db_ref>
    </db_ref_list>
-   <WVObjectSize size="13" />
+   <WVObjectSize size="14" />
    <wvobject fp_name="/XBarInterconnect_tb/r_Clk" type="logic" db_ref_id="1">
       <obj_property name="ElementShortName">r_Clk</obj_property>
       <obj_property name="ObjectShortName">r_Clk</obj_property>
    </wvobject>
    <wvobject fp_name="/XBarInterconnect_tb/XBarInterconnect0/w_MuxSel" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">w_MuxSel[14:0]</obj_property>
-      <obj_property name="ObjectShortName">w_MuxSel[14:0]</obj_property>
+      <obj_property name="ElementShortName">w_MuxSel[11:0]</obj_property>
+      <obj_property name="ObjectShortName">w_MuxSel[11:0]</obj_property>
    </wvobject>
    <wvobject fp_name="/XBarInterconnect_tb/XBarInterconnect0/w_M_SNewTransaction" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">w_M_SNewTransaction[4:0,4:0]</obj_property>
-      <obj_property name="ObjectShortName">w_M_SNewTransaction[4:0,4:0]</obj_property>
+      <obj_property name="ElementShortName">w_M_SNewTransaction[4:0,3:0]</obj_property>
+      <obj_property name="ObjectShortName">w_M_SNewTransaction[4:0,3:0]</obj_property>
       <obj_property name="UseCustomSignalColor">true</obj_property>
       <obj_property name="CustomSignalColor">#ffff00</obj_property>
       <wvobject fp_name="/XBarInterconnect_tb/XBarInterconnect0/w_M_SNewTransaction[4]" type="array" db_ref_id="1">
-         <obj_property name="ElementShortName">[4,4:0]</obj_property>
-         <obj_property name="ObjectShortName">w_M_SNewTransaction[4,4:0]</obj_property>
+         <obj_property name="ElementShortName">[4,3:0]</obj_property>
+         <obj_property name="ObjectShortName">w_M_SNewTransaction[4,3:0]</obj_property>
          <obj_property name="UseCustomSignalColor">true</obj_property>
          <obj_property name="CustomSignalColor">#ffff00</obj_property>
       </wvobject>
       <wvobject fp_name="/XBarInterconnect_tb/XBarInterconnect0/w_M_SNewTransaction[3]" type="array" db_ref_id="1">
-         <obj_property name="ElementShortName">[3,4:0]</obj_property>
-         <obj_property name="ObjectShortName">w_M_SNewTransaction[3,4:0]</obj_property>
+         <obj_property name="ElementShortName">[3,3:0]</obj_property>
+         <obj_property name="ObjectShortName">w_M_SNewTransaction[3,3:0]</obj_property>
          <obj_property name="UseCustomSignalColor">true</obj_property>
          <obj_property name="CustomSignalColor">#ffff00</obj_property>
       </wvobject>
       <wvobject fp_name="/XBarInterconnect_tb/XBarInterconnect0/w_M_SNewTransaction[2]" type="array" db_ref_id="1">
-         <obj_property name="ElementShortName">[2,4:0]</obj_property>
-         <obj_property name="ObjectShortName">w_M_SNewTransaction[2,4:0]</obj_property>
+         <obj_property name="ElementShortName">[2,3:0]</obj_property>
+         <obj_property name="ObjectShortName">w_M_SNewTransaction[2,3:0]</obj_property>
          <obj_property name="UseCustomSignalColor">true</obj_property>
          <obj_property name="CustomSignalColor">#ffff00</obj_property>
       </wvobject>
       <wvobject fp_name="/XBarInterconnect_tb/XBarInterconnect0/w_M_SNewTransaction[1]" type="array" db_ref_id="1">
-         <obj_property name="ElementShortName">[1,4:0]</obj_property>
-         <obj_property name="ObjectShortName">w_M_SNewTransaction[1,4:0]</obj_property>
+         <obj_property name="ElementShortName">[1,3:0]</obj_property>
+         <obj_property name="ObjectShortName">w_M_SNewTransaction[1,3:0]</obj_property>
          <obj_property name="UseCustomSignalColor">true</obj_property>
          <obj_property name="CustomSignalColor">#ffff00</obj_property>
       </wvobject>
       <wvobject fp_name="/XBarInterconnect_tb/XBarInterconnect0/w_M_SNewTransaction[0]" type="array" db_ref_id="1">
-         <obj_property name="ElementShortName">[0,4:0]</obj_property>
-         <obj_property name="ObjectShortName">w_M_SNewTransaction[0,4:0]</obj_property>
+         <obj_property name="ElementShortName">[0,3:0]</obj_property>
+         <obj_property name="ObjectShortName">w_M_SNewTransaction[0,3:0]</obj_property>
          <obj_property name="UseCustomSignalColor">true</obj_property>
          <obj_property name="CustomSignalColor">#ffff00</obj_property>
       </wvobject>
    </wvobject>
    <wvobject fp_name="/XBarInterconnect_tb/XBarInterconnect0/w_M_SReq" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">w_M_SReq[4:0,4:0]</obj_property>
-      <obj_property name="ObjectShortName">w_M_SReq[4:0,4:0]</obj_property>
+      <obj_property name="ElementShortName">w_M_SReq[4:0,3:0]</obj_property>
+      <obj_property name="ObjectShortName">w_M_SReq[4:0,3:0]</obj_property>
       <obj_property name="UseCustomSignalColor">true</obj_property>
       <obj_property name="CustomSignalColor">#ffff00</obj_property>
       <wvobject fp_name="/XBarInterconnect_tb/XBarInterconnect0/w_M_SReq[4]" type="array" db_ref_id="1">
-         <obj_property name="ElementShortName">[4,4:0]</obj_property>
-         <obj_property name="ObjectShortName">w_M_SReq[4,4:0]</obj_property>
+         <obj_property name="ElementShortName">[4,3:0]</obj_property>
+         <obj_property name="ObjectShortName">w_M_SReq[4,3:0]</obj_property>
          <obj_property name="UseCustomSignalColor">true</obj_property>
          <obj_property name="CustomSignalColor">#ffff00</obj_property>
       </wvobject>
       <wvobject fp_name="/XBarInterconnect_tb/XBarInterconnect0/w_M_SReq[3]" type="array" db_ref_id="1">
-         <obj_property name="ElementShortName">[3,4:0]</obj_property>
-         <obj_property name="ObjectShortName">w_M_SReq[3,4:0]</obj_property>
+         <obj_property name="ElementShortName">[3,3:0]</obj_property>
+         <obj_property name="ObjectShortName">w_M_SReq[3,3:0]</obj_property>
          <obj_property name="UseCustomSignalColor">true</obj_property>
          <obj_property name="CustomSignalColor">#ffff00</obj_property>
       </wvobject>
       <wvobject fp_name="/XBarInterconnect_tb/XBarInterconnect0/w_M_SReq[2]" type="array" db_ref_id="1">
-         <obj_property name="ElementShortName">[2,4:0]</obj_property>
-         <obj_property name="ObjectShortName">w_M_SReq[2,4:0]</obj_property>
+         <obj_property name="ElementShortName">[2,3:0]</obj_property>
+         <obj_property name="ObjectShortName">w_M_SReq[2,3:0]</obj_property>
          <obj_property name="UseCustomSignalColor">true</obj_property>
          <obj_property name="CustomSignalColor">#ffff00</obj_property>
       </wvobject>
       <wvobject fp_name="/XBarInterconnect_tb/XBarInterconnect0/w_M_SReq[1]" type="array" db_ref_id="1">
-         <obj_property name="ElementShortName">[1,4:0]</obj_property>
-         <obj_property name="ObjectShortName">w_M_SReq[1,4:0]</obj_property>
+         <obj_property name="ElementShortName">[1,3:0]</obj_property>
+         <obj_property name="ObjectShortName">w_M_SReq[1,3:0]</obj_property>
          <obj_property name="UseCustomSignalColor">true</obj_property>
          <obj_property name="CustomSignalColor">#ffff00</obj_property>
       </wvobject>
       <wvobject fp_name="/XBarInterconnect_tb/XBarInterconnect0/w_M_SReq[0]" type="array" db_ref_id="1">
-         <obj_property name="ElementShortName">[0,4:0]</obj_property>
-         <obj_property name="ObjectShortName">w_M_SReq[0,4:0]</obj_property>
+         <obj_property name="ElementShortName">[0,3:0]</obj_property>
+         <obj_property name="ObjectShortName">w_M_SReq[0,3:0]</obj_property>
          <obj_property name="UseCustomSignalColor">true</obj_property>
          <obj_property name="CustomSignalColor">#ffff00</obj_property>
       </wvobject>
+   </wvobject>
+   <wvobject fp_name="/XBarInterconnect_tb/r_RdData" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">r_RdData[31:0]</obj_property>
+      <obj_property name="ObjectShortName">r_RdData[31:0]</obj_property>
+      <obj_property name="Radix">HEXRADIX</obj_property>
    </wvobject>
    <wvobject fp_name="group104" type="group">
       <obj_property name="label">Master0</obj_property>
@@ -147,14 +152,14 @@
          <obj_property name="CustomSignalColor">#00ffff</obj_property>
       </wvobject>
       <wvobject fp_name="/XBarInterconnect_tb/XBarInterconnect0/\[0].InputDecoder /o_Out_Req" type="array" db_ref_id="1">
-         <obj_property name="ElementShortName">o_Out_Req[4:0]</obj_property>
-         <obj_property name="ObjectShortName">o_Out_Req[4:0]</obj_property>
+         <obj_property name="ElementShortName">o_Out_Req[3:0]</obj_property>
+         <obj_property name="ObjectShortName">o_Out_Req[3:0]</obj_property>
          <obj_property name="UseCustomSignalColor">true</obj_property>
          <obj_property name="CustomSignalColor">#ff00ff</obj_property>
       </wvobject>
       <wvobject fp_name="/XBarInterconnect_tb/XBarInterconnect0/\[0].InputDecoder /o_Out_NewTransaction" type="array" db_ref_id="1">
-         <obj_property name="ElementShortName">o_Out_NewTransaction[4:0]</obj_property>
-         <obj_property name="ObjectShortName">o_Out_NewTransaction[4:0]</obj_property>
+         <obj_property name="ElementShortName">o_Out_NewTransaction[3:0]</obj_property>
+         <obj_property name="ObjectShortName">o_Out_NewTransaction[3:0]</obj_property>
          <obj_property name="UseCustomSignalColor">true</obj_property>
          <obj_property name="CustomSignalColor">#ff00ff</obj_property>
       </wvobject>
@@ -229,14 +234,14 @@
          <obj_property name="CustomSignalColor">#00ffff</obj_property>
       </wvobject>
       <wvobject fp_name="/XBarInterconnect_tb/XBarInterconnect0/\[1].InputDecoder /o_Out_Req" type="array" db_ref_id="1">
-         <obj_property name="ElementShortName">o_Out_Req[4:0]</obj_property>
-         <obj_property name="ObjectShortName">o_Out_Req[4:0]</obj_property>
+         <obj_property name="ElementShortName">o_Out_Req[3:0]</obj_property>
+         <obj_property name="ObjectShortName">o_Out_Req[3:0]</obj_property>
          <obj_property name="UseCustomSignalColor">true</obj_property>
          <obj_property name="CustomSignalColor">#ff00ff</obj_property>
       </wvobject>
       <wvobject fp_name="/XBarInterconnect_tb/XBarInterconnect0/\[1].InputDecoder /o_Out_NewTransaction" type="array" db_ref_id="1">
-         <obj_property name="ElementShortName">o_Out_NewTransaction[4:0]</obj_property>
-         <obj_property name="ObjectShortName">o_Out_NewTransaction[4:0]</obj_property>
+         <obj_property name="ElementShortName">o_Out_NewTransaction[3:0]</obj_property>
+         <obj_property name="ObjectShortName">o_Out_NewTransaction[3:0]</obj_property>
          <obj_property name="UseCustomSignalColor">true</obj_property>
          <obj_property name="CustomSignalColor">#ff00ff</obj_property>
       </wvobject>
