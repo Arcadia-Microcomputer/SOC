@@ -30,11 +30,33 @@ module BOOTROM #(
     integer i;
     integer numRamUsed;
     initial begin
-Ram[0] = 32'h00000093;
-Ram[1] = 32'h00400113;
-Ram[2] = 32'h00108093;
-Ram[3] = 32'hfe209ee3;
-numRamUsed = 4;
+Ram[0] = 32'hff801117;
+Ram[1] = 32'hffc10113;
+Ram[2] = 32'h008000ef;
+Ram[3] = 32'h0000006f;
+Ram[4] = 32'hfc0307b7;
+Ram[5] = 32'h04b00713;
+Ram[6] = 32'hc08005b7;
+Ram[7] = 32'h00e79023;
+Ram[8] = 32'h00c00613;
+Ram[9] = 32'h05858593;
+Ram[10] = 32'hfc030537;
+Ram[11] = 32'h0040006f;
+Ram[12] = 32'h02060263;
+Ram[13] = 32'h00c58733;
+Ram[14] = 32'h00255783;
+Ram[15] = 32'h0087f793;
+Ram[16] = 32'hfe079ce3;
+Ram[17] = 32'h0005c783;
+Ram[18] = 32'h00158593;
+Ram[19] = 32'h00f50223;
+Ram[20] = 32'hfee594e3;
+Ram[21] = 32'h00008067;
+Ram[22] = 32'h6c6c6548;
+Ram[23] = 32'h6f57206f;
+Ram[24] = 32'h0a646c72;
+Ram[25] = 32'h00000000;
+numRamUsed = 26;
         for(i = numRamUsed; i < DEPTH; i = i + 1)begin
             Ram[i] = 0;
         end

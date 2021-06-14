@@ -3,150 +3,180 @@
 module HazardUnit(
     input i_Clk,
 
-    input i_RS1Valid_D,
-    input [4:0]i_RS1Addr_D,
+    input i_RS1Valid_ID,
+    input [4:0]i_RS1Addr_ID,
 
-    input i_RS2Valid_D,
-    input [4:0]i_RS2Addr_D,
+    input i_RS2Valid_ID,
+    input [4:0]i_RS2Addr_ID,
 
-    input [4:0]i_RDAddr_E,
-    input [4:0]i_RDAddr_M,
-    input [4:0]i_RDAddr_W,
+    input [4:0]i_RDAddr_EX1,
+    input [4:0]i_RDAddr_EX2,
+    input [4:0]i_RDAddr_WB,
 
-    input i_IBusWaitReq_F,
-    input i_DBusWaitReq_M,
+    input i_IsMemRead_EX1,
+    input i_IsMemRead_EX2,
+    input i_IsMemRead_WB,
 
-    input i_IsMemRead_E,
-    input i_IsMemRead_M,
-    input i_IsMemRead_W,
+    input i_IsJump_EX2,
+    input i_IsBranch_EX2,
+    input i_TakeBranch_EX2,
 
-    input i_IsJump_M,
-    input i_IsBranch_M,
-    input i_TakeBranch_M,
+    input i_ICacheStall_PC,
+    input i_DCacheStall_EX2,
 
     output reg o_PcEn,
     output reg o_IBusRdEn,
-    output reg o_IBusOZero,
-    output reg o_DBusTranslatorEn,
+    output reg o_ICacheHoldOut,
 
-    output reg o_RegEn_IF2,
-    output reg o_RegEn_D,
-    output reg o_RegEn_E,
-    output reg o_RegEn_M,
-    output reg o_RegEn_W,
+    output reg o_RegEn_IF,
+    output reg o_RegEn_ID,
+    output reg o_RegEn_EX1,
+    output reg o_RegEn_EX2,
+    output reg o_RegEn_WB,
 
-    output reg o_RegClr_IF2,
-    output reg o_RegClr_D,
-    output reg o_RegClr_E,
-    output reg o_RegClr_M,
-    output reg o_RegClr_W
+    output reg o_RegClr_IF,
+    output reg o_RegClr_ID,
+    output reg o_RegClr_EX1,
+    output reg o_RegClr_EX2,
+    output reg o_RegClr_WB
     );
     
     initial begin
         o_PcEn = 1;
         o_IBusRdEn  = 1;
-        o_IBusOZero = 0;
-        o_DBusTranslatorEn = 1;
+        o_ICacheHoldOut = 0;
 
-        o_RegEn_IF2 = 1;
-        o_RegEn_D   = 1;
-        o_RegEn_E   = 1;
-        o_RegEn_M   = 1;
-        o_RegEn_W   = 1;
+        o_RegEn_IF  = 1;
+        o_RegEn_ID  = 1;
+        o_RegEn_EX1 = 1;
+        o_RegEn_EX2 = 1;
+        o_RegEn_WB  = 1;
 
-        o_RegClr_IF2 = 0;
-        o_RegClr_D   = 0;
-        o_RegClr_E   = 0;
-        o_RegClr_M   = 0;
-        o_RegClr_W   = 0;
+        o_RegClr_IF  = 0;
+        o_RegClr_ID  = 0;
+        o_RegClr_EX1 = 0;
+        o_RegClr_EX2 = 0;
+        o_RegClr_WB  = 0;
     end
 
-    wire w_DBusHaz_DE  = (i_IsMemRead_E && ((i_RS1Valid_D & (i_RS1Addr_D == i_RDAddr_E)) || (i_RS2Valid_D & (i_RS2Addr_D == i_RDAddr_E))));
-    wire w_DBusHaz_DM  = (i_IsMemRead_M && ((i_RS1Valid_D & (i_RS1Addr_D == i_RDAddr_M)) || (i_RS2Valid_D & (i_RS2Addr_D == i_RDAddr_M))));
-    wire w_DBusHaz_DW  = (i_IsMemRead_W && ((i_RS1Valid_D & (i_RS1Addr_D == i_RDAddr_W)) || (i_RS2Valid_D & (i_RS2Addr_D == i_RDAddr_W))));
-    wire w_DBusHazzard = w_DBusHaz_DE || w_DBusHaz_DM || w_DBusHaz_DW;
+    // Check for DBUS hazzards
+    wire w_DBusHaz_ID_EX1  = (i_IsMemRead_EX1 && ((i_RS1Valid_ID & (i_RS1Addr_ID == i_RDAddr_EX1)) || (i_RS2Valid_ID & (i_RS2Addr_ID == i_RDAddr_EX1))));
+    wire w_DBusHaz_ID_EX2  = (i_IsMemRead_EX2 && ((i_RS1Valid_ID & (i_RS1Addr_ID == i_RDAddr_EX2)) || (i_RS2Valid_ID & (i_RS2Addr_ID == i_RDAddr_EX2))));
+    wire w_DBusHaz_ID_WB  = (i_IsMemRead_WB && ((i_RS1Valid_ID & (i_RS1Addr_ID == i_RDAddr_WB)) || (i_RS2Valid_ID & (i_RS2Addr_ID == i_RDAddr_WB))));
+    wire w_DBusHazzard = w_DBusHaz_ID_EX1 || w_DBusHaz_ID_EX2 || w_DBusHaz_ID_WB;
 
-    reg r_StallCounter_d = 2'b0;
-    reg r_StallCounter_q = 2'b0;
+    reg r_Old_ICacheStall_PC = 0;
+    reg r_Old_TakeBranch_EX2 = 0;
+    reg r_Old_DCacheStall_EX2 = 0;
 
-    reg r_DBusWaitReq_W = 0;
+    // Hazzards that result the fetch stages stalling
+    wire w_StallFetchStage = i_DCacheStall_EX2 | w_DBusHazzard | r_Old_TakeBranch_EX2;
+    wire w_StallBranch = i_ICacheStall_PC;
+    reg r_Old_StallFetchStage = 0;
+    
+    always @(posedge i_Clk) begin
+        r_Old_ICacheStall_PC <= i_ICacheStall_PC;
+        r_Old_TakeBranch_EX2 <= i_TakeBranch_EX2;
+        r_Old_DCacheStall_EX2 <= i_DCacheStall_EX2;
+        r_Old_StallFetchStage <= w_StallFetchStage;
+    end
 
     always @(*) begin
         o_PcEn   <= 1;
         o_IBusRdEn  <= 1;
-        o_IBusOZero <= 0;
-        o_DBusTranslatorEn <= 1;
+        o_ICacheHoldOut <= 0;
 
-        o_RegEn_IF2 <= 1;
-        o_RegEn_D  <= 1;
-        o_RegEn_E  <= 1;
-        o_RegEn_M  <= 1;
-        o_RegEn_W  <= 1;
+        o_RegEn_IF  <= 1;
+        o_RegEn_ID  <= 1;
+        o_RegEn_EX1 <= 1;
+        o_RegEn_EX2 <= 1;
+        o_RegEn_WB  <= 1;
 
-        o_RegClr_IF2 <= 0;
-        o_RegClr_D <= 0;
-        o_RegClr_E <= 0;
-        o_RegClr_M <= 0;
-        o_RegClr_W <= 0;
+        o_RegClr_IF  <= 0;
+        o_RegClr_ID  <= 0;
+        o_RegClr_EX1 <= 0;
+        o_RegClr_EX2 <= 0;
+        o_RegClr_WB  <= 0;
 
-        r_StallCounter_d <= r_StallCounter_q;
+        // Fetch stages stall
+        if(i_ICacheStall_PC)begin
+            // Icache stall
+            o_PcEn <= 0;
 
-        if(r_DBusWaitReq_W) begin
-            //If there is a load data hazzard due to:
-            //  -Slave asserting WaitReq
+            // If fetch stage asked to stall from futher down the pipeline
+            if(w_StallFetchStage)begin
+                // Can't execute fetched instruction so just full stall for now
+                o_RegEn_IF <= 0;
+                o_RegEn_ID <= 0;
 
-            o_DBusTranslatorEn <= 0;
+                // Store the next fetched instruction in the ICache internal reg
+                if(r_Old_StallFetchStage)begin
+                    o_ICacheHoldOut <= 1;
+                end
+            end else if(r_Old_ICacheStall_PC)begin
+                // Wait one cycle to
+                // - Allow previously fetched inst to executed
+                // - IF PC to be synced with the instruction being fetched
+                o_RegEn_IF <= 0;
+                o_RegClr_ID <= 1;
+            end
+        end else if(r_Old_ICacheStall_PC) begin
+            // New instrution is loaded into IF_ID reg
 
-            //Stall all the previous stages
+            if(w_StallFetchStage || r_Old_StallFetchStage)begin
+                // Current instruction in ID need to be executed so no double fetch
+                o_ICacheHoldOut <= 1; 
+            end else begin
+                // Double fetch happens to make sure to ignore first time inst fetched
+                o_RegClr_ID <= 1;
+            end
+        end else if (w_StallFetchStage) begin
+            // Stalls from deeper down the pipeline
             o_PcEn <= 0;
             o_IBusRdEn <= 0;
 
-            o_RegEn_IF2 <= 0;
-            o_RegEn_D   <= 0;
-            o_RegEn_E   <= 0;
-            o_RegEn_M   <= 0;
-            o_RegEn_W   <= 0;
+            o_RegEn_IF <= 0;
+            o_RegEn_ID <= 0;
+        end else if (r_Old_StallFetchStage) begin
+            // New inst is already fetched at this point
+            // Gets loaded into IF_ID reg here
+        end
 
-        end else if (i_TakeBranch_M) begin
-            //If there is a branch hazzard
-            //Clear out the consecutive instructions executing
-            o_RegClr_IF2 <= 1;
-            o_RegClr_D   <= 1;
-            o_RegClr_E   <= 1;
-            o_RegClr_M   <= 1;
+        if (i_TakeBranch_EX2) begin
+            if(w_StallBranch) begin
+                // Stall taking branch until free to do so (i.e fetching stage stalled)
 
-            //Stall the pipelined for 2 cycles
-            o_IBusOZero <= 0;
+                // Stall previous stages
+                // EX1 etc will have instructions from branch not taken so can ignore that stage
+                o_RegEn_EX2 <= 0;
+            end else begin
+                // Clear out the consecutive instructions executing
+                o_RegClr_IF  <= 1;
+                o_RegClr_ID  <= 1;
+                o_RegClr_EX1 <= 1;
+                o_RegClr_EX2 <= 1;
+            end   
+        end
 
-            r_StallCounter_d <= 1'd1;
+        if(i_DCacheStall_EX2) begin
+            // If there is a load data hazzard due to DCache stalling
+            // Stall all the previous stages
+            
+            o_RegEn_EX1 <= 0;
+            o_RegEn_EX2 <= 0;
+            
+            if(w_DBusHaz_ID_WB || w_DBusHaz_ID_EX2 || i_IsMemRead_EX2)begin
+                // Will be trash in WB reg as DCache hasn't got data yet
+                o_RegClr_WB <= 1;
+            end else if(r_Old_DCacheStall_EX2)begin
+                // Allow inst currently in wb to execute, after cycle clear it though as
+                // no vaid instruction in it
+                o_RegClr_WB <= 1;
+            end
         end else if(w_DBusHazzard)begin
             //If there is a load data dependency hazzard
-            o_PcEn <= 0;
-            o_IBusRdEn <= 0;
-            
-            o_RegEn_IF2 <= 0;
-            o_RegEn_D <= 0;
-
-            if(!(w_DBusHaz_DW && i_IsBranch_M))begin
-                //Don't clear
-                o_RegClr_E <= 1; 
-            end
+            o_RegClr_EX1 <= 1;
         end 
-
-        if (r_StallCounter_q != 0)begin
-            o_RegEn_E <= 0;
-
-            if(r_StallCounter_q != 1)begin
-                //POSSIBLE BUG
-                o_RegEn_IF2 <= 0;
-                o_RegEn_D <= 0; 
-            end
-            r_StallCounter_d <= r_StallCounter_q - 1;
-        end
     end
 
-    always @(posedge i_Clk ) begin
-        r_StallCounter_q <= r_StallCounter_d;
-        r_DBusWaitReq_W <= i_DBusWaitReq_M;
-    end
 endmodule

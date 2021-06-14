@@ -1,24 +1,24 @@
 `timescale 1ns / 1ps
 
-module DBusMaster(
+module DBusTranslator(
     input i_Clk,
-    input i_DBusTranslatorEn,
-
-    //DBUS
-    output [29:0]o_DBus_Address,
-    output [3:0] o_DBus_ByteEn,
-    output o_DBus_Read,
-    output o_DBus_Write,
-    input [31:0] i_DBus_ReadData,
-    output [31:0] o_DBus_WriteData,
+    input i_TranslatorEn,
 
     //CPU
     input [2:0]i_BusMode,
     input [31:0]i_CpuAddr,
     input i_CpuRe,
     input i_CpuWe,
-    output reg [31:0] o_CpuRd,
-    input [31:0] i_CpuWd
+    output reg [31:0]o_CpuRd,
+    input [31:0]i_CpuWd,
+
+    //DBUS
+    output [29:0]o_DBus_Address,
+    output [3:0]o_DBus_ByteEn,
+    output o_DBus_Read,
+    output o_DBus_Write,
+    input [31:0]i_DBus_ReadData,
+    output [31:0]o_DBus_WriteData
     );
 
     initial begin
@@ -57,7 +57,7 @@ module DBusMaster(
     parameter p_BUS_WORD_ACCESS         = 2'b10;
 
     always @(posedge i_Clk)begin
-        if(i_DBusTranslatorEn)begin
+        if(i_TranslatorEn)begin
             r_BusModeRd <= i_BusMode;
             r_AddrRd <= i_CpuAddr[1:0]; 
 
@@ -70,7 +70,7 @@ module DBusMaster(
     end
 
     always @(*) begin
-        if(i_DBusTranslatorEn)begin
+        if(i_TranslatorEn)begin
             r_DBus_Address <= i_CpuAddr[31:2];
             r_DBusRe <= i_CpuRe;
             r_DBusWe <= i_CpuWe;

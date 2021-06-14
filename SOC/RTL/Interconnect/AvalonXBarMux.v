@@ -69,7 +69,7 @@ module AvalonXBarMux (
 
     //Take care of the (output -> input) signals
     integer i;
-    always @(i_Clk) begin
+    always @(posedge i_Clk) begin
         for(i = 0; i < `NUM_INPUTS; i = i + 1)begin
             if(r_Old_MuxSel[2:0] == i)begin
                 //Link data from Output 0 to Input i

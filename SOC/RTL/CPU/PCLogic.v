@@ -1,6 +1,6 @@
 `timescale 1ns / 1ps
 
-module PC #(
+module PCLogic #(
     parameter INITIAL_PC_VALUE = 0
     )(
     input i_Clk,

@@ -195,7 +195,7 @@ module SOC(
     );
 
     CPU #(
-        //Starts executing from BOOT ROM
+        //Start executing from BOOT ROM on startup
         .INITIAL_PC_VALUE(32'hC0800000)
     )CPU0 (
         .i_Clk(w_SysClk),
