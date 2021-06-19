@@ -4,12 +4,12 @@ module BusArbiter_tb();
     reg r_Clk = 0;
 
     //Avalon Master Bus 0 signals
-    reg [29:0]r_AV_M0_Addr = 30'h00000000;
+    reg [29:0]r_AV_M0_Addr = 0;
     reg r_AV_M0_Read = 0;
     reg r_AV_M0_Write = 0;
 
     //Avalon Master Bus 1 signals
-    reg [29:0]r_AV_M1_Addr = 30'h20000000;
+    reg [29:0]r_AV_M1_Addr = 00;
     reg r_AV_M1_Read = 0;
     reg r_AV_M1_Write = 0;
 
@@ -37,9 +37,10 @@ module BusArbiter_tb();
 
     BusArbiter#(
         .NUM_INPUTS(2),
-        .SEL_NUM_BITS({5'd1, 5'd1}),
-        .SEL_VAL({30'd1, 30'd0})
+        .SEL_NUM_BITS(1),
+        .SEL_VAL(0)
     )BusArbiter0(
+        .i_Clk(r_Clk),
         .o_MuxSel(w_MuxSel),
 
         .i_AVIn_Addr({r_AV_M1_Addr, r_AV_M0_Addr}),
