@@ -12,8 +12,8 @@ module AvalonTestSlave #(
     input [29:0]i_AV_Addr,
     input [3:0]i_AV_ByteEn,
     input i_AV_Read,
-    output reg [31:0]o_AV_ReadData,
     input i_AV_Write,
+    output reg [31:0]o_AV_ReadData,
     input [31:0]i_AV_WriteData,
     output reg o_AV_WaitRequest
     );
@@ -32,20 +32,18 @@ module AvalonTestSlave #(
     reg [$clog2(READ_WAIT_REQ_CYCLES):0]r_Read_WaitReqCounter = 0;
 
     always @(*) begin
+        o_AV_WaitRequest <= 0;
+
         if(w_Sel)begin
             if(i_AV_Write)begin
                 if(r_Write_WaitReqCounter != WRITE_WAIT_REQ_CYCLES)begin
                     o_AV_WaitRequest <= 1;
-                end else begin
-                    o_AV_WaitRequest <= 0;
                 end
             end
 
             if(i_AV_Read)begin
                 if(r_Read_WaitReqCounter != READ_WAIT_REQ_CYCLES)begin
                     o_AV_WaitRequest <= 1;
-                end else begin
-                    o_AV_WaitRequest <= 0;
                 end
             end
         end

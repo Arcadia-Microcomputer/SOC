@@ -7,8 +7,8 @@ module AvalonTestSlave_tb();
     reg [29:0]r_AV_Addr = 0;
     reg [3:0]r_AV_ByteEn = 0;
     reg r_AV_Read = 0;
-    wire [31:0]w_AV_ReadData;
     reg r_AV_Write = 0;
+    wire [31:0]w_AV_ReadData;
     reg [31:0]r_AV_WriteData = 0;
     wire w_AV_WaitRequest;
 
@@ -49,8 +49,8 @@ module AvalonTestSlave_tb();
         .i_AV_Addr(r_AV_Addr),
         .i_AV_ByteEn(r_AV_ByteEn),
         .i_AV_Read(r_AV_Read),
-        .o_AV_ReadData(w_AV_ReadData),
         .i_AV_Write(r_AV_Write),
+        .o_AV_ReadData(w_AV_ReadData),
         .i_AV_WriteData(r_AV_WriteData),
         .o_AV_WaitRequest(w_AV_WaitRequest)
     );

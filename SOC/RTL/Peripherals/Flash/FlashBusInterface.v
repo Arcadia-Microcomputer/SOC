@@ -144,6 +144,7 @@ module FlashBusInterface #(
                         if(i_AV_ByteEn[0])begin
                             r_AReg_CMD <= i_AV_WriteData[3:0];
                         end
+
                         if(i_AV_ByteEn[1])begin
                             r_AReg_CMDEn <= i_AV_WriteData[8];
                             r_FLASH_Addr <= r_AReg_Addr;
@@ -204,7 +205,7 @@ module FlashBusInterface #(
         if(r_isWriteTransaction)begin
             r_FLASH_AckReq <= 1;
 
-            //Check to see if the flash controler wants new data to write
+            //Check to see if the flash controller wants new data to write
             //Have 2 cycles to deal with the request 
             if(w_FLASH_ReqNextData)begin
                 if((r_AReg_Count == 1) || w_WRFifo_Empty)begin
