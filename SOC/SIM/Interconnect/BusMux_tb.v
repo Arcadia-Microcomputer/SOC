@@ -61,8 +61,13 @@ module BusMux_tb();
 
     initial begin
         r_MuxSel <= 2'd1;
-        #160 r_MuxSel = 2'd2;
-        #160 r_MuxSel = 2'd0;
+        #160;
+        @(posedge r_Clk);
+        r_MuxSel = 2'd2;
+
+        #160;
+        @(posedge r_Clk);
+        r_MuxSel = 2'd0;
     end
 
     BusMux #(

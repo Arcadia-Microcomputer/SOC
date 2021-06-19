@@ -45,18 +45,17 @@ module BusMux#(
     genvar i;
     for (i = 0; i < NUM_INPUTS; i = i + 1) begin : linkBack
         always @(*) begin
+            o_AVIn_WaitRequest[i] <= 1;
+            o_AVIn_ReadData[32*i +: 32] <= 32'b0;
+
             // Check if master is selected, is so link wait request
             if(i_MuxSel == i+1)begin
                 o_AVIn_WaitRequest[i] <= i_AVOut_WaitRequest;
-            end else begin
-                o_AVIn_WaitRequest[i] <= 1;
             end
 
             // Check if master is selected, if so link read data (One cycle delay)
             if(r_Old_MuxSel == i+1)begin
                 o_AVIn_ReadData[32*i +: 32] <= i_AVOut_ReadData;
-            end else begin
-                o_AVIn_ReadData[32*i +: 32] <= 32'b0;
             end
         end
     end
