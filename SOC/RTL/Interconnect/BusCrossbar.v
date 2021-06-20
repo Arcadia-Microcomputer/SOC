@@ -27,46 +27,85 @@ module BusCrossBar#(
     input [(1*(NUM_SLAVES))-1:0] i_AVOut_WaitRequest
     );
 
-    wire [(32*(NUM_SLAVES)-1):0] w_AVIn_ReadData [NUM_MASTERS-1:0];
-    wire [(1*(NUM_SLAVES)-1):0] w_AVIn_WaitRequest [NUM_MASTERS-1:0];
+    // MasterDecoder's arbiter signals
+    wire [NUM_SLAVES-1:0] w_Req [NUM_MASTERS-1:0];
+    wire [NUM_SLAVES-1:0] w_Lock [NUM_MASTERS-1:0];
+    wire [NUM_SLAVES-1:0] w_Gnt [NUM_MASTERS-1:0];
+    
+    // Link back signals from slave to master
+    wire [(32*(NUM_SLAVES)-1):0] w_AV_ReadData [NUM_SLAVES-1:0];
+    wire [(1*(NUM_SLAVES))-1:0] w_AV_WaitRequest [NUM_SLAVES-1:0];
 
+    // MasterDecoder for each master
+    // Generates the slave arbiter req and lock signals
     genvar i;
-    for (i = 0; i < NUM_SLAVES; i = i + 1) begin : masterInterconnects
-        BusInterconnect #(
-            .NUM_INPUTS(NUM_MASTERS),
-            .SEL_NUM_BITS(SEL_NUM_BITS[5*i +: 5]),
-            .SEL_VAL(SEL_VAL[30*i +: 30])
-        )BusInterconnect0(
+    for (i = 0; i < NUM_MASTERS; i = i + 1) begin : masterDecoders
+        MasterDecoder #(
+            .NUM_SLAVES(NUM_SLAVES),
+            .SEL_NUM_BITS(SEL_NUM_BITS),
+            .SEL_VAL(SEL_VAL)
+        )MasterDecoderX(
+            .i_Clk(i_Clk),
+            
+            .o_Req(w_Req[i]),
+            .o_Lock(w_Lock[i]),
+            .i_Gnt(w_Gnt[i]),
+
+            .i_AVIn_Addr(i_AVIn_Addr[30*i +: 30]),
+            .i_AVIn_Read(i_AVIn_Read[i]),
+            .i_AVIn_Write(i_AVIn_Write[i]),
+            .o_AVIn_WaitRequest(o_AVIn_WaitRequest[i])
+        );
+    end
+
+    // SlaveInterconnect for each slave
+    // Does the bus muxing based on req and lock signals from the MasterDecoders
+    for (i = 0; i < NUM_SLAVES; i = i + 1) begin : slaveInterconnects
+        SlaveInterconnect #(
+            .NUM_MASTERS(NUM_MASTERS)
+        )SlaveInterconnectX(
             .i_Clk(i_Clk),
 
-            //Inputs
+            // (MUST BE SELF IMPLEMENTED)
+            .i_Req({w_Req[1][i], w_Req[0][i]}),
+            .i_Lock({w_Lock[1][i], w_Lock[0][i]}),
+            .o_Gnt({w_Gnt[1][i], w_Gnt[0][i]}),
+
+            // Master signals
             .i_AVIn_Addr(i_AVIn_Addr),
             .i_AVIn_ByteEn(i_AVIn_ByteEn),
             .i_AVIn_Read(i_AVIn_Read),
             .i_AVIn_Write(i_AVIn_Write),
-            .o_AVIn_ReadData(w_AVIn_ReadData[i]),
+            .o_AVIn_ReadData(w_AV_ReadData[i]),
             .i_AVIn_WriteData(i_AVIn_WriteData),
-            .o_AVIn_WaitRequest(w_AVIn_WaitRequest[i]),
+            .o_AVIn_WaitRequest(w_AV_WaitRequest[i]),
 
-            //Outputs
+            // Slave signals
             .o_AVOut_Addr(o_AVOut_Addr[30*i +: 30]),
             .o_AVOut_ByteEn(o_AVOut_ByteEn[4*i +: 4]),
-            .o_AVOut_Read(o_AVOut_Read[1*i +: 1]),
-            .o_AVOut_Write(o_AVOut_Write[1*i +: 1]),
+            .o_AVOut_Read(o_AVOut_Read[i]),
+            .o_AVOut_Write(o_AVOut_Write[i]),
             .i_AVOut_ReadData(i_AVOut_ReadData[32*i +: 32]),
             .o_AVOut_WriteData(o_AVOut_WriteData[32*i +: 32]),
-            .i_AVOut_WaitRequest(i_AVOut_WaitRequest[1*i +: 1])
+            .i_AVOut_WaitRequest(i_AVOut_WaitRequest[i])
         );
     end
 
-    // Slave to Master link back (MUST BE SELF IMPLEMENTED BASED ON NUMBER OF MASTERS AND SLAVES)
-    always @(*) begin
-        o_AVIn_WaitRequest[0] <= w_AVIn_WaitRequest[0][0] | w_AVIn_WaitRequest[1][0];
-        o_AVIn_WaitRequest[1] <= w_AVIn_WaitRequest[0][1] | w_AVIn_WaitRequest[1][1];
-    end
-    always @(posedge i_Clk) begin
-        o_AVIn_ReadData[32*0 +: 32] <= w_AVIn_ReadData[0][31:0] | w_AVIn_ReadData[1][31:0];
-        o_AVIn_ReadData[32*1 +: 32] <= w_AVIn_ReadData[0][63:32] | w_AVIn_ReadData[1][63:32];
+    // Slave to Master loop back
+    for (i = 0; i < NUM_MASTERS; i = i + 1) begin : loopBack
+        always @(*) begin
+            o_AVIn_ReadData[32*i +: 32] <= 0;
+            o_AVIn_WaitRequest[i] <= 1;
+
+            if (w_Gnt[i][0]) begin
+                o_AVIn_ReadData[32*i +: 32] <= w_AV_ReadData[0][32*i +: 32];
+                o_AVIn_WaitRequest[i] <= w_AV_WaitRequest[0][i];
+            end else if (w_Gnt[i][1]) begin
+                o_AVIn_ReadData[32*i +: 32] <= w_AV_ReadData[1][32*i +: 32];
+                o_AVIn_WaitRequest[i] <= w_AV_WaitRequest[1][i];
+            end
+        end
+        
     end
 
 endmodule

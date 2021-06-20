@@ -1,7 +1,7 @@
 `timescale 1ns / 1ps
 
 module BusMux#(
-    parameter NUM_INPUTS = 2
+    parameter NUM_INPUTS = 2 
     )(
     input i_Clk,
 
@@ -45,7 +45,7 @@ module BusMux#(
     genvar i;
     for (i = 0; i < NUM_INPUTS; i = i + 1) begin : linkBack
         always @(*) begin
-            o_AVIn_WaitRequest[i] <= 0;
+            o_AVIn_WaitRequest[i] <= 1;
             o_AVIn_ReadData[32*i +: 32] <= 32'b0;
 
             // Check if master is selected, is so link wait request
