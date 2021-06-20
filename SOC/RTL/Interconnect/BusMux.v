@@ -8,21 +8,21 @@ module BusMux#(
     input [$clog2(NUM_INPUTS+1)-1:0]i_MuxSel,
 
     //Avalon master inputs
-    input [(30*(NUM_INPUTS))-1:0]i_AVIn_Addr,
-    input [(4*(NUM_INPUTS))-1:0]i_AVIn_ByteEn,
-    input [(1*(NUM_INPUTS)-1):0]i_AVIn_Read,
-    input [(1*(NUM_INPUTS))-1:0]i_AVIn_Write,
-    output reg [(32*(NUM_INPUTS)-1):0]o_AVIn_ReadData,
-    input [(32*(NUM_INPUTS)-1):0]i_AVIn_WriteData,
-    output reg [(1*(NUM_INPUTS))-1:0]o_AVIn_WaitRequest,
+    input [(30*(NUM_INPUTS))-1:0] i_AVIn_Addr,
+    input [(4*(NUM_INPUTS))-1:0] i_AVIn_ByteEn,
+    input [(1*(NUM_INPUTS)-1):0] i_AVIn_Read,
+    input [(1*(NUM_INPUTS))-1:0] i_AVIn_Write,
+    output reg [(32*(NUM_INPUTS)-1):0] o_AVIn_ReadData,
+    input [(32*(NUM_INPUTS)-1):0] i_AVIn_WriteData,
+    output reg [(1*(NUM_INPUTS))-1:0] o_AVIn_WaitRequest,
 
     //Avalon slave output
-    output [29:0]o_AVOut_Addr,
-    output [3:0]o_AVOut_ByteEn,
+    output [29:0] o_AVOut_Addr,
+    output [3:0] o_AVOut_ByteEn,
     output o_AVOut_Read,
     output o_AVOut_Write,
-    input [31:0]i_AVOut_ReadData,
-    output [31:0]o_AVOut_WriteData,
+    input [31:0] i_AVOut_ReadData,
+    output [31:0] o_AVOut_WriteData,
     input i_AVOut_WaitRequest
     );
 
@@ -45,7 +45,7 @@ module BusMux#(
     genvar i;
     for (i = 0; i < NUM_INPUTS; i = i + 1) begin : linkBack
         always @(*) begin
-            o_AVIn_WaitRequest[i] <= 1;
+            o_AVIn_WaitRequest[i] <= 0;
             o_AVIn_ReadData[32*i +: 32] <= 32'b0;
 
             // Check if master is selected, is so link wait request

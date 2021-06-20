@@ -7,16 +7,18 @@ module BusArbiter#(
     )(
     input i_Clk,
     
-    output reg [$clog2(NUM_INPUTS+1)-1:0]o_MuxSel,
+    output reg [$clog2(NUM_INPUTS+1)-1:0] o_MuxSel,
+    output reg [NUM_INPUTS-1:0] o_Gnt,
 
     // Inputs from master
-    input [(30*(NUM_INPUTS))-1:0]i_AVIn_Addr,
-    input [(1*(NUM_INPUTS)-1):0]i_AVIn_Read,
-    input [(1*(NUM_INPUTS))-1:0]i_AVIn_Write
+    input [(30*(NUM_INPUTS))-1:0] i_AVIn_Addr,
+    input [(1*(NUM_INPUTS)-1):0] i_AVIn_Read,
+    input [(1*(NUM_INPUTS))-1:0] i_AVIn_Write
     );
 
     initial begin
       o_MuxSel <= 0;  
+      o_Gnt <= 0;
     end
 
     reg [NUM_INPUTS-1:0] r_Req = 0;
@@ -38,13 +40,16 @@ module BusArbiter#(
     end
 
     // Arbitration (MUST BE SELF IMPLEMENTED BASED ON NUMBER OF INPUTS)
-    always @(posedge i_Clk) begin
+    always @(*) begin
         o_MuxSel <= 0;
+        o_Gnt <= 0;
 
         if(r_Req[0])begin
             o_MuxSel <= 1;
+            o_Gnt[0] <= 1;
         end else if(r_Req[1])begin
             o_MuxSel <= 2;
+            o_Gnt[1] <= 1;
         end
     end
 

@@ -9,10 +9,11 @@ module BusArbiter_tb();
     reg r_AV_M0_Write = 0;
 
     //Avalon Master Bus 1 signals
-    reg [29:0]r_AV_M1_Addr = 00;
+    reg [29:0]r_AV_M1_Addr = 0;
     reg r_AV_M1_Read = 0;
     reg r_AV_M1_Write = 0;
 
+    wire [1:0]w_Gnt;
     wire [1:0]w_MuxSel;
 
     //Generate the clock
@@ -41,6 +42,8 @@ module BusArbiter_tb();
         .SEL_VAL(0)
     )BusArbiter0(
         .i_Clk(r_Clk),
+        
+        .o_Gnt(w_Gnt),
         .o_MuxSel(w_MuxSel),
 
         .i_AVIn_Addr({r_AV_M1_Addr, r_AV_M0_Addr}),

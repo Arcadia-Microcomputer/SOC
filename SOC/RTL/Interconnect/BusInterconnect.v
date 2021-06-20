@@ -8,21 +8,21 @@ module BusInterconnect#(
     input i_Clk,
 
     //Avalon master inputs
-    input [(30*(NUM_INPUTS))-1:0]i_AVIn_Addr,
-    input [(4*(NUM_INPUTS))-1:0]i_AVIn_ByteEn,
-    input [(1*(NUM_INPUTS)-1):0]i_AVIn_Read,
-    input [(1*(NUM_INPUTS))-1:0]i_AVIn_Write,
-    output [(32*(NUM_INPUTS)-1):0]o_AVIn_ReadData,
-    input [(32*(NUM_INPUTS)-1):0]i_AVIn_WriteData,
-    output [(1*(NUM_INPUTS))-1:0]o_AVIn_WaitRequest,
+    input [(30*(NUM_INPUTS))-1:0] i_AVIn_Addr,
+    input [(4*(NUM_INPUTS))-1:0] i_AVIn_ByteEn,
+    input [(1*(NUM_INPUTS)-1):0] i_AVIn_Read,
+    input [(1*(NUM_INPUTS))-1:0] i_AVIn_Write,
+    output [(32*(NUM_INPUTS)-1):0] o_AVIn_ReadData,
+    input [(32*(NUM_INPUTS)-1):0] i_AVIn_WriteData,
+    output [(1*(NUM_INPUTS))-1:0] o_AVIn_WaitRequest,
 
     //Avalon slave output
-    output [29:0]o_AVOut_Addr,
-    output [3:0]o_AVOut_ByteEn,
+    output [29:0] o_AVOut_Addr,
+    output [3:0] o_AVOut_ByteEn,
     output o_AVOut_Read,
     output o_AVOut_Write,
-    input [31:0]i_AVOut_ReadData,
-    output [31:0]o_AVOut_WriteData,
+    input [31:0] i_AVOut_ReadData,
+    output [31:0] o_AVOut_WriteData,
     input i_AVOut_WaitRequest
     );
 

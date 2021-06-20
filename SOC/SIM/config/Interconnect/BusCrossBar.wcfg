@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="I:/D.Git Repos/Arcadia Microcomputer/SOC/SOC/WorkinDir/BusCrossbar_tb_isim_beh.wdb" id="1" type="auto">
+         <top_modules>
+            <top_module name="BusCrossbar_tb" />
+            <top_module name="glbl" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <WVObjectSize size="4" />
+   <wvobject fp_name="/BusCrossbar_tb/r_Clk" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">r_Clk</obj_property>
+      <obj_property name="ObjectShortName">r_Clk</obj_property>
+   </wvobject>
+   <wvobject fp_name="group30" type="group">
+      <obj_property name="label">Masters</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject fp_name="group31" type="group">
+         <obj_property name="label">Master0</obj_property>
+         <obj_property name="DisplayName">label</obj_property>
+         <wvobject fp_name="/BusCrossbar_tb/r_AV_M0_Addr" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">r_AV_M0_Addr[29:0]</obj_property>
+            <obj_property name="ObjectShortName">r_AV_M0_Addr[29:0]</obj_property>
+            <obj_property name="Radix">HEXRADIX</obj_property>
+            <obj_property name="UseCustomSignalColor">true</obj_property>
+            <obj_property name="CustomSignalColor">#ffa500</obj_property>
+         </wvobject>
+         <wvobject fp_name="/BusCrossbar_tb/r_AV_M0_ByteEn" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">r_AV_M0_ByteEn[3:0]</obj_property>
+            <obj_property name="ObjectShortName">r_AV_M0_ByteEn[3:0]</obj_property>
+            <obj_property name="UseCustomSignalColor">true</obj_property>
+            <obj_property name="CustomSignalColor">#ffa500</obj_property>
+         </wvobject>
+         <wvobject fp_name="/BusCrossbar_tb/r_AV_M0_Read" type="logic" db_ref_id="1">
+            <obj_property name="ElementShortName">r_AV_M0_Read</obj_property>
+            <obj_property name="ObjectShortName">r_AV_M0_Read</obj_property>
+            <obj_property name="UseCustomSignalColor">true</obj_property>
+            <obj_property name="CustomSignalColor">#ffa500</obj_property>
+         </wvobject>
+         <wvobject fp_name="/BusCrossbar_tb/r_AV_M0_Write" type="logic" db_ref_id="1">
+            <obj_property name="ElementShortName">r_AV_M0_Write</obj_property>
+            <obj_property name="ObjectShortName">r_AV_M0_Write</obj_property>
+            <obj_property name="UseCustomSignalColor">true</obj_property>
+            <obj_property name="CustomSignalColor">#ffa500</obj_property>
+         </wvobject>
+         <wvobject fp_name="/BusCrossbar_tb/w_AV_M0_ReadData" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">w_AV_M0_ReadData[31:0]</obj_property>
+            <obj_property name="ObjectShortName">w_AV_M0_ReadData[31:0]</obj_property>
+            <obj_property name="Radix">HEXRADIX</obj_property>
+            <obj_property name="UseCustomSignalColor">true</obj_property>
+            <obj_property name="CustomSignalColor">#ffa500</obj_property>
+         </wvobject>
+         <wvobject fp_name="/BusCrossbar_tb/r_AV_M0_WriteData" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">r_AV_M0_WriteData[31:0]</obj_property>
+            <obj_property name="ObjectShortName">r_AV_M0_WriteData[31:0]</obj_property>
+            <obj_property name="Radix">HEXRADIX</obj_property>
+            <obj_property name="UseCustomSignalColor">true</obj_property>
+            <obj_property name="CustomSignalColor">#ffa500</obj_property>
+         </wvobject>
+         <wvobject fp_name="/BusCrossbar_tb/w_AV_M0_WaitRequest" type="logic" db_ref_id="1">
+            <obj_property name="ElementShortName">w_AV_M0_WaitRequest</obj_property>
+            <obj_property name="ObjectShortName">w_AV_M0_WaitRequest</obj_property>
+            <obj_property name="UseCustomSignalColor">true</obj_property>
+            <obj_property name="CustomSignalColor">#ffa500</obj_property>
+         </wvobject>
+      </wvobject>
+      <wvobject fp_name="group32" type="group">
+         <obj_property name="label">Master1</obj_property>
+         <obj_property name="DisplayName">label</obj_property>
+         <wvobject fp_name="/BusCrossbar_tb/r_AV_M1_Addr" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">r_AV_M1_Addr[29:0]</obj_property>
+            <obj_property name="ObjectShortName">r_AV_M1_Addr[29:0]</obj_property>
+            <obj_property name="Radix">HEXRADIX</obj_property>
+            <obj_property name="UseCustomSignalColor">true</obj_property>
+            <obj_property name="CustomSignalColor">#ffa500</obj_property>
+         </wvobject>
+         <wvobject fp_name="/BusCrossbar_tb/r_AV_M1_ByteEn" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">r_AV_M1_ByteEn[3:0]</obj_property>
+            <obj_property name="ObjectShortName">r_AV_M1_ByteEn[3:0]</obj_property>
+            <obj_property name="UseCustomSignalColor">true</obj_property>
+            <obj_property name="CustomSignalColor">#ffa500</obj_property>
+         </wvobject>
+         <wvobject fp_name="/BusCrossbar_tb/r_AV_M1_Read" type="logic" db_ref_id="1">
+            <obj_property name="ElementShortName">r_AV_M1_Read</obj_property>
+            <obj_property name="ObjectShortName">r_AV_M1_Read</obj_property>
+            <obj_property name="UseCustomSignalColor">true</obj_property>
+            <obj_property name="CustomSignalColor">#ffa500</obj_property>
+         </wvobject>
+         <wvobject fp_name="/BusCrossbar_tb/r_AV_M1_Write" type="logic" db_ref_id="1">
+            <obj_property name="ElementShortName">r_AV_M1_Write</obj_property>
+            <obj_property name="ObjectShortName">r_AV_M1_Write</obj_property>
+            <obj_property name="UseCustomSignalColor">true</obj_property>
+            <obj_property name="CustomSignalColor">#ffa500</obj_property>
+         </wvobject>
+         <wvobject fp_name="/BusCrossbar_tb/w_AV_M1_ReadData" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">w_AV_M1_ReadData[31:0]</obj_property>
+            <obj_property name="ObjectShortName">w_AV_M1_ReadData[31:0]</obj_property>
+            <obj_property name="Radix">HEXRADIX</obj_property>
+            <obj_property name="UseCustomSignalColor">true</obj_property>
+            <obj_property name="CustomSignalColor">#ffa500</obj_property>
+         </wvobject>
+         <wvobject fp_name="/BusCrossbar_tb/r_AV_M1_WriteData" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">r_AV_M1_WriteData[31:0]</obj_property>
+            <obj_property name="ObjectShortName">r_AV_M1_WriteData[31:0]</obj_property>
+            <obj_property name="Radix">HEXRADIX</obj_property>
+            <obj_property name="UseCustomSignalColor">true</obj_property>
+            <obj_property name="CustomSignalColor">#ffa500</obj_property>
+         </wvobject>
+         <wvobject fp_name="/BusCrossbar_tb/w_AV_M1_WaitRequest" type="logic" db_ref_id="1">
+            <obj_property name="ElementShortName">w_AV_M1_WaitRequest</obj_property>
+            <obj_property name="ObjectShortName">w_AV_M1_WaitRequest</obj_property>
+            <obj_property name="UseCustomSignalColor">true</obj_property>
+            <obj_property name="CustomSignalColor">#ffa500</obj_property>
+         </wvobject>
+      </wvobject>
+   </wvobject>
+   <wvobject fp_name="group33" type="group">
+      <obj_property name="label">Slaves</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject fp_name="group35" type="group">
+         <obj_property name="label">Slave0</obj_property>
+         <obj_property name="DisplayName">label</obj_property>
+         <wvobject fp_name="/BusCrossbar_tb/w_AV_S0_Addr" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">w_AV_S0_Addr[29:0]</obj_property>
+            <obj_property name="ObjectShortName">w_AV_S0_Addr[29:0]</obj_property>
+            <obj_property name="Radix">HEXRADIX</obj_property>
+            <obj_property name="UseCustomSignalColor">true</obj_property>
+            <obj_property name="CustomSignalColor">#800080</obj_property>
+         </wvobject>
+         <wvobject fp_name="/BusCrossbar_tb/w_AV_S0_ByteEn" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">w_AV_S0_ByteEn[3:0]</obj_property>
+            <obj_property name="ObjectShortName">w_AV_S0_ByteEn[3:0]</obj_property>
+            <obj_property name="UseCustomSignalColor">true</obj_property>
+            <obj_property name="CustomSignalColor">#800080</obj_property>
+         </wvobject>
+         <wvobject fp_name="/BusCrossbar_tb/w_AV_S0_Read" type="logic" db_ref_id="1">
+            <obj_property name="ElementShortName">w_AV_S0_Read</obj_property>
+            <obj_property name="ObjectShortName">w_AV_S0_Read</obj_property>
+            <obj_property name="UseCustomSignalColor">true</obj_property>
+            <obj_property name="CustomSignalColor">#800080</obj_property>
+         </wvobject>
+         <wvobject fp_name="/BusCrossbar_tb/w_AV_S0_Write" type="logic" db_ref_id="1">
+            <obj_property name="ElementShortName">w_AV_S0_Write</obj_property>
+            <obj_property name="ObjectShortName">w_AV_S0_Write</obj_property>
+            <obj_property name="UseCustomSignalColor">true</obj_property>
+            <obj_property name="CustomSignalColor">#800080</obj_property>
+         </wvobject>
+         <wvobject fp_name="/BusCrossbar_tb/w_AV_S0_ReadData" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">w_AV_S0_ReadData[31:0]</obj_property>
+            <obj_property name="ObjectShortName">w_AV_S0_ReadData[31:0]</obj_property>
+            <obj_property name="Radix">HEXRADIX</obj_property>
+            <obj_property name="UseCustomSignalColor">true</obj_property>
+            <obj_property name="CustomSignalColor">#800080</obj_property>
+         </wvobject>
+         <wvobject fp_name="/BusCrossbar_tb/w_AV_S0_WriteData" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">w_AV_S0_WriteData[31:0]</obj_property>
+            <obj_property name="ObjectShortName">w_AV_S0_WriteData[31:0]</obj_property>
+            <obj_property name="Radix">HEXRADIX</obj_property>
+            <obj_property name="UseCustomSignalColor">true</obj_property>
+            <obj_property name="CustomSignalColor">#800080</obj_property>
+         </wvobject>
+         <wvobject fp_name="/BusCrossbar_tb/w_AV_S0_WaitRequest" type="logic" db_ref_id="1">
+            <obj_property name="ElementShortName">w_AV_S0_WaitRequest</obj_property>
+            <obj_property name="ObjectShortName">w_AV_S0_WaitRequest</obj_property>
+            <obj_property name="UseCustomSignalColor">true</obj_property>
+            <obj_property name="CustomSignalColor">#800080</obj_property>
+         </wvobject>
+         <wvobject fp_name="/BusCrossbar_tb/AvalonTestSlave0/r_AReg_One" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">r_AReg_One[31:0]</obj_property>
+            <obj_property name="ObjectShortName">r_AReg_One[31:0]</obj_property>
+            <obj_property name="Radix">HEXRADIX</obj_property>
+            <obj_property name="UseCustomSignalColor">true</obj_property>
+            <obj_property name="CustomSignalColor">#00ffff</obj_property>
+         </wvobject>
+      </wvobject>
+      <wvobject fp_name="group34" type="group">
+         <obj_property name="label">Slave1</obj_property>
+         <obj_property name="DisplayName">label</obj_property>
+         <wvobject fp_name="/BusCrossbar_tb/w_AV_S1_Addr" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">w_AV_S1_Addr[29:0]</obj_property>
+            <obj_property name="ObjectShortName">w_AV_S1_Addr[29:0]</obj_property>
+            <obj_property name="Radix">HEXRADIX</obj_property>
+            <obj_property name="UseCustomSignalColor">true</obj_property>
+            <obj_property name="CustomSignalColor">#800080</obj_property>
+         </wvobject>
+         <wvobject fp_name="/BusCrossbar_tb/w_AV_S1_ByteEn" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">w_AV_S1_ByteEn[3:0]</obj_property>
+            <obj_property name="ObjectShortName">w_AV_S1_ByteEn[3:0]</obj_property>
+            <obj_property name="UseCustomSignalColor">true</obj_property>
+            <obj_property name="CustomSignalColor">#800080</obj_property>
+         </wvobject>
+         <wvobject fp_name="/BusCrossbar_tb/w_AV_S1_Read" type="logic" db_ref_id="1">
+            <obj_property name="ElementShortName">w_AV_S1_Read</obj_property>
+            <obj_property name="ObjectShortName">w_AV_S1_Read</obj_property>
+            <obj_property name="UseCustomSignalColor">true</obj_property>
+            <obj_property name="CustomSignalColor">#800080</obj_property>
+         </wvobject>
+         <wvobject fp_name="/BusCrossbar_tb/w_AV_S1_Write" type="logic" db_ref_id="1">
+            <obj_property name="ElementShortName">w_AV_S1_Write</obj_property>
+            <obj_property name="ObjectShortName">w_AV_S1_Write</obj_property>
+            <obj_property name="UseCustomSignalColor">true</obj_property>
+            <obj_property name="CustomSignalColor">#800080</obj_property>
+         </wvobject>
+         <wvobject fp_name="/BusCrossbar_tb/w_AV_S1_ReadData" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">w_AV_S1_ReadData[31:0]</obj_property>
+            <obj_property name="ObjectShortName">w_AV_S1_ReadData[31:0]</obj_property>
+            <obj_property name="Radix">HEXRADIX</obj_property>
+            <obj_property name="UseCustomSignalColor">true</obj_property>
+            <obj_property name="CustomSignalColor">#800080</obj_property>
+         </wvobject>
+         <wvobject fp_name="/BusCrossbar_tb/w_AV_S1_WriteData" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">w_AV_S1_WriteData[31:0]</obj_property>
+            <obj_property name="ObjectShortName">w_AV_S1_WriteData[31:0]</obj_property>
+            <obj_property name="Radix">HEXRADIX</obj_property>
+            <obj_property name="UseCustomSignalColor">true</obj_property>
+            <obj_property name="CustomSignalColor">#800080</obj_property>
+         </wvobject>
+         <wvobject fp_name="/BusCrossbar_tb/w_AV_S1_WaitRequest" type="logic" db_ref_id="1">
+            <obj_property name="ElementShortName">w_AV_S1_WaitRequest</obj_property>
+            <obj_property name="ObjectShortName">w_AV_S1_WaitRequest</obj_property>
+            <obj_property name="UseCustomSignalColor">true</obj_property>
+            <obj_property name="CustomSignalColor">#800080</obj_property>
+         </wvobject>
+         <wvobject fp_name="/BusCrossbar_tb/AvalonTestSlave1/r_AReg_One" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">r_AReg_One[31:0]</obj_property>
+            <obj_property name="ObjectShortName">r_AReg_One[31:0]</obj_property>
+            <obj_property name="Radix">HEXRADIX</obj_property>
+            <obj_property name="UseCustomSignalColor">true</obj_property>
+            <obj_property name="CustomSignalColor">#00ffff</obj_property>
+         </wvobject>
+      </wvobject>
+   </wvobject>
+   <wvobject fp_name="group38" type="group">
+      <obj_property name="label">CrossBar</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject fp_name="group39" type="group">
+         <obj_property name="label">Interconnect0</obj_property>
+         <obj_property name="DisplayName">label</obj_property>
+         <wvobject fp_name="/BusCrossbar_tb/BusCrossBar/\masterInterconnects[0].BusInterconnect0 /SEL_NUM_BITS" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">SEL_NUM_BITS[4:0]</obj_property>
+            <obj_property name="ObjectShortName">SEL_NUM_BITS[4:0]</obj_property>
+            <obj_property name="UseCustomSignalColor">true</obj_property>
+            <obj_property name="CustomSignalColor">#800080</obj_property>
+            <obj_property name="Radix">HEXRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/BusCrossbar_tb/BusCrossBar/\masterInterconnects[0].BusInterconnect0 /SEL_VAL" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">SEL_VAL[29:0]</obj_property>
+            <obj_property name="ObjectShortName">SEL_VAL[29:0]</obj_property>
+            <obj_property name="UseCustomSignalColor">true</obj_property>
+            <obj_property name="CustomSignalColor">#800080</obj_property>
+            <obj_property name="Radix">HEXRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/BusCrossbar_tb/BusCrossBar/\masterInterconnects[0].BusInterconnect0 /BusArbiter0/r_Req" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">r_Req[1:0]</obj_property>
+            <obj_property name="ObjectShortName">r_Req[1:0]</obj_property>
+            <obj_property name="UseCustomSignalColor">true</obj_property>
+            <obj_property name="CustomSignalColor">#ffff00</obj_property>
+         </wvobject>
+         <wvobject fp_name="/BusCrossbar_tb/BusCrossBar/\masterInterconnects[0].BusInterconnect0 /w_MuxSel" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">w_MuxSel[1:0]</obj_property>
+            <obj_property name="ObjectShortName">w_MuxSel[1:0]</obj_property>
+            <obj_property name="UseCustomSignalColor">true</obj_property>
+            <obj_property name="CustomSignalColor">#ffff00</obj_property>
+            <obj_property name="Radix">HEXRADIX</obj_property>
+         </wvobject>
+      </wvobject>
+      <wvobject fp_name="group40" type="group">
+         <obj_property name="label">Interconnect1</obj_property>
+         <obj_property name="DisplayName">label</obj_property>
+         <wvobject fp_name="/BusCrossbar_tb/BusCrossBar/\masterInterconnects[1].BusInterconnect0 /SEL_NUM_BITS" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">SEL_NUM_BITS[4:0]</obj_property>
+            <obj_property name="ObjectShortName">SEL_NUM_BITS[4:0]</obj_property>
+            <obj_property name="Radix">HEXRADIX</obj_property>
+            <obj_property name="UseCustomSignalColor">true</obj_property>
+            <obj_property name="CustomSignalColor">#800080</obj_property>
+         </wvobject>
+         <wvobject fp_name="/BusCrossbar_tb/BusCrossBar/\masterInterconnects[1].BusInterconnect0 /SEL_VAL" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">SEL_VAL[29:0]</obj_property>
+            <obj_property name="ObjectShortName">SEL_VAL[29:0]</obj_property>
+            <obj_property name="Radix">HEXRADIX</obj_property>
+            <obj_property name="UseCustomSignalColor">true</obj_property>
+            <obj_property name="CustomSignalColor">#800080</obj_property>
+         </wvobject>
+         <wvobject fp_name="/BusCrossbar_tb/BusCrossBar/\masterInterconnects[1].BusInterconnect0 /BusArbiter0/r_Req" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">r_Req[1:0]</obj_property>
+            <obj_property name="ObjectShortName">r_Req[1:0]</obj_property>
+            <obj_property name="UseCustomSignalColor">true</obj_property>
+            <obj_property name="CustomSignalColor">#ffff00</obj_property>
+         </wvobject>
+         <wvobject fp_name="/BusCrossbar_tb/BusCrossBar/\masterInterconnects[1].BusInterconnect0 /w_MuxSel" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">w_MuxSel[1:0]</obj_property>
+            <obj_property name="ObjectShortName">w_MuxSel[1:0]</obj_property>
+            <obj_property name="UseCustomSignalColor">true</obj_property>
+            <obj_property name="CustomSignalColor">#ffff00</obj_property>
+            <obj_property name="Radix">HEXRADIX</obj_property>
+         </wvobject>
+      </wvobject>
+   </wvobject>
+</wave_config>

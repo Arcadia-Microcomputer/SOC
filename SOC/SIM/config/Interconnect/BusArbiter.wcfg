@@ -10,7 +10,7 @@
          </top_modules>
       </db_ref>
    </db_ref_list>
-   <WVObjectSize size="4" />
+   <WVObjectSize size="5" />
    <wvobject fp_name="/BusArbiter_tb/r_Clk" type="logic" db_ref_id="1">
       <obj_property name="ElementShortName">r_Clk</obj_property>
       <obj_property name="ObjectShortName">r_Clk</obj_property>
@@ -18,6 +18,12 @@
    <wvobject fp_name="/BusArbiter_tb/w_MuxSel" type="array" db_ref_id="1">
       <obj_property name="ElementShortName">w_MuxSel[1:0]</obj_property>
       <obj_property name="ObjectShortName">w_MuxSel[1:0]</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#00ffff</obj_property>
+   </wvobject>
+   <wvobject fp_name="/BusArbiter_tb/w_Gnt" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">w_Gnt[1:0]</obj_property>
+      <obj_property name="ObjectShortName">w_Gnt[1:0]</obj_property>
       <obj_property name="UseCustomSignalColor">true</obj_property>
       <obj_property name="CustomSignalColor">#00ffff</obj_property>
    </wvobject>
