@@ -32,6 +32,8 @@ module BusCrossBar#(
     wire [NUM_SLAVES-1:0] w_Lock [NUM_MASTERS-1:0];
     wire [NUM_SLAVES-1:0] w_Gnt [NUM_MASTERS-1:0];
     
+    reg [NUM_SLAVES-1:0] r_Old_Gnt [NUM_MASTERS-1:0];
+    
     // Link back signals from slave to master
     wire [(32*(NUM_SLAVES)-1):0] w_AV_ReadData [NUM_SLAVES-1:0];
     wire [(1*(NUM_SLAVES))-1:0] w_AV_WaitRequest [NUM_SLAVES-1:0];
@@ -97,15 +99,25 @@ module BusCrossBar#(
             o_AVIn_ReadData[32*i +: 32] <= 0;
             o_AVIn_WaitRequest[i] <= 1;
 
+            // Wait request is looped back imediately
             if (w_Gnt[i][0]) begin
-                o_AVIn_ReadData[32*i +: 32] <= w_AV_ReadData[0][32*i +: 32];
                 o_AVIn_WaitRequest[i] <= w_AV_WaitRequest[0][i];
             end else if (w_Gnt[i][1]) begin
-                o_AVIn_ReadData[32*i +: 32] <= w_AV_ReadData[1][32*i +: 32];
                 o_AVIn_WaitRequest[i] <= w_AV_WaitRequest[1][i];
+            end
+
+            // Read data is one cycle delayed
+            if (r_Old_Gnt[i][0]) begin
+                o_AVIn_ReadData[32*i +: 32] <= w_AV_ReadData[0][32*i +: 32];
+            end else if (r_Old_Gnt[i][1]) begin
+                o_AVIn_ReadData[32*i +: 32] <= w_AV_ReadData[1][32*i +: 32];
             end
         end
         
     end
 
+    always @(posedge i_Clk) begin
+        r_Old_Gnt[0] <= w_Gnt[0];
+        r_Old_Gnt[1] <= w_Gnt[1];
+    end
 endmodule

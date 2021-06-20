@@ -14,7 +14,6 @@ module UartBusInterface #(
     input i_AV_Write,
     input [31:0]i_AV_WriteData,
     output reg o_AV_WaitRequest,
-    input [7:0]i_AV_BurstCount,
 
     //UART IO
     output o_UART_TX,
