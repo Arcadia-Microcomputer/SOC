@@ -1,38 +1,41 @@
 `timescale 1ns / 1ps
 
 module SOCTest(
-    input i_Clk
+    input i_Clk,
     
     // //User Flash
     // output o_UserFlash_Clk,
     // output o_UserFlash_nCS,
     // inout [3:0]io_UserFlash_IO,
 
-    // //UART0
-    // output UART0_TX,
-    // input UART0_nCTS,
-    // input UART0_RX, 
-    // output UART0_nRTS
+    //UART
+    output UART0_TX,
+    input UART0_nCTS,
+    input UART0_RX, 
+    output UART0_nRTS
     );
 
     //-------- Address Space Layout --------//
     //Top Block
     parameter ADDR_TOP_SEL_BITS = 1;
-    parameter TADDR_TOP_MEM      = 1'd0;
-    parameter TADDR_TOP_PERIPH   = 1'd1;
+    parameter TADDR_TOP_MEM     = 1'd0;
+    parameter TADDR_TOP_PERIPH  = 1'd1;
 
     //---- TOP MEM Block ----//
     parameter ADDR_MEM_SEL_BITS = (ADDR_TOP_SEL_BITS + 2);
     parameter ADDR_MEM = {TADDR_TOP_MEM};
 
-    parameter TADDR_MEM_RAM = 2'd0;
+    parameter TADDR_MEM_FLASH = 2'd0;
 
     //---- TOP PERIPH Block ----//
-    parameter ADDR_PERIPH_SEL_BITS = (ADDR_TOP_SEL_BITS + 4);
+    parameter ADDR_PERIPH_SEL_BITS = (ADDR_TOP_SEL_BITS + 3);
     parameter ADDR_PERIPH = {TADDR_TOP_PERIPH};
 
-    parameter TADDR_PERIPH_BROM = 4'd0;
-    parameter TADDR_PERIPH_UART = 4'd1;
+    parameter TADDR_PERIPH_BROM             = 3'd0;
+    parameter TADDR_PERIPH_RAM              = 3'd1;
+    parameter TADDR_PERIPH_FLASH_CNTRL      = 3'd2;
+    parameter TADDR_PERIPH_UART             = 3'd3;
+    parameter TADDR_PERIPH_DISPLAY_C_CNTRL  = 3'd4;
 
     //---- MASTER BUSES ----//
     // CPU Instuction Master Bus
@@ -55,31 +58,37 @@ module SOCTest(
 
     //---- SLAVE BUSES ----//
     // MEM bus
-    wire [31:0]w_AV_RAM_ReadData;
-    wire w_AV_RAM_WaitRequest;
+    wire [31:0]w_AV_FLASH_ReadData = 0;
+    wire w_AV_FLASH_WaitRequest = 0;
 
     wire [29:0]w_AV_MEM_Addr;
     wire [3:0]w_AV_MEM_ByteEn;
     wire w_AV_MEM_Read;
     wire w_AV_MEM_Write;
-    wire [31:0]w_AV_MEM_ReadData = w_AV_RAM_ReadData;
+    wire [31:0]w_AV_MEM_ReadData = w_AV_FLASH_ReadData;
     wire [31:0]w_AV_MEM_WriteData;
-    wire w_AV_MEM_WaitRequest = w_AV_RAM_WaitRequest;
+    wire w_AV_MEM_WaitRequest = w_AV_FLASH_WaitRequest;
 
     // Periph bus
-    wire [31:0]w_AV_UART_ReadData = 0;
-    wire w_AV_UART_WaitRequest = 0;
-
     wire [31:0]w_AV_BROM_ReadData;
     wire w_AV_BROM_WaitRequest;
+
+    wire [31:0]w_AV_RAM_ReadData;
+    wire w_AV_RAM_WaitRequest;
+
+    wire [31:0]w_AV_FLASH_CNTRL_ReadData = 0;
+    wire w_AV_FLASH_CNTRL_WaitRequest = 0;
+
+    wire [31:0]w_AV_UART_ReadData;
+    wire w_AV_UART_WaitRequest;
 
     wire [29:0]w_AV_PERIPH_Addr;
     wire [3:0]w_AV_PERIPH_ByteEn;
     wire w_AV_PERIPH_Read;
     wire w_AV_PERIPH_Write;
-    wire [31:0]w_AV_PERIPH_ReadData = w_AV_UART_ReadData | w_AV_BROM_ReadData;
+    wire [31:0]w_AV_PERIPH_ReadData = w_AV_BROM_ReadData | w_AV_RAM_ReadData | w_AV_FLASH_CNTRL_ReadData | w_AV_UART_ReadData;
     wire [31:0]w_AV_PERIPH_WriteData;
-    wire w_AV_PERIPH_WaitRequest = w_AV_UART_WaitRequest | w_AV_BROM_WaitRequest;
+    wire w_AV_PERIPH_WaitRequest = w_AV_BROM_WaitRequest | w_AV_RAM_WaitRequest | w_AV_FLASH_CNTRL_WaitRequest | w_AV_UART_WaitRequest;
 
     CPU #(
         //Start executing from BOOT ROM on startup
@@ -103,22 +112,9 @@ module SOCTest(
         .i_DBus_WaitRequest(w_AV_DBus_WaitRequest)
     );
 
-    RAM #(
-        .NUM_PERIPH_SEL_BITS(ADDR_MEM_SEL_BITS),
-        .PERIPH_SEL_VAL({ADDR_MEM, TADDR_MEM_RAM}),
-        .DEPTH(16)
-    )RAM0(
-        .i_Clk(i_Clk),
+    // MEM Slaves
 
-        .i_AV_Addr(w_AV_MEM_Addr),
-        .i_AV_ByteEn(w_AV_MEM_ByteEn),
-        .i_AV_Read(w_AV_MEM_Read),
-        .i_AV_Write(w_AV_MEM_Write),
-        .o_AV_ReadData(w_AV_RAM_ReadData),
-        .i_AV_WriteData(w_AV_MEM_WriteData),
-        .o_AV_WaitRequest(w_AV_RAM_WaitRequest)
-    );
-
+    // PERIPH Slaves
     BOOTROM #(
         .NUM_PERIPH_SEL_BITS(ADDR_PERIPH_SEL_BITS),
         .PERIPH_SEL_VAL({ADDR_PERIPH, TADDR_PERIPH_BROM}),
@@ -130,6 +126,42 @@ module SOCTest(
         .i_AV_Read(w_AV_PERIPH_Read),
         .o_AV_ReadData(w_AV_BROM_ReadData),
         .o_AV_WaitRequest(w_AV_BROM_WaitRequest)
+    );
+
+    RAM #(
+        .NUM_PERIPH_SEL_BITS(ADDR_PERIPH_SEL_BITS),
+        .PERIPH_SEL_VAL({ADDR_PERIPH, TADDR_PERIPH_RAM}),
+        .DEPTH(16)
+    )RAM0(
+        .i_Clk(i_Clk),
+
+        .i_AV_Addr(w_AV_PERIPH_Addr),
+        .i_AV_ByteEn(w_AV_PERIPH_ByteEn),
+        .i_AV_Read(w_AV_PERIPH_Read),
+        .i_AV_Write(w_AV_PERIPH_Write),
+        .o_AV_ReadData(w_AV_RAM_ReadData),
+        .i_AV_WriteData(w_AV_PERIPH_WriteData),
+        .o_AV_WaitRequest(w_AV_RAM_WaitRequest)
+    );
+
+    UartBusInterface #(
+        .NUM_PERIPH_SEL_BITS(ADDR_PERIPH_SEL_BITS),
+        .PERIPH_SEL_VAL({ADDR_PERIPH, TADDR_PERIPH_UART})
+    )UART0(
+        .i_Clk(i_Clk),
+
+        .i_AV_Addr(w_AV_PERIPH_Addr),
+        .i_AV_ByteEn(w_AV_PERIPH_ByteEn),
+        .i_AV_Read(w_AV_PERIPH_Read),
+        .i_AV_Write(w_AV_PERIPH_Write),
+        .o_AV_ReadData(w_AV_UART_ReadData),
+        .i_AV_WriteData(w_AV_PERIPH_WriteData),
+        .o_AV_WaitRequest(w_AV_UART_WaitRequest),
+
+        .o_UART_TX(UART0_TX),
+        .i_UART_nCTS(UART0_nCTS),
+        .i_UART_RX(UART0_RX),
+        .o_UART_nRTS(UART0_nRTS)
     );
 
     BusCrossBar #(

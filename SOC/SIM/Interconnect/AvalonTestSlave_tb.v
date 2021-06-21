@@ -26,13 +26,10 @@ module AvalonTestSlave_tb();
         r_AV_Write <= 1;
         r_AV_WriteData <= 32'h5A5A5A5A;
         @(posedge r_Clk);
-        @(negedge w_AV_WaitRequest);
-        @(posedge r_Clk);
         r_AV_Write <= 0;
         
-        @(posedge r_Clk);
+        // Read
         r_AV_Read <= 1;
-        @(negedge w_AV_WaitRequest);
         @(posedge r_Clk);
         r_AV_Read <= 0;
     end
@@ -40,8 +37,8 @@ module AvalonTestSlave_tb();
     AvalonTestSlave #(
         .NUM_PERIPH_SEL_BITS(5),
         .PERIPH_SEL(0),
-        .WRITE_WAIT_REQ_CYCLES(5),
-        .READ_WAIT_REQ_CYCLES(4)
+        .WRITE_WAIT_REQ_CYCLES(0),
+        .READ_WAIT_REQ_CYCLES(0)
     )AvalonTestSlave0(
         .i_Clk(r_Clk),
 

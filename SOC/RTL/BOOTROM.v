@@ -31,10 +31,14 @@ module BOOTROM #(
     integer numRamUsed;
     initial begin
 Ram[0] = 32'h800000b7;
-Ram[1] = 32'h00000113;
-Ram[2] = 32'h0000a183;
-Ram[3] = 32'h00312023;
-numRamUsed = 4;
+Ram[1] = 32'h90000137;
+Ram[2] = 32'hb00001b7;
+Ram[3] = 32'h00010237;
+Ram[4] = 32'h00220213;
+Ram[5] = 32'h0041a023;
+Ram[6] = 32'h04800213;
+Ram[7] = 32'h00418223;
+numRamUsed = 8;
         for(i = numRamUsed; i < DEPTH; i = i + 1)begin
             Ram[i] = 0;
         end

@@ -10,8 +10,8 @@ module UartBusInterface #(
     input [29:0]i_AV_Addr,
     input [3:0]i_AV_ByteEn,
     input i_AV_Read,
-    output reg [31:0]o_AV_ReadData,
     input i_AV_Write,
+    output reg [31:0]o_AV_ReadData,
     input [31:0]i_AV_WriteData,
     output reg o_AV_WaitRequest,
 

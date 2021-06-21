@@ -14,17 +14,17 @@ module RAM #(
     input i_AV_Write,
     output reg [31:0]o_AV_ReadData,
     input [31:0]i_AV_WriteData,
-    output o_AV_WaitRequest
+    output reg o_AV_WaitRequest
     );
 
     initial begin
         o_AV_ReadData <= 0;
+        o_AV_WaitRequest <= 0;
     end
-    assign o_AV_WaitRequest = 0;
 
     //DBUS Signals
     assign w_SlaveSel = (i_AV_Addr[29:30-NUM_PERIPH_SEL_BITS] == PERIPH_SEL_VAL)? 1 : 0;
-	 wire [29-NUM_PERIPH_SEL_BITS:0]w_RegAddr = i_AV_Addr[29-NUM_PERIPH_SEL_BITS:0];
+	wire [29-NUM_PERIPH_SEL_BITS:0]w_RegAddr = i_AV_Addr[29-NUM_PERIPH_SEL_BITS:0];
 
     //The Ram block
     reg [31:0]Ram[DEPTH - 1:0];
@@ -38,6 +38,7 @@ module RAM #(
 
     always @(posedge i_Clk) begin
         o_AV_ReadData <= 0;
+        o_AV_WaitRequest <= 0;
 
         if(w_SlaveSel)begin
             if(i_AV_Write)begin

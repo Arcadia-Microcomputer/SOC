@@ -3,7 +3,7 @@
    <wave_state>
    </wave_state>
    <db_ref_list>
-      <db_ref path="I:/D.Git Repos/Arcadia Microcomputer/SOC/SOC/WorkinDir/BusCrossbar_tb_isim_beh1.wdb" id="1" type="auto">
+      <db_ref path="I:/D.Git Repos/Arcadia Microcomputer/SOC/SOC/WorkinDir/BusCrossbar_tb_isim_beh.wdb" id="1" type="auto">
          <top_modules>
             <top_module name="BusCrossbar_tb" />
             <top_module name="glbl" />
@@ -236,6 +236,24 @@
    <wvobject fp_name="group38" type="group">
       <obj_property name="label">CrossBar</obj_property>
       <obj_property name="DisplayName">label</obj_property>
+      <wvobject fp_name="/BusCrossbar_tb/BusCrossBar/w_Req" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">w_Req[1:0,1:0]</obj_property>
+         <obj_property name="ObjectShortName">w_Req[1:0,1:0]</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
+         <obj_property name="CustomSignalColor">#800080</obj_property>
+      </wvobject>
+      <wvobject fp_name="/BusCrossbar_tb/BusCrossBar/w_Lock" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">w_Lock[1:0,1:0]</obj_property>
+         <obj_property name="ObjectShortName">w_Lock[1:0,1:0]</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
+         <obj_property name="CustomSignalColor">#800080</obj_property>
+      </wvobject>
+      <wvobject fp_name="/BusCrossbar_tb/BusCrossBar/w_Gnt" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">w_Gnt[1:0,1:0]</obj_property>
+         <obj_property name="ObjectShortName">w_Gnt[1:0,1:0]</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
+         <obj_property name="CustomSignalColor">#800080</obj_property>
+      </wvobject>
       <wvobject fp_name="group39" type="group">
          <obj_property name="label">Interconnect0</obj_property>
          <obj_property name="DisplayName">label</obj_property>

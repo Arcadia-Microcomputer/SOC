@@ -32,12 +32,12 @@ module SlaveArbiter#(
             o_MuxSel <= r_Old_MuxSel;
             o_Gnt <= r_Old_Gnt;
         end else begin
-            if(i_Req[0])begin
-                o_MuxSel <= 1;
-                o_Gnt[0] <= 1;
-            end else if(i_Req[1])begin
+            if(i_Req[1])begin
                 o_MuxSel <= 2;
                 o_Gnt[1] <= 1;
+            end else if(i_Req[0])begin
+                o_MuxSel <= 1;
+                o_Gnt[0] <= 1;
             end
         end
     end

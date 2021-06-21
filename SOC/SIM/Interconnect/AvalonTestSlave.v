@@ -26,10 +26,10 @@ module AvalonTestSlave #(
     assign w_RegAddr = i_AV_Addr[29-NUM_PERIPH_SEL_BITS:0];
 
     //Addresable registers
-    reg [31:0]r_AReg_One = 0;
+    reg [31:0]r_AReg_One = 32'h5;
 
-    reg [$clog2(WRITE_WAIT_REQ_CYCLES):0]r_Write_WaitReqCounter = 0;
-    reg [$clog2(READ_WAIT_REQ_CYCLES):0]r_Read_WaitReqCounter = 0;
+    reg [31:0]r_Write_WaitReqCounter = 0;
+    reg [31:0]r_Read_WaitReqCounter = 0;
 
     always @(*) begin
         o_AV_WaitRequest <= 0;
@@ -50,6 +50,10 @@ module AvalonTestSlave #(
     end
 
     always @(posedge i_Clk) begin
+        o_AV_ReadData <= 0;
+        r_Write_WaitReqCounter <= 0;
+        r_Read_WaitReqCounter <= 0;
+
         if(w_Sel)begin
             if(i_AV_Write)begin
                 case (w_RegAddr)
@@ -59,6 +63,8 @@ module AvalonTestSlave #(
                             if(i_AV_ByteEn[1]) r_AReg_One[15:8]  <= i_AV_WriteData[15:8];
                             if(i_AV_ByteEn[2]) r_AReg_One[23:16] <= i_AV_WriteData[23:16];
                             if(i_AV_ByteEn[3]) r_AReg_One[31:24] <= i_AV_WriteData[31:24];
+                        end else begin
+                            r_Write_WaitReqCounter <= r_Write_WaitReqCounter + 1;
                         end
                     end
                 endcase
@@ -67,24 +73,14 @@ module AvalonTestSlave #(
             if(i_AV_Read)begin
                 case (w_RegAddr)
                     0:begin
-                       if(r_Read_WaitReqCounter == READ_WAIT_REQ_CYCLES)begin
+                        if(r_Read_WaitReqCounter == READ_WAIT_REQ_CYCLES)begin
                             o_AV_ReadData <= r_AReg_One;
-                        end 
+                        end else begin
+                            r_Read_WaitReqCounter <= r_Read_WaitReqCounter + 1;
+                        end
                     end
                 endcase
             end 
-            
-            if(i_AV_Write)begin
-                r_Write_WaitReqCounter <= r_Write_WaitReqCounter + 1;
-            end else begin
-                r_Write_WaitReqCounter <= 0;
-            end
-
-            if(i_AV_Read)begin
-                r_Read_WaitReqCounter <= r_Read_WaitReqCounter + 1;
-            end else begin
-                r_Read_WaitReqCounter <= 0;
-            end
         end
     end
 endmodule

@@ -48,28 +48,27 @@ module BusCrossbar_tb();
     initial begin
         //Master 0
         @(posedge r_Clk);
-        r_AV_M0_Addr <= 0;
-        r_AV_M0_Write <= 1;
-        r_AV_M0_WriteData <= 32'h1;
+        r_AV_M0_Addr <= 30'h20000000;
+        r_AV_M0_Read <= 1;
         @(posedge r_Clk);
-        @(negedge w_AV_M0_WaitRequest);
         @(posedge r_Clk);
-        r_AV_M0_Write <= 0;
+        @(posedge r_Clk);
+        @(posedge r_Clk);
+        r_AV_M0_Read <= 0;
     end
 
     initial begin
         //Master 1
         @(posedge r_Clk);
-        r_AV_M1_Addr <= 30'h00000000;
-        r_AV_M1_Write <= 1;
-        r_AV_M1_WriteData <= 32'h2;
+        @(posedge r_Clk);
+        r_AV_M1_Addr <= 30'h20000000;
+        r_AV_M1_Read <= 1;
         @(posedge r_Clk);
         @(posedge r_Clk);
         @(posedge r_Clk);
-
-        @(negedge w_AV_M1_WaitRequest);
         @(posedge r_Clk);
-        r_AV_M1_Write <= 0;
+        @(posedge r_Clk);
+        r_AV_M1_Read <= 0;
     end
 
     BusCrossBar #(
@@ -102,8 +101,8 @@ module BusCrossbar_tb();
     AvalonTestSlave #(
         .NUM_PERIPH_SEL_BITS(1),
         .PERIPH_SEL(0),
-        .WRITE_WAIT_REQ_CYCLES(1),
-        .READ_WAIT_REQ_CYCLES(1)
+        .WRITE_WAIT_REQ_CYCLES(0),
+        .READ_WAIT_REQ_CYCLES(0)
     )AvalonTestSlave0(
         .i_Clk(r_Clk),
 
