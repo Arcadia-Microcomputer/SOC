@@ -5,6 +5,7 @@ module ICache(
 
     input i_RdEn,
     input i_HoldOut,
+    input i_Clear,
     output o_Stall,
 
     //CPU
@@ -32,7 +33,9 @@ module ICache(
     always @(*) begin
         o_CpuRd <= r_Old_CpuRd;
 
-        if(r_Old_RdEn & !i_HoldOut) begin
+        if(i_Clear)begin
+            o_CpuRd <= 0;
+        end else if(r_Old_RdEn & !i_HoldOut) begin
             o_CpuRd <= i_IBus_ReadData; 
         end
     end

@@ -18,14 +18,14 @@ module SOC_tb();
     end
 
     SOC SOC0(
-        .i_OscClk_100Mhz(r_Clk)
+        .i_OscClk_100Mhz(r_Clk),
 
-        // .o_UserFlash_Clk(w_Flash_Clk),
-        // .o_UserFlash_nCS(w_Flash_nCS),
-        // .io_UserFlash_IO(w_Flash_IO),
+        .o_UserFlash_Clk(w_Flash_Clk),
+        .o_UserFlash_nCS(w_Flash_nCS),
+        .io_UserFlash_IO(w_Flash_IO),
 
-        // .UART0_TX(w_UART0_TX),
-        // .UART0_RX(w_UART0_TX)
+        .o_UART0_TX(w_UART0_TX),
+        .i_UART0_RX(w_UART0_TX)
     );
 
     W25Q16JV W25Q16JV_0(

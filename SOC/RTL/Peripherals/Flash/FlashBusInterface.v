@@ -1,22 +1,27 @@
 `timescale 1ns / 1ps
 
 module FlashBusInterface #(
-    parameter MEM_ADDR_SEL_BITS = 0,
-    parameter CNTRL_ADDR_SEL_BITS = 0
+    parameter MEM_PERIPH_SEL_BITS = 5,
+    parameter MEM_PERIPH_SEL_VAL = 0,
+    parameter CNTRL_ADDR_SEL_BITS = 5,
+    parameter CNTRL_PERIPH_SEL_VAL = 1
     )(
     input i_Clk,
 
-    //Avalon RW slave
-    input i_AV_MEM_SlaveSel,
-    input [29-MEM_ADDR_SEL_BITS:0]i_AV_MEM_RegAddr,
-    input i_CNTRL_SlaveSel,
-    input [29-CNTRL_ADDR_SEL_BITS:0]i_CNTRL_RegAddr,
-    input [3:0]i_AV_ByteEn,
-    input i_AV_Read,
-    input i_AV_Write,
-    output reg [31:0]o_AV_ReadData,
-    input [31:0]i_AV_WriteData,
-    output reg o_AV_WaitRequest,
+    //Avalon R slave (MEM)
+    input [29:0]i_AV_MEM_Addr,
+    input i_AV_MEM_Read,
+    output reg [31:0]o_AV_MEM_ReadData,
+    output o_AV_MEM_WaitRequest,
+
+    //Avalon RW slave (CONTROL)
+    input [29:0]i_AV_CNTRL_Addr,
+    input [3:0]i_AV_CNTRL_ByteEn,
+    input i_AV_CNTRL_Read,
+    input i_AV_CNTRL_Write,
+    output reg [31:0]o_AV_CNTRL_ReadData,
+    input [31:0]i_AV_CNTRL_WriteData,
+    output reg o_AV_CNTRL_WaitRequest,
 
     //Flash Interface
     output o_Flash_Clk,
@@ -24,11 +29,22 @@ module FlashBusInterface #(
 	inout [3:0]io_Flash_IO
     );
 
-    //DBus Signals
     initial begin
-        o_AV_ReadData <= 0;
-        o_AV_WaitRequest <= 0;
+        o_AV_MEM_ReadData <= 0;
+
+        o_AV_CNTRL_ReadData <= 0;
+        o_AV_CNTRL_WaitRequest <= 0;
     end
+
+    //DBUS Signals
+    assign w_MEM_SlaveSel = (i_AV_MEM_Addr[29:30-MEM_PERIPH_SEL_BITS] == MEM_PERIPH_SEL_VAL)? 1 : 0;
+	wire [29-MEM_PERIPH_SEL_BITS:0]w_MEM_RegAddr = i_AV_MEM_Addr[29-MEM_PERIPH_SEL_BITS:0];
+
+    assign w_CNTRL_SlaveSel = (i_AV_CNTRL_Addr[29:30-CNTRL_ADDR_SEL_BITS] == CNTRL_PERIPH_SEL_VAL)? 1 : 0;
+	wire [29-CNTRL_ADDR_SEL_BITS:0]w_CNTRL_RegAddr = i_AV_CNTRL_Addr[29-CNTRL_ADDR_SEL_BITS:0];
+
+    reg r_AV_MEM_WaitRequest = 0;
+    assign o_AV_MEM_WaitRequest = w_MEM_SlaveSel? r_AV_MEM_WaitRequest: 0;
 
     //The various register addresses
     parameter p_REG_ADDR_CNTRL = 0;
@@ -69,32 +85,37 @@ module FlashBusInterface #(
     reg r_AReg_CMDEn = 0;
     
     //Memory Mapped Read FSM
-    localparam FSM_READ_STATE_SIZE = 1;
+    localparam FSM_READ_STATE_SIZE = 2;
     localparam FSM_READ_WAIT = 0,
-               FSM_READ_RD = 1;
+               FSM_READ_RD = 1,
+               FSM_READ_COMPLETE = 2;
     reg [FSM_READ_STATE_SIZE-1:0] FSM_READ_state = 0;
 
     //Memory Mapped Read Registers
     reg r_MM_isReadTransaction = 0;
     reg [3:0]r_MM_ReadByteCounter = 0;
-    reg [23:0]r_MM_ReadData = 0;
+    reg [31:0]r_MM_ReadData = 0;
     reg [23:0]r_MM_Addr = 0;
-    reg [23:0]r_MM_CMDEn = 0;
+    reg r_MM_CMDEn = 0;
 
     //Write transaction registers
     reg r_isWriteTransaction = 0;
 
     always @(posedge i_Clk)begin
-        o_AV_ReadData <= 0;
-        o_AV_WaitRequest <= 0;
+        o_AV_MEM_ReadData <= 0;
+        r_AV_MEM_WaitRequest <= 1;
+
+        o_AV_CNTRL_ReadData <= 0;
+        o_AV_CNTRL_WaitRequest <= 0;
+
+        r_MM_CMDEn <= 0;
+
         r_WRFifo_WrEn <= 0;
         r_WRFifo_RdEn <= 0;
         r_AReg_CMDEn <= 0;
-        r_MM_CMDEn <= 0;
 
+        // (MEM) FSM to read data from flash
         if(r_MM_isReadTransaction)begin
-            o_AV_WaitRequest <= 1;
-
             case (FSM_READ_state)
                 FSM_READ_WAIT:begin
                     if(w_FLASH_NewDataAvailableNextClk)begin
@@ -107,96 +128,100 @@ module FlashBusInterface #(
                         r_FLASH_AckReq <= 0;
                     end
 
-                    if(r_MM_ReadByteCounter == 0)begin
-                        r_MM_isReadTransaction <= 0;
-                        o_AV_ReadData[23:0] <= r_MM_ReadData;
-                        o_AV_WaitRequest <= 0;
-                    end
-
                     case (r_MM_ReadByteCounter[1:0])
                         3:r_MM_ReadData[7:0] <= w_FLASH_ReadData;
                         2:r_MM_ReadData[15:8] <= w_FLASH_ReadData;
                         1:r_MM_ReadData[23:16] <= w_FLASH_ReadData;
-                        0:o_AV_ReadData[31:24] <= w_FLASH_ReadData;
+                        0:r_MM_ReadData[31:24] <= w_FLASH_ReadData;
                     endcase
 
+                    if(r_MM_ReadByteCounter == 0)begin
+                        r_AV_MEM_WaitRequest <= 0;
+                        FSM_READ_state <= FSM_READ_COMPLETE;
+                    end else begin
+                        FSM_READ_state <= FSM_READ_WAIT;
+                    end
+                end
+                FSM_READ_COMPLETE:begin
+                    o_AV_MEM_ReadData[31:0] <= r_MM_ReadData;
+                    
+                    r_MM_isReadTransaction <= 0;
                     FSM_READ_state <= FSM_READ_WAIT;
                 end
             endcase
-        end else if (i_AV_MEM_SlaveSel) begin
+        end else begin
             //Read transaction
-            if(i_AV_Read)begin
+            if(i_AV_MEM_Read)begin
                 r_MM_isReadTransaction <= 1;
                 r_MM_ReadByteCounter <= 4;
                 r_MM_ReadData <= 0;
-                r_MM_Addr <= {i_AV_MEM_RegAddr[21:0], 2'b0};
+                r_MM_Addr <= {w_MEM_RegAddr[21:0], 2'b0};
                 r_MM_CMDEn <= 1;
                 r_FLASH_AckReq <= 1;
-                o_AV_WaitRequest <= 1;
             end
         end
 
-        if (i_CNTRL_SlaveSel) begin
+        if (w_CNTRL_SlaveSel) begin
             //Write transaction
-            if(i_AV_Write)begin
-                case (i_CNTRL_RegAddr)
+            if(i_AV_CNTRL_Write)begin
+                case (w_CNTRL_RegAddr)
                     p_REG_ADDR_CNTRL:begin
-                        if(i_AV_ByteEn[0])begin
-                            r_AReg_CMD <= i_AV_WriteData[3:0];
+                        if(i_AV_CNTRL_ByteEn[0])begin
+                            r_AReg_CMD <= i_AV_CNTRL_WriteData[3:0];
                         end
 
-                        if(i_AV_ByteEn[1])begin
-                            r_AReg_CMDEn <= i_AV_WriteData[8];
+                        if(i_AV_CNTRL_ByteEn[1])begin
+                            r_AReg_CMDEn <= i_AV_CNTRL_WriteData[8];
                             r_FLASH_Addr <= r_AReg_Addr;
 
                             //Check to see if a write command needs to be issued
-                            if(i_AV_ByteEn[0])begin
+                            if(i_AV_CNTRL_ByteEn[0])begin
                                 //Command is getting updated as well so use latest data
-                                if(i_AV_WriteData[8] && (i_AV_WriteData[3:0] == COMMAND_PROGRAM_PAGE))begin
+                                if(i_AV_CNTRL_WriteData[8] && (i_AV_CNTRL_WriteData[3:0] == COMMAND_PROGRAM_PAGE))begin
                                     r_isWriteTransaction <= 1;
                                     r_WRFifo_RdEn <= 1; 
                                 end
                             end else begin
                                 //Command isn't getting updated so use stored command
-                                if(i_AV_WriteData[8] && (r_AReg_CMD == COMMAND_PROGRAM_PAGE))begin
+                                if(i_AV_CNTRL_WriteData[8] && (r_AReg_CMD == COMMAND_PROGRAM_PAGE))begin
                                     r_isWriteTransaction <= 1;
                                     r_WRFifo_RdEn <= 1; 
                                 end
                             end
                         end
 
-                        if(i_AV_ByteEn[2])begin
-                            r_AReg_Count <= i_AV_WriteData[22:16];
+                        if(i_AV_CNTRL_ByteEn[2])begin
+                            r_AReg_Count <= i_AV_CNTRL_WriteData[22:16];
                         end
                     end
                     p_REG_ADDR_ADDR:begin
-                        if(i_AV_ByteEn[0]) r_AReg_Addr[7:0]   <= i_AV_WriteData[7:0];
-                        if(i_AV_ByteEn[1]) r_AReg_Addr[15:8]  <= i_AV_WriteData[15:8];
-                        if(i_AV_ByteEn[2]) r_AReg_Addr[23:16] <= i_AV_WriteData[23:16];
+                        if(i_AV_CNTRL_ByteEn[0]) r_AReg_Addr[7:0]   <= i_AV_CNTRL_WriteData[7:0];
+                        if(i_AV_CNTRL_ByteEn[1]) r_AReg_Addr[15:8]  <= i_AV_CNTRL_WriteData[15:8];
+                        if(i_AV_CNTRL_ByteEn[2]) r_AReg_Addr[23:16] <= i_AV_CNTRL_WriteData[23:16];
                     end
                     p_REG_ADDR_DATA:begin
-                        if(i_AV_ByteEn[0])begin
+                        if(i_AV_CNTRL_ByteEn[0])begin
                             r_WRFifo_WrEn <= 1;
-                            r_WRFifo_WrData <= i_AV_WriteData[7:0];
+                            r_WRFifo_WrData <= i_AV_CNTRL_WriteData[7:0];
                         end
                     end
                 endcase 
             end
             
             //Read transaction
-            if(i_AV_Read)begin
-                case (i_CNTRL_RegAddr)
+            if(i_AV_CNTRL_Read)begin
+                case (w_CNTRL_RegAddr)
                     p_REG_ADDR_CNTRL:begin
-                        o_AV_ReadData <= {9'b0, r_AReg_Count, 4'b0, w_WRFifo_Empty, w_WRFifo_Full, w_FLASH_CMDBusy, r_AReg_CMDEn, 4'b0, r_AReg_CMD};
+                        o_AV_CNTRL_ReadData <= {9'b0, r_AReg_Count, 4'b0, w_WRFifo_Empty, w_WRFifo_Full, w_FLASH_CMDBusy, r_AReg_CMDEn, 4'b0, r_AReg_CMD};
                     end
                     p_REG_ADDR_ADDR:begin
-                        o_AV_ReadData <= {8'b0, r_AReg_Addr};
+                        o_AV_CNTRL_ReadData <= {8'b0, r_AReg_Addr};
                     end
                     p_REG_ADDR_DATA:begin
-                        o_AV_ReadData <= {24'b0, w_FLASH_ReadData};
+                        o_AV_CNTRL_ReadData <= {24'b0, w_FLASH_ReadData};
                     end
                     default:begin
-                        o_AV_ReadData <= 0;
+                        o_AV_CNTRL_ReadData <= 0;
                     end
                 endcase 
             end

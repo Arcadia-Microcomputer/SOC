@@ -336,83 +336,81 @@
             <obj_property name="UseCustomSignalColor">true</obj_property>
             <obj_property name="CustomSignalColor">#ffff00</obj_property>
          </wvobject>
-         <wvobject fp_name="/SOCTest_tb/SOCTest0/CPU0/HazardUnit0/o_PcEn" type="logic" db_ref_id="1">
-            <obj_property name="ElementShortName">o_PcEn</obj_property>
-            <obj_property name="ObjectShortName">o_PcEn</obj_property>
-            <obj_property name="UseCustomSignalColor">true</obj_property>
-            <obj_property name="CustomSignalColor">#00ffff</obj_property>
-         </wvobject>
-         <wvobject fp_name="/SOCTest_tb/SOCTest0/CPU0/HazardUnit0/o_IBusRdEn" type="logic" db_ref_id="1">
-            <obj_property name="ElementShortName">o_IBusRdEn</obj_property>
-            <obj_property name="ObjectShortName">o_IBusRdEn</obj_property>
-            <obj_property name="UseCustomSignalColor">true</obj_property>
-            <obj_property name="CustomSignalColor">#00ffff</obj_property>
-         </wvobject>
-         <wvobject fp_name="/SOCTest_tb/SOCTest0/CPU0/HazardUnit0/o_ICacheHoldOut" type="logic" db_ref_id="1">
-            <obj_property name="ElementShortName">o_ICacheHoldOut</obj_property>
-            <obj_property name="ObjectShortName">o_ICacheHoldOut</obj_property>
-            <obj_property name="UseCustomSignalColor">true</obj_property>
-            <obj_property name="CustomSignalColor">#00ffff</obj_property>
-         </wvobject>
-         <wvobject fp_name="/SOCTest_tb/SOCTest0/CPU0/HazardUnit0/o_RegEn_IF" type="logic" db_ref_id="1">
-            <obj_property name="ElementShortName">o_RegEn_IF</obj_property>
-            <obj_property name="ObjectShortName">o_RegEn_IF</obj_property>
-            <obj_property name="UseCustomSignalColor">true</obj_property>
-            <obj_property name="CustomSignalColor">#00ffff</obj_property>
-         </wvobject>
-         <wvobject fp_name="/SOCTest_tb/SOCTest0/CPU0/HazardUnit0/o_RegEn_ID" type="logic" db_ref_id="1">
-            <obj_property name="ElementShortName">o_RegEn_ID</obj_property>
-            <obj_property name="ObjectShortName">o_RegEn_ID</obj_property>
-            <obj_property name="UseCustomSignalColor">true</obj_property>
-            <obj_property name="CustomSignalColor">#00ffff</obj_property>
-         </wvobject>
-         <wvobject fp_name="/SOCTest_tb/SOCTest0/CPU0/HazardUnit0/o_RegEn_EX1" type="logic" db_ref_id="1">
-            <obj_property name="ElementShortName">o_RegEn_EX1</obj_property>
-            <obj_property name="ObjectShortName">o_RegEn_EX1</obj_property>
-            <obj_property name="UseCustomSignalColor">true</obj_property>
-            <obj_property name="CustomSignalColor">#00ffff</obj_property>
-         </wvobject>
-         <wvobject fp_name="/SOCTest_tb/SOCTest0/CPU0/HazardUnit0/o_RegEn_EX2" type="logic" db_ref_id="1">
-            <obj_property name="ElementShortName">o_RegEn_EX2</obj_property>
-            <obj_property name="ObjectShortName">o_RegEn_EX2</obj_property>
-            <obj_property name="UseCustomSignalColor">true</obj_property>
-            <obj_property name="CustomSignalColor">#00ffff</obj_property>
-         </wvobject>
-         <wvobject fp_name="/SOCTest_tb/SOCTest0/CPU0/HazardUnit0/o_RegEn_WB" type="logic" db_ref_id="1">
-            <obj_property name="ElementShortName">o_RegEn_WB</obj_property>
-            <obj_property name="ObjectShortName">o_RegEn_WB</obj_property>
-            <obj_property name="UseCustomSignalColor">true</obj_property>
-            <obj_property name="CustomSignalColor">#00ffff</obj_property>
-         </wvobject>
-         <wvobject fp_name="/SOCTest_tb/SOCTest0/CPU0/HazardUnit0/o_RegClr_IF" type="logic" db_ref_id="1">
-            <obj_property name="ElementShortName">o_RegClr_IF</obj_property>
-            <obj_property name="ObjectShortName">o_RegClr_IF</obj_property>
-            <obj_property name="UseCustomSignalColor">true</obj_property>
-            <obj_property name="CustomSignalColor">#00ffff</obj_property>
-         </wvobject>
-         <wvobject fp_name="/SOCTest_tb/SOCTest0/CPU0/HazardUnit0/o_RegClr_ID" type="logic" db_ref_id="1">
-            <obj_property name="ElementShortName">o_RegClr_ID</obj_property>
-            <obj_property name="ObjectShortName">o_RegClr_ID</obj_property>
-            <obj_property name="UseCustomSignalColor">true</obj_property>
-            <obj_property name="CustomSignalColor">#00ffff</obj_property>
-         </wvobject>
-         <wvobject fp_name="/SOCTest_tb/SOCTest0/CPU0/HazardUnit0/o_RegClr_EX1" type="logic" db_ref_id="1">
-            <obj_property name="ElementShortName">o_RegClr_EX1</obj_property>
-            <obj_property name="ObjectShortName">o_RegClr_EX1</obj_property>
-            <obj_property name="UseCustomSignalColor">true</obj_property>
-            <obj_property name="CustomSignalColor">#00ffff</obj_property>
-         </wvobject>
-         <wvobject fp_name="/SOCTest_tb/SOCTest0/CPU0/HazardUnit0/o_RegClr_EX2" type="logic" db_ref_id="1">
-            <obj_property name="ElementShortName">o_RegClr_EX2</obj_property>
-            <obj_property name="ObjectShortName">o_RegClr_EX2</obj_property>
-            <obj_property name="UseCustomSignalColor">true</obj_property>
-            <obj_property name="CustomSignalColor">#00ffff</obj_property>
-         </wvobject>
-         <wvobject fp_name="/SOCTest_tb/SOCTest0/CPU0/HazardUnit0/o_RegClr_WB" type="logic" db_ref_id="1">
-            <obj_property name="ElementShortName">o_RegClr_WB</obj_property>
-            <obj_property name="ObjectShortName">o_RegClr_WB</obj_property>
-            <obj_property name="UseCustomSignalColor">true</obj_property>
-            <obj_property name="CustomSignalColor">#00ffff</obj_property>
+         <wvobject fp_name="group334" type="group">
+            <obj_property name="label">Control Signals</obj_property>
+            <obj_property name="DisplayName">label</obj_property>
+            <wvobject fp_name="/SOCTest_tb/SOCTest0/CPU0/HazardUnit0/o_PcEn" type="logic" db_ref_id="1">
+               <obj_property name="ElementShortName">o_PcEn</obj_property>
+               <obj_property name="ObjectShortName">o_PcEn</obj_property>
+               <obj_property name="UseCustomSignalColor">true</obj_property>
+               <obj_property name="CustomSignalColor">#00ffff</obj_property>
+            </wvobject>
+            <wvobject fp_name="/SOCTest_tb/SOCTest0/CPU0/HazardUnit0/o_ICacheHoldOut" type="logic" db_ref_id="1">
+               <obj_property name="ElementShortName">o_ICacheHoldOut</obj_property>
+               <obj_property name="ObjectShortName">o_ICacheHoldOut</obj_property>
+               <obj_property name="UseCustomSignalColor">true</obj_property>
+               <obj_property name="CustomSignalColor">#00ffff</obj_property>
+            </wvobject>
+            <wvobject fp_name="/SOCTest_tb/SOCTest0/CPU0/HazardUnit0/o_RegEn_IF" type="logic" db_ref_id="1">
+               <obj_property name="ElementShortName">o_RegEn_IF</obj_property>
+               <obj_property name="ObjectShortName">o_RegEn_IF</obj_property>
+               <obj_property name="UseCustomSignalColor">true</obj_property>
+               <obj_property name="CustomSignalColor">#00ffff</obj_property>
+            </wvobject>
+            <wvobject fp_name="/SOCTest_tb/SOCTest0/CPU0/HazardUnit0/o_RegEn_ID" type="logic" db_ref_id="1">
+               <obj_property name="ElementShortName">o_RegEn_ID</obj_property>
+               <obj_property name="ObjectShortName">o_RegEn_ID</obj_property>
+               <obj_property name="UseCustomSignalColor">true</obj_property>
+               <obj_property name="CustomSignalColor">#00ffff</obj_property>
+            </wvobject>
+            <wvobject fp_name="/SOCTest_tb/SOCTest0/CPU0/HazardUnit0/o_RegEn_EX1" type="logic" db_ref_id="1">
+               <obj_property name="ElementShortName">o_RegEn_EX1</obj_property>
+               <obj_property name="ObjectShortName">o_RegEn_EX1</obj_property>
+               <obj_property name="UseCustomSignalColor">true</obj_property>
+               <obj_property name="CustomSignalColor">#00ffff</obj_property>
+            </wvobject>
+            <wvobject fp_name="/SOCTest_tb/SOCTest0/CPU0/HazardUnit0/o_RegEn_EX2" type="logic" db_ref_id="1">
+               <obj_property name="ElementShortName">o_RegEn_EX2</obj_property>
+               <obj_property name="ObjectShortName">o_RegEn_EX2</obj_property>
+               <obj_property name="UseCustomSignalColor">true</obj_property>
+               <obj_property name="CustomSignalColor">#00ffff</obj_property>
+            </wvobject>
+            <wvobject fp_name="/SOCTest_tb/SOCTest0/CPU0/HazardUnit0/o_RegEn_WB" type="logic" db_ref_id="1">
+               <obj_property name="ElementShortName">o_RegEn_WB</obj_property>
+               <obj_property name="ObjectShortName">o_RegEn_WB</obj_property>
+               <obj_property name="UseCustomSignalColor">true</obj_property>
+               <obj_property name="CustomSignalColor">#00ffff</obj_property>
+            </wvobject>
+            <wvobject fp_name="/SOCTest_tb/SOCTest0/CPU0/HazardUnit0/o_RegClr_IF" type="logic" db_ref_id="1">
+               <obj_property name="ElementShortName">o_RegClr_IF</obj_property>
+               <obj_property name="ObjectShortName">o_RegClr_IF</obj_property>
+               <obj_property name="UseCustomSignalColor">true</obj_property>
+               <obj_property name="CustomSignalColor">#00ffff</obj_property>
+            </wvobject>
+            <wvobject fp_name="/SOCTest_tb/SOCTest0/CPU0/HazardUnit0/o_RegClr_ID" type="logic" db_ref_id="1">
+               <obj_property name="ElementShortName">o_RegClr_ID</obj_property>
+               <obj_property name="ObjectShortName">o_RegClr_ID</obj_property>
+               <obj_property name="UseCustomSignalColor">true</obj_property>
+               <obj_property name="CustomSignalColor">#00ffff</obj_property>
+            </wvobject>
+            <wvobject fp_name="/SOCTest_tb/SOCTest0/CPU0/HazardUnit0/o_RegClr_EX1" type="logic" db_ref_id="1">
+               <obj_property name="ElementShortName">o_RegClr_EX1</obj_property>
+               <obj_property name="ObjectShortName">o_RegClr_EX1</obj_property>
+               <obj_property name="UseCustomSignalColor">true</obj_property>
+               <obj_property name="CustomSignalColor">#00ffff</obj_property>
+            </wvobject>
+            <wvobject fp_name="/SOCTest_tb/SOCTest0/CPU0/HazardUnit0/o_RegClr_EX2" type="logic" db_ref_id="1">
+               <obj_property name="ElementShortName">o_RegClr_EX2</obj_property>
+               <obj_property name="ObjectShortName">o_RegClr_EX2</obj_property>
+               <obj_property name="UseCustomSignalColor">true</obj_property>
+               <obj_property name="CustomSignalColor">#00ffff</obj_property>
+            </wvobject>
+            <wvobject fp_name="/SOCTest_tb/SOCTest0/CPU0/HazardUnit0/o_RegClr_WB" type="logic" db_ref_id="1">
+               <obj_property name="ElementShortName">o_RegClr_WB</obj_property>
+               <obj_property name="ObjectShortName">o_RegClr_WB</obj_property>
+               <obj_property name="UseCustomSignalColor">true</obj_property>
+               <obj_property name="CustomSignalColor">#00ffff</obj_property>
+            </wvobject>
          </wvobject>
       </wvobject>
    </wvobject>
@@ -637,236 +635,12 @@
             </wvobject>
             <wvobject fp_name="/SOCTest_tb/SOCTest0/BOOT_ROM0/Ram" type="array" db_ref_id="1">
                <obj_property name="DisplayName">label</obj_property>
-               <obj_property name="ElementShortName">Ram[31:0,31:0]</obj_property>
-               <obj_property name="ObjectShortName">Ram[31:0,31:0]</obj_property>
+               <obj_property name="ElementShortName">Ram[127:0,31:0]</obj_property>
+               <obj_property name="ObjectShortName">Ram[127:0,31:0]</obj_property>
                <obj_property name="UseCustomSignalColor">true</obj_property>
                <obj_property name="CustomSignalColor">#00ffff</obj_property>
                <obj_property name="Radix">HEXRADIX</obj_property>
                <obj_property name="label">Rom[31:0,31:0]</obj_property>
-               <wvobject fp_name="/SOCTest_tb/SOCTest0/BOOT_ROM0/Ram[31]" type="array" db_ref_id="1">
-                  <obj_property name="ElementShortName">[31,31:0]</obj_property>
-                  <obj_property name="ObjectShortName">Ram[31,31:0]</obj_property>
-                  <obj_property name="Radix">HEXRADIX</obj_property>
-                  <obj_property name="UseCustomSignalColor">true</obj_property>
-                  <obj_property name="CustomSignalColor">#00ffff</obj_property>
-               </wvobject>
-               <wvobject fp_name="/SOCTest_tb/SOCTest0/BOOT_ROM0/Ram[30]" type="array" db_ref_id="1">
-                  <obj_property name="ElementShortName">[30,31:0]</obj_property>
-                  <obj_property name="ObjectShortName">Ram[30,31:0]</obj_property>
-                  <obj_property name="Radix">HEXRADIX</obj_property>
-                  <obj_property name="UseCustomSignalColor">true</obj_property>
-                  <obj_property name="CustomSignalColor">#00ffff</obj_property>
-               </wvobject>
-               <wvobject fp_name="/SOCTest_tb/SOCTest0/BOOT_ROM0/Ram[29]" type="array" db_ref_id="1">
-                  <obj_property name="ElementShortName">[29,31:0]</obj_property>
-                  <obj_property name="ObjectShortName">Ram[29,31:0]</obj_property>
-                  <obj_property name="Radix">HEXRADIX</obj_property>
-                  <obj_property name="UseCustomSignalColor">true</obj_property>
-                  <obj_property name="CustomSignalColor">#00ffff</obj_property>
-               </wvobject>
-               <wvobject fp_name="/SOCTest_tb/SOCTest0/BOOT_ROM0/Ram[28]" type="array" db_ref_id="1">
-                  <obj_property name="ElementShortName">[28,31:0]</obj_property>
-                  <obj_property name="ObjectShortName">Ram[28,31:0]</obj_property>
-                  <obj_property name="Radix">HEXRADIX</obj_property>
-                  <obj_property name="UseCustomSignalColor">true</obj_property>
-                  <obj_property name="CustomSignalColor">#00ffff</obj_property>
-               </wvobject>
-               <wvobject fp_name="/SOCTest_tb/SOCTest0/BOOT_ROM0/Ram[27]" type="array" db_ref_id="1">
-                  <obj_property name="ElementShortName">[27,31:0]</obj_property>
-                  <obj_property name="ObjectShortName">Ram[27,31:0]</obj_property>
-                  <obj_property name="Radix">HEXRADIX</obj_property>
-                  <obj_property name="UseCustomSignalColor">true</obj_property>
-                  <obj_property name="CustomSignalColor">#00ffff</obj_property>
-               </wvobject>
-               <wvobject fp_name="/SOCTest_tb/SOCTest0/BOOT_ROM0/Ram[26]" type="array" db_ref_id="1">
-                  <obj_property name="ElementShortName">[26,31:0]</obj_property>
-                  <obj_property name="ObjectShortName">Ram[26,31:0]</obj_property>
-                  <obj_property name="Radix">HEXRADIX</obj_property>
-                  <obj_property name="UseCustomSignalColor">true</obj_property>
-                  <obj_property name="CustomSignalColor">#00ffff</obj_property>
-               </wvobject>
-               <wvobject fp_name="/SOCTest_tb/SOCTest0/BOOT_ROM0/Ram[25]" type="array" db_ref_id="1">
-                  <obj_property name="ElementShortName">[25,31:0]</obj_property>
-                  <obj_property name="ObjectShortName">Ram[25,31:0]</obj_property>
-                  <obj_property name="Radix">HEXRADIX</obj_property>
-                  <obj_property name="UseCustomSignalColor">true</obj_property>
-                  <obj_property name="CustomSignalColor">#00ffff</obj_property>
-               </wvobject>
-               <wvobject fp_name="/SOCTest_tb/SOCTest0/BOOT_ROM0/Ram[24]" type="array" db_ref_id="1">
-                  <obj_property name="ElementShortName">[24,31:0]</obj_property>
-                  <obj_property name="ObjectShortName">Ram[24,31:0]</obj_property>
-                  <obj_property name="Radix">HEXRADIX</obj_property>
-                  <obj_property name="UseCustomSignalColor">true</obj_property>
-                  <obj_property name="CustomSignalColor">#00ffff</obj_property>
-               </wvobject>
-               <wvobject fp_name="/SOCTest_tb/SOCTest0/BOOT_ROM0/Ram[23]" type="array" db_ref_id="1">
-                  <obj_property name="ElementShortName">[23,31:0]</obj_property>
-                  <obj_property name="ObjectShortName">Ram[23,31:0]</obj_property>
-                  <obj_property name="Radix">HEXRADIX</obj_property>
-                  <obj_property name="UseCustomSignalColor">true</obj_property>
-                  <obj_property name="CustomSignalColor">#00ffff</obj_property>
-               </wvobject>
-               <wvobject fp_name="/SOCTest_tb/SOCTest0/BOOT_ROM0/Ram[22]" type="array" db_ref_id="1">
-                  <obj_property name="ElementShortName">[22,31:0]</obj_property>
-                  <obj_property name="ObjectShortName">Ram[22,31:0]</obj_property>
-                  <obj_property name="Radix">HEXRADIX</obj_property>
-                  <obj_property name="UseCustomSignalColor">true</obj_property>
-                  <obj_property name="CustomSignalColor">#00ffff</obj_property>
-               </wvobject>
-               <wvobject fp_name="/SOCTest_tb/SOCTest0/BOOT_ROM0/Ram[21]" type="array" db_ref_id="1">
-                  <obj_property name="ElementShortName">[21,31:0]</obj_property>
-                  <obj_property name="ObjectShortName">Ram[21,31:0]</obj_property>
-                  <obj_property name="Radix">HEXRADIX</obj_property>
-                  <obj_property name="UseCustomSignalColor">true</obj_property>
-                  <obj_property name="CustomSignalColor">#00ffff</obj_property>
-               </wvobject>
-               <wvobject fp_name="/SOCTest_tb/SOCTest0/BOOT_ROM0/Ram[20]" type="array" db_ref_id="1">
-                  <obj_property name="ElementShortName">[20,31:0]</obj_property>
-                  <obj_property name="ObjectShortName">Ram[20,31:0]</obj_property>
-                  <obj_property name="Radix">HEXRADIX</obj_property>
-                  <obj_property name="UseCustomSignalColor">true</obj_property>
-                  <obj_property name="CustomSignalColor">#00ffff</obj_property>
-               </wvobject>
-               <wvobject fp_name="/SOCTest_tb/SOCTest0/BOOT_ROM0/Ram[19]" type="array" db_ref_id="1">
-                  <obj_property name="ElementShortName">[19,31:0]</obj_property>
-                  <obj_property name="ObjectShortName">Ram[19,31:0]</obj_property>
-                  <obj_property name="Radix">HEXRADIX</obj_property>
-                  <obj_property name="UseCustomSignalColor">true</obj_property>
-                  <obj_property name="CustomSignalColor">#00ffff</obj_property>
-               </wvobject>
-               <wvobject fp_name="/SOCTest_tb/SOCTest0/BOOT_ROM0/Ram[18]" type="array" db_ref_id="1">
-                  <obj_property name="ElementShortName">[18,31:0]</obj_property>
-                  <obj_property name="ObjectShortName">Ram[18,31:0]</obj_property>
-                  <obj_property name="Radix">HEXRADIX</obj_property>
-                  <obj_property name="UseCustomSignalColor">true</obj_property>
-                  <obj_property name="CustomSignalColor">#00ffff</obj_property>
-               </wvobject>
-               <wvobject fp_name="/SOCTest_tb/SOCTest0/BOOT_ROM0/Ram[17]" type="array" db_ref_id="1">
-                  <obj_property name="ElementShortName">[17,31:0]</obj_property>
-                  <obj_property name="ObjectShortName">Ram[17,31:0]</obj_property>
-                  <obj_property name="Radix">HEXRADIX</obj_property>
-                  <obj_property name="UseCustomSignalColor">true</obj_property>
-                  <obj_property name="CustomSignalColor">#00ffff</obj_property>
-               </wvobject>
-               <wvobject fp_name="/SOCTest_tb/SOCTest0/BOOT_ROM0/Ram[16]" type="array" db_ref_id="1">
-                  <obj_property name="ElementShortName">[16,31:0]</obj_property>
-                  <obj_property name="ObjectShortName">Ram[16,31:0]</obj_property>
-                  <obj_property name="Radix">HEXRADIX</obj_property>
-                  <obj_property name="UseCustomSignalColor">true</obj_property>
-                  <obj_property name="CustomSignalColor">#00ffff</obj_property>
-               </wvobject>
-               <wvobject fp_name="/SOCTest_tb/SOCTest0/BOOT_ROM0/Ram[15]" type="array" db_ref_id="1">
-                  <obj_property name="ElementShortName">[15,31:0]</obj_property>
-                  <obj_property name="ObjectShortName">Ram[15,31:0]</obj_property>
-                  <obj_property name="Radix">HEXRADIX</obj_property>
-                  <obj_property name="UseCustomSignalColor">true</obj_property>
-                  <obj_property name="CustomSignalColor">#00ffff</obj_property>
-               </wvobject>
-               <wvobject fp_name="/SOCTest_tb/SOCTest0/BOOT_ROM0/Ram[14]" type="array" db_ref_id="1">
-                  <obj_property name="ElementShortName">[14,31:0]</obj_property>
-                  <obj_property name="ObjectShortName">Ram[14,31:0]</obj_property>
-                  <obj_property name="Radix">HEXRADIX</obj_property>
-                  <obj_property name="UseCustomSignalColor">true</obj_property>
-                  <obj_property name="CustomSignalColor">#00ffff</obj_property>
-               </wvobject>
-               <wvobject fp_name="/SOCTest_tb/SOCTest0/BOOT_ROM0/Ram[13]" type="array" db_ref_id="1">
-                  <obj_property name="ElementShortName">[13,31:0]</obj_property>
-                  <obj_property name="ObjectShortName">Ram[13,31:0]</obj_property>
-                  <obj_property name="Radix">HEXRADIX</obj_property>
-                  <obj_property name="UseCustomSignalColor">true</obj_property>
-                  <obj_property name="CustomSignalColor">#00ffff</obj_property>
-               </wvobject>
-               <wvobject fp_name="/SOCTest_tb/SOCTest0/BOOT_ROM0/Ram[12]" type="array" db_ref_id="1">
-                  <obj_property name="ElementShortName">[12,31:0]</obj_property>
-                  <obj_property name="ObjectShortName">Ram[12,31:0]</obj_property>
-                  <obj_property name="Radix">HEXRADIX</obj_property>
-                  <obj_property name="UseCustomSignalColor">true</obj_property>
-                  <obj_property name="CustomSignalColor">#00ffff</obj_property>
-               </wvobject>
-               <wvobject fp_name="/SOCTest_tb/SOCTest0/BOOT_ROM0/Ram[11]" type="array" db_ref_id="1">
-                  <obj_property name="ElementShortName">[11,31:0]</obj_property>
-                  <obj_property name="ObjectShortName">Ram[11,31:0]</obj_property>
-                  <obj_property name="Radix">HEXRADIX</obj_property>
-                  <obj_property name="UseCustomSignalColor">true</obj_property>
-                  <obj_property name="CustomSignalColor">#00ffff</obj_property>
-               </wvobject>
-               <wvobject fp_name="/SOCTest_tb/SOCTest0/BOOT_ROM0/Ram[10]" type="array" db_ref_id="1">
-                  <obj_property name="ElementShortName">[10,31:0]</obj_property>
-                  <obj_property name="ObjectShortName">Ram[10,31:0]</obj_property>
-                  <obj_property name="Radix">HEXRADIX</obj_property>
-                  <obj_property name="UseCustomSignalColor">true</obj_property>
-                  <obj_property name="CustomSignalColor">#00ffff</obj_property>
-               </wvobject>
-               <wvobject fp_name="/SOCTest_tb/SOCTest0/BOOT_ROM0/Ram[9]" type="array" db_ref_id="1">
-                  <obj_property name="ElementShortName">[9,31:0]</obj_property>
-                  <obj_property name="ObjectShortName">Ram[9,31:0]</obj_property>
-                  <obj_property name="Radix">HEXRADIX</obj_property>
-                  <obj_property name="UseCustomSignalColor">true</obj_property>
-                  <obj_property name="CustomSignalColor">#00ffff</obj_property>
-               </wvobject>
-               <wvobject fp_name="/SOCTest_tb/SOCTest0/BOOT_ROM0/Ram[8]" type="array" db_ref_id="1">
-                  <obj_property name="ElementShortName">[8,31:0]</obj_property>
-                  <obj_property name="ObjectShortName">Ram[8,31:0]</obj_property>
-                  <obj_property name="Radix">HEXRADIX</obj_property>
-                  <obj_property name="UseCustomSignalColor">true</obj_property>
-                  <obj_property name="CustomSignalColor">#00ffff</obj_property>
-               </wvobject>
-               <wvobject fp_name="/SOCTest_tb/SOCTest0/BOOT_ROM0/Ram[7]" type="array" db_ref_id="1">
-                  <obj_property name="ElementShortName">[7,31:0]</obj_property>
-                  <obj_property name="ObjectShortName">Ram[7,31:0]</obj_property>
-                  <obj_property name="Radix">HEXRADIX</obj_property>
-                  <obj_property name="UseCustomSignalColor">true</obj_property>
-                  <obj_property name="CustomSignalColor">#00ffff</obj_property>
-               </wvobject>
-               <wvobject fp_name="/SOCTest_tb/SOCTest0/BOOT_ROM0/Ram[6]" type="array" db_ref_id="1">
-                  <obj_property name="ElementShortName">[6,31:0]</obj_property>
-                  <obj_property name="ObjectShortName">Ram[6,31:0]</obj_property>
-                  <obj_property name="Radix">HEXRADIX</obj_property>
-                  <obj_property name="UseCustomSignalColor">true</obj_property>
-                  <obj_property name="CustomSignalColor">#00ffff</obj_property>
-               </wvobject>
-               <wvobject fp_name="/SOCTest_tb/SOCTest0/BOOT_ROM0/Ram[5]" type="array" db_ref_id="1">
-                  <obj_property name="ElementShortName">[5,31:0]</obj_property>
-                  <obj_property name="ObjectShortName">Ram[5,31:0]</obj_property>
-                  <obj_property name="Radix">HEXRADIX</obj_property>
-                  <obj_property name="UseCustomSignalColor">true</obj_property>
-                  <obj_property name="CustomSignalColor">#00ffff</obj_property>
-               </wvobject>
-               <wvobject fp_name="/SOCTest_tb/SOCTest0/BOOT_ROM0/Ram[4]" type="array" db_ref_id="1">
-                  <obj_property name="ElementShortName">[4,31:0]</obj_property>
-                  <obj_property name="ObjectShortName">Ram[4,31:0]</obj_property>
-                  <obj_property name="Radix">HEXRADIX</obj_property>
-                  <obj_property name="UseCustomSignalColor">true</obj_property>
-                  <obj_property name="CustomSignalColor">#00ffff</obj_property>
-               </wvobject>
-               <wvobject fp_name="/SOCTest_tb/SOCTest0/BOOT_ROM0/Ram[3]" type="array" db_ref_id="1">
-                  <obj_property name="ElementShortName">[3,31:0]</obj_property>
-                  <obj_property name="ObjectShortName">Ram[3,31:0]</obj_property>
-                  <obj_property name="Radix">HEXRADIX</obj_property>
-                  <obj_property name="UseCustomSignalColor">true</obj_property>
-                  <obj_property name="CustomSignalColor">#00ffff</obj_property>
-               </wvobject>
-               <wvobject fp_name="/SOCTest_tb/SOCTest0/BOOT_ROM0/Ram[2]" type="array" db_ref_id="1">
-                  <obj_property name="ElementShortName">[2,31:0]</obj_property>
-                  <obj_property name="ObjectShortName">Ram[2,31:0]</obj_property>
-                  <obj_property name="Radix">HEXRADIX</obj_property>
-                  <obj_property name="UseCustomSignalColor">true</obj_property>
-                  <obj_property name="CustomSignalColor">#00ffff</obj_property>
-               </wvobject>
-               <wvobject fp_name="/SOCTest_tb/SOCTest0/BOOT_ROM0/Ram[1]" type="array" db_ref_id="1">
-                  <obj_property name="ElementShortName">[1,31:0]</obj_property>
-                  <obj_property name="ObjectShortName">Ram[1,31:0]</obj_property>
-                  <obj_property name="Radix">HEXRADIX</obj_property>
-                  <obj_property name="UseCustomSignalColor">true</obj_property>
-                  <obj_property name="CustomSignalColor">#00ffff</obj_property>
-               </wvobject>
-               <wvobject fp_name="/SOCTest_tb/SOCTest0/BOOT_ROM0/Ram[0]" type="array" db_ref_id="1">
-                  <obj_property name="ElementShortName">[0,31:0]</obj_property>
-                  <obj_property name="ObjectShortName">Ram[0,31:0]</obj_property>
-                  <obj_property name="Radix">HEXRADIX</obj_property>
-                  <obj_property name="UseCustomSignalColor">true</obj_property>
-                  <obj_property name="CustomSignalColor">#00ffff</obj_property>
-               </wvobject>
             </wvobject>
          </wvobject>
          <wvobject fp_name="group78" type="group">
@@ -879,123 +653,11 @@
                <obj_property name="CustomSignalColor">#00ffff</obj_property>
             </wvobject>
             <wvobject fp_name="/SOCTest_tb/SOCTest0/RAM0/Ram" type="array" db_ref_id="1">
-               <obj_property name="ElementShortName">Ram[15:0,31:0]</obj_property>
-               <obj_property name="ObjectShortName">Ram[15:0,31:0]</obj_property>
+               <obj_property name="ElementShortName">Ram[127:0,31:0]</obj_property>
+               <obj_property name="ObjectShortName">Ram[127:0,31:0]</obj_property>
                <obj_property name="Radix">HEXRADIX</obj_property>
                <obj_property name="UseCustomSignalColor">true</obj_property>
                <obj_property name="CustomSignalColor">#00ffff</obj_property>
-               <wvobject fp_name="/SOCTest_tb/SOCTest0/RAM0/Ram[15]" type="array" db_ref_id="1">
-                  <obj_property name="ElementShortName">[15,31:0]</obj_property>
-                  <obj_property name="ObjectShortName">Ram[15,31:0]</obj_property>
-                  <obj_property name="UseCustomSignalColor">true</obj_property>
-                  <obj_property name="CustomSignalColor">#00ffff</obj_property>
-                  <obj_property name="Radix">HEXRADIX</obj_property>
-               </wvobject>
-               <wvobject fp_name="/SOCTest_tb/SOCTest0/RAM0/Ram[14]" type="array" db_ref_id="1">
-                  <obj_property name="ElementShortName">[14,31:0]</obj_property>
-                  <obj_property name="ObjectShortName">Ram[14,31:0]</obj_property>
-                  <obj_property name="UseCustomSignalColor">true</obj_property>
-                  <obj_property name="CustomSignalColor">#00ffff</obj_property>
-                  <obj_property name="Radix">HEXRADIX</obj_property>
-               </wvobject>
-               <wvobject fp_name="/SOCTest_tb/SOCTest0/RAM0/Ram[13]" type="array" db_ref_id="1">
-                  <obj_property name="ElementShortName">[13,31:0]</obj_property>
-                  <obj_property name="ObjectShortName">Ram[13,31:0]</obj_property>
-                  <obj_property name="UseCustomSignalColor">true</obj_property>
-                  <obj_property name="CustomSignalColor">#00ffff</obj_property>
-                  <obj_property name="Radix">HEXRADIX</obj_property>
-               </wvobject>
-               <wvobject fp_name="/SOCTest_tb/SOCTest0/RAM0/Ram[12]" type="array" db_ref_id="1">
-                  <obj_property name="ElementShortName">[12,31:0]</obj_property>
-                  <obj_property name="ObjectShortName">Ram[12,31:0]</obj_property>
-                  <obj_property name="UseCustomSignalColor">true</obj_property>
-                  <obj_property name="CustomSignalColor">#00ffff</obj_property>
-                  <obj_property name="Radix">HEXRADIX</obj_property>
-               </wvobject>
-               <wvobject fp_name="/SOCTest_tb/SOCTest0/RAM0/Ram[11]" type="array" db_ref_id="1">
-                  <obj_property name="ElementShortName">[11,31:0]</obj_property>
-                  <obj_property name="ObjectShortName">Ram[11,31:0]</obj_property>
-                  <obj_property name="UseCustomSignalColor">true</obj_property>
-                  <obj_property name="CustomSignalColor">#00ffff</obj_property>
-                  <obj_property name="Radix">HEXRADIX</obj_property>
-               </wvobject>
-               <wvobject fp_name="/SOCTest_tb/SOCTest0/RAM0/Ram[10]" type="array" db_ref_id="1">
-                  <obj_property name="ElementShortName">[10,31:0]</obj_property>
-                  <obj_property name="ObjectShortName">Ram[10,31:0]</obj_property>
-                  <obj_property name="UseCustomSignalColor">true</obj_property>
-                  <obj_property name="CustomSignalColor">#00ffff</obj_property>
-                  <obj_property name="Radix">HEXRADIX</obj_property>
-               </wvobject>
-               <wvobject fp_name="/SOCTest_tb/SOCTest0/RAM0/Ram[9]" type="array" db_ref_id="1">
-                  <obj_property name="ElementShortName">[9,31:0]</obj_property>
-                  <obj_property name="ObjectShortName">Ram[9,31:0]</obj_property>
-                  <obj_property name="UseCustomSignalColor">true</obj_property>
-                  <obj_property name="CustomSignalColor">#00ffff</obj_property>
-                  <obj_property name="Radix">HEXRADIX</obj_property>
-               </wvobject>
-               <wvobject fp_name="/SOCTest_tb/SOCTest0/RAM0/Ram[8]" type="array" db_ref_id="1">
-                  <obj_property name="ElementShortName">[8,31:0]</obj_property>
-                  <obj_property name="ObjectShortName">Ram[8,31:0]</obj_property>
-                  <obj_property name="UseCustomSignalColor">true</obj_property>
-                  <obj_property name="CustomSignalColor">#00ffff</obj_property>
-                  <obj_property name="Radix">HEXRADIX</obj_property>
-               </wvobject>
-               <wvobject fp_name="/SOCTest_tb/SOCTest0/RAM0/Ram[7]" type="array" db_ref_id="1">
-                  <obj_property name="ElementShortName">[7,31:0]</obj_property>
-                  <obj_property name="ObjectShortName">Ram[7,31:0]</obj_property>
-                  <obj_property name="UseCustomSignalColor">true</obj_property>
-                  <obj_property name="CustomSignalColor">#00ffff</obj_property>
-                  <obj_property name="Radix">HEXRADIX</obj_property>
-               </wvobject>
-               <wvobject fp_name="/SOCTest_tb/SOCTest0/RAM0/Ram[6]" type="array" db_ref_id="1">
-                  <obj_property name="ElementShortName">[6,31:0]</obj_property>
-                  <obj_property name="ObjectShortName">Ram[6,31:0]</obj_property>
-                  <obj_property name="UseCustomSignalColor">true</obj_property>
-                  <obj_property name="CustomSignalColor">#00ffff</obj_property>
-                  <obj_property name="Radix">HEXRADIX</obj_property>
-               </wvobject>
-               <wvobject fp_name="/SOCTest_tb/SOCTest0/RAM0/Ram[5]" type="array" db_ref_id="1">
-                  <obj_property name="ElementShortName">[5,31:0]</obj_property>
-                  <obj_property name="ObjectShortName">Ram[5,31:0]</obj_property>
-                  <obj_property name="UseCustomSignalColor">true</obj_property>
-                  <obj_property name="CustomSignalColor">#00ffff</obj_property>
-                  <obj_property name="Radix">HEXRADIX</obj_property>
-               </wvobject>
-               <wvobject fp_name="/SOCTest_tb/SOCTest0/RAM0/Ram[4]" type="array" db_ref_id="1">
-                  <obj_property name="ElementShortName">[4,31:0]</obj_property>
-                  <obj_property name="ObjectShortName">Ram[4,31:0]</obj_property>
-                  <obj_property name="UseCustomSignalColor">true</obj_property>
-                  <obj_property name="CustomSignalColor">#00ffff</obj_property>
-                  <obj_property name="Radix">HEXRADIX</obj_property>
-               </wvobject>
-               <wvobject fp_name="/SOCTest_tb/SOCTest0/RAM0/Ram[3]" type="array" db_ref_id="1">
-                  <obj_property name="ElementShortName">[3,31:0]</obj_property>
-                  <obj_property name="ObjectShortName">Ram[3,31:0]</obj_property>
-                  <obj_property name="UseCustomSignalColor">true</obj_property>
-                  <obj_property name="CustomSignalColor">#00ffff</obj_property>
-                  <obj_property name="Radix">HEXRADIX</obj_property>
-               </wvobject>
-               <wvobject fp_name="/SOCTest_tb/SOCTest0/RAM0/Ram[2]" type="array" db_ref_id="1">
-                  <obj_property name="ElementShortName">[2,31:0]</obj_property>
-                  <obj_property name="ObjectShortName">Ram[2,31:0]</obj_property>
-                  <obj_property name="UseCustomSignalColor">true</obj_property>
-                  <obj_property name="CustomSignalColor">#00ffff</obj_property>
-                  <obj_property name="Radix">HEXRADIX</obj_property>
-               </wvobject>
-               <wvobject fp_name="/SOCTest_tb/SOCTest0/RAM0/Ram[1]" type="array" db_ref_id="1">
-                  <obj_property name="ElementShortName">[1,31:0]</obj_property>
-                  <obj_property name="ObjectShortName">Ram[1,31:0]</obj_property>
-                  <obj_property name="UseCustomSignalColor">true</obj_property>
-                  <obj_property name="CustomSignalColor">#00ffff</obj_property>
-                  <obj_property name="Radix">HEXRADIX</obj_property>
-               </wvobject>
-               <wvobject fp_name="/SOCTest_tb/SOCTest0/RAM0/Ram[0]" type="array" db_ref_id="1">
-                  <obj_property name="ElementShortName">[0,31:0]</obj_property>
-                  <obj_property name="ObjectShortName">Ram[0,31:0]</obj_property>
-                  <obj_property name="UseCustomSignalColor">true</obj_property>
-                  <obj_property name="CustomSignalColor">#00ffff</obj_property>
-                  <obj_property name="Radix">HEXRADIX</obj_property>
-               </wvobject>
             </wvobject>
          </wvobject>
          <wvobject fp_name="group161" type="group">
@@ -1016,6 +678,13 @@
             <wvobject fp_name="/SOCTest_tb/SOCTest0/UART0/r_AReg_RxEn" type="logic" db_ref_id="1">
                <obj_property name="ElementShortName">r_AReg_RxEn</obj_property>
                <obj_property name="ObjectShortName">r_AReg_RxEn</obj_property>
+               <obj_property name="UseCustomSignalColor">true</obj_property>
+               <obj_property name="CustomSignalColor">#800080</obj_property>
+            </wvobject>
+            <wvobject fp_name="/SOCTest_tb/SOCTest0/UART0/r_AReg_ClksPerBit" type="array" db_ref_id="1">
+               <obj_property name="ElementShortName">r_AReg_ClksPerBit[15:0]</obj_property>
+               <obj_property name="ObjectShortName">r_AReg_ClksPerBit[15:0]</obj_property>
+               <obj_property name="Radix">HEXRADIX</obj_property>
                <obj_property name="UseCustomSignalColor">true</obj_property>
                <obj_property name="CustomSignalColor">#800080</obj_property>
             </wvobject>

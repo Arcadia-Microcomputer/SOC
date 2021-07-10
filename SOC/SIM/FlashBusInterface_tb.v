@@ -19,105 +19,113 @@ module FlashBusInterface_tb();
     wire w_Flash_Clk;
     wire [3:0]w_Flash_IO;
 
-    //Avalon Bus Sim
-    reg r_MEM_SlaveSel = 0;
-    reg [25:0]r_MEM_RegAddr = 0;
+    //Avalon Bus (MEM)
+    reg [29:0]r_AV_MEM_Addr = 32'h0;
+    reg r_AV_MEM_Read = 0;
+    wire [31:0]w_AV_MEM_ReadData;
+    wire w_AV_MEM_WaitRequest;
 
-    reg r_CNTRL_SlaveSel = 0;
-    reg [25:0]r_CNTRL_RegAddr = 0;
-
-    reg [3:0]r_AV_ByteEN = 0;
-    reg r_AV_Read = 0;
-    reg r_AV_Write = 0;
-    wire [31:0]w_AV_ReadData;
-    reg [31:0]r_AV_WriteData = 0;
-    wire w_AV_WaitRequest;
+    //Avalon Bus (CONTROL)
+    reg [29:0]r_AV_CNTRL_Addr = 32'h80000000;
+    reg [3:0]r_AV_CNTRL_ByteEN = 0;
+    reg r_AV_CNTRL_Read = 0;
+    reg r_AV_CNTRL_Write = 0;
+    wire [31:0]w_AV_CNTRL_ReadData;
+    reg [31:0]r_AV_CNTRL_WriteData = 0;
+    wire w_AV_CNTRL_WaitRequest;
 
     //The various FlashController register addresses
     parameter p_REG_ADDR_CNTRL = 0;
     parameter p_REG_ADDR_ADDR  = 1;
     parameter p_REG_ADDR_DATA  = 2;
 
+    reg [3:0]r_Counter = 0;
+
     //Generate the clock
     initial begin
         #10;
         forever #10 r_Clk = ~r_Clk;
     end
-    
-    reg [7:0]r_Counter = 0;
-    reg [31:0]r_RDData = 0;
 
     initial begin
-        #100;
-        //Write Enable
-        @(posedge r_Clk);
-        r_CNTRL_SlaveSel <= 1;
-        r_AV_ByteEN <= 4'b1111;
-        r_AV_Write <= 1;
-        r_AV_WriteData[3:0] <= COMMAND_WRITE_ENABLE;
-        r_AV_WriteData[8] <= 1;
-        r_CNTRL_RegAddr <= p_REG_ADDR_CNTRL;
+        // #100;
+        // //Write Enable
+        // @(posedge r_Clk);
+        // r_AV_CNTRL_ByteEN <= 4'b1111;
+        // r_AV_CNTRL_Write <= 1;
+        // r_AV_CNTRL_WriteData[3:0] <= COMMAND_WRITE_ENABLE;
+        // r_AV_CNTRL_WriteData[8] <= 1;
+        // r_AV_CNTRL_Addr <= 32'h20000000 + p_REG_ADDR_CNTRL;
 
-        //Set the address
-        @(posedge r_Clk);
-        r_CNTRL_SlaveSel <= 1;
-        r_AV_ByteEN <= 4'b1111;
-        r_AV_Write <= 1;
-        r_AV_WriteData <= 0;
-        r_CNTRL_RegAddr <= p_REG_ADDR_ADDR;
+        // //Set the address
+        // @(posedge r_Clk);
+        // r_AV_CNTRL_ByteEN <= 4'b1111;
+        // r_AV_CNTRL_Write <= 1;
+        // r_AV_CNTRL_WriteData <= 0;
+        // r_AV_CNTRL_Addr <= 32'h20000000 + p_REG_ADDR_ADDR;
 
-        //Write 4 words to the fifo
-        while(r_Counter < 3)begin
-            @(posedge r_Clk);
-            r_CNTRL_SlaveSel <= 1;
-            r_AV_ByteEN <= 4'b0001;
-            r_AV_Write <= 1;
-            case (r_Counter)
-                0:r_AV_WriteData <= 32'h00000012;
-                1:r_AV_WriteData <= 32'h000000EF;
-                2:r_AV_WriteData <= 32'h000000CD;
-                3:r_AV_WriteData <= 32'h000000AB;
-            endcase
+        // //Write 4 words to the fifo
+        // while(r_Counter < 3)begin
+        //     @(posedge r_Clk);
+        //     r_AV_CNTRL_ByteEN <= 4'b0001;
+        //     r_AV_CNTRL_Write <= 1;
+        //     r_AV_CNTRL_Addr <= 32'h20000000 + p_REG_ADDR_DATA;
+
+        //     case (r_Counter)
+        //         0:r_AV_CNTRL_WriteData <= 32'h000000AA;
+        //         1:r_AV_CNTRL_WriteData <= 32'h00000055;
+        //         2:r_AV_CNTRL_WriteData <= 32'h000000AA;
+        //         3:r_AV_CNTRL_WriteData <= 32'h00000055;
+        //     endcase
             
-            r_CNTRL_RegAddr <= p_REG_ADDR_DATA;
-            r_Counter <= r_Counter + 1;
-        end
-        @(posedge r_Clk);
-        r_AV_Write <= 0;
+        //     r_Counter <= r_Counter + 1;
+        // end
+        // @(posedge r_Clk);
+        // r_AV_CNTRL_Write <= 0;
 
-        //Program Page
-        #400;
-        @(posedge r_Clk);
-        r_CNTRL_SlaveSel <= 1;
-        r_AV_ByteEN <= 4'b1111;
-        r_AV_Write <= 1;
-        r_AV_WriteData[3:0] <= COMMAND_PROGRAM_PAGE;
-        r_AV_WriteData[22:16] <= 4;
-        r_AV_WriteData[8] <= 1;
-        r_CNTRL_RegAddr <= p_REG_ADDR_CNTRL;
+        // //Program Page
+        // #400;
+        // @(posedge r_Clk);
+        // r_AV_CNTRL_ByteEN <= 4'b1111;
+        // r_AV_CNTRL_Write <= 1;
+        // r_AV_CNTRL_WriteData[3:0] <= COMMAND_PROGRAM_PAGE;
+        // r_AV_CNTRL_WriteData[22:16] <= 4;
+        // r_AV_CNTRL_WriteData[8] <= 1;
+        // r_AV_CNTRL_Addr <= 32'h20000000 + p_REG_ADDR_CNTRL;
         
+        // @(posedge r_Clk);
+        // r_AV_CNTRL_Write <= 0;
+    end
+
+    initial begin
         @(posedge r_Clk);
-        r_AV_Write <= 0;
+        r_AV_MEM_Addr <= 0;
+        r_AV_MEM_Read <= 1;
+        @(negedge w_AV_MEM_WaitRequest);
+        @(posedge r_Clk);
+        r_AV_MEM_Read <= 0;
     end
 
     FlashBusInterface #(
-        .MEM_ADDR_SEL_BITS(4),
-        .CNTRL_ADDR_SEL_BITS(4)
+        .MEM_PERIPH_SEL_BITS(1),
+        .MEM_PERIPH_SEL_VAL(0),
+        .CNTRL_ADDR_SEL_BITS(1),
+        .CNTRL_PERIPH_SEL_VAL(1)
     )DUT(
         .i_Clk(r_Clk),
         
-        .i_MEM_SlaveSel(r_MEM_SlaveSel),
-        .i_MEM_RegAddr(r_MEM_RegAddr),
+        .i_AV_MEM_Addr(r_AV_MEM_Addr),
+        .i_AV_MEM_Read(r_AV_MEM_Read),
+        .o_AV_MEM_ReadData(w_AV_MEM_ReadData),
+        .o_AV_MEM_WaitRequest(w_AV_MEM_WaitRequest),
 
-        .i_CNTRL_SlaveSel(r_CNTRL_SlaveSel),
-        .i_CNTRL_RegAddr(r_CNTRL_RegAddr),
-
-        .i_AV_ByteEn(r_AV_ByteEN),
-        .i_AV_Read(r_AV_Read),
-        .i_AV_Write(r_AV_Write),
-        .o_AV_ReadData(w_AV_ReadData),
-        .i_AV_WriteData(r_AV_WriteData),
-        .o_AV_WaitRequest(w_AV_WaitRequest),
+        .i_AV_CNTRL_Addr(r_AV_CNTRL_Addr),
+        .i_AV_CNTRL_ByteEn(r_AV_CNTRL_ByteEN),
+        .i_AV_CNTRL_Read(r_AV_CNTRL_Read),
+        .i_AV_CNTRL_Write(r_AV_CNTRL_Write),
+        .o_AV_CNTRL_ReadData(w_AV_CNTRL_ReadData),
+        .i_AV_CNTRL_WriteData(r_AV_CNTRL_WriteData),
+        .o_AV_CNTRL_WaitRequest(w_AV_CNTRL_WaitRequest),
 
         .o_Flash_Clk(w_Flash_Clk),
         .o_Flash_nCS(w_Flash_nCS),

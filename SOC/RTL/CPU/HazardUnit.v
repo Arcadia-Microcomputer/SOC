@@ -25,8 +25,9 @@ module HazardUnit(
     input i_DCacheStall_EX2,
 
     output reg o_PcEn,
-    output reg o_IBusRdEn,
+    output reg o_ICacheRdEn,
     output reg o_ICacheHoldOut,
+    output reg o_ICacheClear,
 
     output reg o_RegEn_IF,
     output reg o_RegEn_ID,
@@ -43,8 +44,9 @@ module HazardUnit(
     
     initial begin
         o_PcEn = 1;
-        o_IBusRdEn  = 1;
+        o_ICacheRdEn  = 1;
         o_ICacheHoldOut = 0;
+        o_ICacheClear = 0;
 
         o_RegEn_IF  = 1;
         o_RegEn_ID  = 1;
@@ -65,26 +67,37 @@ module HazardUnit(
     wire w_DBusHaz_ID_WB  = (i_IsMemRead_WB && ((i_RS1Valid_ID & (i_RS1Addr_ID == i_RDAddr_WB)) || (i_RS2Valid_ID & (i_RS2Addr_ID == i_RDAddr_WB))));
     wire w_DBusHazzard = w_DBusHaz_ID_EX1 || w_DBusHaz_ID_EX2 || w_DBusHaz_ID_WB;
 
-    reg r_Old_ICacheStall_PC = 0;
-    reg r_Old_TakeBranch_EX2 = 0;
+    reg r_Old_ICacheStall_PC = 0;    
     reg r_Old_DCacheStall_EX2 = 0;
 
-    // Hazzards that result the fetch stages stalling
-    wire w_StallFetchStage = i_DCacheStall_EX2 | w_DBusHazzard | r_Old_TakeBranch_EX2;
-    wire w_StallBranch = i_ICacheStall_PC;
+    reg r_Old_TakeBranch_EX2 = 0;
+    reg r_Old_IsJump_EX2 = 0;
     reg r_Old_StallFetchStage = 0;
+    reg r_Old_StallBranch = 0;
+    reg r_Old_Old_StallBranch = 0;
+    reg r_Old_ICacheHoldOut = 0;
+
+    // Hazzards that result the fetch stages stalling
+    wire w_StallFetchStage = i_DCacheStall_EX2 | (w_DBusHazzard && !i_TakeBranch_EX2) | r_Old_TakeBranch_EX2 | r_Old_IsJump_EX2;
+    wire w_StallBranch = i_ICacheStall_PC;
     
     always @(posedge i_Clk) begin
         r_Old_ICacheStall_PC <= i_ICacheStall_PC;
-        r_Old_TakeBranch_EX2 <= i_TakeBranch_EX2;
         r_Old_DCacheStall_EX2 <= i_DCacheStall_EX2;
+
+        r_Old_TakeBranch_EX2 <= i_TakeBranch_EX2;
+        r_Old_IsJump_EX2 <= i_IsJump_EX2;
         r_Old_StallFetchStage <= w_StallFetchStage;
+        r_Old_StallBranch <= w_StallBranch;
+        r_Old_Old_StallBranch <= r_Old_StallBranch;
+        r_Old_ICacheHoldOut <= o_ICacheHoldOut;
     end
 
     always @(*) begin
-        o_PcEn   <= 1;
-        o_IBusRdEn  <= 1;
+        o_PcEn <= 1;
+        o_ICacheRdEn  <= 1;
         o_ICacheHoldOut <= 0;
+        o_ICacheClear <= 0;
 
         o_RegEn_IF  <= 1;
         o_RegEn_ID  <= 1;
@@ -133,7 +146,7 @@ module HazardUnit(
         end else if (w_StallFetchStage) begin
             // Stalls from deeper down the pipeline
             o_PcEn <= 0;
-            o_IBusRdEn <= 0;
+            o_ICacheRdEn <= 0;
 
             o_RegEn_IF <= 0;
             o_RegEn_ID <= 0;
@@ -142,7 +155,7 @@ module HazardUnit(
             // Gets loaded into IF_ID reg here
         end
 
-        if (i_TakeBranch_EX2) begin
+        if (i_TakeBranch_EX2 | i_IsJump_EX2) begin
             if(w_StallBranch) begin
                 // Stall taking branch until free to do so (i.e fetching stage stalled)
 
@@ -151,11 +164,16 @@ module HazardUnit(
                 o_RegEn_EX2 <= 0;
             end else begin
                 // Clear out the consecutive instructions executing
-                o_RegClr_IF  <= 1;
+                o_RegClr_IF <= 1;
                 o_RegClr_ID  <= 1;
                 o_RegClr_EX1 <= 1;
                 o_RegClr_EX2 <= 1;
             end   
+        end else if(r_Old_TakeBranch_EX2) begin
+            // Need to clear as under certain circumstances, inst is bad
+            if(r_Old_ICacheHoldOut || r_Old_IsJump_EX2 || r_Old_Old_StallBranch)begin 
+                o_ICacheClear <= 1;
+            end
         end
 
         if(i_DCacheStall_EX2) begin

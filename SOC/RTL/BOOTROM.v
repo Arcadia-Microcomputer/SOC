@@ -30,15 +30,30 @@ module BOOTROM #(
     integer i;
     integer numRamUsed;
     initial begin
-Ram[0] = 32'h800000b7;
-Ram[1] = 32'h90000137;
-Ram[2] = 32'hb00001b7;
-Ram[3] = 32'h00010237;
-Ram[4] = 32'h00220213;
-Ram[5] = 32'h0041a023;
-Ram[6] = 32'h04800213;
-Ram[7] = 32'h00418223;
-numRamUsed = 8;
+Ram[0] = 32'h10000117;
+Ram[1] = 32'h1fc10113;
+Ram[2] = 32'h008000ef;
+Ram[3] = 32'h0000006f;
+Ram[4] = 32'hb00007b7;
+Ram[5] = 32'h00200713;
+Ram[6] = 32'h800005b7;
+Ram[7] = 32'h00e79023;
+Ram[8] = 32'h00c00613;
+Ram[9] = 32'h04c58593;
+Ram[10] = 32'hb0000537;
+Ram[11] = 32'h0040006f;
+Ram[12] = 32'h00060c63;
+Ram[13] = 32'h00c58633;
+Ram[14] = 32'h0005c783;
+Ram[15] = 32'h00158593;
+Ram[16] = 32'h00f50223;
+Ram[17] = 32'hfec59ae3;
+Ram[18] = 32'h00008067;
+Ram[19] = 32'h6c6c6548;
+Ram[20] = 32'h6f57206f;
+Ram[21] = 32'h0a646c72;
+Ram[22] = 32'h00000000;
+numRamUsed = 23;
         for(i = numRamUsed; i < DEPTH; i = i + 1)begin
             Ram[i] = 0;
         end
@@ -49,7 +64,7 @@ numRamUsed = 8;
 
         if(w_SlaveSel)begin
             if(i_AV_Read)begin
-                o_AV_ReadData <= Ram[w_RegAddr[$clog2(DEPTH)-1:0]]; 
+                o_AV_ReadData <= Ram[w_RegAddr]; 
             end
         end
     end

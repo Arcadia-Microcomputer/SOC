@@ -1111,7 +1111,7 @@ begin :disable_interface
 	DO_Output_Enable = 1'b0;			    // Tri-state DO output.					
 	DIO_Output_Enable_reg = 1'b0;		// Tri-state DIO output.
 	WPn_Output_Enable_reg = 1'b0;		// Tri-state WPn output
-	HOLDn_Output_Enable = 1'b0;		  // Tri-state HOLDn output
+	HOLDn_Output_Enable = 1'b0;		  // Tri-state HOL Dn output
 	flag_slow_read_reg = 1'b0;			  // Initiate normal timing checks
 
 	disable input_byte;

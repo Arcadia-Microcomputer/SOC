@@ -1,5 +1,4 @@
 EESchema Schematic File Version 4
-LIBS:CPUSchem-cache
 EELAYER 30 0
 EELAYER END
 $Descr A4 11693 8268
@@ -99,9 +98,9 @@ Wire Wire Line
 Wire Wire Line
 	5325 1800 5625 1800
 Text Label 5700 3350 3    31   ~ 0
-En_E
+En_EX1
 Text Label 5750 3350 3    31   ~ 0
-Clr_E
+Clr_EX1
 Text Label 5825 2050 0    31   ~ 0
 PC_EX1
 Wire Wire Line
@@ -211,17 +210,17 @@ Text Label 2200 2375 0    31   ~ 0
 TakeBranch_EX2
 Text Label 3800 5100 2    31   ~ 0
 TakeBranch
-Text Label 4925 4525 0    31   ~ 0
-En_EX1
-Text Label 4925 4925 0    31   ~ 0
-Clr_EX1
-Text Label 4925 4450 0    31   ~ 0
-En_ID
-Text Label 4925 4850 0    31   ~ 0
-Clr_ID
 Text Label 4925 4600 0    31   ~ 0
-En_EX2
+En_EX1
 Text Label 4925 5000 0    31   ~ 0
+Clr_EX1
+Text Label 4925 4525 0    31   ~ 0
+En_ID
+Text Label 4925 4925 0    31   ~ 0
+Clr_ID
+Text Label 4925 4675 0    31   ~ 0
+En_EX2
+Text Label 4925 5075 0    31   ~ 0
 Clr_EX2
 Text Label 2550 3150 2    31   ~ 0
 PcEn_PC
@@ -245,9 +244,7 @@ RDAddr_EX2
 Wire Wire Line
 	3100 3150 3025 3150
 Text Label 4925 4200 0    31   ~ 0
-IBusRdEn_ID
-Text Label 4925 4275 0    31   ~ 0
-IBusOZero_ID
+ICacheRdEn_IF
 $Comp
 L CPUSchem:ADDER U?
 U 1 1 5EBA3168
@@ -440,9 +437,9 @@ Wire Wire Line
 Wire Wire Line
 	5325 1350 5325 1400
 Connection ~ 5325 1400
-Text Label 4925 5075 0    31   ~ 0
+Text Label 4925 5150 0    31   ~ 0
 Clr_WB
-Text Label 4925 4675 0    31   ~ 0
+Text Label 4925 4750 0    31   ~ 0
 En_WB
 Text Label 8500 4250 0    31   ~ 0
 Rs2ForSel_EX2
@@ -542,10 +539,6 @@ Text Label 6675 2725 2    31   ~ 0
 LoadUpperOp_EX1
 Text Label 5825 1700 0    31   ~ 0
 ExeResSel_EX1
-Text Label 3325 3325 3    31   ~ 0
-IBusRdEn_ID
-Text Label 3375 3325 3    31   ~ 0
-IBusOZero_ID
 Wire Wire Line
 	5825 1750 7050 1750
 Wire Wire Line
@@ -573,17 +566,6 @@ F 3 "" H 3375 2425 50  0001 C CNN
 	1    3350 2300
 	1    0    0    -1  
 $EndComp
-$Comp
-L CPUSchem:ICache U?
-U 1 1 5FED08D9
-P 3300 3175
-F 0 "U?" H 3025 3400 50  0001 C CNN
-F 1 "ICache" H 3250 3275 39  0000 C CNN
-F 2 "" H 2975 3325 50  0001 C CNN
-F 3 "" H 2975 3325 50  0001 C CNN
-	1    3300 3175
-	1    0    0    -1  
-$EndComp
 Text Notes 4775 1100 0    118  ~ 0
 ID
 $Comp
@@ -607,9 +589,9 @@ Text Label 4025 2750 3    31   ~ 0
 En_ID
 Text Label 4075 2750 3    31   ~ 0
 Clr_ID
-Text Label 4925 4375 0    31   ~ 0
+Text Label 4925 4450 0    31   ~ 0
 En_IF
-Text Label 4925 4775 0    31   ~ 0
+Text Label 4925 4850 0    31   ~ 0
 Clr_IF
 Wire Wire Line
 	4150 2400 4275 2400
@@ -851,8 +833,6 @@ F 3 "" H 7775 3975 31  0001 C CNN
 	1    7775 3975
 	1    0    0    -1  
 $EndComp
-Text Label 8050 2825 3    31   ~ 0
-En_EX2
 Text Label 8100 2825 3    31   ~ 0
 Clr_EX2
 Text Label 8175 1900 0    31   ~ 0
@@ -1004,4 +984,27 @@ Text Label 8925 1950 2    31   ~ 0
 WBData_WB
 Text Label 8925 2200 2    31   ~ 0
 WBData_WB
+Text Label 4925 4275 0    31   ~ 0
+ICacheHoldOut_IF
+Text Label 4925 4350 0    31   ~ 0
+ICacheClear_IF
+Text Label 3400 3325 3    31   ~ 0
+ICacheClear_IF
+Text Label 3350 3325 3    31   ~ 0
+ICacheHoldOut_IF
+Text Label 3300 3325 3    31   ~ 0
+ICacheRdEn_IF
+$Comp
+L CPUSchem:ICache U?
+U 1 1 5FED08D9
+P 3300 3175
+F 0 "U?" H 3025 3400 50  0001 C CNN
+F 1 "ICache" H 3250 3275 39  0000 C CNN
+F 2 "" H 2975 3325 50  0001 C CNN
+F 3 "" H 2975 3325 50  0001 C CNN
+	1    3300 3175
+	1    0    0    -1  
+$EndComp
+Text Label 8050 2825 3    31   ~ 0
+En_EX2
 $EndSCHEMATC

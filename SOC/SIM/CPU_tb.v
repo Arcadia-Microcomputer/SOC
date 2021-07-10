@@ -27,13 +27,16 @@ module CPU_tb();
     integer i;
     integer numRamUsed;
     initial begin
-Ram[0] = 32'h00c00093;
-Ram[1] = 32'h00000113;
-Ram[2] = 32'h00110113;
-Ram[3] = 32'h00210113;
-Ram[4] = 32'hfe209ce3;
-Ram[5] = 32'h01400113;
-numRamUsed = 6;
+Ram[0] = 32'hb0000137;
+Ram[1] = 32'h00500213;
+Ram[2] = 32'h00000293;
+Ram[3] = 32'h00210023;
+Ram[4] = 32'h00128293;
+Ram[5] = 32'hfe521ce3;
+Ram[6] = 32'h00002183;
+Ram[7] = 32'h00310023;
+Ram[8] = 32'h0000006f;
+numRamUsed = 9;
         for(i = numRamUsed; i < IR_DEPTH; i = i + 1)begin
             Ram[i] = 0;
         end
@@ -95,14 +98,14 @@ numRamUsed = 6;
         //I Rom wait req
         if(w_AV_IBus_Addr[29] == 0)begin
             if(w_AV_IBus_Read)begin
-                r_AV_IBus_WaitRequest <= r_counter[1];
+                r_AV_IBus_WaitRequest <= 0; //r_counter[1];
             end
         end
 
         //D Ram Wait req
         if(w_AV_DBus_Addr[29] == 1)begin
             if(w_AV_DBus_Read || w_AV_DBus_Write)begin
-                r_AV_DBus_WaitRequest <= r_counter[2];
+                r_AV_DBus_WaitRequest <= 0; //r_counter[2];
             end
         end
     end
@@ -133,7 +136,7 @@ numRamUsed = 6;
         end
         
         // Data ram
-        if(w_AV_DBus_Addr[29] == 1)begin
+        if(w_AV_DBus_Addr[29] == 0)begin
             if(w_AV_DBus_Read)begin
                 r_DR_ReadData <= r_DRam[w_AV_DBus_Addr[$clog2(DR_DEPTH)-1:0]];
             end else if(w_AV_DBus_Write && !r_AV_DBus_WaitRequest) begin

@@ -61,10 +61,10 @@ NET "i_OscClk_100Mhz"          LOC = R7     | IOSTANDARD = LVCMOS33 | PERIOD = 1
 #NET "io_UserFlash_IO[3]"    LOC = M12      | IOSTANDARD = LVCMOS33 | DRIVE = 8 | SLEW = FAST;
 
 #### USB To Uart ####
-NET "UART0_TX"          LOC = D9      | IOSTANDARD = LVCMOS33 | DRIVE = 8 | SLEW = FAST;
-NET "UART0_nCTS"        LOC = C8      | IOSTANDARD = LVCMOS33 | DRIVE = 8 | SLEW = FAST;
-NET "UART0_RX"          LOC = C9      | IOSTANDARD = LVCMOS33 | DRIVE = 8 | SLEW = FAST;
-NET "UART0_nRTS"        LOC = D8      | IOSTANDARD = LVCMOS33 | DRIVE = 8 | SLEW = FAST;
+NET "o_UART0_TX"          LOC = D9      | IOSTANDARD = LVCMOS33 | DRIVE = 8 | SLEW = FAST;
+NET "i_UART0_nCTS"        LOC = C8      | IOSTANDARD = LVCMOS33 | DRIVE = 8 | SLEW = FAST;
+NET "i_UART0_RX"          LOC = C9      | IOSTANDARD = LVCMOS33 | DRIVE = 8 | SLEW = FAST;
+NET "o_UART0_nRTS"        LOC = D8      | IOSTANDARD = LVCMOS33 | DRIVE = 8 | SLEW = FAST;
 
 ### 7 Segment Displays ###
 #NET "o_7Seg_En[0]"      LOC = B10      | IOSTANDARD = LVCMOS33 | DRIVE = 8 | SLEW = FAST;

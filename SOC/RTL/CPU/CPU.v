@@ -159,7 +159,8 @@ module CPU #(
     //HazardUnit Signals
     wire w_PcEn;
     wire w_ICacheHoldOut;
-    wire w_IBusRdEn;
+    wire w_ICacheClear;
+    wire w_ICacheRdEn;
 
     wire w_RegEn_IF;
     wire w_RegEn_ID;
@@ -206,8 +207,9 @@ module CPU #(
     ICache ICache0(
         .i_Clk(i_Clk),
 
-        .i_RdEn(w_IBusRdEn),
+        .i_RdEn(w_ICacheRdEn),
         .i_HoldOut(w_ICacheHoldOut),
+        .i_Clear(w_ICacheClear),
         .o_Stall(w_ICacheStall_PC),
 
         .i_CpuAddr(w_PC_PC),
@@ -451,8 +453,9 @@ module CPU #(
         .i_DCacheStall_EX2(w_DCacheStall_EX2),
 
         .o_PcEn(w_PcEn),
-        .o_IBusRdEn(w_IBusRdEn),
+        .o_ICacheRdEn(w_ICacheRdEn),
         .o_ICacheHoldOut(w_ICacheHoldOut),
+        .o_ICacheClear(w_ICacheClear),
 
         .o_RegEn_IF(w_RegEn_IF),
         .o_RegEn_ID(w_RegEn_ID),
