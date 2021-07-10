@@ -171,9 +171,9 @@ module HazardUnit(
             end   
         end else if(r_Old_TakeBranch_EX2) begin
             // Need to clear as under certain circumstances, inst is bad
-            if(r_Old_ICacheHoldOut || r_Old_IsJump_EX2 || r_Old_Old_StallBranch)begin 
+            //if(r_Old_ICacheHoldOut || r_Old_IsJump_EX2 || r_Old_Old_StallBranch)begin 
                 o_ICacheClear <= 1;
-            end
+            //end
         end
 
         if(i_DCacheStall_EX2) begin
