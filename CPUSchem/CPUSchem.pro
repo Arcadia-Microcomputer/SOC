@@ -1,4 +1,4 @@
-update=07-May-21 11:42:46 AM
+update=11-Jul-21 7:47:26 PM
 version=1
 last_client=kicad
 [general]
@@ -34,7 +34,7 @@ LibDir=
 [schematic_editor]
 version=1
 PageLayoutDescrFile=
-PlotDirectoryName=C:/Users/ss13a/OneDrive - University of South Australia/
+PlotDirectoryName=D:/System/Downloads/
 SubpartIdSeparator=0
 SubpartFirstId=65
 NetFmtName=

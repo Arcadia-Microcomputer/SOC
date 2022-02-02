@@ -61,7 +61,7 @@ Text Label 5825 3100 0    31   ~ 0
 RS1Addr_EX1
 Text Label 5825 3025 0    31   ~ 0
 RS2Addr_EX1
-Text Label 7425 4100 2    31   ~ 0
+Text Label 6525 4000 2    31   ~ 0
 RS2Addr_EX1
 Text Label 5825 3175 0    31   ~ 0
 RDAddr_EX1
@@ -75,7 +75,7 @@ Wire Wire Line
 	5325 1550 5325 1500
 Wire Wire Line
 	5325 1700 5325 1650
-Text Label 7425 4325 2    31   ~ 0
+Text Label 6525 4225 2    31   ~ 0
 RDAddr_EX2
 Wire Wire Line
 	5275 1650 5325 1650
@@ -117,7 +117,7 @@ Text Label 5625 1950 2    31   ~ 0
 RS1Valid_ID
 Text Label 5625 1900 2    31   ~ 0
 RS2Valid_ID
-Text Label 7425 4400 2    31   ~ 0
+Text Label 6525 4300 2    31   ~ 0
 RegWrEn_EX2
 Text Label 5825 1550 0    31   ~ 0
 Func3_EX1
@@ -133,7 +133,7 @@ F 3 "" H 6175 2775 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 Text Label 6100 2475 2    31   ~ 0
-AluRes_M
+ExeRes_EX2
 Wire Wire Line
 	5825 2425 6100 2425
 Text Label 6200 2450 0    31   ~ 0
@@ -181,15 +181,15 @@ Wire Wire Line
 Connection ~ 4275 1975
 Wire Wire Line
 	4275 1975 4275 2400
-Text Label 4925 4125 0    31   ~ 0
+Text Label 5100 3750 0    31   ~ 0
 PcEn_PC
-Text Label 3800 4200 2    31   ~ 0
+Text Label 3975 3825 2    31   ~ 0
 RS1Addr_ID
-Text Label 3800 4350 2    31   ~ 0
+Text Label 3975 3975 2    31   ~ 0
 RS2Addr_ID
-Text Label 3800 4450 2    31   ~ 0
+Text Label 3975 4075 2    31   ~ 0
 RDAddr_EX1
-Text Label 3800 5025 2    31   ~ 0
+Text Label 3975 4650 2    31   ~ 0
 IsBranch_EX2
 $Comp
 L CPUSchem:BRANCH_UNIT U?
@@ -208,42 +208,42 @@ Text Label 1200 2450 2    31   ~ 0
 IsBranch_EX2
 Text Label 2200 2375 0    31   ~ 0
 TakeBranch_EX2
-Text Label 3800 5100 2    31   ~ 0
+Text Label 3975 4725 2    31   ~ 0
 TakeBranch
-Text Label 4925 4600 0    31   ~ 0
+Text Label 5100 4225 0    31   ~ 0
 En_EX1
-Text Label 4925 5000 0    31   ~ 0
+Text Label 5100 4625 0    31   ~ 0
 Clr_EX1
-Text Label 4925 4525 0    31   ~ 0
+Text Label 5100 4150 0    31   ~ 0
 En_ID
-Text Label 4925 4925 0    31   ~ 0
+Text Label 5100 4550 0    31   ~ 0
 Clr_ID
-Text Label 4925 4675 0    31   ~ 0
+Text Label 5100 4300 0    31   ~ 0
 En_EX2
-Text Label 4925 5075 0    31   ~ 0
+Text Label 5100 4700 0    31   ~ 0
 Clr_EX2
 Text Label 2550 3150 2    31   ~ 0
 PcEn_PC
 $Comp
 L CPUSchem:HAZARD_UNIT U?
 U 1 1 5EBA3150
-P 4200 4275
+P 4375 3900
 AR Path="/5EBA3150" Ref="U?"  Part="1" 
 AR Path="/5EB97B98/5EBA3150" Ref="U?"  Part="1" 
-F 0 "U?" H 4100 4650 31  0001 C CNN
-F 1 "HAZARD_UNIT" H 4025 4500 39  0000 C CNN
-F 2 "" H 4100 4650 31  0001 C CNN
-F 3 "" H 4100 4650 31  0001 C CNN
-	1    4200 4275
+F 0 "U?" H 4275 4275 31  0001 C CNN
+F 1 "HAZARD_UNIT" H 4200 4125 39  0000 C CNN
+F 2 "" H 4275 4275 31  0001 C CNN
+F 3 "" H 4275 4275 31  0001 C CNN
+	1    4375 3900
 	1    0    0    -1  
 $EndComp
 Text Label 1200 2600 2    31   ~ 0
 AluZero_EX2
-Text Label 3800 4525 2    31   ~ 0
+Text Label 3975 4150 2    31   ~ 0
 RDAddr_EX2
 Wire Wire Line
 	3100 3150 3025 3150
-Text Label 4925 4200 0    31   ~ 0
+Text Label 5100 3825 0    31   ~ 0
 ICacheRdEn_IF
 $Comp
 L CPUSchem:ADDER U?
@@ -292,9 +292,9 @@ Wire Wire Line
 	2200 2375 2275 2375
 Text Label 1200 2675 2    31   ~ 0
 AluSignNeg_EX2
-Text Label 3800 4275 2    31   ~ 0
+Text Label 3975 3900 2    31   ~ 0
 RS2Valid_ID
-Text Label 3800 4125 2    31   ~ 0
+Text Label 3975 3750 2    31   ~ 0
 RS1Valid_ID
 Wire Wire Line
 	4275 2775 5025 2775
@@ -304,7 +304,7 @@ Text Label 4625 1900 0    31   ~ 0
 RS2Addr_ID
 Text Label 4625 1975 0    31   ~ 0
 RDAddr_ID
-Text Label 8500 4025 0    31   ~ 0
+Text Label 7600 3925 0    31   ~ 0
 Rs1ForSel_EX1
 Text Label 4625 2200 2    31   ~ 0
 RS1_ID
@@ -329,7 +329,7 @@ Wire Wire Line
 	5825 2225 5850 2225
 Text Label 5825 1650 0    31   ~ 0
 IsBranch_EX1
-Text Label 3800 4700 2    31   ~ 0
+Text Label 3975 4325 2    31   ~ 0
 DBusRe_EX1
 Wire Wire Line
 	5325 1500 5325 1450
@@ -355,7 +355,7 @@ Wire Wire Line
 Wire Wire Line
 	5850 2125 6200 2125
 Text Label 6200 2175 2    31   ~ 0
-AluRes_M
+ExeRes_EX2
 Wire Wire Line
 	6225 2500 6225 2775
 Text Label 6825 2500 2    31   ~ 0
@@ -409,9 +409,9 @@ F 3 "" H 7000 2575 50  0001 C CNN
 	1    6925 2325
 	1    0    0    -1  
 $EndComp
-Text Label 8500 4100 0    31   ~ 0
+Text Label 7600 4000 0    31   ~ 0
 Rs2ForSel_EX1
-Text Label 8500 4175 0    31   ~ 0
+Text Label 7600 4075 0    31   ~ 0
 Rs1ForSel_EX2
 Text Label 6375 2150 0    31   ~ 0
 Rs1For_EX1
@@ -424,7 +424,7 @@ Text Label 1750 3400 2    31   ~ 0
 BranchAdderBSel_EX2
 Text Label 1700 3525 2    31   ~ 0
 Rs1For_EX2
-Text Label 7425 4175 2    31   ~ 0
+Text Label 6525 4075 2    31   ~ 0
 RS1Addr_EX2
 Text Label 4625 2400 2    31   ~ 0
 RegWrEn_WB
@@ -437,11 +437,11 @@ Wire Wire Line
 Wire Wire Line
 	5325 1350 5325 1400
 Connection ~ 5325 1400
-Text Label 4925 5150 0    31   ~ 0
+Text Label 5100 4775 0    31   ~ 0
 Clr_WB
-Text Label 4925 4750 0    31   ~ 0
+Text Label 5100 4375 0    31   ~ 0
 En_WB
-Text Label 8500 4250 0    31   ~ 0
+Text Label 7600 4150 0    31   ~ 0
 Rs2ForSel_EX2
 Text Label 6250 2050 0    31   ~ 0
 Rs1ForSel_EX1
@@ -492,13 +492,13 @@ Text Label 5500 2250 2    31   ~ 0
 AluRes_EX2
 Text Label 5500 2475 2    31   ~ 0
 AluRes_EX2
-Text Label 7425 4025 2    31   ~ 0
+Text Label 6525 3925 2    31   ~ 0
 RS1Addr_EX1
-Text Label 7425 4250 2    31   ~ 0
+Text Label 6525 4150 2    31   ~ 0
 RS2Addr_EX2
-Text Label 7425 3875 2    31   ~ 0
+Text Label 6525 3775 2    31   ~ 0
 RS1Addr_ID
-Text Label 7425 3950 2    31   ~ 0
+Text Label 6525 3850 2    31   ~ 0
 RS2Addr_ID
 Text Label 6600 2375 2    31   ~ 0
 AluBSel_EX1
@@ -525,11 +525,11 @@ Wire Wire Line
 Wire Wire Line
 	5325 1300 5325 1350
 Connection ~ 5325 1350
-Text Label 3800 4600 2    31   ~ 0
+Text Label 3975 4225 2    31   ~ 0
 RDAddr_WB
-Text Label 3800 4775 2    31   ~ 0
+Text Label 3975 4400 2    31   ~ 0
 DBusRe_EX2
-Text Label 3800 4850 2    31   ~ 0
+Text Label 3975 4475 2    31   ~ 0
 DBusRe_WB
 Text Label 5825 1800 0    31   ~ 0
 AluBSel_EX1
@@ -589,9 +589,9 @@ Text Label 4025 2750 3    31   ~ 0
 En_ID
 Text Label 4075 2750 3    31   ~ 0
 Clr_ID
-Text Label 4925 4450 0    31   ~ 0
+Text Label 5100 4075 0    31   ~ 0
 En_IF
-Text Label 4925 4850 0    31   ~ 0
+Text Label 5100 4475 0    31   ~ 0
 Clr_IF
 Wire Wire Line
 	4150 2400 4275 2400
@@ -610,7 +610,7 @@ F 3 "" H 5750 1650 50  0001 C CNN
 $EndComp
 Text Label 6150 2350 2    31   ~ 0
 Rs2ForSel_EX1
-Text Label 3800 4950 2    31   ~ 0
+Text Label 3975 4575 2    31   ~ 0
 IsBranch_EX1
 Text Notes 6600 1100 0    118  ~ 0
 EX1
@@ -684,7 +684,7 @@ Text Label 8175 2600 0    31   ~ 0
 RS2Addr_EX2
 Text Label 7975 2600 2    31   ~ 0
 RS2Addr_EX1
-Text Label 8500 3875 0    31   ~ 0
+Text Label 7600 3775 0    31   ~ 0
 Rs1ForSel_ID
 Text Label 7375 2425 0    31   ~ 0
 AluRes_EX1
@@ -823,14 +823,14 @@ Func3_EX2
 $Comp
 L CPUSchem:FORWARDING_UNIT U?
 U 1 1 5EBA3206
-P 7775 3975
+P 6875 3875
 AR Path="/5EBA3206" Ref="U?"  Part="1" 
 AR Path="/5EB97B98/5EBA3206" Ref="U?"  Part="1" 
-F 0 "U?" H 7775 4250 31  0001 C CNN
-F 1 "FORWARDING_UNIT" H 7725 4150 39  0000 C CNN
-F 2 "" H 7775 3975 31  0001 C CNN
-F 3 "" H 7775 3975 31  0001 C CNN
-	1    7775 3975
+F 0 "U?" H 6875 4150 31  0001 C CNN
+F 1 "FORWARDING_UNIT" H 6825 4050 39  0000 C CNN
+F 2 "" H 6875 3875 31  0001 C CNN
+F 3 "" H 6875 3875 31  0001 C CNN
+	1    6875 3875
 	1    0    0    -1  
 $EndComp
 Text Label 8100 2825 3    31   ~ 0
@@ -952,7 +952,7 @@ Wire Wire Line
 	1800 2825 1800 3100
 Wire Wire Line
 	1800 3100 1900 3100
-Text Label 8500 3950 0    31   ~ 0
+Text Label 7600 3850 0    31   ~ 0
 Rs2ForSel_ID
 Text Notes 10500 1100 0    118  ~ 0
 WB
@@ -970,13 +970,13 @@ Connection ~ 3025 2825
 Wire Wire Line
 	3025 2825 3025 3150
 Text Label 3625 3225 0    31   ~ 0
-ICacheStall_PC
+ICacheStall_IF
 Text Label 10225 2450 0    31   ~ 0
 DCacheStall_EX2
-Text Label 3800 5300 2    31   ~ 0
+Text Label 3975 4925 2    31   ~ 0
 DCacheStall_EX2
-Text Label 3800 5225 2    31   ~ 0
-ICacheStall_PC
+Text Label 3975 4850 2    31   ~ 0
+ICacheStall_IF
 Wire Wire Line
 	4275 1650 4750 1650
 Connection ~ 4275 2400
@@ -984,9 +984,9 @@ Text Label 8925 1950 2    31   ~ 0
 WBData_WB
 Text Label 8925 2200 2    31   ~ 0
 WBData_WB
-Text Label 4925 4275 0    31   ~ 0
+Text Label 5100 3900 0    31   ~ 0
 ICacheHoldOut_IF
-Text Label 4925 4350 0    31   ~ 0
+Text Label 5100 3975 0    31   ~ 0
 ICacheClear_IF
 Text Label 3400 3325 3    31   ~ 0
 ICacheClear_IF

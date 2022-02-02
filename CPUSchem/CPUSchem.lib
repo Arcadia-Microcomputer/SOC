@@ -282,7 +282,7 @@ X En_WB ~ 725 -475 50 L 39 39 1 1 O
 X ICacheClear ~ 725 -75 50 L 39 39 1 1 O
 X ICacheHoldOut ~ 725 0 50 L 39 39 1 1 O
 X ICacheRdEn ~ 725 75 50 L 39 39 1 1 O
-X ICacheStall_PC ~ -400 -950 50 R 39 39 1 1 I
+X ICacheStall_IF ~ -400 -950 50 R 39 39 1 1 I
 X IsBranch_EX2 ~ -400 -750 50 R 39 39 1 1 I
 X IsJump_EX2 ~ -400 -675 50 R 39 39 1 1 I
 X IsMemRead_EX1 ~ -400 -425 50 R 39 39 1 1 I
