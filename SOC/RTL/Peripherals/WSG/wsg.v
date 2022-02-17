@@ -39,10 +39,10 @@ module wsg(
 parameter p_Decode_Address_Base = 23'b11111100000000100000000;
 
 //volume control registers
-reg [4:0] r_Volume_Control_L0 [4:0]; //left volume nybble 0
-reg [4:0] r_Volume_Control_L1 [4:0]; //left volume nybble 1
-reg [4:0] r_Volume_Control_R0 [4:0]; //right volume nybble 0
-reg [4:0] r_Volume_Control_R1 [4:0]; //right volume nybble 1
+reg [3:0] r_Volume_Control_L0 [7:0]; //left volume nybble 0
+reg [3:0] r_Volume_Control_L1 [7:0]; //left volume nybble 1
+reg [3:0] r_Volume_Control_R0 [7:0]; //right volume nybble 0
+reg [3:0] r_Volume_Control_R1 [7:0]; //right volume nybble 1
 
 //cycle counter. counts up each tick of audio clock. used to control things that happen on particular cycles, or a certain number of times per sample, like the 48KHz sample rate clock.
 reg [6:0] r_Cycle_Counter = 7'b0000000;
@@ -71,8 +71,7 @@ reg signed [15:0] r_Aud_Left = 16'h0000; //inside audio domain
 reg signed [15:0] r_Aud_Right = 16'h0000;
 
 //mid-mix temporary holding registers
-reg signed [7:0] r_Sample_Holding;
-reg [7:0] r_Volume_Holding;
+reg signed [7:0] r_Sample_Holding = 8'h00;
 reg signed [23:0] r_Aud_Midmix = 24'h000000; //register is reused. one channel is updated, then the other a couple dozen clock cycles later. should be fine?
 
 //audio output assignments
@@ -131,11 +130,11 @@ always @(posedge i_Clk) begin
 
 	if(w_Sample_Wanted_B || r_Synth_Active) begin //start running once w_Sample_Wanted is active, then iterate through all 1024 cycles and stop until w_Sample_Wanted is high again
 		if(r_Cycle_Counter[6]&&r_Cycle_Counter[5]&&r_Cycle_Counter[4]&&r_Cycle_Counter[3]&&r_Cycle_Counter[2]&&r_Cycle_Counter[1]&&r_Cycle_Counter[0]) begin //if cycle counter hits maximum (all 1-bits), reset it to zero
-			r_Cycle_Counter <= 10'b0000000000;
+			r_Cycle_Counter <= 7'b0000000;
 			r_Synth_Active <= 1'b0;
 		end else begin
 			r_Synth_Active <= 1'b1;
-			r_Cycle_Counter <= r_Cycle_Counter + 10'b0000000001;
+			r_Cycle_Counter <= r_Cycle_Counter + 7'b0000001;
 		end
 	
 		//cycle usage overview:
@@ -157,7 +156,7 @@ always @(posedge i_Clk) begin
 		if(r_Cycle_Counter[6:4]==3'b001) begin //wavecounter increment cycles
 		
 		end
-		if((r_Cycle_Counter[6:5]==2'b01)||((r_Cycle_Counter[6]=1'b1)&&((r_Cycle_Counter[5:4]==2'b01)||(r_Cycle_Counter[5:4]==2'b10)))) begin // mixer cycles. evaluates to true for 010, 011, 101, 110
+		if((r_Cycle_Counter[6:5]==2'b01)||((r_Cycle_Counter[6]==1'b1)&&((r_Cycle_Counter[5:4]==2'b01)||(r_Cycle_Counter[5:4]==2'b10)))) begin // mixer cycles. evaluates to true for 010, 011, 101, 110
 		
 		end
 		if(r_Cycle_Counter[6:0]==7'b1000000) begin //move left sample from holding register to final output
@@ -188,10 +187,10 @@ always @(posedge i_Clk) begin
 				end
 			end
 			if(i_AV_Read) begin
-				r_AV_ReadData <= {r_Waveforms_0[i_Address[6:0], r_Waveforms_1[i_Address[6:0], r_Waveforms_2[i_Address[6:0], r_Waveforms_3[i_Address[6:0]};
+				r_AV_ReadData <= {r_Waveforms_0[i_Address[6:0]], r_Waveforms_1[i_Address[6:0]], r_Waveforms_2[i_Address[6:0]], r_Waveforms_3[i_Address[6:0]]};
 			end
 		end else begin //top address bit 1? we're in the control registers
-			case(i_Address[6:3]) begin
+			case(i_Address[6:3])
 				4'b1101: begin //voice control registers
 					if(i_AV_Write) begin
 						if(i_AV_ByteEn[3]) begin
@@ -219,7 +218,7 @@ always @(posedge i_Clk) begin
 					end
 				end
 				default: r_AV_ReadData <= 32'h00000000; //if it's not a defined register, zero the read.
-			end
+			endcase
 		end
 	end
 end
@@ -229,19 +228,21 @@ integer i;
 integer j;
 integer k;
 integer l;
-integer m;
 initial begin
-	for (i=0;i<=15;i=i+1)
-		r_Volume_Control[i] <= 8'h00; //fortunately the voices start muted
-	for (j=0;j<=7;j=j+1)
-		r_Freq[j] <= 16'h00000000;
+	for (i=0;i<=6;i=i+1)
+		r_Volume_Control_L0[i] <= 4'h0; //fortunately the voices start muted
+		r_Volume_Control_L1[i] <= 4'h0; 
+		r_Volume_Control_R0[i] <= 4'h0; 
+		r_Volume_Control_R1[i] <= 4'h0; 
+		r_Freq_H[i] <= 8'h00; //start with voices at frequency zero
+		r_Freq_L[i] <= 8'h00;
 	for (k=0;k<=7;k=k+1)
 		r_Freq_Counters[k] <= 17'b00000000000000000;
 	for (l=0;l<=6;l=l+1)
 		r_Wave_Counters[l] <= 6'b000000;
-	for (m=0;m<=447;m=m+1)
-		r_Waveforms[m] <= 8'h00;
-	r_LFSR <= 17'b10000000000000000;
+	$readmemh("waveforms0.mem", r_Waveforms_0); //the files are set up to initialize the waveforms to all square waves, but could be anything
+	$readmemh("waveforms1.mem", r_Waveforms_1); //square, triangle, saw, sine, etc
+	$readmemh("waveforms2.mem", r_Waveforms_2); //waveforms0 is bytes 0,4,8 of the waveforms register, waveforms is 1,5,9, etc. 
+	$readmemh("waveforms3.mem", r_Waveforms_3); //each voice only gets 16 bytes per file (16x4 -> 64)
 end
-
 endmodule
