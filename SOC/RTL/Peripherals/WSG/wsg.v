@@ -72,7 +72,7 @@ reg signed [15:0] r_Aud_Left = 16'h0000; //inside audio domain
 reg signed [15:0] r_Aud_Right = 16'h0000;
 
 //mid-mix temporary holding registers
-reg signed [7:0] r_Sample_Holding; //holds the sample from the waveform registers so we can do bit selects with it in the mix stage
+reg signed [7:0] r_Sample_Holding = 8'h00000000; //holds the sample from the waveform registers so we can do bit selects with it in the mix stage
 reg [5:0] r_Wave_Counter_Holding; //value here here so I can do a bit select to figure out which of the 4 waveform registers to read from
 reg [3:0] r_Volume_Control_Holding; //holds one nybble at a time for the sake of logic sharing in the mix cycle
 reg r_Mix_Voice; //passes passes a bit from the mix setup stage to the mix stage, so that if volume control n0==n1==4'b0000 the voice will mute like it should.
@@ -82,12 +82,9 @@ reg signed [23:0] r_Aud_Midmix = 24'h000000; //register is reused. one channel i
 assign o_Aud_Left = r_Aud_Left;
 assign o_Aud_Right = r_Aud_Right;
 
-//chip enable.
-assign w_Chip_Enable = i_SlaveSel && (i_Address[29:8]==p_Decode_Address_Base);
-
-//data output assignment. zeroed unless WSG is being accessed.
+//data output assignment. zeroed by the bus access logic unless WSG is being accessed.
 reg [31:0] r_AV_ReadData = 32'h00000000;
-assign o_AV_ReadData = w_Chip_Enable ? 32'h00000000 : (i_AV_Read ? 32'h00000000 : r_AV_ReadData);
+assign o_AV_ReadData = r_AV_ReadData;
 
 //clock domain crossing registers and wires
 wire [15:0] w_Left_Sample_BDomain;
@@ -206,7 +203,7 @@ end
 
 
 always @(posedge i_Clk) begin
-	if(w_Chip_Enable) begin
+	if(i_SlaveSel && (i_Address[29:8] == p_Decode_Address_Base)) begin
 		if(!i_Address[7]) begin //top address bit: accessing waveram or control registers. bit 6 = 0? we're in the waveram
 			if(i_AV_Write) begin
 				if(i_AV_ByteEn[3]) begin
@@ -224,10 +221,12 @@ always @(posedge i_Clk) begin
 			end
 			if(i_AV_Read) begin
 				r_AV_ReadData <= {r_Waveforms_0[i_Address[6:0]], r_Waveforms_1[i_Address[6:0]], r_Waveforms_2[i_Address[6:0]], r_Waveforms_3[i_Address[6:0]]};
+			end else begin
+				r_AV_ReadData <= 32'h00000000; //if it's not a read access, zero the readdata register
 			end
 		end else begin //top address bit 1? we're in the control registers
 			case(i_Address[6:3])
-				4'b1101: begin //voice control registers
+				4'b1100: begin //voice control registers
 					if(i_AV_Write) begin
 						if(i_AV_ByteEn[3]) begin
 							r_Freq_L[i_Address[2:0]] <= i_AV_WriteData[31:24];
@@ -248,7 +247,7 @@ always @(posedge i_Clk) begin
 						r_AV_ReadData <= {r_Freq_L[i_Address[2:0]], r_Freq_H[i_Address[2:0]], r_Volume_Control_L0[i_Address[2:0]], r_Volume_Control_L1[i_Address[2:0]], r_Volume_Control_R0[i_Address[2:0]], r_Volume_Control_R1[i_Address[2:0]]};
 					end
 				end
-				4'b1111: begin //wavepointer read access. not writable. only readable one byte at a time to avoid the portedness logic usage thing.
+				4'b1110: begin //wavepointer read access. not writable. only readable one byte at a time to avoid the portedness logic usage thing and the logic i'd have to write to work around it.
 					if(i_AV_Read) begin //wavecounters are at bytes 0,4,8,12,16,20,24,28.
 						r_AV_ReadData <= {2'b00, r_Wave_Counters[i_Address[2:0]], 24'h000000};
 					end
@@ -256,6 +255,8 @@ always @(posedge i_Clk) begin
 				default: r_AV_ReadData <= 32'h00000000; //if it's not a defined register, zero the read.
 			endcase
 		end
+	end else begin //if the wsg is not being accessed, zero the readdata output
+		r_AV_ReadData <= 32'h00000000;
 	end
 end
 

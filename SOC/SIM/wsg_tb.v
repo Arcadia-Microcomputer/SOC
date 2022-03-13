@@ -33,7 +33,7 @@ module wsgv4testbench;
 	reg [31:0] i_AV_WriteData;
 	reg i_Clk;
 	reg i_Audio_Clk;
-	reg [7:0] r_Cycle_Counter = 8'h00;
+	reg [23:0] r_Cycle_Counter = 32'h00000000;
 
 	// Outputs
 	wire [31:0] o_AV_ReadData;
@@ -73,21 +73,21 @@ module wsgv4testbench;
 	end
 	
 	always @(posedge i_Clk) begin
-		if(r_Cycle_Counter==8'hff) begin
-			r_Cycle_Counter <= 8'h00;
+		if(r_Cycle_Counter==24'hffffff) begin
+			r_Cycle_Counter <= 24'h000000;
 		end else begin
-			r_Cycle_Counter <= r_Cycle_Counter + 8'h01;
+			r_Cycle_Counter <= r_Cycle_Counter + 24'h000001;
 		end
 		
 		case (r_Cycle_Counter)
-			8'h00 : begin
+			24'hBEEFED : begin
 				i_Address <= 30'b111111000000001000000011100000;
 				i_AV_Write <= 1'b1;
 				i_AV_WriteData <=32'hFFFFFFFF;
 				i_AV_ByteEn <= 4'hF;
 				i_SlaveSel <= 1'b1;
 			end
-			8'h02 : begin
+			24'hDEEBEE : begin
 				i_Address <= 30'b111111000000001000000011100000;
 				i_AV_Read <= 1'b1;
 				i_AV_ByteEn <= 4'hF;
@@ -99,7 +99,7 @@ module wsgv4testbench;
 				i_AV_Read <= 1'b0;
 				i_AV_Write <= 1'b0;
 				i_AV_ByteEn <= 4'hF;
-				i_SlaveSel <= 1'b1;
+				i_SlaveSel <= 1'b0;
 			end
 		endcase
 	end
