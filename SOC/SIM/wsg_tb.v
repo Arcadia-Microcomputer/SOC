@@ -81,14 +81,14 @@ module wsgv4testbench;
 		
 		case (r_Cycle_Counter)
 			8'h00 : begin
-				i_Address <= 30'b111111000000001000000000000000;
+				i_Address <= 30'b111111000000001000000011100000;
 				i_AV_Write <= 1'b1;
 				i_AV_WriteData <=32'hFFFFFFFF;
 				i_AV_ByteEn <= 4'hF;
 				i_SlaveSel <= 1'b1;
 			end
-			8'h02: begin
-				i_Address <= 30'b111111000000001000000000000000;
+			8'h02 : begin
+				i_Address <= 30'b111111000000001000000011100000;
 				i_AV_Read <= 1'b1;
 				i_AV_ByteEn <= 4'hF;
 				i_SlaveSel <= 1'b1;
