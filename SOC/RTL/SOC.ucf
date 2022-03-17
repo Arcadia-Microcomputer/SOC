@@ -4,8 +4,8 @@ CONFIG VCCAUX = "3.3";
 NET "i_OscClk_100Mhz"          LOC = R7     | IOSTANDARD = LVCMOS33 | PERIOD = 100MHz;
 
 #### IO Header ####
-#NET "UART0_TX"          LOC = H3      | IOSTANDARD = LVCMOS33 | DRIVE = 8 | SLEW = FAST;
-#NET "io_IO[1]"          LOC = H1      | IOSTANDARD = LVCMOS33 | DRIVE = 8 | SLEW = FAST;
+NET "o_UART1_TX"          LOC = H3      | IOSTANDARD = LVCMOS33 | DRIVE = 8 | SLEW = FAST; #IO[0]
+NET "i_UART1_RX"          LOC = H1      | IOSTANDARD = LVCMOS33 | DRIVE = 8 | SLEW = FAST; #IO[1]
 #NET "io_IO[2]"          LOC = J2      | IOSTANDARD = LVCMOS33 | DRIVE = 8 | SLEW = FAST;
 #NET "io_IO[3]"          LOC = K1      | IOSTANDARD = LVCMOS33 | DRIVE = 8 | SLEW = FAST;
 #NET "io_IO[4]"          LOC = L1      | IOSTANDARD = LVCMOS33 | DRIVE = 8 | SLEW = FAST;
@@ -26,6 +26,13 @@ NET "i_OscClk_100Mhz"          LOC = R7     | IOSTANDARD = LVCMOS33 | PERIOD = 1
 #NET "io_IO[19]"         LOC = H2      | IOSTANDARD = LVCMOS33 | DRIVE = 8 | SLEW = FAST;
 #NET "io_IO[20]"         LOC = G3      | IOSTANDARD = LVCMOS33 | DRIVE = 8 | SLEW = FAST;
 #NET "io_IO[21]"         LOC = G5      | IOSTANDARD = LVCMOS33 | DRIVE = 8 | SLEW = FAST;
+
+
+NET "io_IO_Periph_D8"       LOC = K2      | IOSTANDARD = LVCMOS33 | DRIVE = 8 | SLEW = FAST; #IO17
+NET "io_IO_Periph_Wr"       LOC = H4      | IOSTANDARD = LVCMOS33 | DRIVE = 8 | SLEW = FAST; #IO18
+NET "io_IO_SlaveSel"        LOC = H2      | IOSTANDARD = LVCMOS33 | DRIVE = 8 | SLEW = FAST; #IO19
+NET "io_IO_CmdEn"           LOC = G3      | IOSTANDARD = LVCMOS33 | DRIVE = 8 | SLEW = FAST; #IO20
+NET "io_IO_SysClk"          LOC = G5      | IOSTANDARD = LVCMOS33 | DRIVE = 8 | SLEW = FAST; #IO21
 
 #### VGA ####
 #NET "o_VGA_Clk"         LOC = A6      | IOSTANDARD = LVCMOS33 | DRIVE = 8 | SLEW = FAST;

@@ -14,10 +14,24 @@ module SOC(
     input i_UART0_RX, 
     output o_UART0_nRTS,
 
+    // UART1
+    output o_UART1_TX,
+    input i_UART1_RX, 
+
     // 7 Segment Display
 	output [2:0] o_7Seg_En,
-	output [6:0] o_7Seg_Led
+	output [6:0] o_7Seg_Led,
+
+    // Debug signals
+    output io_IO_Periph_D8,
+    output io_IO_Periph_Wr,
+    output io_IO_SlaveSel,
+    output io_IO_CmdEn,
+    output io_IO_SysClk
     );
+
+    assign io_IO_Periph_Wr = w_AV_PERIPH_Write;
+    assign io_IO_Periph_D8 = w_AV_PERIPH_WriteData[8];
 
     //-------- Address Space Layout --------//
     //Top Block
@@ -38,8 +52,9 @@ module SOC(
     parameter TADDR_PERIPH_BROM             = 3'd0;
     parameter TADDR_PERIPH_RAM              = 3'd1;
     parameter TADDR_PERIPH_FLASH_CNTRL      = 3'd2;
-    parameter TADDR_PERIPH_UART             = 3'd3;
-    parameter TADDR_PERIPH_GPIO             = 3'd4;
+    parameter TADDR_PERIPH_UART0            = 3'd3;
+    parameter TADDR_PERIPH_UART1            = 3'd4;
+    parameter TADDR_PERIPH_GPIO             = 3'd5;
 
     //---- MASTER BUSES ----//
     // CPU Instuction Master Bus
@@ -83,8 +98,11 @@ module SOC(
     wire [31:0]w_AV_FLASH_CNTRL_ReadData;
     wire w_AV_FLASH_CNTRL_WaitRequest;
 
-    wire [31:0]w_AV_UART_ReadData;
-    wire w_AV_UART_WaitRequest;
+    wire [31:0]w_AV_UART0_ReadData;
+    wire w_AV_UART0_WaitRequest;
+
+    wire [31:0]w_AV_UART1_ReadData;
+    wire w_AV_UART1_WaitRequest;
 
     wire [31:0]w_AV_GPIO_ReadData;
     wire w_AV_GPIO_WaitRequest;
@@ -93,9 +111,9 @@ module SOC(
     wire [3:0]w_AV_PERIPH_ByteEn;
     wire w_AV_PERIPH_Read;
     wire w_AV_PERIPH_Write;
-    wire [31:0]w_AV_PERIPH_ReadData = w_AV_BROM_ReadData | w_AV_RAM_ReadData | w_AV_FLASH_CNTRL_ReadData | w_AV_UART_ReadData | w_AV_GPIO_ReadData;
+    wire [31:0]w_AV_PERIPH_ReadData = w_AV_BROM_ReadData | w_AV_RAM_ReadData | w_AV_FLASH_CNTRL_ReadData | w_AV_UART0_ReadData | w_AV_UART1_ReadData | w_AV_GPIO_ReadData;
     wire [31:0]w_AV_PERIPH_WriteData;
-    wire w_AV_PERIPH_WaitRequest = w_AV_BROM_WaitRequest | w_AV_RAM_WaitRequest | w_AV_FLASH_CNTRL_WaitRequest | w_AV_UART_WaitRequest | w_AV_GPIO_WaitRequest;
+    wire w_AV_PERIPH_WaitRequest = w_AV_BROM_WaitRequest | w_AV_RAM_WaitRequest | w_AV_FLASH_CNTRL_WaitRequest | w_AV_UART0_WaitRequest | w_AV_UART1_WaitRequest | w_AV_GPIO_WaitRequest;
 
     //Main PLL
     wire w_SysClk;
@@ -135,10 +153,13 @@ module SOC(
     FlashBusInterface #(
         .MEM_PERIPH_SEL_BITS(ADDR_MEM_SEL_BITS),
         .MEM_PERIPH_SEL_VAL({ADDR_MEM, TADDR_MEM_FLASH}),
+        
         .CNTRL_ADDR_SEL_BITS(ADDR_PERIPH_SEL_BITS),
         .CNTRL_PERIPH_SEL_VAL({ADDR_PERIPH, TADDR_PERIPH_FLASH_CNTRL})
     )FLASH0(
         .i_Clk(w_SysClk),
+        .o_CmdEn(io_IO_CmdEn),
+        .o_SlaveSel(io_IO_SlaveSel),
 
         .i_AV_MEM_Addr(w_AV_MEM_Addr),
         .i_AV_MEM_Read(w_AV_MEM_Read),
@@ -162,7 +183,7 @@ module SOC(
     BOOTROM #(
         .NUM_PERIPH_SEL_BITS(ADDR_PERIPH_SEL_BITS),
         .PERIPH_SEL_VAL({ADDR_PERIPH, TADDR_PERIPH_BROM}),
-        .DEPTH(128)
+        .DEPTH(512)
     )BOOT_ROM0(
         .i_Clk(w_SysClk),
 
@@ -175,7 +196,7 @@ module SOC(
     RAM #(
         .NUM_PERIPH_SEL_BITS(ADDR_PERIPH_SEL_BITS),
         .PERIPH_SEL_VAL({ADDR_PERIPH, TADDR_PERIPH_RAM}),
-        .DEPTH(128)
+        .DEPTH(512)
     )RAM0(
         .i_Clk(w_SysClk),
 
@@ -190,7 +211,7 @@ module SOC(
 
     UartBusInterface #(
         .NUM_PERIPH_SEL_BITS(ADDR_PERIPH_SEL_BITS),
-        .PERIPH_SEL_VAL({ADDR_PERIPH, TADDR_PERIPH_UART})
+        .PERIPH_SEL_VAL({ADDR_PERIPH, TADDR_PERIPH_UART0})
     )UART0(
         .i_Clk(w_SysClk),
 
@@ -198,14 +219,34 @@ module SOC(
         .i_AV_ByteEn(w_AV_PERIPH_ByteEn),
         .i_AV_Read(w_AV_PERIPH_Read),
         .i_AV_Write(w_AV_PERIPH_Write),
-        .o_AV_ReadData(w_AV_UART_ReadData),
+        .o_AV_ReadData(w_AV_UART0_ReadData),
         .i_AV_WriteData(w_AV_PERIPH_WriteData),
-        .o_AV_WaitRequest(w_AV_UART_WaitRequest),
+        .o_AV_WaitRequest(w_AV_UART0_WaitRequest),
 
         .o_UART_TX(o_UART0_TX),
         .i_UART_nCTS(i_UART0_nCTS),
         .i_UART_RX(i_UART0_RX),
         .o_UART_nRTS(o_UART0_nRTS)
+    );
+
+    UartBusInterface #(
+        .NUM_PERIPH_SEL_BITS(ADDR_PERIPH_SEL_BITS),
+        .PERIPH_SEL_VAL({ADDR_PERIPH, TADDR_PERIPH_UART1})
+    )UART1(
+        .i_Clk(w_SysClk),
+
+        .i_AV_Addr(w_AV_PERIPH_Addr),
+        .i_AV_ByteEn(w_AV_PERIPH_ByteEn),
+        .i_AV_Read(w_AV_PERIPH_Read),
+        .i_AV_Write(w_AV_PERIPH_Write),
+        .o_AV_ReadData(w_AV_UART1_ReadData),
+        .i_AV_WriteData(w_AV_PERIPH_WriteData),
+        .o_AV_WaitRequest(w_AV_UART1_WaitRequest),
+
+        .o_UART_TX(o_UART1_TX),
+        // .i_UART_nCTS(i_UART0_nCTS),
+        .i_UART_RX(i_UART1_RX)
+        // .o_UART_nRTS(o_UART0_nRTS)
     );
 
     GPIOBusInterface #(
@@ -252,4 +293,19 @@ module SOC(
         .o_AVOut_WriteData({w_AV_PERIPH_WriteData, w_AV_MEM_WriteData}),
         .i_AVOut_WaitRequest({w_AV_PERIPH_WaitRequest, w_AV_MEM_WaitRequest})
     );
+
+    ODDR2 #(
+        .DDR_ALIGNMENT("NONE"), // Sets output alignment to "NONE", "C0" or "C1" 
+        .INIT(1'b0),    // Sets initial state of the Q output to 1'b0 or 1'b1
+        .SRTYPE("SYNC") // Specifies "SYNC" or "ASYNC" set/reset
+    ) ODDR2_FlashClkOut (
+        .R(1'b0),
+        .Q(io_IO_SysClk),        // 1-bit DDR output data
+        .C0(w_SysClk),    // 1-bit clock input
+        .C1(!w_SysClk),   // 1-bit clock input
+        .CE(1'b1),    // 1-bit clock enable input
+        .D0(1'b0),  // 1-bit data input (associated with C0)
+        .D1(1'b1)   // 1-bit data input (associated with C1)
+    );
+
 endmodule

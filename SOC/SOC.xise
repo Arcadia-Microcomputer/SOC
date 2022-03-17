@@ -18,53 +18,13 @@
     <file xil_pn:name="RTL/SOC.ucf" xil_pn:type="FILE_UCF">
       <association xil_pn:name="Implementation" xil_pn:seqID="0"/>
     </file>
-    <file xil_pn:name="RTL/CPU/ALU.v" xil_pn:type="FILE_VERILOG">
-      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="22"/>
-      <association xil_pn:name="Implementation" xil_pn:seqID="22"/>
-    </file>
-    <file xil_pn:name="RTL/CPU/BranchUnit.v" xil_pn:type="FILE_VERILOG">
-      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="4"/>
-      <association xil_pn:name="Implementation" xil_pn:seqID="4"/>
-    </file>
-    <file xil_pn:name="RTL/CPU/CPU.v" xil_pn:type="FILE_VERILOG">
-      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="28"/>
-      <association xil_pn:name="Implementation" xil_pn:seqID="28"/>
-    </file>
-    <file xil_pn:name="RTL/CPU/ForwardingUnit.v" xil_pn:type="FILE_VERILOG">
-      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="18"/>
-      <association xil_pn:name="Implementation" xil_pn:seqID="18"/>
-    </file>
-    <file xil_pn:name="RTL/CPU/HazardUnit.v" xil_pn:type="FILE_VERILOG">
-      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="17"/>
-      <association xil_pn:name="Implementation" xil_pn:seqID="17"/>
-    </file>
-    <file xil_pn:name="RTL/CPU/ImmGen.v" xil_pn:type="FILE_VERILOG">
-      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="16"/>
-      <association xil_pn:name="Implementation" xil_pn:seqID="16"/>
-    </file>
-    <file xil_pn:name="RTL/CPU/LoadUpper.v" xil_pn:type="FILE_VERILOG">
-      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="15"/>
-      <association xil_pn:name="Implementation" xil_pn:seqID="15"/>
-    </file>
-    <file xil_pn:name="RTL/CPU/RegFile.v" xil_pn:type="FILE_VERILOG">
-      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="13"/>
-      <association xil_pn:name="Implementation" xil_pn:seqID="13"/>
-    </file>
-    <file xil_pn:name="RTL/Peripherals/ADV7123/ADV7123_Driver.v" xil_pn:type="FILE_VERILOG">
-      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="0"/>
-      <association xil_pn:name="Implementation" xil_pn:seqID="0"/>
-    </file>
-    <file xil_pn:name="RTL/Peripherals/UART/UartTx.v" xil_pn:type="FILE_VERILOG">
-      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="6"/>
-      <association xil_pn:name="Implementation" xil_pn:seqID="6"/>
-    </file>
     <file xil_pn:name="RTL/SOC.v" xil_pn:type="FILE_VERILOG">
       <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="32"/>
       <association xil_pn:name="Implementation" xil_pn:seqID="31"/>
     </file>
     <file xil_pn:name="ipcore_dir/PLL_M.xco" xil_pn:type="FILE_COREGEN">
       <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="30"/>
-      <association xil_pn:name="Implementation" xil_pn:seqID="30"/>
+      <association xil_pn:name="Implementation" xil_pn:seqID="24"/>
     </file>
     <file xil_pn:name="SIM/SOC_tb.v" xil_pn:type="FILE_VERILOG">
       <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="33"/>
@@ -72,63 +32,13 @@
       <association xil_pn:name="PostRouteSimulation" xil_pn:seqID="153"/>
       <association xil_pn:name="PostTranslateSimulation" xil_pn:seqID="153"/>
     </file>
-    <file xil_pn:name="RTL/RAM.v" xil_pn:type="FILE_VERILOG">
-      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="23"/>
-      <association xil_pn:name="Implementation" xil_pn:seqID="23"/>
-    </file>
     <file xil_pn:name="ipcore_dir/VRAM.xco" xil_pn:type="FILE_COREGEN">
       <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="0"/>
       <association xil_pn:name="Implementation" xil_pn:seqID="0"/>
     </file>
-    <file xil_pn:name="RTL/Peripherals/ADV7123/VideoDriver.v" xil_pn:type="FILE_VERILOG">
-      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="0"/>
-      <association xil_pn:name="Implementation" xil_pn:seqID="0"/>
-    </file>
-    <file xil_pn:name="RTL/Peripherals/Flash/FlashControler.v" xil_pn:type="FILE_VERILOG">
-      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="9"/>
-      <association xil_pn:name="Implementation" xil_pn:seqID="9"/>
-    </file>
-    <file xil_pn:name="SIM/w25q16jv.v" xil_pn:type="FILE_VERILOG">
-      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="31"/>
-      <association xil_pn:name="PostMapSimulation" xil_pn:seqID="104"/>
-      <association xil_pn:name="PostRouteSimulation" xil_pn:seqID="104"/>
-      <association xil_pn:name="PostTranslateSimulation" xil_pn:seqID="104"/>
-    </file>
-    <file xil_pn:name="RTL/Peripherals/Flash/FlashBusInterface.v" xil_pn:type="FILE_VERILOG">
-      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="26"/>
-      <association xil_pn:name="Implementation" xil_pn:seqID="26"/>
-    </file>
-    <file xil_pn:name="RTL/Peripherals/GPIO/GPIOBusInterface.v" xil_pn:type="FILE_VERILOG">
-      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="25"/>
-      <association xil_pn:name="Implementation" xil_pn:seqID="25"/>
-    </file>
-    <file xil_pn:name="RTL/Peripherals/GPIO/SevenSegmentDriver.v" xil_pn:type="FILE_VERILOG">
-      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="8"/>
-      <association xil_pn:name="Implementation" xil_pn:seqID="8"/>
-    </file>
     <file xil_pn:name="RTL/Power2Div.v" xil_pn:type="FILE_VERILOG">
       <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="5"/>
       <association xil_pn:name="Implementation" xil_pn:seqID="5"/>
-    </file>
-    <file xil_pn:name="RTL/FIFO.v" xil_pn:type="FILE_VERILOG">
-      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="12"/>
-      <association xil_pn:name="Implementation" xil_pn:seqID="12"/>
-    </file>
-    <file xil_pn:name="RTL/Peripherals/UART/UartBusInterface.v" xil_pn:type="FILE_VERILOG">
-      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="24"/>
-      <association xil_pn:name="Implementation" xil_pn:seqID="24"/>
-    </file>
-    <file xil_pn:name="RTL/Peripherals/UART/UartRx.v" xil_pn:type="FILE_VERILOG">
-      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="7"/>
-      <association xil_pn:name="Implementation" xil_pn:seqID="7"/>
-    </file>
-    <file xil_pn:name="RTL/Peripherals/I2S/I2SBusInterface.v" xil_pn:type="FILE_VERILOG">
-      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="0"/>
-      <association xil_pn:name="Implementation" xil_pn:seqID="0"/>
-    </file>
-    <file xil_pn:name="RTL/Peripherals/I2S/I2SDriver.v" xil_pn:type="FILE_VERILOG">
-      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="0"/>
-      <association xil_pn:name="Implementation" xil_pn:seqID="0"/>
     </file>
     <file xil_pn:name="ipcore_dir/I2S_FIFO.xco" xil_pn:type="FILE_COREGEN">
       <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="0"/>
@@ -136,105 +46,115 @@
     </file>
     <file xil_pn:name="RTL/BOOTROM.v" xil_pn:type="FILE_VERILOG">
       <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="29"/>
-      <association xil_pn:name="Implementation" xil_pn:seqID="29"/>
+      <association xil_pn:name="Implementation" xil_pn:seqID="23"/>
     </file>
-    <file xil_pn:name="RTL/Peripherals/Timer/Timer.v" xil_pn:type="FILE_VERILOG">
-      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="0"/>
-      <association xil_pn:name="Implementation" xil_pn:seqID="0"/>
+    <file xil_pn:name="../LIB/CPU/PipelinedV1/RTL/ALU.v" xil_pn:type="FILE_VERILOG">
+      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="64"/>
+      <association xil_pn:name="Implementation" xil_pn:seqID="22"/>
     </file>
-    <file xil_pn:name="RTL/CPU/Bus/DBusTranslator.v" xil_pn:type="FILE_VERILOG">
-      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="3"/>
-      <association xil_pn:name="Implementation" xil_pn:seqID="3"/>
+    <file xil_pn:name="../LIB/CPU/PipelinedV1/RTL/BranchUnit.v" xil_pn:type="FILE_VERILOG">
+      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="65"/>
+      <association xil_pn:name="Implementation" xil_pn:seqID="4"/>
     </file>
-    <file xil_pn:name="RTL/CPU/Bus/ICache.v" xil_pn:type="FILE_VERILOG">
-      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="20"/>
-      <association xil_pn:name="Implementation" xil_pn:seqID="20"/>
+    <file xil_pn:name="../LIB/CPU/PipelinedV1/RTL/CPU.v" xil_pn:type="FILE_VERILOG">
+      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="66"/>
+      <association xil_pn:name="Implementation" xil_pn:seqID="30"/>
     </file>
-    <file xil_pn:name="RTL/CPU/Bus/DCache.v" xil_pn:type="FILE_VERILOG">
-      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="21"/>
-      <association xil_pn:name="Implementation" xil_pn:seqID="21"/>
-    </file>
-    <file xil_pn:name="RTL/CPU/Decoder.v" xil_pn:type="FILE_VERILOG">
-      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="19"/>
+    <file xil_pn:name="../LIB/CPU/PipelinedV1/RTL/Decoder.v" xil_pn:type="FILE_VERILOG">
+      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="67"/>
       <association xil_pn:name="Implementation" xil_pn:seqID="19"/>
     </file>
-    <file xil_pn:name="RTL/CPU/PCLogic.v" xil_pn:type="FILE_VERILOG">
-      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="14"/>
+    <file xil_pn:name="../LIB/CPU/PipelinedV1/RTL/ForwardingUnit.v" xil_pn:type="FILE_VERILOG">
+      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="68"/>
+      <association xil_pn:name="Implementation" xil_pn:seqID="18"/>
+    </file>
+    <file xil_pn:name="../LIB/CPU/PipelinedV1/RTL/HazardUnit.v" xil_pn:type="FILE_VERILOG">
+      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="69"/>
+      <association xil_pn:name="Implementation" xil_pn:seqID="17"/>
+    </file>
+    <file xil_pn:name="../LIB/CPU/PipelinedV1/RTL/ImmGen.v" xil_pn:type="FILE_VERILOG">
+      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="70"/>
+      <association xil_pn:name="Implementation" xil_pn:seqID="16"/>
+    </file>
+    <file xil_pn:name="../LIB/CPU/PipelinedV1/RTL/LoadUpper.v" xil_pn:type="FILE_VERILOG">
+      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="71"/>
+      <association xil_pn:name="Implementation" xil_pn:seqID="15"/>
+    </file>
+    <file xil_pn:name="../LIB/CPU/PipelinedV1/RTL/PCLogic.v" xil_pn:type="FILE_VERILOG">
+      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="72"/>
       <association xil_pn:name="Implementation" xil_pn:seqID="14"/>
     </file>
-    <file xil_pn:name="SIM/CPU_tb.v" xil_pn:type="FILE_VERILOG">
-      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="0"/>
-      <association xil_pn:name="PostMapSimulation" xil_pn:seqID="37"/>
-      <association xil_pn:name="PostRouteSimulation" xil_pn:seqID="37"/>
-      <association xil_pn:name="PostTranslateSimulation" xil_pn:seqID="37"/>
+    <file xil_pn:name="../LIB/CPU/PipelinedV1/RTL/RegFile.v" xil_pn:type="FILE_VERILOG">
+      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="73"/>
+      <association xil_pn:name="Implementation" xil_pn:seqID="13"/>
     </file>
-    <file xil_pn:name="SIM/Interconnect/AvalonTestSlave.v" xil_pn:type="FILE_VERILOG">
-      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="0"/>
-      <association xil_pn:name="PostMapSimulation" xil_pn:seqID="136"/>
-      <association xil_pn:name="PostRouteSimulation" xil_pn:seqID="136"/>
-      <association xil_pn:name="PostTranslateSimulation" xil_pn:seqID="136"/>
+    <file xil_pn:name="../LIB/CPU/PipelinedV1/RTL/Bus/DBusTranslator.v" xil_pn:type="FILE_VERILOG">
+      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="74"/>
+      <association xil_pn:name="Implementation" xil_pn:seqID="3"/>
     </file>
-    <file xil_pn:name="SIM/Interconnect/AvalonTestSlave_tb.v" xil_pn:type="FILE_VERILOG">
-      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="0"/>
-      <association xil_pn:name="PostMapSimulation" xil_pn:seqID="137"/>
-      <association xil_pn:name="PostRouteSimulation" xil_pn:seqID="137"/>
-      <association xil_pn:name="PostTranslateSimulation" xil_pn:seqID="137"/>
+    <file xil_pn:name="../LIB/CPU/PipelinedV1/RTL/Bus/DCache.v" xil_pn:type="FILE_VERILOG">
+      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="75"/>
+      <association xil_pn:name="Implementation" xil_pn:seqID="21"/>
     </file>
-    <file xil_pn:name="RTL/Interconnect/BusMux.v" xil_pn:type="FILE_VERILOG">
-      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="2"/>
+    <file xil_pn:name="../LIB/CPU/PipelinedV1/RTL/Bus/ICache.v" xil_pn:type="FILE_VERILOG">
+      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="76"/>
+      <association xil_pn:name="Implementation" xil_pn:seqID="20"/>
+    </file>
+    <file xil_pn:name="../LIB/Interconnects/XbarV1/RTL/BusCrossbar.v" xil_pn:type="FILE_VERILOG">
+      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="77"/>
+      <association xil_pn:name="Implementation" xil_pn:seqID="29"/>
+    </file>
+    <file xil_pn:name="../LIB/Interconnects/XbarV1/RTL/BusMux.v" xil_pn:type="FILE_VERILOG">
+      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="78"/>
       <association xil_pn:name="Implementation" xil_pn:seqID="2"/>
     </file>
-    <file xil_pn:name="SIM/Interconnect/BusMux_tb.v" xil_pn:type="FILE_VERILOG">
-      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="0"/>
-      <association xil_pn:name="PostMapSimulation" xil_pn:seqID="57"/>
-      <association xil_pn:name="PostRouteSimulation" xil_pn:seqID="57"/>
-      <association xil_pn:name="PostTranslateSimulation" xil_pn:seqID="57"/>
+    <file xil_pn:name="../LIB/Interconnects/XbarV1/RTL/MasterDecoder.v" xil_pn:type="FILE_VERILOG">
+      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="79"/>
+      <association xil_pn:name="Implementation" xil_pn:seqID="12"/>
     </file>
-    <file xil_pn:name="SIM/Interconnect/MasterDecoder_tb.v" xil_pn:type="FILE_VERILOG">
-      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="0"/>
-      <association xil_pn:name="PostMapSimulation" xil_pn:seqID="80"/>
-      <association xil_pn:name="PostRouteSimulation" xil_pn:seqID="80"/>
-      <association xil_pn:name="PostTranslateSimulation" xil_pn:seqID="80"/>
-    </file>
-    <file xil_pn:name="RTL/Interconnect/MasterDecoder.v" xil_pn:type="FILE_VERILOG">
-      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="11"/>
-      <association xil_pn:name="Implementation" xil_pn:seqID="11"/>
-    </file>
-    <file xil_pn:name="RTL/Interconnect/SlaveArbiter.v" xil_pn:type="FILE_VERILOG">
-      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="1"/>
+    <file xil_pn:name="../LIB/Interconnects/XbarV1/RTL/SlaveArbiter.v" xil_pn:type="FILE_VERILOG">
+      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="80"/>
       <association xil_pn:name="Implementation" xil_pn:seqID="1"/>
     </file>
-    <file xil_pn:name="SIM/Interconnect/SlaveArbiter_tb.v" xil_pn:type="FILE_VERILOG">
-      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="0"/>
-      <association xil_pn:name="PostMapSimulation" xil_pn:seqID="87"/>
-      <association xil_pn:name="PostRouteSimulation" xil_pn:seqID="87"/>
-      <association xil_pn:name="PostTranslateSimulation" xil_pn:seqID="87"/>
+    <file xil_pn:name="../LIB/Interconnects/XbarV1/RTL/SlaveInterconnect.v" xil_pn:type="FILE_VERILOG">
+      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="81"/>
+      <association xil_pn:name="Implementation" xil_pn:seqID="11"/>
     </file>
-    <file xil_pn:name="SIM/Interconnect/SlaveInterconnect_tb.v" xil_pn:type="FILE_VERILOG">
-      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="0"/>
-      <association xil_pn:name="PostMapSimulation" xil_pn:seqID="94"/>
-      <association xil_pn:name="PostRouteSimulation" xil_pn:seqID="94"/>
-      <association xil_pn:name="PostTranslateSimulation" xil_pn:seqID="94"/>
-    </file>
-    <file xil_pn:name="RTL/Interconnect/SlaveInterconnect.v" xil_pn:type="FILE_VERILOG">
-      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="10"/>
+    <file xil_pn:name="../LIB/Memory/RTL/FIFO.v" xil_pn:type="FILE_VERILOG">
+      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="82"/>
       <association xil_pn:name="Implementation" xil_pn:seqID="10"/>
     </file>
-    <file xil_pn:name="RTL/Interconnect/BusCrossbar.v" xil_pn:type="FILE_VERILOG">
-      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="27"/>
+    <file xil_pn:name="../LIB/Memory/RTL/RAM.v" xil_pn:type="FILE_VERILOG">
+      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="83"/>
+      <association xil_pn:name="Implementation" xil_pn:seqID="28"/>
+    </file>
+    <file xil_pn:name="../LIB/Peripherals/GPIO/RTL/GPIOBusInterface.v" xil_pn:type="FILE_VERILOG">
+      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="84"/>
+      <association xil_pn:name="Implementation" xil_pn:seqID="26"/>
+    </file>
+    <file xil_pn:name="../LIB/Peripherals/GPIO/RTL/SevenSegmentDriver.v" xil_pn:type="FILE_VERILOG">
+      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="85"/>
+      <association xil_pn:name="Implementation" xil_pn:seqID="8"/>
+    </file>
+    <file xil_pn:name="../LIB/Peripherals/Flash/RTL/FlashBusInterface.v" xil_pn:type="FILE_VERILOG">
+      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="86"/>
       <association xil_pn:name="Implementation" xil_pn:seqID="27"/>
     </file>
-    <file xil_pn:name="SIM/Interconnect/BusCrossbar_tb.v" xil_pn:type="FILE_VERILOG">
-      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="0"/>
-      <association xil_pn:name="PostMapSimulation" xil_pn:seqID="102"/>
-      <association xil_pn:name="PostRouteSimulation" xil_pn:seqID="102"/>
-      <association xil_pn:name="PostTranslateSimulation" xil_pn:seqID="102"/>
+    <file xil_pn:name="../LIB/Peripherals/Flash/RTL/FlashControler.v" xil_pn:type="FILE_VERILOG">
+      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="87"/>
+      <association xil_pn:name="Implementation" xil_pn:seqID="9"/>
     </file>
-    <file xil_pn:name="SIM/FlashBusInterface_tb.v" xil_pn:type="FILE_VERILOG">
-      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="0"/>
-      <association xil_pn:name="PostMapSimulation" xil_pn:seqID="93"/>
-      <association xil_pn:name="PostRouteSimulation" xil_pn:seqID="93"/>
-      <association xil_pn:name="PostTranslateSimulation" xil_pn:seqID="93"/>
+    <file xil_pn:name="../LIB/Peripherals/UART/RTL/UartBusInterface.v" xil_pn:type="FILE_VERILOG">
+      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="88"/>
+      <association xil_pn:name="Implementation" xil_pn:seqID="25"/>
+    </file>
+    <file xil_pn:name="../LIB/Peripherals/UART/RTL/UartRx.v" xil_pn:type="FILE_VERILOG">
+      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="89"/>
+      <association xil_pn:name="Implementation" xil_pn:seqID="7"/>
+    </file>
+    <file xil_pn:name="../LIB/Peripherals/UART/RTL/UartTx.v" xil_pn:type="FILE_VERILOG">
+      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="90"/>
+      <association xil_pn:name="Implementation" xil_pn:seqID="6"/>
     </file>
     <file xil_pn:name="ipcore_dir/PLL_M.xise" xil_pn:type="FILE_COREGENISE">
       <association xil_pn:name="Implementation" xil_pn:seqID="0"/>
@@ -259,7 +179,7 @@
     <property xil_pn:name="Analysis Effort Level" xil_pn:value="Standard" xil_pn:valueState="default"/>
     <property xil_pn:name="Asynchronous To Synchronous" xil_pn:value="false" xil_pn:valueState="default"/>
     <property xil_pn:name="Auto Implementation Compile Order" xil_pn:value="true" xil_pn:valueState="default"/>
-    <property xil_pn:name="Auto Implementation Top" xil_pn:value="false" xil_pn:valueState="non-default"/>
+    <property xil_pn:name="Auto Implementation Top" xil_pn:value="true" xil_pn:valueState="default"/>
     <property xil_pn:name="Automatic BRAM Packing" xil_pn:value="false" xil_pn:valueState="default"/>
     <property xil_pn:name="Automatically Insert glbl Module in the Netlist" xil_pn:value="true" xil_pn:valueState="default"/>
     <property xil_pn:name="Automatically Run Generate Target PROM/ACE File" xil_pn:value="false" xil_pn:valueState="default"/>
@@ -511,7 +431,7 @@
     <property xil_pn:name="Speed Grade" xil_pn:value="-2" xil_pn:valueState="non-default"/>
     <property xil_pn:name="Starting Placer Cost Table (1-100) Map spartan6" xil_pn:value="1" xil_pn:valueState="default"/>
     <property xil_pn:name="Synthesis Tool" xil_pn:value="XST (VHDL/Verilog)" xil_pn:valueState="default"/>
-    <property xil_pn:name="Target Board for Hardware Co-Simulation" xil_pn:value="SP601 (JTAG)" xil_pn:valueState="default"/>
+    <property xil_pn:name="Target Board for Hardware Co-Simulation" xil_pn:value="N/A" xil_pn:valueState="default"/>
     <property xil_pn:name="Target Simulator" xil_pn:value="NC-Sim Verilog" xil_pn:valueState="non-default"/>
     <property xil_pn:name="Timing Mode Map" xil_pn:value="Performance Evaluation" xil_pn:valueState="default"/>
     <property xil_pn:name="Timing Mode Par" xil_pn:value="Performance Evaluation" xil_pn:valueState="default"/>
@@ -550,7 +470,7 @@
     <property xil_pn:name="Wait for DCM and PLL Lock (Output Events) spartan6" xil_pn:value="Default (NoWait)" xil_pn:valueState="default"/>
     <property xil_pn:name="Wakeup Clock spartan6" xil_pn:value="Startup Clock" xil_pn:valueState="default"/>
     <property xil_pn:name="Watchdog Timer Value spartan6" xil_pn:value="0xFFFF" xil_pn:valueState="default"/>
-    <property xil_pn:name="Working Directory" xil_pn:value="WorkinDir" xil_pn:valueState="non-default"/>
+    <property xil_pn:name="Working Directory" xil_pn:value="./WorkingDir" xil_pn:valueState="non-default"/>
     <property xil_pn:name="Write Timing Constraints" xil_pn:value="false" xil_pn:valueState="default"/>
     <property xil_pn:name="iMPACT Project File" xil_pn:value="soc.ipf" xil_pn:valueState="non-default"/>
     <!--                                                                                  -->

@@ -13,7 +13,7 @@ module SOC_tb();
 
     //Generate the clock
     initial begin
-        #10;
+        #100;
         forever #10 r_Clk = ~r_Clk;
     end
 

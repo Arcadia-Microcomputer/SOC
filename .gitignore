@@ -3,9 +3,9 @@
 *.sch-bak
 *.fp-info-cache
 *.dcm
-SOCSchem/fp-info-cache
-SOCSchem/SocSchem-cache.lib
-SOCSchem/sym-lib-table
+**/fp-info-cache
+**/CPUSchem-cache.lib
+**/sym-lib-table
 
 #Visual Studio code workspaces
 *.code-workspace
@@ -13,9 +13,9 @@ SOCSchem/sym-lib-table
 #ISE generated files
 SOC/ipcore_dir/*
 !SOC/ipcore_dir/coregen.cgp
-!SOC/ipcore_dir/PLL_M.xco
-SOC/WorkinDir/*
-!SOC/WorkinDir/SOC.bit
+!SOC/ipcore_dir/**.xco
+SOC/WorkingDir/*
+!SOC/WorkingDir/SOC.bit
 SOC/iseconfig
 SOC/**/*.twx
 SOC/**/*.svf
