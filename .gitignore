@@ -1,30 +1,36 @@
-#Kicad files we don't need to upload
+# KiCad cache files
 *.bck
 *.sch-bak
 *.fp-info-cache
 *.dcm
 **/fp-info-cache
-**/CPUSchem-cache.lib
+**/*-cache.lib
 **/sym-lib-table
+*.kicad_prl
+*.kicad_pcb
+**/*-backups
 
 #Visual Studio code workspaces
 *.code-workspace
 
 #ISE generated files
-SOC/ipcore_dir/*
-!SOC/ipcore_dir/coregen.cgp
-!SOC/ipcore_dir/**.xco
-SOC/WorkingDir/*
-!SOC/WorkingDir/SOC.bit
-SOC/iseconfig
-SOC/**/*.twx
-SOC/**/*.svf
-SOC/**/*.xml
-SOC/**/*.xsvf
-SOC/**/*.xsl
-SOC/**/*.txt
-SOC/**/*.debug
-SOC/**/*.html
-SOC/**/*.log
-SOC/**/*.xwbt
-SOC/**/*.ipf
+**/ipcore_dir/*
+!**/ipcore_dir/coregen.cgp
+!**/ipcore_dir/**.xco
+**/WorkingDir/*
+!**/WorkingDir/SOC.bit
+**/iseconfig
+*.twx
+*.svf
+*.xml
+*.xsvf
+*.xsl
+*.txt
+*.debug
+*.html
+*.log
+*.xwbt
+*.ipf
+
+# Software build files
+**/build/*
