@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="I:/D.GitRepos/ArcadiaMicrocomputer/SOC/SOCv2/WorkingDir/PCLogic_tb_isim_beh.wdb" id="1" type="auto">
+         <top_modules>
+            <top_module name="PCLogic_tb" />
+            <top_module name="glbl" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <WVObjectSize size="8" />
+   <wvobject fp_name="/PCLogic_tb/r_Clk" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">r_Clk</obj_property>
+      <obj_property name="ObjectShortName">r_Clk</obj_property>
+   </wvobject>
+   <wvobject fp_name="/PCLogic_tb/r_Rst" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">r_Rst</obj_property>
+      <obj_property name="ObjectShortName">r_Rst</obj_property>
+   </wvobject>
+   <wvobject fp_name="/PCLogic_tb/r_En" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">r_En</obj_property>
+      <obj_property name="ObjectShortName">r_En</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ffa500</obj_property>
+   </wvobject>
+   <wvobject fp_name="/PCLogic_tb/r_TakeBranch" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">r_TakeBranch</obj_property>
+      <obj_property name="ObjectShortName">r_TakeBranch</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ffa500</obj_property>
+   </wvobject>
+   <wvobject fp_name="/PCLogic_tb/r_BranchSrc" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">r_BranchSrc</obj_property>
+      <obj_property name="ObjectShortName">r_BranchSrc</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ffa500</obj_property>
+   </wvobject>
+   <wvobject fp_name="/PCLogic_tb/r_Imm" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">r_Imm[31:0]</obj_property>
+      <obj_property name="ObjectShortName">r_Imm[31:0]</obj_property>
+      <obj_property name="Radix">HEXRADIX</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ffa500</obj_property>
+   </wvobject>
+   <wvobject fp_name="/PCLogic_tb/r_RS1" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">r_RS1[31:0]</obj_property>
+      <obj_property name="ObjectShortName">r_RS1[31:0]</obj_property>
+      <obj_property name="Radix">HEXRADIX</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ffa500</obj_property>
+   </wvobject>
+   <wvobject fp_name="/PCLogic_tb/w_PC" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">w_PC[31:0]</obj_property>
+      <obj_property name="ObjectShortName">w_PC[31:0]</obj_property>
+      <obj_property name="Radix">HEXRADIX</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#800080</obj_property>
+   </wvobject>
+</wave_config>
